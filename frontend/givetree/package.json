@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vanilla-extract/css": "^1.16.0",
+    "@vanilla-extract/recipes": "^0.5.5",
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021"
@@ -30,9 +31,11 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vanilla-extract/next-plugin": "^2.4.6",
+    "@vanilla-extract/webpack-plugin": "^2.3.14",
     "eslint": "^8",
     "eslint-config-next": "15.0.1",
     "eslint-plugin-storybook": "^0.10.1",
+    "mini-css-extract-plugin": "^2.9.1",
     "storybook": "8.3.6",
     "typescript": "^5",
     "webpack": "^5.95.0",

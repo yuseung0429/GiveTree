@@ -3358,6 +3358,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vanilla-extract/recipes@npm:^0.5.5":
+  version: 0.5.5
+  resolution: "@vanilla-extract/recipes@npm:0.5.5"
+  peerDependencies:
+    "@vanilla-extract/css": ^1.0.0
+  checksum: 10c0/5e032bc3f7873b1deb39fc64e2ab6871ac3d70dd527309b4e08310def142180fd346df48ca33306ac0ea7626673856e3995fab03f56f54a967c48a3e5e4545d3
+  languageName: node
+  linkType: hard
+
 "@vanilla-extract/webpack-plugin@npm:^2.3.14":
   version: 2.3.14
   resolution: "@vanilla-extract/webpack-plugin@npm:2.3.14"
@@ -6581,9 +6590,12 @@ __metadata:
     "@types/react-dom": "npm:^18"
     "@vanilla-extract/css": "npm:^1.16.0"
     "@vanilla-extract/next-plugin": "npm:^2.4.6"
+    "@vanilla-extract/recipes": "npm:^0.5.5"
+    "@vanilla-extract/webpack-plugin": "npm:^2.3.14"
     eslint: "npm:^8"
     eslint-config-next: "npm:15.0.1"
     eslint-plugin-storybook: "npm:^0.10.1"
+    mini-css-extract-plugin: "npm:^2.9.1"
     next: "npm:15.0.1"
     react: "npm:19.0.0-rc-69d4b800-20241021"
     react-dom: "npm:19.0.0-rc-69d4b800-20241021"
@@ -7979,6 +7991,18 @@ __metadata:
   version: 1.0.1
   resolution: "min-indent@npm:1.0.1"
   checksum: 10c0/7e207bd5c20401b292de291f02913230cb1163abca162044f7db1d951fa245b174dc00869d40dd9a9f32a885ad6a5f3e767ee104cf278f399cb4e92d3f582d5c
+  languageName: node
+  linkType: hard
+
+"mini-css-extract-plugin@npm:^2.9.1":
+  version: 2.9.1
+  resolution: "mini-css-extract-plugin@npm:2.9.1"
+  dependencies:
+    schema-utils: "npm:^4.0.0"
+    tapable: "npm:^2.2.1"
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: 10c0/19361902ef028b9875aafa3931d99643c2d95824ba343a501c83ff61d069a430fcfc523ca796765798b564570da2199f5a28cd51b9528ddbcfdc9271c61400d0
   languageName: node
   linkType: hard
 
