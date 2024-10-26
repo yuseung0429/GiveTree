@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Button from './Button';
+import Button from '.';
 
 import { button } from './Button.css';
 
@@ -8,9 +8,7 @@ import colorPalette from '@/styles/tokens/colorPalette';
 
 const meta = {
   title: 'UI/Button',
-
   component: Button,
-
   parameters: {
     layout: 'fullscreen',
   },

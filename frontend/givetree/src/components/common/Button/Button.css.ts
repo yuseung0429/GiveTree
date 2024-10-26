@@ -30,7 +30,7 @@ export const button = recipe({
     color: Object.keys(colorPalette).reduce((acc, palette) => {
       const color = colorPalette[palette as ColorPalette];
 
-      acc[palette as ColorPalette] = {
+      acc[palette as ColorPalette] = style({
         vars: {
           [containedVar.backgroundColor]: color[500],
           [containedVar.color]: '#fff',
@@ -58,10 +58,10 @@ export const button = recipe({
 
           cursor: 'not-allowed',
         },
-      };
+      });
 
       return acc;
-    }, {} as Record<ColorPalette, object>),
+    }, {} as Record<ColorPalette, string>),
 
     variant: {
       outlined: {
