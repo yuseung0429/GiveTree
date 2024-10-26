@@ -1,13 +1,26 @@
 import { recipe } from '@vanilla-extract/recipes';
+import { createVar, style } from '@vanilla-extract/css';
 
 import colorPalette, { type ColorPalette } from '@/styles/tokens/colorPalette';
 import typography from '@/styles/tokens/typography';
 
+const containedVar = {
+  backgroundColor: createVar(),
+  color: createVar(),
+};
+
+const outlinedVar = {
+  border: createVar(),
+  backgroundColor: createVar(),
+  color: createVar(),
+};
+
 export const button = recipe({
   base: {
-    border: 0,
-    backgroundColor: '#fff',
-    color: colorPalette.text[900],
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '0.0625rem solid',
     cursor: 'pointer',
     transition: 'all 0.1s ease',
     userSelect: 'none',
@@ -18,15 +31,31 @@ export const button = recipe({
       const color = colorPalette[palette as ColorPalette];
 
       acc[palette as ColorPalette] = {
-        backgroundColor: color[500],
-        color: '#fff',
+        vars: {
+          [containedVar.backgroundColor]: color[500],
+          [containedVar.color]: '#fff',
+
+          [outlinedVar.border]: color[700],
+          [outlinedVar.backgroundColor]: '#fff',
+          [outlinedVar.color]: color[500],
+        },
 
         ':active': {
-          backgroundColor: color[700],
+          vars: {
+            [containedVar.backgroundColor]: color[700],
+            [outlinedVar.backgroundColor]: color[50],
+          },
         },
 
         ':disabled': {
-          backgroundColor: color[100],
+          vars: {
+            [containedVar.backgroundColor]: color[100],
+
+            [outlinedVar.border]: color[100],
+            [outlinedVar.backgroundColor]: '#fff',
+            [outlinedVar.color]: color[100],
+          },
+
           cursor: 'not-allowed',
         },
       };
@@ -34,22 +63,51 @@ export const button = recipe({
       return acc;
     }, {} as Record<ColorPalette, object>),
 
+    variant: {
+      outlined: {
+        backgroundColor: outlinedVar.backgroundColor,
+        borderColor: outlinedVar.border,
+        color: outlinedVar.color,
+      },
+
+      contained: {
+        backgroundColor: containedVar.backgroundColor,
+        borderColor: containedVar.backgroundColor,
+        color: containedVar.color,
+      },
+    },
+
     size: {
       sm: {
-        padding: '0.75rem',
-        borderRadius: '1.5rem',
+        height: '2.5rem',
+        padding: '0 0.875rem',
+        borderRadius: '1.25rem',
         fontSize: typography.size.sm,
       },
+
       md: {
-        padding: '1rem',
-        borderRadius: '2rem',
+        height: '2.75rem',
+        padding: '0 1rem',
+        borderRadius: '1.375rem',
         fontSize: typography.size.md,
       },
+
       lg: {
-        padding: '1.25rem',
-        borderRadius: '2.5rem',
+        height: '3rem',
+        padding: '0 1.125rem',
+        borderRadius: '1.5rem',
         fontSize: typography.size.lg,
       },
     },
+
+    fullWidth: {
+      true: {
+        width: '100%',
+      },
+    },
   },
+});
+
+export const icon = style({
+  marginRight: '0.25rem',
 });

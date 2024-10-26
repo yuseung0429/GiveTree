@@ -8,10 +8,13 @@ import colorPalette from '@/styles/tokens/colorPalette';
 
 const meta = {
   title: 'UI/Button',
+
   component: Button,
+
   parameters: {
     layout: 'fullscreen',
   },
+
   decorators: [
     (Story) => (
       <div style={{ padding: '1rem' }}>
@@ -19,22 +22,38 @@ const meta = {
       </div>
     ),
   ],
+
   tags: ['autodocs'],
+
   argTypes: {
     children: {
       description: '버튼 안에 표시할 내용',
       type: 'string',
     },
+
     color: {
       description: '버튼의 색상',
-      control: 'radio',
+      control: 'select',
       options: Object.keys(colorPalette),
     },
+
+    variant: {
+      description: 'variant',
+      control: 'radio',
+      options: Object.keys(button.classNames.variants.variant),
+    },
+
     size: {
       description: '버튼의 크기',
       control: 'radio',
       options: Object.keys(button.classNames.variants.size),
     },
+
+    fullWidth: {
+      description: '버튼의 width를 100%로 설정',
+      control: 'boolean',
+    },
+
     disabled: {
       description:
         '비활성화 여부                                                              ',
