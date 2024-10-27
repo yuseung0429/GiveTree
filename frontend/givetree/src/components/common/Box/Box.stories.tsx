@@ -26,7 +26,31 @@ const meta = {
     },
 
     as: {
-      control: 'text',
+      control: 'select',
+      options: [
+        'article',
+        'aside',
+        'details',
+        'dialog',
+        'figcaption',
+        'figure',
+        'footer',
+        'header',
+        'main',
+        'mark',
+        'nav',
+        'section',
+        'summary',
+        'time',
+        'address',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'div',
+      ],
     },
 
     backgroundColor: {
