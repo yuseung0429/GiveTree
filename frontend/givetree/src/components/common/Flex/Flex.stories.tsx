@@ -24,6 +24,26 @@ const meta = {
     children: {
       table: { disable: true },
     },
+
+    flexWrap: {
+      control: 'text',
+    },
+
+    flexDirection: {
+      control: 'text',
+    },
+
+    gap: {
+      control: 'text',
+    },
+
+    alignItems: {
+      control: 'text',
+    },
+
+    justifyContent: {
+      control: 'text',
+    },
   },
 } satisfies Meta<typeof Flex>;
 
