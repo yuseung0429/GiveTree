@@ -1,40 +1,72 @@
-import { CSSProperties, ReactNode } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  CSSProperties,
+  ElementType,
+  ReactNode,
+} from 'react';
 
-interface BoxProps {
-  children: ReactNode;
-  as?:
-    | 'div'
-    | 'article'
-    | 'aside'
-    | 'details'
-    | 'dialog'
-    | 'figcaption'
-    | 'figure'
-    | 'footer'
-    | 'header'
-    | 'main'
-    | 'mark'
-    | 'nav'
-    | 'section'
-    | 'summary';
-  margin?: CSSProperties['margin'];
-  marginTop?: CSSProperties['marginTop'];
-  marginRight?: CSSProperties['marginRight'];
-  marginBottom?: CSSProperties['marginBottom'];
-  marginLeft?: CSSProperties['marginLeft'];
-  padding?: CSSProperties['padding'];
-  paddingTop?: CSSProperties['paddingTop'];
-  paddingRight?: CSSProperties['paddingRight'];
-  paddingBottom?: CSSProperties['paddingBottom'];
-  paddingLeft?: CSSProperties['paddingLeft'];
-  border?: CSSProperties['border'];
-  borderRadius?: CSSProperties['borderRadius'];
-  backgroundColor?: CSSProperties['backgroundColor'];
-  style?: CSSProperties;
-}
+type BoxProps<T extends ElementType = ElementType> =
+  ComponentPropsWithoutRef<T> & {
+    children: ReactNode;
+    as?: T;
+    margin?: CSSProperties['margin'];
+    marginTop?: CSSProperties['marginTop'];
+    marginRight?: CSSProperties['marginRight'];
+    marginBottom?: CSSProperties['marginBottom'];
+    marginLeft?: CSSProperties['marginLeft'];
+    padding?: CSSProperties['padding'];
+    paddingTop?: CSSProperties['paddingTop'];
+    paddingRight?: CSSProperties['paddingRight'];
+    paddingBottom?: CSSProperties['paddingBottom'];
+    paddingLeft?: CSSProperties['paddingLeft'];
+    border?: CSSProperties['border'];
+    borderRadius?: CSSProperties['borderRadius'];
+    backgroundColor?: CSSProperties['backgroundColor'];
+    style?: CSSProperties;
+  };
 
-const Box = ({ children, as: As = 'div', style, ...props }: BoxProps) => {
-  return <As style={{ ...props, ...style }}>{children}</As>;
+const Box = ({
+  children,
+  as: Component = 'div',
+  margin,
+  marginTop,
+  marginRight,
+  marginBottom,
+  marginLeft,
+  padding,
+  paddingTop,
+  paddingRight,
+  paddingBottom,
+  paddingLeft,
+  border,
+  borderRadius,
+  backgroundColor,
+  style,
+  ...props
+}: BoxProps) => {
+  return (
+    <Component
+      style={{
+        margin,
+        marginTop,
+        marginRight,
+        marginBottom,
+        marginLeft,
+        padding,
+        paddingTop,
+        paddingRight,
+        paddingBottom,
+        paddingLeft,
+        border,
+        borderRadius,
+        backgroundColor,
+        ...style,
+      }}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
 };
 
 export default Box;

@@ -25,6 +25,10 @@ const meta = {
       table: { disable: true },
     },
 
+    as: {
+      control: 'text',
+    },
+
     backgroundColor: {
       control: 'color',
     },
