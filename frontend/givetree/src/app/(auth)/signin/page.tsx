@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import color from '@/styles/tokens/color';
+
 import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
@@ -18,14 +20,20 @@ export default function SignIn() {
           <OAuthList />
         </Box>
 
-        <Flex alignItems="center" justifyContent="space-between">
-          <Typography size="sm">후원자가 아니라 재단이신가요?</Typography>
-          <Link href="/foundation-signin">
-            <Button variant="outlined" size="sm">
-              재단 로그인
-            </Button>
-          </Link>
-        </Flex>
+        <Box
+          padding="0.75rem"
+          borderRadius="0.25rem"
+          backgroundColor={color.grey[200]}
+        >
+          <Flex alignItems="center" justifyContent="space-between">
+            <Typography size="sm">후원자가 아니라 재단이신가요?</Typography>
+            <Link href="/foundation-signin">
+              <Button variant="outlined" size="sm">
+                재단 로그인
+              </Button>
+            </Link>
+          </Flex>
+        </Box>
       </Box>
     </Flex>
   );
