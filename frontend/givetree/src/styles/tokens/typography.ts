@@ -9,7 +9,7 @@ const typography = {
 
   weight: {
     light: '300',
-    normal: '400',
+    regular: '400',
     medium: '500',
     semiBold: '600',
     bold: '700',

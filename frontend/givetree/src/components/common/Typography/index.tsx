@@ -18,7 +18,7 @@ const Typography = ({
   as: Component = 'p',
   color,
   size,
-  weight = 'normal',
+  weight = 'regular',
   style,
   ...props
 }: TypographyProps) => {

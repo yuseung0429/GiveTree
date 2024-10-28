@@ -1,5 +1,12 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import localFont from 'next/font/local';
+
+import '@/styles/global.css';
+
+const pretendard = localFont({
+  src: '../assets/fonts/PretendardVariable.woff2',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'GiveTree',
@@ -8,18 +15,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="ko">
-      <body>
-        <nav>
-          <a href={'/'}>Home</a> |<Link href={'/abc'}>abc</Link>
-        </nav>
-        여기는 고정될거야
-        {children}
-      </body>
+    <html lang="ko" className={pretendard.className}>
+      <body>{children}</body>
     </html>
   );
 }
