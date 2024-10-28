@@ -17,7 +17,7 @@ const outlinedVar = {
 
 export const button = recipe({
   base: {
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     border: '0.0625rem solid',
