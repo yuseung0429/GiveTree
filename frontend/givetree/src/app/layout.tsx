@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'GiveTree',
@@ -12,7 +13,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <nav>
+          <a href={'/'}>Home</a> |<Link href={'/abc'}>abc</Link>
+        </nav>
+        여기는 고정될거야
+        {children}
+      </body>
     </html>
   );
 }
