@@ -22,12 +22,16 @@ type BoxProps<T extends ElementType = ElementType> =
     border?: CSSProperties['border'];
     borderRadius?: CSSProperties['borderRadius'];
     backgroundColor?: CSSProperties['backgroundColor'];
+    width?: CSSProperties['width'];
+    height?: CSSProperties['height'];
     style?: CSSProperties;
   };
 
 const Box = ({
   children,
   as: Component = 'div',
+  width,
+  height,
   margin,
   marginTop,
   marginRight,
@@ -47,6 +51,8 @@ const Box = ({
   return (
     <Component
       style={{
+        width,
+        height,
         margin,
         marginTop,
         marginRight,

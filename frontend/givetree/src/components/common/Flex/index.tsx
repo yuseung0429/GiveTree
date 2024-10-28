@@ -6,9 +6,11 @@ interface FlexProps {
   children: ReactNode;
   flexWrap?: CSSProperties['flexWrap'];
   flexDirection?: CSSProperties['flexDirection'];
-  gap?: string;
+  gap?: CSSProperties['gap'];
   alignItems?: CSSProperties['alignItems'];
   justifyContent?: CSSProperties['justifyContent'];
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
 }
 
 const Flex = ({ children, ...props }: FlexProps) => {
