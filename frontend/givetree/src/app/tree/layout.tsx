@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   description: 'GiveTree',
 };
 
-export default function RootLayout({
+export default function TreeLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="ko">
-      <body>{children}</body>
-    </html>
+    <section>
+      {children}
+    </section>
   );
 }

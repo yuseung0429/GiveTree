@@ -1,7 +1,8 @@
+import React from 'react';
 import * as style from './Main.css';
 
 const dataFetch = () =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     setTimeout(() => resolve('a'), 1000);
   });
 
