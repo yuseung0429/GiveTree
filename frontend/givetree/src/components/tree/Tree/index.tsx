@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import TreeImg from '@/assets/images/tree/tree2.png';
+import TreeImg from '@/assets/images/tree/tree.png';
 import * as style from './tree.css';
 
 const dataFetch = () =>

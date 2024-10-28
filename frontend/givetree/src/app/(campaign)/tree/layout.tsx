@@ -1,3 +1,5 @@
+import BottomBar from '@/components/common/BottomBar';
+import Layout from '@/components/common/Layout';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,8 +13,11 @@ export default function TreeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      {children}
-    </section>
+    <Layout>
+      <main>{children}</main>
+      <footer>
+        <BottomBar>bottom</BottomBar>
+      </footer>
+    </Layout>
   );
 }
