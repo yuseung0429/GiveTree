@@ -1,1 +1,6 @@
-spring.application.name=givetree
+spring:
+  application:
+    name:
+      givetree
+  profiles:
+    include: secret, finance
