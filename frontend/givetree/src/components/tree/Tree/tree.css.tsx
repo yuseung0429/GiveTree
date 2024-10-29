@@ -14,7 +14,13 @@ export const treeImage = style({
   width: '100%',
   height: '74vh',
   overflow: 'hidden',
-  filter: 'drop-shadow(0px -3px 12px rgba(68, 68, 68, 0.3))',
+  perspective: '1000px',
+  transition: 'transform 0.3s ease',
+  // filter: 'drop-shadow(0px -3px 12px rgba(68, 68, 68, 0.3))',
+});
+
+export const flip = style({
+  transform: 'rotateY(180deg)',
 });
 
 export const decoration = style({
@@ -22,3 +28,5 @@ export const decoration = style({
   cursor: 'pointer',
   filter: 'drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.2))',
 });
+
+

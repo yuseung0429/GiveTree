@@ -1,15 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import colorPalette from '@/styles/tokens/colorPalette';
 
-export const treeImage = style({
-  perspective: '1000px',
-  transition: 'transform 0.6s',
-});
-
-export const flip = style({
-  transform: 'rotateY(180deg)',
-});
-
 export const pagination = style({
   display: 'flex',
   justifyContent: 'center',

@@ -22,8 +22,9 @@ const messages = [
 export default function Page() {
   return (
     <Box className={styles.background}>
+  
       <Box className={styles.teamText}>
-        <Typography as="h3" weight="semiBold" color={colorPalette.text[800]}>
+        <Typography as="h3" weight="semiBold" color={colorPalette.text[50]}>
           사랑의 열매
         </Typography>
         <Box className={styles.messageText}>
@@ -33,17 +34,17 @@ export default function Page() {
               style={{
                 display: 'inline-block',
                 fontSize: '1.25rem',
-                color: `${colorPalette.text[700]}`,
+                color: `${colorPalette.text[50]}`,
               }}
             >
               에
             </p>
           </Typography>
-          <Typography as="h2" weight="bold" color={colorPalette.text[700]}>
+          <Typography as="h2" weight="bold" color={colorPalette.text[50]}>
             <p
               style={{
                 display: 'inline-block',
-                color: `${colorPalette.secondary[500]}`,
+                color: `${colorPalette.secondary[100]}`,
               }}
             >
               {messages.length}개
@@ -53,7 +54,7 @@ export default function Page() {
         </Box>
       </Box>
       <Box className={styles.treeImage}>
-        <TreeSlider messages={messages}/>
+        <TreeSlider initialMessages={messages}/>
       </Box>
     </Box>
   );

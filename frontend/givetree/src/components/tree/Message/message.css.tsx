@@ -8,12 +8,12 @@ export const modal = style({
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '280px',
-  height: '240px',
+  height: '220px',
   top: '60%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   backgroundColor: `${colorPalette.text[50]}`,
-  padding: '35px 20px 20px 20px',
+  padding: '30px 20px 20px 20px',
   border: `2px dashed ${colorPalette.primary[500]}`,
   borderRadius: '12px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -24,13 +24,13 @@ export const overlay = style({
   position: 'fixed',
   width: '100vw',
   height: '120vh',
-  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
   zIndex: 999,
 });
 
 export const decorationImg = style({
   position: 'absolute',
-  top: '-30px',
+  top: '-35px',
   left: '50%',
   transform: 'translateX(-50%)',
   width: '60px',
@@ -38,12 +38,12 @@ export const decorationImg = style({
   zIndex: 1,
 });
 
-export const messageText = style({
+export const messageTextContainer = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
   textAlign: 'center',
   width: '240px',
-  height: '180px',
-  lineHeight: '1.8',
+  height: '160px',
+  lineHeight: '1.7',
 });
