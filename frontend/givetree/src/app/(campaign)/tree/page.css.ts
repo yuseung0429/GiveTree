@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import treeBackground from '@/assets/images/tree/treeBackground.png';
+// import treeBackground from '@/assets/images/tree/treeBackground.png';
 
 export const background = style({
   position: 'relative',
@@ -18,11 +18,11 @@ export const background = style({
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundImage: `url('${treeBackground.src}')`,
+    backgroundImage: `url('/images/treeBackground.png')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    opacity: 0.75,
+    opacity: 0.8,
     zIndex: -1,
   },
 });

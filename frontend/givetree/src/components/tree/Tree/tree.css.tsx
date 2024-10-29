@@ -2,16 +2,23 @@ import { style } from '@vanilla-extract/css';
 
 export const container = style({
   display: 'flex',
-  flexDirection: 'column',
+  position: 'relative',
+  width: '100%',
   justifyContent: 'center',
-  overflow: 'hidden'
+  overflow: 'hidden',
+  alignItems: 'center',
 });
 
 export const treeImage = style({
   display: 'flex',
   width: '100%',
-  maxWidth: '400px',
   height: '74vh',
   overflow: 'hidden',
-  filter: 'drop-shadow(5px 5px 20px rgba(0, 0, 0, 0.5))',
+  filter: 'drop-shadow(0px -3px 12px rgba(68, 68, 68, 0.3))',
+});
+
+export const decoration = style({
+  position: 'absolute',
+  cursor: 'pointer',
+  filter: 'drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.2))',
 });
