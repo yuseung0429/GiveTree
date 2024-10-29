@@ -1,0 +1,29 @@
+ssafy:
+  finance:
+    api:
+      base-url: "https://finopenapi.ssafy.io/ssafy/api/v1"
+      member:
+        base: "/member"
+        create: ""
+        search: "/search"
+      bank:
+        base: "/edu/bank"
+        codes-search: "/inquireBankCodes"
+      memo:
+        base: "/edu/transactionMemo"
+        create: ""
+      demand-deposit:
+        base: "/edu/demandDeposit"
+        product-create: "/createDemandDeposit"
+        products-search: "/inquireDemandDepositList"
+        account-create: "/createDemandDepositAccount"
+        accounts-search: "/inquireDemandDepositAccountList"
+        account-search: "/inquireDemandDepositAccount"
+        account-holder-search: "/inquireDemandDepositAccountHolderName"
+        account-balance-search: "/inquireDemandDepositAccountBalance"
+        account-withdrawal: "/updateDemandDepositAccountWithdrawal"
+        account-deposit: "/updateDemandDepositAccountDeposit"
+        account-transfer: "/updateDemandDepositAccountTransfer"
+        account-histories-search: "/inquireTransactionHistoryList"
+        account-history-search: "/inquireTransactionHistory"
+        account-delete: "/deleteDemandDepositAccount"
