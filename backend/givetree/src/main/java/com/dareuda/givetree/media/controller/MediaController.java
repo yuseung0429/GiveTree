@@ -17,10 +17,9 @@ public class MediaController {
     private final StorageService storageService;
 
     @PostMapping
-    public ResponseEntity<Void> store(
-            @RequestPart MultipartFile multipartFile
+    public ResponseEntity<String> store(
+            @RequestPart MultipartFile file
     ) {
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(storageService.store("test", file));
     }
 }

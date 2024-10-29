@@ -1,5 +1,6 @@
 package com.dareuda.givetree.media.domain;
 
+import org.apache.commons.codec.binary.Hex;
 import org.apache.tika.Tika;
 import org.apache.tika.mime.MimeType;
 import org.apache.tika.mime.MimeTypeException;
@@ -31,7 +32,7 @@ public class FileNameGenerator {
                     (fileName + memberName + LocalDateTime.now()).getBytes(StandardCharsets.UTF_8)
             );
 
-            return String.format("%02x", messageDigest.digest());
+            return Hex.encodeHexString(messageDigest.digest());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

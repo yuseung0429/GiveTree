@@ -11,7 +11,7 @@ public class StorageService {
 
     private final MediaStorage mediaStorage;
 
-    public void store(String memberName, MultipartFile multipartFile) {
-        mediaStorage.store(memberName, multipartFile);
+    public String store(String memberName, MultipartFile multipartFile) {
+        return mediaStorage.store(memberName, multipartFile);
     }
 }
