@@ -18,11 +18,11 @@ export const background = style({
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundImage: `url('/images/treeBackground.png')`,
+    backgroundImage: `url('/images/background2.gif')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    opacity: 0.8,
+    // opacity: 0.8,
     zIndex: -1,
   },
 });
