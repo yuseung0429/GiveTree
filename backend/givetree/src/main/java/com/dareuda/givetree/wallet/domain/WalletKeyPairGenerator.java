@@ -9,9 +9,9 @@ import org.web3j.crypto.Keys;
 
 @Component
 @RequiredArgsConstructor
-public class WalletGenerator {
+public class WalletKeyPairGenerator {
 
-    public GeneratedWallet generate() {
+    public WalletKeyPair generate() {
         ECKeyPair keyPair = null;
         try {
             keyPair = Keys.createEcKeyPair();
@@ -20,6 +20,6 @@ public class WalletGenerator {
         }
         String address = Keys.getAddress(keyPair);
         String privateKey = keyPair.getPrivateKey().toString(16);
-        return new GeneratedWallet(address, privateKey);
+        return new WalletKeyPair(address, privateKey);
     }
 }

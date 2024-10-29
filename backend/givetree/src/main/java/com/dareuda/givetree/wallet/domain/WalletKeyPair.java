@@ -1,11 +1,11 @@
 package com.dareuda.givetree.wallet.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
-public class GeneratedWallet {
+@AllArgsConstructor
+public class WalletKeyPair {
     private final String address;
     private final String privateKey;
 }
