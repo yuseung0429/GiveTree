@@ -3,12 +3,12 @@ import { style } from '@vanilla-extract/css';
 // import colorPalette from '@/styles/tokens/colorPalette';
 
 export const mainBg = style({
-  backgroundColor: '#F5F5F5'
+  backgroundColor: '#F5F5F5',
+  minHeight:'100%',
 });
 
 export const section = style({
-  padding: '0 10px',
-  margin: '20px 0 30px 0'
+  padding: '20px 10px',
 });
 
 export const title = style({
@@ -19,4 +19,9 @@ export const flextitle = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center'
+});
+
+export const link = style({
+  textDecoration: 'none',
+  color: '#000',
 });

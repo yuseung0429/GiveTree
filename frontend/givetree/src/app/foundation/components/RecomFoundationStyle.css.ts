@@ -3,11 +3,11 @@ import colorPalette from '@/styles/tokens/colorPalette';
 
 export const container = style({
   width: '100%',
-  height: '140px',
+  aspectRatio: '16 / 9',
+  maxHeight: '300px',
   position:'relative',
   borderRadius: '10px',
   overflow: 'hidden',
-  backgroundColor: colorPalette.primary[50]
 });
 
 export const imageBox = style({
@@ -15,8 +15,10 @@ export const imageBox = style({
   height: '100%',
   position: 'absolute',
   top: '0',
-  left:'0'
-
+  left:'0',
+  backgroundImage: 'url("/temporary/campaignBg.png")', // 임시 이미지
+  backgroundSize: 'cover',
+  backgroundPosition: 'center'
 });
 
 export const overlayBox = style({

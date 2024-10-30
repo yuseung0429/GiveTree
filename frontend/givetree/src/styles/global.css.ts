@@ -6,6 +6,7 @@ globalStyle('*', {
   margin: '0',
   fontFamily: 'inherit',
   WebkitTapHighlightColor: 'transparent',
+  boxSizing: 'border-box',
 });
 
 globalStyle('body', {

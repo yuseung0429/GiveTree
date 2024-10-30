@@ -1,5 +1,5 @@
+import ConditionalBottomBar from '@/app/foundation/ConditionalBottomBar';
 import AppBar from '@/components/common/AppBar';
-import BottomBar from '@/components/common/BottomBar';
 import Layout from '@/components/common/Layout';
 
 export default function FoundationLayout({
@@ -7,6 +7,7 @@ export default function FoundationLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <Layout>
       <header>
@@ -14,7 +15,7 @@ export default function FoundationLayout({
       </header>
       <main>{children}</main>
       <footer>
-        <BottomBar>bottom</BottomBar>
+        <ConditionalBottomBar />
       </footer>
     </Layout>
   );
