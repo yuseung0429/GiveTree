@@ -12,8 +12,9 @@ public class FileSpoofingValidator implements FileValidator{
     @Override
     public void validate(MultipartFile multipartFile) {
         try {
-            String realMimeType = tika.detect(multipartFile.getBytes());
-            if (!multipartFile.getContentType().equals(realMimeType)) {
+            String detectedMimeType = tika.detect(multipartFile.getBytes());
+            String providedMimeType = multipartFile.getContentType();
+            if (!detectedMimeType.equals(providedMimeType)) {
                 throw new RuntimeException();
             }
         } catch (IOException e) {

@@ -31,7 +31,9 @@ public class MediaExtensionValidationInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        if (!(request instanceof MultipartHttpServletRequest multipartRequest)) {
+            throw new RuntimeException();
+        }
 
         MultipartFile multipartFile = multipartRequest.getFile(FILE_NAME);
         if (multipartFile == null) {

@@ -2,14 +2,16 @@ package com.dareuda.givetree.common.file_validator;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ImageFileValidator implements FileValidator {
+import java.util.List;
 
-    private static final String REQUIRE_MIME_TYPE = "image";
+public class MediaFileValidator implements FileValidator {
+
+    private static final List<String> ALLOWED_MIME_TYPES = List.of("image", "video");
 
     @Override
     public void validate(MultipartFile multipartFile) {
         String mimeType = multipartFile.getContentType();
-        if (!mimeType.startsWith(REQUIRE_MIME_TYPE)) {
+        if (mimeType == null || ALLOWED_MIME_TYPES.stream().noneMatch(mimeType::startsWith)) {
             throw new RuntimeException();
         }
     }

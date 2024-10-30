@@ -16,9 +16,10 @@ public class MediaController {
 
     private final StorageService storageService;
 
+    @ValidExtension
     @PostMapping
     public ResponseEntity<String> store(
-            @ValidExtension MultipartFile file
+            @RequestPart MultipartFile file
     ) {
         return ResponseEntity.ok().body(storageService.store("test", file));
     }
