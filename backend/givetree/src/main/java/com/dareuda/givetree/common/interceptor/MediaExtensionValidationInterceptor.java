@@ -1,6 +1,7 @@
 package com.dareuda.givetree.common.interceptor;
 
 import com.dareuda.givetree.common.file_validator.FileValidator;
+import com.dareuda.givetree.media.controller.ValidExtension;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class MediaExtensionValidInterceptor implements HandlerInterceptor {
+public class MediaExtensionValidationInterceptor implements HandlerInterceptor {
 
     private static final String FILE_NAME = "file";
 
@@ -22,7 +23,11 @@ public class MediaExtensionValidInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (!(handler instanceof HandlerMethod)) {
+        if (!(handler instanceof HandlerMethod handlerMethod)) {
+            return true;
+        }
+
+        if (handlerMethod.getMethodAnnotation(ValidExtension.class) == null) {
             return true;
         }
 

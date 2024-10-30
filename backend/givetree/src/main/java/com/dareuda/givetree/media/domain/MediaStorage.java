@@ -12,10 +12,10 @@ public class MediaStorage {
     private final FileNameGenerator fileNameGenerator;
     private final S3Storage s3Storage;
 
-    public String store(String memberName, MultipartFile multipartFile) {
+    public String store(String uploaderName, MultipartFile multipartFile) {
         return s3Storage.upload(
                 multipartFile,
-                fileNameGenerator.generate(multipartFile, memberName)
+                fileNameGenerator.generate(multipartFile, uploaderName)
         );
     }
 }

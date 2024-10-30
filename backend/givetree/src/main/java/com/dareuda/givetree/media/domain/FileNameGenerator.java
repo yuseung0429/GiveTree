@@ -19,17 +19,17 @@ public class FileNameGenerator {
 
     private static final Tika tika = new Tika();
 
-    public String generate(MultipartFile multipartFile, String memberName) {
-        return md5(multipartFile, memberName) + extension(multipartFile);
+    public String generate(MultipartFile multipartFile, String uploaderName) {
+        return md5(multipartFile, uploaderName) + extension(multipartFile);
     }
 
-    private String md5(MultipartFile multipartFile, String memberName) {
+    private String md5(MultipartFile multipartFile, String uploaderName) {
         try {
             String fileName = multipartFile.getOriginalFilename();
 
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             messageDigest.update(
-                    (fileName + memberName + LocalDateTime.now()).getBytes(StandardCharsets.UTF_8)
+                    (fileName + uploaderName + LocalDateTime.now()).getBytes(StandardCharsets.UTF_8)
             );
 
             return Hex.encodeHexString(messageDigest.digest());
