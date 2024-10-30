@@ -19,14 +19,14 @@ const decorations = Array(7)
 const decorationPositions = [
   { top: '18%', left: '41%' },
   { top: '36%', left: '30%' },
-  { top: '36%', left: '56%' },
+  { top: '36%', left: '54%' },
   { top: '52%', left: '20%' },
-  { top: '50%', left: '44%' },
-  { top: '52%', left: '65%' },
-  { top: '68%', left: '10%' },
-  { top: '66%', left: '30%' },
-  { top: '66%', left: '54%' },
-  { top: '68%', left: '73%' },
+  { top: '50%', left: '42%' },
+  { top: '51%', left: '64%' },
+  { top: '70%', left: '12%' },
+  { top: '66%', left: '31%' },
+  { top: '66%', left: '53%' },
+  { top: '70%', left: '73%' },
 ];
 
 type TreeSliderProps = {

@@ -41,19 +41,19 @@ export default function TreeSlider({ initialMessages }: TreeProps) {
     if (moveX.current < -50 && currentPage < trees.length) {
       // 오른쪽으로 스와이프 시 현재 슬라이드가 마지막이 아니면 이동
       setIsFlipping((prev) => !prev);
+      setCurrentPage((prevIndex) => prevIndex + 1);
       setShowDecorations(false);
       setTimeout(() => {
-        setCurrentPage((prevIndex) => prevIndex + 1);
         setShowDecorations(true);
-      }, 300);
+      }, 400);
     } else if (moveX.current > 50 && currentPage > 1) {
       // 왼쪽으로 스와이프 시 현재 슬라이드가 첫 번째가 아니면 이동
       setIsFlipping((prev) => !prev);
+      setCurrentPage((prevIndex) => prevIndex - 1);
       setShowDecorations(false);
       setTimeout(() => {
-        setCurrentPage((prevIndex) => prevIndex - 1);
         setShowDecorations(true);
-      }, 300);
+      }, 400);
     }
     moveX.current = 0;
   };
