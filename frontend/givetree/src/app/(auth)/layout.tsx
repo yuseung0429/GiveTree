@@ -1,6 +1,6 @@
 import AppBar from '@/components/common/AppBar';
-import BottomBar from '@/components/common/BottomBar';
 import Layout from '@/components/common/Layout';
+import NavigationBar from '@/components/common/NavigationBar';
 
 export default function AuthLayout({
   children,
@@ -18,7 +18,7 @@ export default function AuthLayout({
       </header>
       <main>{children}</main>
       <footer>
-        <BottomBar>bottom</BottomBar>
+        <NavigationBar />
       </footer>
     </Layout>
   );
