@@ -1,7 +1,6 @@
 import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
 
-
 export const container = style({
   flex: '0 0',
   width: '100%',
@@ -10,7 +9,6 @@ export const container = style({
 
 export const decoImage = style({
   display: 'flex',
-  backgroundImage: `url('/images/decoBar.png')`,
   width: '100%',
   height: 'auto',
 });
@@ -37,7 +35,7 @@ export const item = style({
   cursor: 'pointer',
   selectors: {
     '&.active': {
-      color: colorPalette.primary[500],
+      color: colorPalette.primary[400],
     },
   },
 });
@@ -46,4 +44,8 @@ export const iconWrapper = style({
   width: '24px',
   height: '24px',
   padding: '2px',
+});
+
+export const text = style({
+  fontSize: '0.75rem',
 });
