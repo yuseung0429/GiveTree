@@ -1,9 +1,8 @@
-import AppBar from '@/components/common/AppBar';
-import BottomBar from '@/components/common/BottomBar';
+
 import Layout from '@/components/common/Layout';
-import colorPalette from '@/styles/tokens/colorPalette';
-import { FaTree, FaRegBell } from 'react-icons/fa';
-import * as styles from './layout.css';
+import NavigationBar from '@/components/common/NavigationBar';
+import Titile from '@/components/campaign/Main/Title';
+
 
 export default function AuthLayout({
   children,
@@ -17,22 +16,11 @@ export default function AuthLayout({
     // Layout 컴포넌트는 main 태그를 기준으로 크기를 화면에 맞추므로 반드시 main 태그를 정의해야 함!!
     <Layout>
       <header>
-        <AppBar>
-          <div className={styles.header}>
-            <div className={styles.leftSection}>
-              <FaTree color={colorPalette.primary[900]} size={24} />
-              <h4>GIVE</h4>
-            </div>
-            <div className={styles.rightSection}>
-              <FaRegBell color='#fff' size={24} />
-            </div>
-          </div>
-        </AppBar>
+      <Titile />
       </header>
-
       <main>{children}</main>
       <footer>
-        <BottomBar>bottom</BottomBar>
+        <NavigationBar />
       </footer>
     </Layout>
   );

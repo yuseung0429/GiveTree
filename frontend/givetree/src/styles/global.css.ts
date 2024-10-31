@@ -5,6 +5,7 @@ import colorPalette from '@/styles/tokens/colorPalette';
 globalStyle('*', {
   margin: '0',
   fontFamily: 'inherit',
+  boxSizing: 'border-box',
   WebkitTapHighlightColor: 'transparent',
 });
 
