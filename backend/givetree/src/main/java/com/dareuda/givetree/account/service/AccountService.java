@@ -16,4 +16,8 @@ public class AccountService {
     public List<ExternalAccountInfo> getAccounts(long memberId) {
         return accountLoader.loadAccounts(memberId);
     }
+
+    public ExternalAccountInfo getAccount(long memberId, String accountNo) {
+        return accountLoader.load(memberId, accountNo);
+    }
 }

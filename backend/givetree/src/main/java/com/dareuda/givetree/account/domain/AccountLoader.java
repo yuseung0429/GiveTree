@@ -22,4 +22,9 @@ public class AccountLoader {
         List<DemandDepositAccountResponse> response = demandDepositApiClient.searchAccounts(info.getUserKey());
         return ListUtils.applyFunctionToElements(response, ExternalAccountInfo::from);
     }
+
+    public ExternalAccountInfo load(long memberId, String accountNo) {
+        MemberFinanceInfo info = financeInfoReader.read(memberId);
+        return ExternalAccountInfo.from(demandDepositApiClient.searchAccount(info.getUserKey(), accountNo));
+    }
 }
