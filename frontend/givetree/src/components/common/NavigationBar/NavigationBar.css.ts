@@ -16,7 +16,7 @@ export const decoImage = style({
 });
 
 export const bar = style({
-  marginBottom: '2px',
+  paddingBottom: '2px',
   width: '100%',
   display: 'flex',
   justifyContent: 'space-around',
