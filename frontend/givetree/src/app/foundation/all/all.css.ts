@@ -13,12 +13,13 @@ export const listBox = style({
 });
 
 export const TabBox = style({
-  width: '125px',
+  width: '120px',
   height: '50px',
   backgroundColor: 'white'
 });
 
 export const tabContainer = style({
+  width: '100%',
   overflowX: 'auto',
   whiteSpace: 'nowrap',
   scrollbarWidth: 'none',  // Firefox
@@ -27,17 +28,5 @@ export const tabContainer = style({
   '::-webkit-scrollbar': { // Chrome, Safari
     display: 'none',
   },
-});
-
-export const tabButton = style({
-  minWidth: '125px',
-  height: '55px',
-  backgroundColor: 'white',
-  border: 'none',
-  outline: 'none',
-  cursor: 'pointer',
-  fontSize: '16px',
-  textAlign: 'center',
-  padding: '10px 0',
-  fontWeight: '500',
+  backgroundColor: 'white'
 });

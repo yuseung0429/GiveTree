@@ -1,10 +1,10 @@
 import { style } from '@vanilla-extract/css';
-// import colorPalette from '@/styles/tokens/colorPalette';
+import colorPalette from '@/styles/tokens/colorPalette';
 
 export const container = style({
   width: '100%',
   height: '70px',
-  borderRadius: '2px',
+  borderRadius: '4px',
   backgroundColor: 'white',
   padding: '10px',
   overflow: 'hidden',
@@ -14,6 +14,15 @@ export const container = style({
   cursor: 'pointer',
   gap: '10px'
 });
+
+export const flexbox = style({
+  display: 'flex',
+  gap: '10px',
+  alignItems: 'center',
+  width: 'calc(100% - 40px)'
+
+});
+
 
 export const foundationLogo = style({
   width: '50px',
@@ -31,11 +40,14 @@ export const btn = style({
 });
 
 export const textbox = style({
-  backgroundColor: 'red'
+  overflow : 'hidden',
 });
 
 export const descript = style({
-  overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
+  marginTop : '4px',
+  overflow: 'hidden', 
+  color: colorPalette.grey[500],
+  fontSize: '14px'
 });
