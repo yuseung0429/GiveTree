@@ -1,6 +1,7 @@
-import DonationCash from '@/app/foundation/components/DonationCash';
+import DonationCash from '@/components/foundation/DonationCash';
 import Box from '@/components/common/Box';
 import Layout from '@/components/common/Layout';
+import Account from '@/components/common/Account/indext';
 
 export default function FoundationLayout({
   children,
@@ -10,10 +11,12 @@ export default function FoundationLayout({
 
   return (
     <Layout>
-      <Box as='section'>
+      <Box as='section' padding='20px 10px'>
         <DonationCash />
+        <Account />
       </Box>
-      <Box as='section' >
+
+      <Box as='section' padding='20px 10px'>
         { children }
       </Box>
     </Layout>

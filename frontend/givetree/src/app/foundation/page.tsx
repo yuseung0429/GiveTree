@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { Suspense } from "react";
-import Searchbar from "@/app/foundation/components/searchbar";
+import Searchbar from "@/components/foundation/searchbar";
 import Typography from "@/components/common/Typography";
-import RecomFoundation from './components/RecomFoundation'
+import RecomFoundation from '../../components/foundation/RecomFoundation'
 import * as style from './foundation.css'
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
-import FoundationItem from '@/app/foundation/components/FoundationItem';
+import FoundationItem from '@/components/foundation/FoundationItem';
 import { useRouter } from 'next/navigation';
 
 type Foundation = {

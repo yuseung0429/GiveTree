@@ -1,6 +1,6 @@
 "use client"; 
 
-import FoundationItem from "@/app/foundation/components/FoundationItem";
+import FoundationItem from "@/components/foundation/FoundationItem";
 import Box from "@/components/common/Box";
 import * as style from '@/app/foundation/all/all.css'
 import Flex from "@/components/common/Flex";

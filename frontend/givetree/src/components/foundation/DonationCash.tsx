@@ -8,7 +8,7 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import { useState } from 'react';
 
 export default function DonationCash () {
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState<number>(0);
 
   // 금액을 직접 입력하는 함수
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,10 +33,10 @@ export default function DonationCash () {
       </Flex>
 
       {/* 금액입력 */}
-      <Box marginTop='20px'>
+      <Box className={style.inputBox}>
         <input 
             type="text" 
-            value={amount.toLocaleString()} // 3자리마다 콤마 추가
+            value={amount > 0 ? amount.toLocaleString() : ''}
             onChange={handleInputChange} 
             className={style.amountInput}
             placeholder="후원하실 금액을 입력해주세요"
@@ -55,7 +55,6 @@ export default function DonationCash () {
             </button>
           ))}
       </Flex>
-
     </Box>
   );
 }
