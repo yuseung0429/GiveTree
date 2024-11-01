@@ -27,9 +27,16 @@ public class FoundationController {
                 .build();
     }
 
-    @GetMapping("/{memberId}")
-    public ResponseEntity<FoundationDetail> getFoundation(@PathVariable long memberId) {
-        FoundationDetail foundationDetail = foundationService.getFoundationDetailByMemberId(memberId);
+    @GetMapping("/{foundationId}")
+    public ResponseEntity<FoundationDetail> getFoundation(@PathVariable long foundationId) {
+        FoundationDetail foundationDetail = foundationService.getFoundationDetail(foundationId);
+
+        return ResponseEntity.ok(foundationDetail);
+    }
+
+    @GetMapping
+    public ResponseEntity<FoundationDetail> getSessionFoundation() {
+        FoundationDetail foundationDetail = foundationService.getFoundationDetailByMemberId(1L);
 
         return ResponseEntity.ok(foundationDetail);
     }

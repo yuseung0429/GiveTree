@@ -17,6 +17,10 @@ public class FoundationService {
         return foundationCreator.create(request);
     }
 
+    public FoundationDetail getFoundationDetail(long foundationId) {
+        return foundationDetailReader.readByMemberId(foundationId);
+    }
+
     public FoundationDetail getFoundationDetailByMemberId(long memberId) {
         return foundationDetailReader.readByMemberId(memberId);
     }
