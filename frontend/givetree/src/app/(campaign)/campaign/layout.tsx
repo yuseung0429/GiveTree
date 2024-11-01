@@ -1,7 +1,6 @@
 import Layout from '@/components/common/Layout';
 import NavigationBar from '@/components/common/NavigationBar';
-import Titile from '@/components/campaign/Main/Title';
-
+import AppBar from '@/components/common/AppBar';
 
 export default function AuthLayout({
   children,
@@ -15,7 +14,7 @@ export default function AuthLayout({
     // Layout 컴포넌트는 main 태그를 기준으로 크기를 화면에 맞추므로 반드시 main 태그를 정의해야 함!!
     <Layout>
       <header>
-      <Titile />
+        <AppBar>희망 나눔 캠페인</AppBar>
       </header>
       <main>{children}</main>
       <footer>

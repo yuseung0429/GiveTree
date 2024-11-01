@@ -10,7 +10,7 @@ export const campaignCard = style({
   aspectRatio: '1',
   borderRadius: '16px',
   padding: '1rem 0.75rem',
-  boxShadow: '4px 4px 8px rgba(0, 0, 0, 0.25)',
+  boxShadow: '3px 3px 6px rgba(0, 0, 0, 0.25)',
   scrollSnapAlign: 'start',
   flexShrink: '0',
   margin: '0 0.5rem 0.5rem 0'
