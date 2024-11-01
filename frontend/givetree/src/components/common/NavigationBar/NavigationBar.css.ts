@@ -41,11 +41,13 @@ export const item = style({
 });
 
 export const iconWrapper = style({
+  display: 'flex',
   width: '24px',
   height: '24px',
-  padding: '2px',
+  paddingBottom: '2px',
 });
 
-export const text = style({
+export const textWrapper = style({
+  display: 'flex',
   fontSize: '0.75rem',
 });

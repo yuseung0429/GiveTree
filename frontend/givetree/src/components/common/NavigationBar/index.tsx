@@ -35,7 +35,7 @@ const NavigationBar = () => {
           <div className={styles.iconWrapper}>
             <HiHome size={24} />
           </div>
-          <Typography className={styles.text}>메인</Typography>
+          <Typography className={styles.textWrapper}>메인</Typography>
         </Link>
         <Link
           href="/foundation"
@@ -46,7 +46,7 @@ const NavigationBar = () => {
           <div className={styles.iconWrapper}>
             <HiBuildingLibrary size={24} />
           </div>
-          <Typography className={styles.text}>재단</Typography>
+          <Typography className={styles.textWrapper}>재단</Typography>
         </Link>
         <Link
           href="/tree"
@@ -66,7 +66,7 @@ const NavigationBar = () => {
           <div className={styles.iconWrapper}>
             <HiShoppingBag size={24} />
           </div>
-          <Typography className={styles.text}>거래</Typography>
+          <Typography className={styles.textWrapper}>거래</Typography>
         </Link>
         <Link
           href="/signup"
@@ -75,7 +75,7 @@ const NavigationBar = () => {
           <div className={styles.iconWrapper}>
             <HiUserCircle size={24} />
           </div>
-          <Typography className={styles.text}>마이</Typography>
+          <Typography className={styles.textWrapper}>마이</Typography>
         </Link>
       </div>
     </div>
