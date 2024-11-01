@@ -1,19 +1,26 @@
+import DonationChart from '@/app/foundation/[id]/detail/DonationChart';
 import * as style from './detail.css';
 import Box from '@/components/common/Box';
 import Typography from '@/components/common/Typography';
 
 export default function DonationTab() {
+  const collectedAmount = 100000; // 모금 금액
+  const spentAmount = 75000; // 지출 금액
+
   return (
     <Box as="article" className={style.TabContainer}>
       {/* 모금함 */}
       <Box>
         <Typography as="h3" weight="medium">
-          단체소개
+          나눔현황
         </Typography>
         <Box>
-          <Typography>여기에 단체에 대한 상세 내용이 들어갑니다...</Typography>
+          <DonationChart
+            collectedAmount={collectedAmount}
+            spentAmount={spentAmount}
+          />
         </Box>
       </Box>
-    </Box> 
+    </Box>
   );
 }

@@ -12,7 +12,7 @@ export default function IntroTab() {
     <Box className={style.TabContainer}>
       {/* 단체소개 */}
       <Box as="article" className={style.article}>
-        <Typography as="h3" weight="semiBold" color={colorPalette.grey[900]}>
+        <Typography as="h3" weight="semiBold" color={colorPalette.primary[400]}>
           단체소개
         </Typography>
         <Box className={style.bottomBox}>
@@ -22,37 +22,37 @@ export default function IntroTab() {
 
       {/* 단체사진 */}
       <Box as="article" className={style.article}>
-        <Typography as="h3" weight="semiBold">
+        <Typography as="h3" weight="semiBold" color={colorPalette.primary[400]}>
           단체사진
         </Typography>
-        <Box className={style.bottomBox}>
-          {/* 여기에 사진을 api에서 받아온 개수만큼 넣고 싶어. 지금은 임의로 넣어야할 것 같아 */}
-          {/* 가로로 스크롤하면서 보이도록 해줘 */}
+        <Flex gap="10px" className={style.imageScrollContainer}>
           <div className={style.imageBox}></div>
           <div className={style.imageBox}></div>
           <div className={style.imageBox}></div>
           <div className={style.imageBox}></div>
-
-        </Box>
+        </Flex>
       </Box>
 
       {/* 단체정보 */}
       <Box as="article" className={style.article}>
-        <Typography as="h3" weight="semiBold">
+        <Typography as="h3" weight="semiBold" color={colorPalette.primary[400]}>
           단체정보
         </Typography>
-        <Flex gap="15px">
+        <Flex gap="20px" flexDirection="column" className={style.bottomBox}>
           {/* 공식단체명 */}
           <Box>
             <Typography
               as="h5"
               weight="medium"
               size="16px"
-              color={colorPalette.grey[700]}
+              color={colorPalette.grey[600]}
+              style={{ marginBottom: '10px' }}
             >
-              공식단체명
+              ◾ 공식단체명
             </Typography>
-            <Typography>사회복지법인 굿네이버스</Typography>
+            <Typography style={{ paddingLeft: '10px' }}>
+              사회복지법인 굿네이버스
+            </Typography>
           </Box>
 
           {/* 사업자등록번호 */}
@@ -61,11 +61,14 @@ export default function IntroTab() {
               as="h5"
               weight="medium"
               size="16px"
-              color={colorPalette.grey[700]}
+              color={colorPalette.grey[600]}
+              style={{ marginBottom: '10px' }}
             >
-              사업자등록번호/고유번호
+              ◾ 사업자등록번호/고유번호
             </Typography>
-            <Typography>사회복지법인 굿네이버스</Typography>
+            <Typography style={{ paddingLeft: '10px' }}>
+              123-45-67890/비영리법인
+            </Typography>
           </Box>
 
           {/* 주소 및 연락처 */}
@@ -74,11 +77,20 @@ export default function IntroTab() {
               as="h5"
               weight="medium"
               size="16px"
-              color={colorPalette.grey[700]}
+              color={colorPalette.grey[600]}
+              style={{ marginBottom: '10px' }}
             >
-              공식단체명
+              ◾ 주소 및 연락처
             </Typography>
-            <Typography>사회복지법인 굿네이버스</Typography>
+            <Box paddingLeft="10px">
+              <Typography style={{ marginBottom: '10px' }}>
+                (07253) 서울 영등포구 버드나루로 13
+              </Typography>
+              <Typography style={{ marginBottom: '10px' }}>
+                02-6717-4000
+              </Typography>
+              <Typography>sypark3@gnk.or.kr</Typography>
+            </Box>
           </Box>
         </Flex>
       </Box>

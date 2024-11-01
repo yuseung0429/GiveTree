@@ -37,10 +37,8 @@ export const article = style({
 
 // imageScrollContainer
 export const imageScrollContainer = style({
-  display: 'flex',
   overflowX: 'auto', // 가로 스크롤 허용
-  gap: '10px', // 이미지 간격
-  paddingBottom: '10px', // 스크롤 영역 여유 공간
+  marginTop: '10px',
   scrollbarWidth: 'none', // Firefox에서 스크롤바 숨김
   msOverflowStyle: 'none', // IE/Edge에서 스크롤바 숨김
   '::-webkit-scrollbar': {
@@ -67,6 +65,7 @@ export const imageBox = style({
   minWidth: '150px',
   maxWidth: '280px',
   aspectRatio: '4 / 3',
+  overflow: 'hidden',
   backgroundColor: colorPalette.primary[50],
 });
 
