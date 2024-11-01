@@ -4,6 +4,7 @@ import { style } from "@vanilla-extract/css";
 export const search = style({
   display: 'flex',
   backgroundColor: colorPalette.primary[300],
+  padding: '0.25rem 1.25rem 1.25rem',
 });
 
 export const inputBox = style({
@@ -15,13 +16,13 @@ export const inputBox = style({
 export const searchInput = style({
   width: '100%',
   height: '50px',
-  padding: '10px 40px 10px 15px', // 오른쪽 여백 추가
+  padding: '10px 40px 10px 15px',
   fontSize: '16px',
   border: 'none',
   borderRadius: '8px',
   outline: 'none',
   '::placeholder': {
-    color: colorPalette.text[300], // 플레이스홀더 색상
+    color: colorPalette.text[300],
   },
 });
 

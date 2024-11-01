@@ -1,6 +1,6 @@
 import * as styles from './main.css';
 import CampaignCard from '@/components/campaign/Main/CapaignCard';
-import SearchBar from '@/components/campaign/Main/SearchBar';
+// import SearchBar from '@/components/campaign/Main/SearchBar';
 
 const campaigns = [
   {
@@ -66,9 +66,9 @@ const endingSoonCampaigns = campaigns.filter(campaign => {
 export default function Home() {
   return (
     <div className={styles.wrapper}>
-      <SearchBar />
-      <div className={styles.mainContainer}>
+      {/* <SearchBar /> */}
 
+      <div className={styles.mainContainer}>
         <h3 className={styles.sectionTitle}>진행 중인 캠페인</h3>
         <div className={styles.slideContainer}>
           {campaigns.map((campaign, index) => (
