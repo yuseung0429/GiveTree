@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('GitLab Clone') {
             steps {           
-                echo '클론을 시작할게요요!'
+                echo '클론을 시작할게요!'
                 checkout scmGit(
                     branches: [[name: 'be']], 
                     extensions: [
