@@ -1,10 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import BottomBar from '@/components/common/BottomBar';
+import NavigationBar from '@/components/common/NavigationBar';
 
 export default function ConditionalBottomBar() {
   const pathname = usePathname();
 
-  return pathname === '/foundation' ? <BottomBar>bottom</BottomBar> : null;
+  return pathname === '/foundation' ? <NavigationBar /> : null;
 }

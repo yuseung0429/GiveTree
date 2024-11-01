@@ -27,7 +27,12 @@ export default function IntroTab() {
         </Typography>
         <Box className={style.bottomBox}>
           {/* 여기에 사진을 api에서 받아온 개수만큼 넣고 싶어. 지금은 임의로 넣어야할 것 같아 */}
+          {/* 가로로 스크롤하면서 보이도록 해줘 */}
           <div className={style.imageBox}></div>
+          <div className={style.imageBox}></div>
+          <div className={style.imageBox}></div>
+          <div className={style.imageBox}></div>
+
         </Box>
       </Box>
 
