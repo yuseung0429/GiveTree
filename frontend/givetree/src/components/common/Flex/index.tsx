@@ -22,13 +22,23 @@ const Flex = ({
   gap,
   alignItems,
   justifyContent,
+  width,
+  height,
   className,
   ...props
 }: FlexProps) => {
   return (
     <div
       className={mergeClasses(s.flex, className)}
-      style={{ flexWrap, flexDirection, gap, alignItems, justifyContent }}
+      style={{
+        flexWrap,
+        flexDirection,
+        gap,
+        alignItems,
+        justifyContent,
+        width,
+        height,
+      }}
       {...props}
     >
       {children}
