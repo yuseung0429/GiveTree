@@ -8,5 +8,7 @@ export const layout = style({
 
 globalStyle(`${layout} > main`, {
   flex: '1 1 auto',
-  overflowY: 'scroll',
+  position: 'relative',
+  overflow: 'hidden scroll',
+  maxWidth: '100vw',
 });

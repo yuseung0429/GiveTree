@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { HiChevronLeft } from 'react-icons/hi2';
 
 import colorPalette from '@/styles/tokens/colorPalette';
+import color from '@/styles/tokens/color';
 
 import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
-import color from '@/styles/tokens/color';
 import TextField from '@/components/common/TextField';
 
 export default function FoundationSignIn() {
@@ -50,7 +50,6 @@ export default function FoundationSignIn() {
         >
           <Flex alignItems="center" justifyContent="space-between">
             <Typography size="sm">아직 재단 계정이 없으신가요?</Typography>
-
             <Link href="/signin">
               <Button variant="outlined" size="sm">
                 재단 회원가입

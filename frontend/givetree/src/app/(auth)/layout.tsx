@@ -1,22 +1,42 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+
+import { AnimatePresence, motion } from 'framer-motion';
+
 import AppBar from '@/components/common/AppBar';
 import BottomBar from '@/components/common/BottomBar';
 import Layout from '@/components/common/Layout';
+import FrozenRouter from '@/components/common/FrozenRouter';
 
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  /**
-   * 페이지에 따라 NavBar가 필요한 경우도 있고, 필요 없는 경우가 있어서 RootLayout에 NavBar를 정의하지 않았음.
-   */
+  const pathname = usePathname();
   return (
-    // Layout 컴포넌트는 main 태그를 기준으로 크기를 화면에 맞추므로 반드시 main 태그를 정의해야 함!!
     <Layout>
       <header>
         <AppBar>top</AppBar>
       </header>
-      <main>{children}</main>
+
+      <main>
+        <AnimatePresence mode="sync" initial={false}>
+          <motion.div
+            key={pathname}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{ position: 'absolute', inset: '0' }}
+            onAnimationStart={() => navigator.vibrate(10)}
+          >
+            <FrozenRouter>{children}</FrozenRouter>
+          </motion.div>
+        </AnimatePresence>
+      </main>
+
       <footer>
         <BottomBar>bottom</BottomBar>
       </footer>
