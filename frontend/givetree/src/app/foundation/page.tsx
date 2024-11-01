@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
-import { Suspense } from "react";
-import Searchbar from "@/components/foundation/searchbar";
-import Typography from "@/components/common/Typography";
-import RecomFoundation from '../../components/foundation/RecomFoundation'
-import * as style from './foundation.css'
+import { Suspense } from 'react';
+import Searchbar from '@/components/foundation/searchbar';
+import Typography from '@/components/common/Typography';
+import RecomFoundation from '../../components/foundation/RecomFoundation';
+import * as style from './foundation.css';
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
 import FoundationItem from '@/components/foundation/FoundationItem';
@@ -25,13 +25,11 @@ const foundations: Foundation[] = [
   { id: 5, name: '유니세프 한국위원회' },
 ];
 
-
 export default function Page() {
   const router = useRouter();
-  
+
   return (
     <Box className={style.mainBg}>
-
       {/* 검색창 */}
       <Box as="section" className={style.section}>
         <Suspense fallback={<div>Loading...</div>}>
@@ -58,17 +56,16 @@ export default function Page() {
           </Link>
         </Box>
 
-        <Flex  flexDirection='column' gap='10px'>
-        {foundations.map((foundation) => (
-            <FoundationItem 
-              key={foundation.id} 
+        <Flex flexDirection="column" gap="10px">
+          {foundations.map((foundation) => (
+            <FoundationItem
+              key={foundation.id}
               foundation={foundation}
               onClick={() => router.push(`/foundation/${foundation.id}/detail`)} // 클릭 시 이동 설정
             />
           ))}
         </Flex>
       </Box>
-
     </Box>
   );
 }
