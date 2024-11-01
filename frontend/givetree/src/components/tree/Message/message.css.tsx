@@ -7,8 +7,8 @@ export const modal = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'center',
-  width: '280px',
-  height: '220px',
+  width: '300px',
+  height: '260px',
   top: '60%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -46,4 +46,5 @@ export const messageTextContainer = style({
   width: '240px',
   height: '160px',
   lineHeight: '1.7',
+  marginBottom: '0.5rem',
 });
