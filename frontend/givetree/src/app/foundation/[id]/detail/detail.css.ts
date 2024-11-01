@@ -30,15 +30,31 @@ export const tabContentContainer = style({
   },
 });
 
-// 탭 컨테이너
+// article
+export const article = style({
+  marginBottom: '30px'
+});
+
+// introBox
+export const bottomBox = style({
+  marginTop: '10px'
+});
+
+// TabContainer
 export const TabContainer = style({
   width: '100%',
-  backgroundColor: colorPalette.primary[100],
-  height: '600px',
   flexGrow: 1,
   overflowY: 'auto',
-  padding: '16px',
   paddingBottom: '60px',
+});
+
+// imageBox
+export const imageBox = style({
+  width: '30%',
+  minWidth: '150px',
+  maxWidth : '280px',
+  aspectRatio : '4 / 3',
+  backgroundColor : colorPalette.primary[50]
 });
 
 // 후원하기 버튼

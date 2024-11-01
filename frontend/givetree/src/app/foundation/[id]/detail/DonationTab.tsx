@@ -14,6 +14,6 @@ export default function DonationTab() {
           <Typography>여기에 단체에 대한 상세 내용이 들어갑니다...</Typography>
         </Box>
       </Box>
-    </Box>
+    </Box> 
   );
 }
