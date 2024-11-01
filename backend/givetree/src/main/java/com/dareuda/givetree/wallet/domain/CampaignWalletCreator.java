@@ -2,7 +2,6 @@ package com.dareuda.givetree.wallet.domain;
 
 import com.dareuda.givetree.campaign.domain.Campaign;
 import com.dareuda.givetree.campaign.domain.CampaignReader;
-import com.dareuda.givetree.wallet.infrastructure.CampaignWalletRepository;
 import com.dareuda.givetree.wallet.infrastructure.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
