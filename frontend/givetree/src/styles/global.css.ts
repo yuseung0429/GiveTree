@@ -6,6 +6,7 @@ import color from '@/styles/tokens/color';
 globalStyle('*', {
   margin: '0',
   boxSizing: 'border-box',
+  overflow: 'auto',
   fontFamily: 'inherit',
   WebkitTapHighlightColor: 'transparent',
 });
