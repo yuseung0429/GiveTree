@@ -16,7 +16,7 @@ export const treeImage = style({
   overflow: 'hidden',
   perspective: '1000px',
   transition: 'transform 0.4s ease',
-  // filter: 'drop-shadow(0px -3px 12px rgba(68, 68, 68, 0.3))',
+  filter: 'drop-shadow(0px -3px 12px rgba(68, 68, 68, 0.3))',
 });
 
 export const flip = style({
