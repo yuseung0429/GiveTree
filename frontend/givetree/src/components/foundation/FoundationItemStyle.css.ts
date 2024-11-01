@@ -12,17 +12,15 @@ export const container = style({
   justifyContent: 'space-between',
   alignItems: 'center',
   cursor: 'pointer',
-  gap: '10px'
+  gap: '10px',
 });
 
 export const flexbox = style({
   display: 'flex',
   gap: '10px',
   alignItems: 'center',
-  width: 'calc(100% - 40px)'
-
+  width: 'calc(100% - 40px)',
 });
-
 
 export const foundationLogo = style({
   width: '50px',
@@ -30,7 +28,7 @@ export const foundationLogo = style({
   borderRadius: '25px',
   padding: '10px',
   flexShrink: '0',
-  border: '1px solid grey'
+  border: '1px solid grey',
 });
 
 export const btn = style({
@@ -40,14 +38,14 @@ export const btn = style({
 });
 
 export const textbox = style({
-  overflow : 'hidden',
+  overflow: 'hidden',
 });
 
 export const descript = style({
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  marginTop : '4px',
-  overflow: 'hidden', 
+  marginTop: '4px',
+  overflow: 'hidden',
   color: colorPalette.grey[500],
-  fontSize: '14px'
+  fontSize: '14px',
 });

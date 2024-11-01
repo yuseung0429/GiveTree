@@ -4,29 +4,30 @@ import { style } from '@vanilla-extract/css';
 
 export const mainBg = style({
   backgroundColor: '#F5F5F5',
-  minHeight:'100%',
+  minHeight: '100%',
 });
 
 export const listBox = style({
   padding: '10px',
-  margin: '20px 0'
+  margin: '20px 0',
 });
 
 export const TabBox = style({
   width: '120px',
   height: '50px',
-  backgroundColor: 'white'
+  backgroundColor: 'white',
 });
 
 export const tabContainer = style({
   width: '100%',
   overflowX: 'auto',
   whiteSpace: 'nowrap',
-  scrollbarWidth: 'none',  // Firefox
+  scrollbarWidth: 'none', // Firefox
   msOverflowStyle: 'none', // IE/Edge
 
-  '::-webkit-scrollbar': { // Chrome, Safari
+  '::-webkit-scrollbar': {
+    // Chrome, Safari
     display: 'none',
   },
-  backgroundColor: 'white'
+  backgroundColor: 'white',
 });
