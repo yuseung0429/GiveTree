@@ -4,7 +4,7 @@ spring:
       givetree
 
   profiles:
-    include: secret, finance
+    include: finance, local
 
   config:
     import: classpath:/properties/application-secret.yml
