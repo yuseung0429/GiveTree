@@ -8,7 +8,7 @@ pipeline {
             steps {           
                 echo '클론을 시작할게요요!'
                 checkout scmGit(
-                    branches: [[name: 'test/cicd']], 
+                    branches: [[name: 'feature/19-be-cicd']], 
                     extensions: [
                         submodule(parentCredentials: true, 
                         recursiveSubmodules: true, reference: '', trackingSubmodules: true)
