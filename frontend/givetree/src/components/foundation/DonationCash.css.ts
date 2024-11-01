@@ -13,14 +13,13 @@ export const foundationLogo = style({
   borderRadius: '25px',
   padding: '10px',
   flexShrink: '0',
-  border: `1px solid ${colorPalette.grey[400]}`
+  border: `1px solid ${colorPalette.grey[400]}`,
 });
 
 // 금액 입력 박스
 export const inputBox = style({
-  margin: '20px 0 10px 0'
+  margin: '20px 0 10px 0',
 });
-
 
 // 금액 입력 Input
 export const amountInput = style({
@@ -33,9 +32,7 @@ export const amountInput = style({
   outline: 'none',
   ':focus': {
     borderBottom: `2px solid ${colorPalette.primary[400]}`,
-  }
-  
-  
+  },
 });
 
 // 금액 버튼 스타일
@@ -49,5 +46,5 @@ export const amountButton = style({
   cursor: 'pointer',
   ':hover': {
     backgroundColor: colorPalette.primary[50],
-  }
+  },
 });

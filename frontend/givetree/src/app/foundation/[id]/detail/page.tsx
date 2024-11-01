@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import TabButton from '@/components/common/Tab';
-import * as style from './detail.css'
-import Box from "@/components/common/Box";
+import * as style from './detail.css';
+import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
 import { useState } from 'react';
 import IntroTab from '@/app/foundation/[id]/detail/IntroTab';
@@ -14,16 +14,13 @@ import CampaignTab from '@/app/foundation/[id]/detail/CampaignTab';
 const categories = ['소개', '모금함', '캠페인'];
 
 export default function Page() {
-
   const [selectedCategory, setSelectedCategory] = useState('소개');
-  
+
   return (
     <Flex flexDirection="column">
       <Box as="section" className={style.fixBox}>
         {/* 상단 배너 */}
-        <Box className={style.foundationBanner}>
-          단체 대표사진
-        </Box>
+        <Box className={style.foundationBanner}>단체 대표사진</Box>
 
         {/* 탭 */}
         <Box>
@@ -56,9 +53,6 @@ export default function Page() {
         </Button>
       </Link>
       */}
-      
-
-
     </Flex>
   );
-} 
+}

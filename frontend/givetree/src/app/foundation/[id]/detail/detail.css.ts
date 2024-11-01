@@ -10,7 +10,6 @@ export const fixBox = style({
   zIndex: 10,
 });
 
-
 // 상단 배너
 export const foundationBanner = style({
   width: '100%',
@@ -31,7 +30,6 @@ export const tabContentContainer = style({
   },
 });
 
-
 // 탭 컨테이너
 export const TabContainer = style({
   width: '100%',
@@ -40,11 +38,11 @@ export const TabContainer = style({
   flexGrow: 1,
   overflowY: 'auto',
   padding: '16px',
-  paddingBottom: '60px'
+  paddingBottom: '60px',
 });
 
 // 후원하기 버튼
 export const fixGiveBtn = style({
   position: 'fixed',
-  bottom: '10px'
+  bottom: '10px',
 });
