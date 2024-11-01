@@ -1,5 +1,5 @@
-import BottomBar from '@/components/common/BottomBar';
 import Layout from '@/components/common/Layout';
+import NavigationBar from '@/components/common/NavigationBar';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function TreeLayout({
     <Layout>
       <main>{children}</main>
       <footer>
-        <BottomBar>bottom</BottomBar>
+        <NavigationBar />
       </footer>
     </Layout>
   );
