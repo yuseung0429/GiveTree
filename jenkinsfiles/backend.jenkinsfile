@@ -1,0 +1,85 @@
+pipeline {
+    agent any
+    tools {
+        gradle 'gradle'
+    }
+    stages {
+        stage('GitLab Clone') {
+            steps {           
+                echo '클론을 시작할게요요!'
+                checkout scmGit(
+                    branches: [[name: 'be']], 
+                    extensions: [
+                        submodule(parentCredentials: true, 
+                        recursiveSubmodules: true, reference: '', trackingSubmodules: true)
+                    ], 
+                    userRemoteConfigs: [
+                        [credentialsId: 'GiveTree', 
+                        url: 'https://lab.ssafy.com/s11-final/S11P31D210']
+                    ]
+                )
+                echo '클론을 완료했어요!'
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('backend/givetree') {
+                    echo '빌드를 시작할게요!'
+                    sh '''
+                    chmod +x ./gradlew
+                    ./gradlew clean bootJar
+                    '''
+                    echo '빌드를 완료했어요!'
+                }
+            }
+        }
+        stage('Make Image') {
+            steps {
+            	dir('backend/givetree') {
+            	    echo '이미지를 만들게요!'
+                    sh '''
+                    docker stop givetree-spring || true 
+                    docker rm givetree-spring || true
+                    docker rmi backend || true
+                    docker build -t backend . 
+                    '''
+                    echo '이미지를 만들었어요!'
+            	}
+            }
+        }
+        stage('Run Container') {
+            steps {
+                dir('backend/givetree') {
+                    sh '''         
+                    docker-compose up -d
+                    '''
+                    echo '새로운 이미지로 givetree-spring 컨테이너를 가동시켜요!'
+                }
+            }
+        }
+    }
+    post {
+        success {
+        	script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                mattermostSend (color: 'good', 
+                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
+                endpoint: 'https://meeting.ssafy.com/hooks/4inuymmqiffrjyaskugfhg4fny', 
+                channel: 'd210-be-cicd'
+                )
+            }
+        }
+        failure {
+        	script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                mattermostSend (color: 'danger', 
+                message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
+                endpoint: 'https://meeting.ssafy.com/hooks/4inuymmqiffrjyaskugfhg4fny', 
+                channel: 'd210-be-cicd'
+                )
+            }
+        }
+    }
+}

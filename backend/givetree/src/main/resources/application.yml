@@ -2,12 +2,12 @@ spring:
   application:
     name:
       givetree
+
   profiles:
-    include: secret, finance
+    include: finance, local
+
   config:
-    import: application-secret.yml
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    import: classpath:/properties/application-secret.yml
 
   jpa:
     show-sql: true
@@ -19,8 +19,6 @@ spring:
         highlight_sql: true
         format_sql: true
         default_batch_fetch_size: 100
+        discriminator:
+          ignore_explicit_for_joined: true
     defer-datasource-initialization: true
-  servlet:
-    multipart:
-      max-file-size: 20MB
-      max-request-size: 20MB
