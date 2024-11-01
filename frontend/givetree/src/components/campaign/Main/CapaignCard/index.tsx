@@ -1,8 +1,10 @@
 import ProgressBar from '@/components/campaign/Main/CapaignCard/ProgressBar';
 import * as styles from './CampaignCard.css';
 import Typography from '@/components/common/Typography';
+import Link from 'next/link';
 
 interface CampaignCardProps {
+  id: number;
   title: string;
   foundation: string;
   progress: number;
@@ -12,6 +14,7 @@ interface CampaignCardProps {
 }
 
 const CampaignCard = ({
+  id,
   title,
   foundation,
   progress,
@@ -20,7 +23,8 @@ const CampaignCard = ({
   imageUrl,
 }: CampaignCardProps) => {
   return (
-    <div
+    <Link
+      href={`/campaign/${id}`}
       className={styles.campaignCard}
       style={{
         backgroundImage: `url(${imageUrl})`,
@@ -44,7 +48,7 @@ const CampaignCard = ({
           </Typography>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

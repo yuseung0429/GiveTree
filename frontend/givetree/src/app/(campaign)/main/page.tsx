@@ -20,6 +20,7 @@ export default function Home() {
           {campaigns.map((campaign) => (
             <CampaignCard
               key={campaign.id}
+              id={campaign.id}
               title={campaign.title}
               foundation={campaign.foundation}
               progress={parseInt(campaign.progress)}
@@ -37,6 +38,7 @@ export default function Home() {
           {endingSoonCampaigns.map((campaign, index) => (
             <CampaignCard
               key={index}
+              id={campaign.id}
               title={campaign.title}
               foundation={campaign.foundation}
               progress={parseInt(campaign.progress)}
