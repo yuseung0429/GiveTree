@@ -4,6 +4,8 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 
 import * as s from './Button.css';
 
+import { mergeClasses } from '@/utils/mergeClasses';
+
 type ButtonVariants = NonNullable<RecipeVariants<typeof s.button>>;
 
 interface ButtonProps
@@ -20,11 +22,15 @@ const Button = ({
   size = 'md',
   variant = 'contained',
   fullWidth = false,
+  className,
   ...props
 }: ButtonProps) => {
   return (
     <button
-      className={s.button({ color, size, fullWidth, variant })}
+      className={mergeClasses(
+        s.button({ color, size, fullWidth, variant }),
+        className
+      )}
       {...props}
     >
       {icon && <span className={s.icon}>{icon}</span>}
