@@ -19,4 +19,6 @@ spring:
         highlight_sql: true
         format_sql: true
         default_batch_fetch_size: 100
+        discriminator:
+          ignore_explicit_for_joined: true
     defer-datasource-initialization: true
