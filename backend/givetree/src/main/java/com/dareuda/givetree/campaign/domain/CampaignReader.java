@@ -1,8 +1,8 @@
-package com.dareuda.givetree.campaign.infrastructure;
+package com.dareuda.givetree.campaign.domain;
 
 
 import com.dareuda.givetree.campaign.controller.CampaignErrorCode;
-import com.dareuda.givetree.campaign.domain.Campaign;
+import com.dareuda.givetree.campaign.infrastructure.CampaignRepository;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
