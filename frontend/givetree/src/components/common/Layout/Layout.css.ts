@@ -4,6 +4,7 @@ export const layout = style({
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
+  backgroundColor: '#fff',
 });
 
 globalStyle(`${layout} > main`, {

@@ -1,30 +1,30 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
 import AppBar from '@/components/common/AppBar';
-import NavigationBar from '@/components/common/NavigationBar';
-import Layout from '@/components/common/Layout';
 import FrozenRouter from '@/components/common/FrozenRouter';
+import Layout from '@/components/common/Layout';
 
-export default function AuthLayout({
+export default function SignInLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
+  const segment = useSelectedLayoutSegment();
+
   return (
     <Layout>
       <header>
-        <AppBar>top</AppBar>
+        <AppBar>Give Tree</AppBar>
       </header>
 
       <main>
         <AnimatePresence mode="sync" initial={false}>
           <motion.div
-            key={pathname}
+            key={segment}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -36,10 +36,6 @@ export default function AuthLayout({
           </motion.div>
         </AnimatePresence>
       </main>
-
-      <footer>
-        <NavigationBar />
-      </footer>
     </Layout>
   );
 }
