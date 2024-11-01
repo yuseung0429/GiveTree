@@ -1,7 +1,5 @@
 import { style } from '@vanilla-extract/css';
 
-// import treeBackground from '@/assets/images/tree/treeBackground.png';
-
 export const background = style({
   position: 'relative',
   display: 'flex',
@@ -10,21 +8,25 @@ export const background = style({
   overflow: 'hidden',
   width: '100%',
   height: '100%',
+  backgroundImage: `url('/images/background.png')`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
 
-  '::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundImage: `url('/images/background2.gif')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    // opacity: 0.8,
-    zIndex: -1,
-  },
+  // '::before': {
+  //   content: '""',
+  //   position: 'absolute',
+  //   top: 0,
+  //   left: 0,
+  //   width: '100%',
+  //   height: '100%',
+  //   backgroundImage: `url('/images/background.png')`,
+  //   backgroundSize: 'cover',
+  //   backgroundPosition: 'center',
+  //   backgroundRepeat: 'no-repeat',
+  //   opacity: '0.9',
+  //   zIndex: -1,
+  // },
 });
 
 export const teamText = style({

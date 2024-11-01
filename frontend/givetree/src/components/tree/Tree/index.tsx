@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import TreeImg from '@/assets/images/tree/tree9.png';
+import TreeImg from '@/assets/images/tree/tree.png';
 import * as styles from './tree.css';
 import Message from '@/components/tree/Message';
 import { MessageContent } from '@/components/tree/TreeSlider';
