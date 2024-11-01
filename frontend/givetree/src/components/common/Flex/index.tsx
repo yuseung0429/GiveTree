@@ -1,8 +1,10 @@
-import { CSSProperties, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 
 import * as s from './Flex.css';
 
-interface FlexProps {
+import { mergeClasses } from '@/utils/mergeClasses';
+
+interface FlexProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
   flexWrap?: CSSProperties['flexWrap'];
   flexDirection?: CSSProperties['flexDirection'];
@@ -13,9 +15,22 @@ interface FlexProps {
   height?: CSSProperties['height'];
 }
 
-const Flex = ({ children, ...props }: FlexProps) => {
+const Flex = ({
+  children,
+  flexWrap,
+  flexDirection,
+  gap,
+  alignItems,
+  justifyContent,
+  className,
+  ...props
+}: FlexProps) => {
   return (
-    <div className={s.flex} style={{ ...props }}>
+    <div
+      className={mergeClasses(s.flex, className)}
+      style={{ flexWrap, flexDirection, gap, alignItems, justifyContent }}
+      {...props}
+    >
       {children}
     </div>
   );

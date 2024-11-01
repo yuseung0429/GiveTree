@@ -4,6 +4,8 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 
 import * as s from './TextField.css';
 
+import { mergeClasses } from '@/utils/mergeClasses';
+
 type TextFieldVariants = NonNullable<
   RecipeVariants<typeof s.container> & RecipeVariants<typeof s.textfield>
 >;
@@ -33,6 +35,7 @@ const TextField = forwardRef<
       height = '3rem',
       disabled = false,
       multiline = false,
+      className,
       ...props
     },
     ref
@@ -41,7 +44,7 @@ const TextField = forwardRef<
       <div className={s.container({ color, variant })} style={{ width }}>
         {multiline ? (
           <textarea
-            className={s.textfield({ size })}
+            className={mergeClasses(s.textfield({ size }), className)}
             ref={ref as React.Ref<HTMLTextAreaElement>}
             disabled={disabled}
             style={{ height }}
@@ -50,7 +53,7 @@ const TextField = forwardRef<
         ) : (
           <input
             type="text"
-            className={s.textfield({ size })}
+            className={mergeClasses(s.textfield({ size }), className)}
             ref={ref as React.Ref<HTMLInputElement>}
             disabled={disabled}
             {...props}

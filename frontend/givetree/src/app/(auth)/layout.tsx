@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import AppBar from '@/components/common/AppBar';
-import BottomBar from '@/components/common/BottomBar';
+import NavigationBar from '@/components/common/NavigationBar';
 import Layout from '@/components/common/Layout';
 import FrozenRouter from '@/components/common/FrozenRouter';
 
@@ -38,7 +38,7 @@ export default function AuthLayout({
       </main>
 
       <footer>
-        <BottomBar>bottom</BottomBar>
+        <NavigationBar />
       </footer>
     </Layout>
   );
