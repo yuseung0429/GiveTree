@@ -11,7 +11,7 @@ public class MemberReader {
     private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
-    Member read(long memberId) {
+    public Member read(long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("failed to read member"));
     }
