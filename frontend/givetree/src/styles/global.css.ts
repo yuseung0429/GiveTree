@@ -5,9 +5,9 @@ import color from '@/styles/tokens/color';
 
 globalStyle('*', {
   margin: '0',
+  boxSizing: 'border-box',
   fontFamily: 'inherit',
   WebkitTapHighlightColor: 'transparent',
-  boxSizing: 'border-box',
 });
 
 globalStyle('*::-webkit-scrollbar', {
@@ -30,4 +30,9 @@ globalStyle('body', {
 
 globalStyle('svg', {
   display: 'block',
+});
+
+globalStyle('a', {
+  color: 'inherit',
+  textDecoration: 'inherit',
 });
