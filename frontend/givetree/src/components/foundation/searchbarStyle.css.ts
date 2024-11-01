@@ -12,7 +12,7 @@ export const container = style({
 
 export const searchInput = style({
   flexGrow: '1',
-  height:'50px',
+  height: '50px',
   outline: 'none',
   border: `2px solid ${colorPalette.primary[50]}`,
   borderRadius: '5px',
@@ -20,16 +20,15 @@ export const searchInput = style({
   color: colorPalette.text[200],
 });
 
-
 export const searchBtn = style({
-  display:'flex',
+  display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '5px',
   border: 'none',
   backgroundColor: colorPalette.primary[300],
   color: 'white',
-  cursor:'pointer',
+  cursor: 'pointer',
   height: '50px',
-  width: '50px'
+  width: '50px',
 });

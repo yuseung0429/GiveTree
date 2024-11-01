@@ -5,7 +5,7 @@ export const container = style({
   width: '100%',
   aspectRatio: '16 / 9',
   maxHeight: '300px',
-  position:'relative',
+  position: 'relative',
   borderRadius: '10px',
   overflow: 'hidden',
 });
@@ -15,10 +15,10 @@ export const imageBox = style({
   height: '100%',
   position: 'absolute',
   top: '0',
-  left:'0',
+  left: '0',
   backgroundImage: 'url("/temporary/campaignBg.png")', // 임시 이미지
   backgroundSize: 'cover',
-  backgroundPosition: 'center'
+  backgroundPosition: 'center',
 });
 
 export const overlayBox = style({
@@ -27,13 +27,12 @@ export const overlayBox = style({
   backgroundColor: 'rgba(0, 0, 0, 0.65)',
   position: 'absolute',
   top: '0',
-  left:'0',
-
+  left: '0',
 });
 
 export const imgTitle = style({
   position: 'absolute',
   top: '15%',
-  left:'5%',
-  color: colorPalette.text[50]
+  left: '5%',
+  color: colorPalette.text[50],
 });
