@@ -1,15 +1,15 @@
-package com.dareuda.givetree.member.domain;
+package com.dareuda.givetree.member.domain.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
-@Builder
 @RequiredArgsConstructor
-public class MemberDetail {
+public class UpdateMemberCommand {
     private final String email;
+    private final String password;
     private final String name;
     private final String phoneNumber;
     private final String address;
+    private final Long profileImageId;
 }

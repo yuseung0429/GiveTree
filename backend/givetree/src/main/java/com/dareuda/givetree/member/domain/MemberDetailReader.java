@@ -1,5 +1,6 @@
 package com.dareuda.givetree.member.domain;
 
+import com.dareuda.givetree.member.domain.dto.MemberDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

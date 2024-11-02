@@ -1,6 +1,7 @@
 package com.dareuda.givetree.member.domain;
 
-import com.dareuda.givetree.member.controller.dto.request.CreateMemberRequest;
+import com.dareuda.givetree.media.domain.Image;
+import com.dareuda.givetree.member.domain.dto.CreateMemberCommand;
 import com.dareuda.givetree.member.infrastructure.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,14 +11,21 @@ import org.springframework.stereotype.Component;
 public class MemberCreator {
     private final MemberRepository memberRepository;
 
-    public long append(CreateMemberRequest request) {
-        Member member = Member.builder()
-                .email(request.getEmail())
-                .name(request.getName())
-                .address(request.getAddress())
-                .phoneNumber(request.getPhoneNumber())
-                .build();
-        member = memberRepository.save(member);
+    public long create(CreateMemberCommand command) {
+        // TODO: 이미지 읽기 추가되면 변경
+        //Image image = command.getProfileImageId() != null ? imageReader.read(command.getProfileImageId()) : null;
+        Image image = null;
+
+        Member member = memberRepository.save(
+                Member.createMember(
+                        command.getEmail(),
+                        command.getPassword(),
+                        command.getName(),
+                        command.getPhoneNumber(),
+                        command.getAddress(),
+                        image
+                )
+        );
 
         return member.getId();
     }

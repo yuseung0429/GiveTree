@@ -38,3 +38,6 @@ out/
 
 ### 개인 yml ###
 application-local.yml
+
+### 비밀 yml ###
+application-secret.yml
