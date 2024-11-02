@@ -51,6 +51,9 @@ dependencies {
 
 	//Blockchain
 	implementation 'org.web3j:core:4.12.2'
+
+    // Password Encode
+    implementation 'org.springframework.security:spring-security-crypto'
 }
 
 tasks.named('test') {

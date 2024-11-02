@@ -1,13 +1,10 @@
 package com.dareuda.givetree.member.domain;
 
 import com.dareuda.givetree.common.domain.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.dareuda.givetree.media.domain.Image;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +21,9 @@ public class Member extends BaseEntity {
     private String email;
 
     @Column
+    private String password;
+
+    @Column
     @NotNull
     private String name;
 
@@ -35,11 +35,52 @@ public class Member extends BaseEntity {
     @NotNull
     private String address;
 
-    @Builder
-    public Member(String email, String name, String phoneNumber, String address) {
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_image_id")
+    private Image profileImage;
+
+    @Column
+    @NotNull
+    private boolean isDeleted;
+
+    public static Member createMember(String email, String password, String name, String phoneNumber, String address, Image image) {
+        Member member = new Member();
+        member.email = email;
+        member.password = password;
+        member.name = name;
+        member.phoneNumber = phoneNumber;
+        member.address = address;
+
+        member.isDeleted = false;
+
+        return member;
+    }
+
+    public void updateEmail(String email) {
         this.email = email;
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
+
+    public void updateName(String name) {
         this.name = name;
+    }
+
+    public void updatePhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void updateAddress(String address) {
         this.address = address;
+    }
+
+    public void updateProfileImage(Image profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public void delete() {
+        isDeleted = true;
     }
 }
