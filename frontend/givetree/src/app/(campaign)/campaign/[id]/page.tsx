@@ -1,7 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import * as styles from './[id].css';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
+import TabButton from '@/components/common/Tab';
+import { useState } from 'react';
+import CampaignInfo from '@/components/campaign/CampaignInfo';
+import CampaignMoney from '@/components/campaign/CampaignMoney';
 
 const mockData = {
   id: 1,
@@ -17,13 +23,10 @@ const mockData = {
   introduction: '어려운 이웃에게 희망을 전달하는 사랑의 열매 캠페인입니다.',
 };
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+const categories = ['소개', '모금함'];
+
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const {
-    id,
     title,
     foundation,
     currentAmount,
@@ -37,6 +40,8 @@ export default async function Page({
   } = mockData;
 
   // const { id } = await params;
+  const [selectedCategory, setSelectedCategory] = useState('소개');
+  const width = `calc(100% / ${categories.length})`;
 
   return (
     <div className={styles.container}>
@@ -48,7 +53,7 @@ export default async function Page({
           src={imageUrl}
           alt="campaign main image"
           width={250}
-          height={2050}
+          height={250}
           className={styles.coverImg}
         />
       </div>
@@ -69,12 +74,33 @@ export default async function Page({
         >
           {foundation}
         </Typography>
-        <Typography as='h5' weight='semiBold' className={styles.introduction}>{introduction}</Typography>
         <div className={styles.periodWrapper}>
           <Typography as="h4" weight="semiBold" color={colorPalette.text[800]}>
             모금기간 &nbsp;|&nbsp; {startDate} ~ {endDate}
           </Typography>
         </div>
+        {categories.map((category) => (
+          <TabButton
+            key={category}
+            label={category}
+            isSelected={selectedCategory === category}
+            onClick={() => setSelectedCategory(category)}
+            width={width}
+          />
+        ))}
+        {selectedCategory === '소개' && (
+          <CampaignInfo
+            introduction={introduction}
+            introduceImage={introduceImage}
+          />
+        )}
+        {selectedCategory === '모금함' && (
+          <CampaignMoney
+            progress={progress}
+            currentAmount={currentAmount}
+            goalAmount={goalAmount}
+          />
+        )}
       </div>
     </div>
   );
