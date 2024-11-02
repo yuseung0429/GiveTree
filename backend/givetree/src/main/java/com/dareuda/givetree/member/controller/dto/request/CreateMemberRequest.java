@@ -23,9 +23,9 @@ public class CreateMemberRequest {
     @NotBlank
     private final String address;
 
-    private final Long profileImageId;
+    private final String profileImageUrl;
 
     public CreateMemberCommand convertToCommand() {
-        return new CreateMemberCommand(email, password, name, phoneNumber, address, profileImageId);
+        return new CreateMemberCommand(email, password, name, phoneNumber, address, profileImageUrl);
     }
 }

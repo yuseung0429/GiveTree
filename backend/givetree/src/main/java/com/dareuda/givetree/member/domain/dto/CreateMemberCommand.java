@@ -22,5 +22,5 @@ public class CreateMemberCommand {
     @NonNull
     private final String address;
 
-    private final Long profileImageId;
+    private final String profileImageUrl;
 }

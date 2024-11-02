@@ -6,10 +6,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class UpdateMemberCommand {
-    private final String email;
     private final String password;
     private final String name;
     private final String phoneNumber;
     private final String address;
-    private final Long profileImageId;
+    private final String profileImageUrl;
 }

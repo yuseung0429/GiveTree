@@ -7,14 +7,13 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class UpdateMemberRequest {
-    private final String email;
     private final String password;
     private final String name;
     private final String phoneNumber;
     private final String address;
-    private final Long profileImageId;
+    private final String profileImageUrl;
 
     public UpdateMemberCommand convertToCommand() {
-        return new UpdateMemberCommand(email, password, name, phoneNumber, address, profileImageId);
+        return new UpdateMemberCommand(password, name, phoneNumber, address, profileImageUrl);
     }
 }

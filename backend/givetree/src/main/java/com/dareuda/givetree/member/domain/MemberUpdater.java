@@ -18,9 +18,6 @@ public class MemberUpdater {
     public void update(long memberId, UpdateMemberCommand command) {
         Member member = memberReader.read(memberId);
 
-        if (command.getEmail() != null) {
-            member.updateEmail(command.getEmail());
-        }
         if (command.getPassword() != null) {
             String encodedPassword = bCryptPasswordEncoder.encode(command.getPassword());
             member.updatePassword(encodedPassword);
@@ -34,7 +31,7 @@ public class MemberUpdater {
         if (command.getAddress() != null) {
             member.updateAddress(command.getAddress());
         }
-        if (command.getProfileImageId() != null) {
+        if (command.getProfileImageUrl() != null) {
             // TODO: Image Repository로부터 찾아오기
             //Image image = command.getProfileImageId() != -1 ? MediaReader.read(command.getProfileImageId()) : null;
             Image image = null;
