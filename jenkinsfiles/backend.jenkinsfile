@@ -60,26 +60,46 @@ pipeline {
     }
     post {
         success {
-        	script {
-                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
-                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
-                mattermostSend (color: 'good', 
-                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
-                endpoint: 'https://meeting.ssafy.com/hooks/4inuymmqiffrjyaskugfhg4fny', 
-                channel: 'd210-be-cicd'
-                )
+            script {
+                sendSuccessMessage()
             }
         }
         failure {
-        	script {
-                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
-                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
-                mattermostSend (color: 'danger', 
-                message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
-                endpoint: 'https://meeting.ssafy.com/hooks/4inuymmqiffrjyaskugfhg4fny', 
-                channel: 'd210-be-cicd'
-                )
+            script {
+                sendFailureMessage()
             }
         }
     }
+}
+
+def sendSuccessMessage() {
+    def commitId = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+    def commitMsg = sh(script: "git show -s --format=%B ${commitId}", returnStdout: true).trim()
+    def authorId = sh(script: "git show -s --pretty=%an ${commitId}", returnStdout: true).trim()
+    def authorName = sh(script: "git show -s --pretty=%ae ${commitId}", returnStdout: true).trim()
+    
+    def message = "![Succes](https://www.jenkins.io/images/logos/cute/cute.png =100)\n#### [Commit Message]\n${commitMsg}\n&nbsp;\n#### [Author]\nName: ${authorId}\nEmail: ${authorName}" 
+                
+    mattermostSend(
+        color: 'good',
+        message: message,
+        endpoint: 'https://meeting.ssafy.com/hooks/4inuymmqiffrjyaskugfhg4fny', 
+        channel: 'd210-be-cicd'
+    )
+}
+
+def sendFailureMessage() {
+    def commitId = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+    def commitMsg = sh(script: "git show -s --format=%B ${commitId}", returnStdout: true).trim()
+    def authorId = sh(script: "git show -s --pretty=%an ${commitId}", returnStdout: true).trim()
+    def authorName = sh(script: "git show -s --pretty=%ae ${commitId}", returnStdout: true).trim()
+    
+    def message = "![Failure](https://www.jenkins.io/images/logos/fire/fire.png =100)\n#### [Commit Message]\n${commitMsg}\n&nbsp;\n#### [Author]\nName: ${authorId}\nEmail: ${authorName}" 
+                
+    mattermostSend(
+        color: 'danger',
+        message: message,
+        endpoint: 'https://meeting.ssafy.com/hooks/4inuymmqiffrjyaskugfhg4fny', 
+        channel: 'd210-be-cicd'
+    )
 }
