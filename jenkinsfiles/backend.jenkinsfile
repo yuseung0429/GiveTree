@@ -53,21 +53,16 @@ pipeline {
                     sh '''         
                     docker-compose up -d
                     '''
-                    echo '새로운 이미지로 givetree-spring 컨테이너를 가동시켜요!'
                 }
             }
         }
     }
     post {
         success {
-            script {
-                sendSuccessMessage()
-            }
+            sendSuccessMessage()
         }
         failure {
-            script {
-                sendFailureMessage()
-            }
+            sendFailureMessage()
         }
     }
 }
