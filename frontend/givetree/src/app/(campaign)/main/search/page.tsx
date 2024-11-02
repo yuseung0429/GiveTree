@@ -24,6 +24,7 @@ export default async function Page({
         {filteredCampaigns.map((campaign) => (
           <CampaignCard
             key={campaign.id}
+            id={campaign.id}
             title={campaign.title}
             foundation={campaign.foundation}
             progress={parseInt(campaign.progress)}

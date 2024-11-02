@@ -10,7 +10,7 @@ export const container = style({
 export const coverImgContainer = style({
   display: 'flex',
   justifyContent: 'center',
-  padding: '30px',
+  padding: '20px',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
@@ -25,7 +25,7 @@ export const coverImgContainer = style({
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     borderBottomLeftRadius: '20px',
     borderBottomRightRadius: '20px',
     zIndex: 0,
@@ -36,7 +36,7 @@ export const coverImg = style({
   zIndex: 1,
   maxHeight: '350px',
   height: '100%',
-  borderRadius: '12px',
+  borderRadius: '20px',
 });
 
 export const title = style({
@@ -53,15 +53,14 @@ export const periodWrapper = style({
   border: `1px solid ${colorPalette.primary[300]}`,
   borderRadius: '12px',
   padding: '0.75rem 0.5rem',
-  marginBottom: '10px',
 });
 
-export const introduction = style({
-  backgroundColor: 'rgb(245, 245, 245)',
-  padding: '0.75rem 0.5rem',
-  lineHeight: 1.3,
-  whiteSpace: 'pre-line',
-  borderRadius: '5px',
-  marginBottom: '10px',
-  textAlign: 'center',
-});
+// export const introduction = style({
+//   backgroundColor: 'rgb(245, 245, 245)',
+//   padding: '0.75rem 0.5rem',
+//   lineHeight: 1.3,
+//   whiteSpace: 'pre-line',
+//   borderRadius: '5px',
+//   marginBottom: '10px',
+//   textAlign: 'center',
+// });
