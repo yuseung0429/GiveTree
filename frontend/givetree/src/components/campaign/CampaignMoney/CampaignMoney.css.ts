@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 
 
 export const text = style({
-  margin: '1rem 0.5rem'
+  margin: '1rem 0.5rem 0.5rem 0.5rem'
 })
 
 export const progressContainer = style({
