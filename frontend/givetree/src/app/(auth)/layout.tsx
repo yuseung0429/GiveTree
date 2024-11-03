@@ -30,7 +30,6 @@ export default function SignInLayout({
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.3 }}
             style={{ position: 'absolute', inset: '0' }}
-            onAnimationStart={() => navigator.vibrate(10)}
           >
             <FrozenRouter>{children}</FrozenRouter>
           </motion.div>

@@ -50,7 +50,7 @@ export default function FoundationSignIn() {
         >
           <Flex alignItems="center" justifyContent="space-between">
             <Typography size="sm">아직 재단 계정이 없으신가요?</Typography>
-            <Link href="/signin">
+            <Link href="/foundation-signup">
               <Button variant="outlined" size="sm">
                 재단 회원가입
               </Button>
