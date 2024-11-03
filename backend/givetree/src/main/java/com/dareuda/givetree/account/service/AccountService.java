@@ -1,6 +1,7 @@
 package com.dareuda.givetree.account.service;
 
 import com.dareuda.givetree.account.domain.AccountLoader;
+import com.dareuda.givetree.account.domain.AccountRegistrar;
 import com.dareuda.givetree.account.domain.ExternalAccountInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,17 @@ import java.util.List;
 public class AccountService {
 
     private final AccountLoader accountLoader;
+    private final AccountRegistrar accountRegistrar;
 
-    public List<ExternalAccountInfo> getAccounts(long memberId) {
+    public List<ExternalAccountInfo> getExternalAccounts(long memberId) {
         return accountLoader.loadAccounts(memberId);
     }
 
-    public ExternalAccountInfo getAccount(long memberId, String accountNo) {
+    public ExternalAccountInfo getExternalAccount(long memberId, String accountNo) {
         return accountLoader.load(memberId, accountNo);
+    }
+
+    public void registerAccount(long memberId, String accountNo, String password) {
+        accountRegistrar.register(memberId, accountNo, password);
     }
 }

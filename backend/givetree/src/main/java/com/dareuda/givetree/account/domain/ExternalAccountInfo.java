@@ -10,22 +10,20 @@ import java.time.LocalDate;
 @Builder
 public class ExternalAccountInfo {
 
-    private final String accountNo;
-    private final String accountName;
-    private final String accountTypeName;
-    private final LocalDate createdDate;
-    private final LocalDate expiryDate;
+    private final String accountNumber;
+    private final String name;
+    private final LocalDate createdAt;
+    private final LocalDate expiryAt;
     private final String bankCode;
     private final String bankName;
     private final Long balance;
 
     public static ExternalAccountInfo from(DemandDepositAccountResponse response) {
         return ExternalAccountInfo.builder()
-                .accountNo(response.getAccountNo())
-                .accountName(response.getAccountName())
-                .accountTypeName(response.getAccountTypeName())
-                .createdDate(response.getAccountCreatedDate())
-                .expiryDate(response.getAccountExpiryDate())
+                .accountNumber(response.getAccountNo())
+                .name(response.getAccountName())
+                .createdAt(response.getAccountCreatedDate())
+                .expiryAt(response.getAccountExpiryDate())
                 .bankCode(response.getBankCode())
                 .bankName(response.getBankName())
                 .balance(response.getAccountBalance())
