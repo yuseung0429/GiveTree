@@ -7,7 +7,7 @@ import {
 
 type BoxProps<T extends ElementType = ElementType> =
   ComponentPropsWithoutRef<T> & {
-    children: ReactNode;
+    children?: ReactNode;
     as?: T;
     margin?: CSSProperties['margin'];
     marginTop?: CSSProperties['marginTop'];
