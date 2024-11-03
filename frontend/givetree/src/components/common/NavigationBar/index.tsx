@@ -60,8 +60,8 @@ const NavigationBar = () => {
           </div>
         </Link>
         <Link
-          href="/signin"
-          className={`${styles.item} ${isActive('/signin') ? 'active' : ''}`}
+          href="/market"
+          className={`${styles.item} ${isActive('/market') ? 'active' : ''}`}
         >
           <div className={styles.iconWrapper}>
             <HiShoppingBag size={24} />
@@ -69,8 +69,8 @@ const NavigationBar = () => {
           <Typography className={styles.textWrapper}>거래</Typography>
         </Link>
         <Link
-          href="/signup"
-          className={`${styles.item} ${isActive('/signup') ? 'active' : ''}`}
+          href="/signin"
+          className={`${styles.item} ${isActive('/signin') ? 'active' : ''}`}
         >
           <div className={styles.iconWrapper}>
             <HiUserCircle size={24} />
