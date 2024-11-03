@@ -8,7 +8,7 @@ import AppBar from '@/components/common/AppBar';
 import FrozenRouter from '@/components/common/FrozenRouter';
 import Layout from '@/components/common/Layout';
 
-export default function SignInLayout({
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
