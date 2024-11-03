@@ -23,9 +23,9 @@ export default function Home() {
               id={campaign.id}
               title={campaign.title}
               foundation={campaign.foundation}
-              progress={parseInt(campaign.progress)}
-              currentAmount={parseInt(campaign.currentAmount)}
-              goalAmount={parseInt(campaign.goalAmount)}
+              progress={campaign.progress}
+              currentAmount={campaign.currentAmount}
+              goalAmount={campaign.goalAmount}
               imageUrl={campaign.imageUrl}
             />
           ))}
@@ -41,9 +41,9 @@ export default function Home() {
               id={campaign.id}
               title={campaign.title}
               foundation={campaign.foundation}
-              progress={parseInt(campaign.progress)}
-              currentAmount={parseInt(campaign.currentAmount)}
-              goalAmount={parseInt(campaign.goalAmount)}
+              progress={campaign.progress}
+              currentAmount={campaign.currentAmount}
+              goalAmount={campaign.goalAmount}
               imageUrl={campaign.imageUrl}
             />
           ))}
