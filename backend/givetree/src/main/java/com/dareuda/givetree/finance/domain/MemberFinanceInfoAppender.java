@@ -1,6 +1,7 @@
 package com.dareuda.givetree.finance.domain;
 
 import com.dareuda.givetree.common.errors.exception.RestApiException;
+import com.dareuda.givetree.common.utils.SHA256Utils;
 import com.dareuda.givetree.finance.controller.FinanceErrorCode;
 import com.dareuda.givetree.finance.infrastructure.MemberFinanceInfoRepository;
 import com.dareuda.givetree.member.domain.Member;
@@ -16,35 +17,28 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MemberFinanceInfoAppender {
 
+    private final SHA256Utils sha256Utils;
     private final MemberReader memberReader;
+    private final MemberFinanceInfoLoader memberFinanceInfoLoader;
     private final MemberFinanceInfoValidator memberFinanceInfoValidator;
     private final MemberFinanceInfoRepository memberFinanceInfoRepository;
 
-    private final MemberApiClient memberApiClient;
-
-    public void append(long memberId) {
+    public void append(long memberId, String password) {
         memberFinanceInfoValidator.validateAppendable(memberId);
 
         Member member = memberReader.read(memberId);
 
-        MemberResponse response = retrieveMemberInfoFromApi(member);
+        MemberResponse response = memberFinanceInfoLoader.load(member.getId());
+
+        String salt = sha256Utils.generate();
+        String hashedPassword = sha256Utils.generate(password+salt);
 
         MemberFinanceInfo info = MemberFinanceInfo.builder()
                 .id(member.getId())
                 .userKey(response.getUserKey())
+                .salt(salt)
+                .simplePassword(hashedPassword)
                 .build();
         memberFinanceInfoRepository.save(info);
-    }
-
-    private MemberResponse retrieveMemberInfoFromApi(Member member) {
-        try {
-            return memberApiClient.createMember(member.getEmail());
-        } catch (MemberAlreadyExistsException e1) {
-            try {
-                return memberApiClient.searchMember(member.getEmail());
-            } catch (MemberNotFoundException e2) {
-                throw new RestApiException(FinanceErrorCode.MEMBER_ALREADY_REGISTERED);
-            }
-        }
     }
 }

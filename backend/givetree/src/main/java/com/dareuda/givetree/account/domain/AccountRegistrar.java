@@ -14,7 +14,6 @@ import java.util.Optional;
 public class AccountRegistrar {
 
     private final MemberReader memberReader;
-    private final SHA256Utils sha256Utils;
     private final AccountValidator accountValidator;
     private final AccountLoader accountLoader;
     private final BankReader bankReader;
@@ -22,18 +21,15 @@ public class AccountRegistrar {
     private final AccountUpdater accountUpdater;
     private final AccountRepository accountRepository;
 
-    public void register(long memberId, String accountNumber, String password) {
+    public void register(long memberId, String accountNumber) {
         accountValidator.validateRegisterable(memberId);
 
         ExternalAccountInfo info = accountLoader.load(memberId, accountNumber);
         accountValidator.validateExpired(info.getExpiryAt());
 
-        String salt = sha256Utils.generate();
-        String simplePassword = sha256Utils.generate(password + salt);
-
         Optional<Account> optAccount = accountReader.readOptionalByAccountNumber(accountNumber);
         if (optAccount.isPresent()) {
-            accountUpdater.reRegisterAccount(optAccount.get().getId(), simplePassword, salt);
+            accountUpdater.reRegisterAccount(optAccount.get().getId());
             return;
         }
 
@@ -47,8 +43,6 @@ public class AccountRegistrar {
                 .createdAt(info.getCreatedAt())
                 .expiryAt(info.getExpiryAt())
                 .isActive(true)
-                .simplePassword(simplePassword)
-                .salt(salt)
                 .bank(bank)
                 .build();
         accountRepository.save(account);

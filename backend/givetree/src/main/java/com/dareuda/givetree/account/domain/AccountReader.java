@@ -28,7 +28,7 @@ public class AccountReader {
         return accountRepository.findByAccountNumber(accountNumber);
     }
 
-    public Account getActiveAccount(long memberId) {
+    public Account readActiveAccount(long memberId) {
         return accountRepository.findByMemberIdAndIsActive(memberId, true)
                 .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
     }

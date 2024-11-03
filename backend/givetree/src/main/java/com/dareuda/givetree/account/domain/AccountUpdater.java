@@ -12,10 +12,8 @@ public class AccountUpdater {
     private final AccountReader accountReader;
 
     @Transactional
-    public void reRegisterAccount(long accountId, String simplePassword, String salt) {
+    public void reRegisterAccount(long accountId) {
         Account account = accountReader.read(accountId);
-        account.changeSimplePassword(simplePassword);
-        account.changeSalt(salt);
         account.activate();
     }
 }

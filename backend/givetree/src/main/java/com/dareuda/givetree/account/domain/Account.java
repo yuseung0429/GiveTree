@@ -1,6 +1,5 @@
 package com.dareuda.givetree.account.domain;
 
-import com.dareuda.givetree.common.utils.ByteArrayToHexStringConverter;
 import com.dareuda.givetree.member.domain.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -46,36 +45,9 @@ public class Account {
     private Boolean isActive;
 
     @NotNull
-    @Column(name = "simple_password")
-    @Convert(converter = ByteArrayToHexStringConverter.class)
-    private String simplePassword;
-
-    @NotNull
-    @Column(name = "salt")
-    @Convert(converter = ByteArrayToHexStringConverter.class)
-    private String salt;
-
-    @NotNull
-    @Column(name = "failure_count")
-    private Integer failureCount;
-
-    @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bank_code")
     private Bank bank;
-
-    @PrePersist
-    private void prePersist() {
-        failureCount = 0;
-    }
-
-    public void changeSimplePassword(String simplePassword) {
-        this.simplePassword = simplePassword;
-    }
-
-    public void changeSalt(String salt) {
-        this.salt = salt;
-    }
 
     public void activate() {
         this.isActive = true;
