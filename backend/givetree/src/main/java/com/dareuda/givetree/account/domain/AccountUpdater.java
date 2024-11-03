@@ -16,4 +16,10 @@ public class AccountUpdater {
         Account account = accountReader.read(accountId);
         account.activate();
     }
+
+    @Transactional
+    public void unregisterAccount(long accountId) {
+        Account account = accountReader.readActiveAccount(accountId);
+        account.deactivate();
+    }
 }

@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MemberFinanceInfoValidator {
+public class MemberFinanceValidator {
 
-    private final MemberFinanceInfoReader memberFinanceInfoReader;
+    private final MemberFinanceReader memberFinanceReader;
 
     public void validateAppendable(long memberId) {
-        if (memberFinanceInfoReader.isExists(memberId)) {
+        if (memberFinanceReader.isExists(memberId)) {
             throw new RestApiException(CommonErrorCode.RESOURCE_CONFLICT);
         }
     }

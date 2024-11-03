@@ -10,10 +10,10 @@ import java.util.UUID;
 @Getter
 @Entity
 @Builder
-@Table(name = "member_finance_info")
+@Table(name = "member_finance")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class MemberFinanceInfo {
+public class MemberFinance {
     @Id
     @Column(name = "member_id")
     private Long id;

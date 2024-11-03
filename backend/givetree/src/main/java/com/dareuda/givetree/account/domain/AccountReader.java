@@ -19,11 +19,6 @@ public class AccountReader {
                 .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
     }
 
-    public Account readByAccountNumber(String accountNumber) {
-        return accountRepository.findByAccountNumber(accountNumber)
-                .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-    }
-
     public Optional<Account> readOptionalByAccountNumber(String accountNumber) {
         return accountRepository.findByAccountNumber(accountNumber);
     }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MemberFinanceInfoLoader {
+public class MemberFinanceLoader {
 
     private final MemberApiClient memberApiClient;
     private final MemberReader memberReader;

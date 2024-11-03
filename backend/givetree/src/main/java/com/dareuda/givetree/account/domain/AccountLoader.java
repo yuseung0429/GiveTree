@@ -3,8 +3,8 @@ package com.dareuda.givetree.account.domain;
 import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.common.utils.ListUtils;
-import com.dareuda.givetree.finance.domain.MemberFinanceInfo;
-import com.dareuda.givetree.finance.domain.MemberFinanceInfoReader;
+import com.dareuda.givetree.finance.domain.MemberFinance;
+import com.dareuda.givetree.finance.domain.MemberFinanceReader;
 import com.ssafy.finance.client.DemandDepositApiClient;
 import com.ssafy.finance.exception.account.AccountNotFoundException;
 import com.ssafy.finance.response.demand_deposit.DemandDepositAccountResponse;
@@ -17,32 +17,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountLoader {
 
-    private final MemberFinanceInfoReader financeInfoReader;
+    private final MemberFinanceReader memberFinanceReader;
     private final DemandDepositApiClient demandDepositApiClient;
 
     public List<ExternalAccountInfo> loadAccounts(long memberId) {
-        MemberFinanceInfo info = financeInfoReader.read(memberId);
-        List<DemandDepositAccountResponse> response = demandDepositApiClient.searchAccounts(info.getUserKey());
+        MemberFinance memberFinance = memberFinanceReader.read(memberId);
+        List<DemandDepositAccountResponse> response = demandDepositApiClient.searchAccounts(memberFinance.getUserKey());
         return ListUtils.applyFunctionToElements(response, ExternalAccountInfo::from);
     }
 
     public ExternalAccountInfo load(long memberId, String accountNo) {
-        MemberFinanceInfo info = null;
+        MemberFinance memberFinance = null;
         try {
-            info = financeInfoReader.read(memberId);
+            memberFinance = memberFinanceReader.read(memberId);
         } catch (AccountNotFoundException e) {
             throw new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND);
         }
-        return ExternalAccountInfo.from(demandDepositApiClient.searchAccount(info.getUserKey(), accountNo));
+        return ExternalAccountInfo.from(demandDepositApiClient.searchAccount(memberFinance.getUserKey(), accountNo));
     }
 
     public long loadAccountBalance(long memberId, String accountNo) {
-        MemberFinanceInfo info = null;
+        MemberFinance memberFinance = null;
         try {
-            info = financeInfoReader.read(memberId);
+            memberFinance = memberFinanceReader.read(memberId);
         } catch (AccountNotFoundException e) {
             throw new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND);
         }
-        return demandDepositApiClient.searchAccountBalance(info.getUserKey(), accountNo).getAccountBalance();
+        return demandDepositApiClient.searchAccountBalance(memberFinance.getUserKey(), accountNo).getAccountBalance();
     }
 }
