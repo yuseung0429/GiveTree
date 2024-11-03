@@ -20,4 +20,10 @@ public interface AccountRepository extends Repository<Account, Long> {
 
     Optional<Account> findByAccountNumber(String accountNumber);
 
+    @Query("""
+           SELECT a
+           FROM Account a
+           WHERE a.member.id = :memberId AND a.isActive = :isActive
+           """)
+    Optional<Account> findByMemberIdAndIsActive(long memberId, boolean isActive);
 }

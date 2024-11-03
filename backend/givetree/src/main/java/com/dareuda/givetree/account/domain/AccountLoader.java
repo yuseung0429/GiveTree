@@ -35,4 +35,14 @@ public class AccountLoader {
         }
         return ExternalAccountInfo.from(demandDepositApiClient.searchAccount(info.getUserKey(), accountNo));
     }
+
+    public long loadAccountBalance(long memberId, String accountNo) {
+        MemberFinanceInfo info = null;
+        try {
+            info = financeInfoReader.read(memberId);
+        } catch (AccountNotFoundException e) {
+            throw new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND);
+        }
+        return demandDepositApiClient.searchAccountBalance(info.getUserKey(), accountNo).getAccountBalance();
+    }
 }
