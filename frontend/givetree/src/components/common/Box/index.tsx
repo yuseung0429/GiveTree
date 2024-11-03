@@ -48,28 +48,33 @@ const Box = ({
   style,
   ...props
 }: BoxProps) => {
+  const inlineStyles = Object.entries({
+    width,
+    height,
+    margin,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    padding,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft,
+    border,
+    borderRadius,
+    backgroundColor,
+    ...style,
+  }).reduce((acc, [key, value]) => {
+    if (value !== undefined) {
+      acc[key] = value;
+    }
+
+    return acc;
+  }, {} as Record<string, string | number>);
+
   return (
-    <Component
-      style={{
-        width,
-        height,
-        margin,
-        marginTop,
-        marginRight,
-        marginBottom,
-        marginLeft,
-        padding,
-        paddingTop,
-        paddingRight,
-        paddingBottom,
-        paddingLeft,
-        border,
-        borderRadius,
-        backgroundColor,
-        ...style,
-      }}
-      {...props}
-    >
+    <Component style={inlineStyles} {...props}>
       {children}
     </Component>
   );
