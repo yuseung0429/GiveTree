@@ -49,14 +49,14 @@ const NavigationBar = () => {
           <Typography className={styles.textWrapper}>재단</Typography>
         </Link>
         <Link
-          href="/tree"
-          className={`${styles.item} ${isActive('/tree') ? 'active' : ''}`}
+          href="/tree/1"
+          className={`${styles.item} ${isActive('/tree/1') ? 'active' : ''}`}
         >
           <div
-            className={styles.iconWrapper}
+            className={styles.treeIconWrapper}
             style={{ display: 'flex', alignItems: 'center' }}
           >
-            <FaTree size={40} />
+            <FaTree size={30} />
           </div>
         </Link>
         <Link

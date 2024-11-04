@@ -1,9 +1,11 @@
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <main>{children}</main>
+      <main>
+        <Suspense>{children}</Suspense>
+      </main>
     </div>
   );
 }

@@ -8,7 +8,7 @@ const ProgressBar = ({ progress }: ProgressBarProps) => {
   return (
     <div className={styles.progressBarContainer}>
       <div className={styles.progressBar} style={{ width: `${progress}%` }}>
-        <span className={styles.progressText}>{`${progress}%`}</span>
+        <div className={styles.progressText}>{`${progress}%`}</div>
       </div>
     </div>
   );

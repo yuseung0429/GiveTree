@@ -1,8 +1,11 @@
 import ProgressBar from '@/components/campaign/Main/CapaignCard/ProgressBar';
 import * as styles from './CampaignCard.css';
 import Typography from '@/components/common/Typography';
+import Link from 'next/link';
+import colorPalette from '@/styles/tokens/colorPalette';
 
 interface CampaignCardProps {
+  id: number;
   title: string;
   foundation: string;
   progress: number;
@@ -12,6 +15,7 @@ interface CampaignCardProps {
 }
 
 const CampaignCard = ({
+  id,
   title,
   foundation,
   progress,
@@ -20,7 +24,8 @@ const CampaignCard = ({
   imageUrl,
 }: CampaignCardProps) => {
   return (
-    <div
+    <Link
+      href={`/campaign/${id}`}
       className={styles.campaignCard}
       style={{
         backgroundImage: `url(${imageUrl})`,
@@ -29,22 +34,36 @@ const CampaignCard = ({
       }}
     >
       <div>
-        <h2 className={styles.campaignTitle}>{title}</h2>
-        <h4 className={styles.campaignSubtitle}>{foundation}</h4>
+        <Typography
+          as="h2"
+          weight="semiBold"
+          color={colorPalette.text[900]}
+          className={styles.campaignTitle}
+        >
+          {title}
+        </Typography>
+        <Typography
+          as="h4"
+          weight="semiBold"
+          color={colorPalette.text[700]}
+          className={styles.campaignSubtitle}
+        >
+          {foundation}
+        </Typography>
       </div>
 
       <div className={styles.progressContainer}>
         <ProgressBar progress={progress} />
         <div className={styles.amountContainer}>
-          <Typography as="h5" weight="bold">
+          <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
             {currentAmount.toLocaleString()}원
           </Typography>
-          <Typography as="h5" weight="semiBold">
+          <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
             {goalAmount.toLocaleString()}원 목표
           </Typography>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
