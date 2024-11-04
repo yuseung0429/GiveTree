@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/foundations")
+@RequestMapping("/api/foundations")
 @RequiredArgsConstructor
 public class FoundationController {
     private final FoundationService foundationService;
