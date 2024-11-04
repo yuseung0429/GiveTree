@@ -8,9 +8,11 @@ interface FlexProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
   flexWrap?: CSSProperties['flexWrap'];
   flexDirection?: CSSProperties['flexDirection'];
-  gap?: string;
+  gap?: CSSProperties['gap'];
   alignItems?: CSSProperties['alignItems'];
   justifyContent?: CSSProperties['justifyContent'];
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
 }
 
 const Flex = ({
@@ -20,13 +22,23 @@ const Flex = ({
   gap,
   alignItems,
   justifyContent,
+  width,
+  height,
   className,
   ...props
 }: FlexProps) => {
   return (
     <div
       className={mergeClasses(s.flex, className)}
-      style={{ flexWrap, flexDirection, gap, alignItems, justifyContent }}
+      style={{
+        flexWrap,
+        flexDirection,
+        gap,
+        alignItems,
+        justifyContent,
+        width,
+        height,
+      }}
       {...props}
     >
       {children}
