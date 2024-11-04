@@ -1,0 +1,28 @@
+import { Meta, Story, Primary, Controls } from '@storybook/addon-docs/blocks';
+import * as AppBar from './AppBar.stories.tsx';
+
+<Meta of={AppBar} />
+
+# AppBar
+
+AppBar
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## Usage
+
+```tsx
+// 뒤로가기 버튼은 onBackCLick이 정의되어야 생깁니다.
+<AppBar title="Title" onBackClick={() => alert('뒤로가기')}>
+  <AppBar.Menu onClick={() => alert('검색')}>
+    <HiMagnifyingGlass />
+  </AppBar.Menu>
+  <AppBar.Menu onClick={() => alert('알림')}>
+    <HiOutlineBell />
+  </AppBar.Menu>
+</AppBar>
+```

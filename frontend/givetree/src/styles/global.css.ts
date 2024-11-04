@@ -4,6 +4,7 @@ import colorPalette from '@/styles/tokens/colorPalette';
 
 globalStyle('*', {
   margin: '0',
+  outline: 'none',
   boxSizing: 'border-box',
   overflow: 'auto',
   fontFamily: 'inherit',
