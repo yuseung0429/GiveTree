@@ -15,7 +15,7 @@ type TextFieldProps = TextFieldVariants &
     React.ComponentProps<'input'> & React.ComponentProps<'textarea'>,
     keyof TextFieldVariants
   > & {
-    variant: NonNullable<TextFieldVariants['variant']>;
+    variant?: NonNullable<TextFieldVariants['variant']>;
     width?: string;
     height?: string;
     multiline?: boolean;

@@ -33,7 +33,7 @@ export const container = recipe({
 
           [outlinedVar.border]: colorPalette.grey[500],
           [outlinedVar.backgroundColor]: '#fff',
-          [outlinedVar.color]: colorPalette.text[200],
+          [outlinedVar.color]: colorPalette.text[400],
         },
 
         selectors: {

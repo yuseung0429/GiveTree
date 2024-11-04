@@ -6,7 +6,7 @@ import color from '@/styles/tokens/color';
 
 export default function Home() {
   return (
-    <Box as="main" >
+    <Box as="main">
       <Box
         padding="1rem"
         borderRadius="0.5rem"

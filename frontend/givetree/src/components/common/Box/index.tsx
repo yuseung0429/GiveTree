@@ -7,7 +7,7 @@ import {
 
 type BoxProps<T extends ElementType = ElementType> =
   ComponentPropsWithoutRef<T> & {
-    children: ReactNode;
+    children?: ReactNode;
     as?: T;
     margin?: CSSProperties['margin'];
     marginTop?: CSSProperties['marginTop'];
@@ -22,12 +22,16 @@ type BoxProps<T extends ElementType = ElementType> =
     border?: CSSProperties['border'];
     borderRadius?: CSSProperties['borderRadius'];
     backgroundColor?: CSSProperties['backgroundColor'];
+    width?: CSSProperties['width'];
+    height?: CSSProperties['height'];
     style?: CSSProperties;
   };
 
 const Box = ({
   children,
   as: Component = 'div',
+  width,
+  height,
   margin,
   marginTop,
   marginRight,
@@ -44,26 +48,33 @@ const Box = ({
   style,
   ...props
 }: BoxProps) => {
+  const inlineStyles = Object.entries({
+    width,
+    height,
+    margin,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    padding,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft,
+    border,
+    borderRadius,
+    backgroundColor,
+    ...style,
+  }).reduce((acc, [key, value]) => {
+    if (value !== undefined) {
+      acc[key] = value;
+    }
+
+    return acc;
+  }, {} as Record<string, string | number>);
+
   return (
-    <Component
-      style={{
-        margin,
-        marginTop,
-        marginRight,
-        marginBottom,
-        marginLeft,
-        padding,
-        paddingTop,
-        paddingRight,
-        paddingBottom,
-        paddingLeft,
-        border,
-        borderRadius,
-        backgroundColor,
-        ...style,
-      }}
-      {...props}
-    >
+    <Component style={inlineStyles} {...props}>
       {children}
     </Component>
   );

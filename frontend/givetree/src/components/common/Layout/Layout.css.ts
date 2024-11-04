@@ -4,9 +4,11 @@ export const layout = style({
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
+  backgroundColor: '#fff',
 });
 
 globalStyle(`${layout} > main`, {
   flex: '1 1 auto',
-  overflowY: 'scroll',
+  position: 'relative',
+  maxWidth: '100vw',
 });
