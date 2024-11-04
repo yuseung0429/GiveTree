@@ -44,7 +44,12 @@ export const iconWrapper = style({
   display: 'flex',
   width: '24px',
   height: '24px',
-  paddingBottom: '2px',
+});
+
+export const treeIconWrapper = style({
+  display: 'flex',
+  width: '30px',
+  height: '30px',
 });
 
 export const textWrapper = style({

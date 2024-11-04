@@ -40,6 +40,16 @@ const TreeProgress: React.FC<TreeProgressProps> = ({
         >
           {currentAmount?.toLocaleString()}원
         </Typography>
+
+        <Typography
+          as="h3"
+          weight="bold"
+          color='#fff'
+          className={styles.progressText}
+          style={{ top: `${100 - fillHeight}%` }}
+        >
+          {progress}%
+        </Typography>
       </div>
     </div>
   );

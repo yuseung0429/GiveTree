@@ -46,3 +46,10 @@ export const amountText = style({
   textAlign: 'center',
   marginBottom : '0.25rem',
 });
+
+export const progressText = style({
+  position: 'absolute',
+  width: '100%',
+  textAlign: 'center',
+  marginTop : '0.75rem',
+})
