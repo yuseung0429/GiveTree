@@ -1,25 +1,40 @@
-import AppBar from '@/components/common/AppBar';
-import Layout from '@/components/common/Layout';
-import NavigationBar from '@/components/common/NavigationBar';
+'use client';
 
-export default function AuthLayout({
+import { useSelectedLayoutSegment } from 'next/navigation';
+
+import { AnimatePresence, motion } from 'framer-motion';
+
+import AppBar from '@/components/common/AppBar';
+import FrozenRouter from '@/components/common/FrozenRouter';
+import Layout from '@/components/common/Layout';
+
+export default function SignInLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  /**
-   * 페이지에 따라 NavBar가 필요한 경우도 있고, 필요 없는 경우가 있어서 RootLayout에 NavBar를 정의하지 않았음.
-   */
+  const segment = useSelectedLayoutSegment();
+
   return (
-    // Layout 컴포넌트는 main 태그를 기준으로 크기를 화면에 맞추므로 반드시 main 태그를 정의해야 함!!
     <Layout>
       <header>
-        <AppBar>top</AppBar>
+        <AppBar>Give Tree</AppBar>
       </header>
-      <main>{children}</main>
-      <footer>
-        <NavigationBar />
-      </footer>
+
+      <main>
+        <AnimatePresence mode="sync" initial={false}>
+          <motion.div
+            key={segment}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{ position: 'absolute', inset: '0' }}
+          >
+            <FrozenRouter>{children}</FrozenRouter>
+          </motion.div>
+        </AnimatePresence>
+      </main>
     </Layout>
   );
 }

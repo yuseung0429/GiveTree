@@ -1,24 +1,26 @@
-import Link from 'next/link';
-
 import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
+import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
 
 export default function SignUp() {
   return (
-    <Box padding="1rem">
-      <Typography as="h2" weight="semiBold">
-        재단 로그인
-      </Typography>
-      <Flex alignItems="center" justifyContent="space-between">
-        <Typography size="sm">재단이 아니라 후원자이신가요?</Typography>
-        <Link href="/signin">
-          <Button variant="outlined" size="sm">
-            후원자 로그인
+    <Flex alignItems="center" height="100%">
+      <Box width="100%" padding="1rem">
+        <Flex flexDirection="column" gap="1.5rem">
+          <Typography as="h2" weight="bold" style={{ lineHeight: 1.5 }}>
+            네이버 계정으로
+            <br />
+            기브트리 시작하기
+          </Typography>
+          <Typography>닉네임만 입력하면 바로 가입할 수 있어요.</Typography>
+          <TextField name="nickname" size="lg" defaultValue="lee유승" />
+          <Button size="lg" disabled>
+            회원가입
           </Button>
-        </Link>
-      </Flex>
-    </Box>
+        </Flex>
+      </Box>
+    </Flex>
   );
 }
