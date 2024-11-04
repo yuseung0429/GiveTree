@@ -10,20 +10,6 @@ import CampaignInfo from '@/components/campaign/CampaignInfo';
 import CampaignMoney from '@/components/campaign/CampaignMoney';
 import campaigns from '@/mock/campaigns.json';
 
-// const mockData = {
-//   id: 1,
-//   title: '희망 나눔 캠페인',
-//   foundation: '사랑의 열매',
-//   currentAmount: 5400000,
-//   goalAmount: 15000000,
-//   progress: 36,
-//   imageUrl: '/images/campaign/poster.png',
-//   introduceImage: '/images/campaign/introducePoster.png',
-//   startDate: '2024-01-01',
-//   endDate: '2024-12-31',
-//   introduction: '어려운 이웃에게 희망을 전달하는 사랑의 열매 캠페인입니다.',
-// };
-
 const categories = ['소개', '모금함'];
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {

@@ -1,10 +1,9 @@
-import colorPalette from "@/styles/tokens/colorPalette";
-import { style } from "@vanilla-extract/css";
-
+import colorPalette from '@/styles/tokens/colorPalette';
+import { style } from '@vanilla-extract/css';
 
 export const text = style({
-  margin: '1rem 0.5rem 0.5rem 0.5rem'
-})
+  margin: '1rem 0.5rem 0.5rem 0.5rem',
+});
 
 export const progressContainer = style({
   position: 'relative',
@@ -12,7 +11,7 @@ export const progressContainer = style({
   borderRadius: '12px',
   padding: '0.75rem',
   overflow: 'hidden',
-  marginBottom: '1.5rem'
+  marginBottom: '1.5rem',
 });
 
 export const amountContainer = style({
