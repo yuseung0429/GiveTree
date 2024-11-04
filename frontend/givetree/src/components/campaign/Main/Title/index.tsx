@@ -1,5 +1,6 @@
 import colorPalette from '@/styles/tokens/colorPalette';
-import { FaTree, FaRegBell } from 'react-icons/fa';
+import { FaTree } from 'react-icons/fa';
+import { HiOutlineBell } from 'react-icons/hi2';
 import * as styles from './Title.css';
 import Typography from '@/components/common/Typography';
 
@@ -11,7 +12,7 @@ const Titile = () => {
         <Typography as='h2' color='#fff' weight='semiBold'>GIVE</Typography>
       </div>
       <div className={styles.rightSection}>
-        <FaRegBell color="#fff" size={22} />
+        <HiOutlineBell color="#fff" size={24} />
       </div>
     </div>
   );

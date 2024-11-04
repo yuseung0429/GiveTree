@@ -7,7 +7,7 @@ interface ProgressBarProps {
 const ProgressBar = ({ progress }: ProgressBarProps) => {
   return (
     <div className={styles.progressBarContainer}>
-      <div className={styles.progressBar} style={{ width: `${progress}%` }}>
+      <div className={styles.progressBar} style={{ width: `${progress}%`}}>
         <span className={styles.progressText}>{`${progress}%`}</span>
       </div>
     </div>

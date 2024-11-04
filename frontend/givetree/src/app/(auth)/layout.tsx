@@ -4,7 +4,6 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import AppBar from '@/components/common/AppBar';
 import FrozenRouter from '@/components/common/FrozenRouter';
 import Layout from '@/components/common/Layout';
 
@@ -17,10 +16,6 @@ export default function SignInLayout({
 
   return (
     <Layout>
-      <header>
-        <AppBar>Give Tree</AppBar>
-      </header>
-
       <main>
         <AnimatePresence mode="sync" initial={false}>
           <motion.div

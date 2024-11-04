@@ -2,11 +2,11 @@ import { style } from '@vanilla-extract/css';
 import colorPalette from '@/styles/tokens/colorPalette';
 
 export const progressBarContainer = style({
-  backgroundColor: colorPalette.grey[200],
+  backgroundColor: colorPalette.grey[300],
   boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.25)',
   borderRadius: '8px',
   height: '14px',
-  // overflow: 'hidden',
+  overflow: 'hidden',
   marginBottom: '0.5rem',
 });
 
