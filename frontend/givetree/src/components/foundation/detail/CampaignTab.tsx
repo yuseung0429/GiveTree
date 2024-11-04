@@ -6,6 +6,7 @@ import Typography from '@/components/common/Typography';
 export default function CampaignTab() {
   // 임시 확인용 데이터
   const campaignData = {
+    id: 1,
     title: '캠페인 제목',
     foundation: '재단명',
     progress: 65,
@@ -24,6 +25,7 @@ export default function CampaignTab() {
         </Typography>
         <Box marginTop="15px">
           <CampaignCard
+            id={campaignData.id}
             title={campaignData.title}
             foundation={campaignData.foundation}
             progress={campaignData.progress}

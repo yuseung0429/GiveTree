@@ -10,7 +10,7 @@ export default function FoundationLayout({
   return (
     <Layout>
       <header>
-        <AppBar>top</AppBar>
+        <AppBar title="재단" />
       </header>
       <main>{children}</main>
       <footer>

@@ -26,6 +26,14 @@ const foundations: Foundation[] = [
 ];
 
 export default function Page() {
+  return (
+    <Suspense fallback={<div>검색중...</div>}>
+      <SearchContent />
+    </Suspense>
+  );
+}
+
+function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
@@ -39,42 +47,34 @@ export default function Page() {
   };
 
   return (
-    <Suspense fallback={<div>검색중...</div>}>
-      <Flex flexDirection="column" className={style.container}>
-        <Box className={style.searchSection} marginBottom="20px">
-          <Searchbar onSearch={handleSearch} initialValue={query} />
-        </Box>
+    <Flex flexDirection="column" className={style.container}>
+      <Box className={style.searchSection} marginBottom="20px">
+        <Searchbar onSearch={handleSearch} initialValue={query} />
+      </Box>
 
-        <Box
-          className={style.resultCount}
-          marginBottom="20px"
-          paddingLeft="5px"
-        >
-          <Typography weight="medium" size={16} color={colorPalette.grey[700]}>
-            {filteredFoundations.length}개의 검색결과가 있습니다
-          </Typography>
-        </Box>
+      <Box className={style.resultCount} marginBottom="20px" paddingLeft="5px">
+        <Typography weight="medium" size={16} color={colorPalette.grey[700]}>
+          {filteredFoundations.length}개의 검색결과가 있습니다
+        </Typography>
+      </Box>
 
-        <Box className={style.searchbox}>
-          <Flex flexDirection="column" gap="10px">
-            {filteredFoundations.map((foundation) => (
-              <FoundationItem
-                key={foundation.id}
-                foundation={foundation}
-                onClick={() =>
-                  router.push(`/foundation/${foundation.id}/detail`)
-                }
-              />
-            ))}
+      <Box className={style.searchbox}>
+        <Flex flexDirection="column" gap="10px">
+          {filteredFoundations.map((foundation) => (
+            <FoundationItem
+              key={foundation.id}
+              foundation={foundation}
+              onClick={() => router.push(`/foundation/${foundation.id}/detail`)}
+            />
+          ))}
 
-            {filteredFoundations.length === 0 && (
-              <Box className={style.noResult}>
-                <Typography>검색 결과가 없습니다.</Typography>
-              </Box>
-            )}
-          </Flex>
-        </Box>
-      </Flex>
-    </Suspense>
+          {filteredFoundations.length === 0 && (
+            <Box className={style.noResult}>
+              <Typography>검색 결과가 없습니다.</Typography>
+            </Box>
+          )}
+        </Flex>
+      </Box>
+    </Flex>
   );
 }
