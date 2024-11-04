@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 public class MemberDetail {
+    private final long id;
+
     @NonNull
     private final String email;
 

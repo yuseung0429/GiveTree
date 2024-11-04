@@ -35,7 +35,7 @@ public class Member extends BaseEntity {
     @NotNull
     private String address;
 
-    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_image_id")
     private Image profileImage;
 
@@ -54,10 +54,6 @@ public class Member extends BaseEntity {
         member.isDeleted = false;
 
         return member;
-    }
-
-    public void updateEmail(String email) {
-        this.email = email;
     }
 
     public void updatePassword(String password) {
