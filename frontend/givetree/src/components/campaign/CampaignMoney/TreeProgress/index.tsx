@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import * as styles from './TreeProgress.css';
 import Typography from '@/components/common/Typography';
 
@@ -13,14 +13,6 @@ const TreeProgress: React.FC<TreeProgressProps> = ({
   goalAmount,
   progress,
 }) => {
-  const [fillHeight, setFillHeight] = useState(0);
-
-  useEffect(() => {
-    // const percentage = (currentAmount / goalAmount) * 100;
-    if (progress)
-    setFillHeight(progress);
-  }, [progress]);
-
   return (
     <div className={styles.container}>
       <Typography as="h4" weight="semiBold" className={styles.goalAmountText}>
@@ -29,14 +21,14 @@ const TreeProgress: React.FC<TreeProgressProps> = ({
       <div className={styles.treeContainer}>
         <div
           className={styles.treeFill}
-          style={{ height: `${fillHeight}%` }}
+          style={{ height: `${progress}%` }}
         ></div>
 
         <Typography
           as="h4"
           weight="bold"
           className={styles.amountText}
-          style={{ bottom: `${fillHeight}%` }}
+          style={{ bottom: `${progress}%` }}
         >
           {currentAmount?.toLocaleString()}원
         </Typography>
@@ -44,9 +36,9 @@ const TreeProgress: React.FC<TreeProgressProps> = ({
         <Typography
           as="h3"
           weight="bold"
-          color='#fff'
+          color="#fff"
           className={styles.progressText}
-          style={{ top: `${100 - fillHeight}%` }}
+          style={{ top: `${100 - progress}%` }}
         >
           {progress}%
         </Typography>
