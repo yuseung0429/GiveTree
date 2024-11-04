@@ -7,7 +7,9 @@ spring:
     include: finance, local
 
   config:
-    import: classpath:/properties/application-secret.yml
+    import:
+      - classpath:/properties/application-secret.yml
+      - classpath:/properties/application-oauth.yml
 
   jpa:
     show-sql: true
