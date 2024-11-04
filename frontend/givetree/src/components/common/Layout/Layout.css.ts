@@ -12,3 +12,11 @@ globalStyle(`${layout} > main`, {
   position: 'relative',
   maxWidth: '100vw',
 });
+
+globalStyle(`${layout} > header`, {
+  flex: '0 0 auto',
+});
+
+globalStyle(`${layout} > footer`, {
+  flex: '0 0 auto',
+});
