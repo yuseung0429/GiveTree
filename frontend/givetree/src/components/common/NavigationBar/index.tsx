@@ -53,10 +53,10 @@ const NavigationBar = () => {
           className={`${styles.item} ${isActive('/tree') ? 'active' : ''}`}
         >
           <div
-            className={styles.iconWrapper}
+            className={styles.treeIconWrapper}
             style={{ display: 'flex', alignItems: 'center' }}
           >
-            <FaTree size={40} />
+            <FaTree size={30} />
           </div>
         </Link>
         <Link
