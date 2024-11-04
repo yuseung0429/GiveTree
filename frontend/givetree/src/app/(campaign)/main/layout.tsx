@@ -2,6 +2,7 @@ import Layout from '@/components/common/Layout';
 import NavigationBar from '@/components/common/NavigationBar';
 import Titile from '@/components/campaign/Main/Title';
 import SearchBar from '@/components/campaign/Main/SearchBar';
+import { Suspense } from 'react';
 
 export default function AuthLayout({
   children,
@@ -16,7 +17,9 @@ export default function AuthLayout({
     <Layout>
       <header>
         <Titile />
-        <SearchBar />
+        <Suspense>
+          <SearchBar />
+        </Suspense>
       </header>
       <main>{children}</main>
       <footer>
