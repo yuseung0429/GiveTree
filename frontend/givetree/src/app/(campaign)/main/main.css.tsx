@@ -3,7 +3,6 @@ import { style } from '@vanilla-extract/css';
 
 export const wrapper = style({
   backgroundColor: colorPalette.primary[300],
-  overflowY: 'auto',
 });
 
 export const mainContainer = style({
@@ -31,7 +30,7 @@ export const slideContainer = style({
 });
 
 export const sectionTitle = style({
-  margin: '0.75rem 0.5rem 0.5rem 1rem',
+  margin: '0.5rem 1rem',
   color: colorPalette.text[800],
   fontWeight: 'bold',
 });

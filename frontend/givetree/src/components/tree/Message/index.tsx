@@ -26,11 +26,15 @@ const Message = ({ message, decoration, onClose }: MessageProps) => {
           className={styles.decorationImg}
         />
         <Box className={styles.messageTextContainer}>
-          <Typography as="h3" color={colorPalette.text[800]} weight="semiBold">
+          <Typography as="h4" color={colorPalette.text[900]} weight="medium">
             {message.message}
           </Typography>
 
-          <Typography as="p" color={colorPalette.secondary[400]} weight="bold">
+          <Typography
+            as="p"
+            color={colorPalette.secondary[400]}
+            weight="semiBold"
+          >
             from. {message.from}
           </Typography>
         </Box>

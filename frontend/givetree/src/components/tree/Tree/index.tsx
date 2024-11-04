@@ -17,6 +17,7 @@ const decorations = Array(7)
   .map((_, index) => `/images/treeObj${index + 1}.png`);
 
 const decorationPositions = [
+<<<<<<< HEAD
   { top: '18%', left: '41%' },
   { top: '36%', left: '30%' },
   { top: '36%', left: '54%' },
@@ -27,6 +28,18 @@ const decorationPositions = [
   { top: '66%', left: '31%' },
   { top: '66%', left: '53%' },
   { top: '70%', left: '73%' },
+=======
+  { top: '18%', left: '50%' },
+  { top: '36%', left: '38%' },
+  { top: '36%', left: '62%' },
+  { top: '52%', left: '26%' },
+  { top: '50%', left: '50%' },
+  { top: '52%', left: '74%' },
+  { top: '69%', left: '18%' },
+  { top: '66%', left: '38%' },
+  { top: '66%', left: '62%' },
+  { top: '69%', left: '82%' },
+>>>>>>> 217513172553598b008ef1d3a6a4c833d9254c53
 ];
 
 type TreeSliderProps = {
@@ -72,8 +85,8 @@ const Tree = ({ messages, isFlipping, showDecorations }: TreeSliderProps) => {
                 decorations[index % decorations.length]
               )
             }
-            width={60}
-            height={60}
+            width={58}
+            height={58}
           />
         ))}
 

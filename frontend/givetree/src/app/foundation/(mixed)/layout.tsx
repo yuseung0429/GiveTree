@@ -1,5 +1,5 @@
-import AppBar from '@/components/common/AppBar';
 import Layout from '@/components/common/Layout';
+import MainAppBar from '@/components/common/MainAppBar';
 import NavigationBar from '@/components/common/NavigationBar';
 
 export default function FoundationLayout({
@@ -10,7 +10,7 @@ export default function FoundationLayout({
   return (
     <Layout>
       <header>
-        <AppBar>top</AppBar>
+        <MainAppBar>GIVE 재단</MainAppBar>
       </header>
       <main>{children}</main>
       <footer>
