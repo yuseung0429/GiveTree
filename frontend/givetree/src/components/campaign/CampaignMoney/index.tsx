@@ -26,27 +26,12 @@ const CampaignMoney = ({
       >
         모금 현황
       </Typography>
-      {/* <div className={styles.progressContainer}>
-        <ProgressBar progress={progress} />
-        <div className={styles.amountContainer}>
-          <Typography as="h5" weight="bold">
-            {currentAmount}원
-          </Typography>
-          <Typography as="h5" weight="semiBold">
-            {goalAmount}원 목표
-          </Typography>
-        </div>
-      </div>
-      <Typography
-        as="h4"
-        weight="semiBold"
-        color={colorPalette.text[900]}
-        className={styles.text}
-      >
-        나의 모금 내역
-      </Typography> */}
 
-    <TreeProgress currentAmount={currentAmount} goalAmount={goalAmount} progress={progress}/>
+      <TreeProgress
+        currentAmount={currentAmount}
+        goalAmount={goalAmount}
+        progress={progress}
+      />
 
       <div className={styles.giveButton}>
         <Button fullWidth>후원하기</Button>

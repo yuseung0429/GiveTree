@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { style } from '@vanilla-extract/css';
 
 export const introduction = style({
   backgroundColor: 'rgb(245, 245, 245)',
@@ -7,7 +7,6 @@ export const introduction = style({
   whiteSpace: 'pre-line',
   borderRadius: '5px',
   marginBottom: '10px',
-  // textAlign: 'center',
   margin: '1rem auto',
 });
 
