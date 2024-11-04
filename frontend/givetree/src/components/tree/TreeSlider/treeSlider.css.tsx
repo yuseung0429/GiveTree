@@ -4,7 +4,6 @@ import colorPalette from '@/styles/tokens/colorPalette';
 export const pagination = style({
   display: 'flex',
   justifyContent: 'center',
-  marginBottom: '1rem',
 });
 
 export const dot = style({

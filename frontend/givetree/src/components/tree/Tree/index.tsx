@@ -72,8 +72,8 @@ const Tree = ({ messages, isFlipping, showDecorations }: TreeSliderProps) => {
                 decorations[index % decorations.length]
               )
             }
-            width={60}
-            height={60}
+            width={58}
+            height={58}
           />
         ))}
 

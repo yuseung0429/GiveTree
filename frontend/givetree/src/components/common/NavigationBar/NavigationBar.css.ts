@@ -50,7 +50,7 @@ export const treeIconWrapper = style({
   display: 'flex',
   width: '30px',
   height: '30px',
-})
+});
 
 export const textWrapper = style({
   display: 'flex',

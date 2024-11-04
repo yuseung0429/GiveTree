@@ -18,7 +18,6 @@ export default function AuthLayout({
         <Titile />
         <SearchBar />
       </header>
-
       <main>{children}</main>
       <footer>
         <NavigationBar />

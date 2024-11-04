@@ -12,7 +12,7 @@ export const container = style({
 export const treeImage = style({
   display: 'flex',
   width: '100%',
-  height: '74vh',
+  height: '70vh',
   overflow: 'hidden',
   perspective: '1000px',
   transition: 'transform 0.4s ease',
