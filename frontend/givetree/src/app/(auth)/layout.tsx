@@ -1,6 +1,6 @@
 'use client';
 
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -13,12 +13,13 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const segment = useSelectedLayoutSegment();
 
   return (
     <Layout>
       <header>
-        <AppBar>Give Tree</AppBar>
+        <AppBar title="Give Tree" onBackClick={() => router.back()} />
       </header>
 
       <main>
