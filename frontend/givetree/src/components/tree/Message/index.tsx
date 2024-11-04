@@ -26,7 +26,7 @@ const Message = ({ message, decoration, onClose }: MessageProps) => {
           className={styles.decorationImg}
         />
         <Box className={styles.messageTextContainer}>
-          <Typography as="h3" color={colorPalette.text[800]} weight="semiBold">
+          <Typography as="h4" color={colorPalette.text[900]} weight="semiBold">
             {message.message}
           </Typography>
 

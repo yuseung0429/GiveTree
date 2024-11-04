@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 
 export const container = style({
   display: 'flex',
@@ -23,8 +23,15 @@ export const flip = style({
   transform: 'rotateY(180deg)',
 });
 
+const swayAnimation = keyframes({
+  '0%': { transform: 'translateX(-50%) rotate(-5deg)' },
+  '50%': { transform: 'translateX(-50%) rotate(5deg)' },
+  '100%': { transform: 'translateX(-50%) rotate(-5deg)' },
+});
+
 export const decoration = style({
   position: 'absolute',
   cursor: 'pointer',
   filter: 'drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.2))',
+  animation: `${swayAnimation} 2s ease-in-out infinite`,
 });

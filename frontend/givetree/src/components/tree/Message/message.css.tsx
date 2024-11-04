@@ -7,8 +7,8 @@ export const modal = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'center',
-  width: '300px',
-  height: '260px',
+  width: '280px',
+  height: '240px',
   top: '60%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -18,6 +18,7 @@ export const modal = style({
   borderRadius: '12px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
   zIndex: 1000,
+  overflow: 'visible',
 });
 
 export const overlay = style({
@@ -37,6 +38,7 @@ export const decorationImg = style({
   height: '60px',
   zIndex: 1,
 });
+
 
 export const messageTextContainer = style({
   display: 'flex',
