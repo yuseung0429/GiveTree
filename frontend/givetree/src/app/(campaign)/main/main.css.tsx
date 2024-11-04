@@ -3,7 +3,6 @@ import { style } from '@vanilla-extract/css';
 
 export const wrapper = style({
   backgroundColor: colorPalette.primary[300],
-  overflowY: 'auto',
 });
 
 export const mainContainer = style({

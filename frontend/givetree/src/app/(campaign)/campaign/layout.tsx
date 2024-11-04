@@ -1,7 +1,6 @@
 import Layout from '@/components/common/Layout';
 import NavigationBar from '@/components/common/NavigationBar';
 import AppBar from '@/components/common/AppBar';
-import CampatinDetail from '@/components/campaign/CampaignDetail';
 
 export default function AuthLayout({
   children,
@@ -16,7 +15,6 @@ export default function AuthLayout({
     <Layout>
       <header>
         <AppBar>희망 나눔 캠페인</AppBar>
-        <CampatinDetail />
       </header>
       <main>{children}</main>
       <footer>
