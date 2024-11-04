@@ -1,5 +1,3 @@
-import ConditionalBottomBar from '@/components/foundation/ConditionalBottomBar';
-import AppBar from '@/components/common/AppBar';
 import Layout from '@/components/common/Layout';
 import MainAppBar from '@/components/common/MainAppBar';
 import NavigationBar from '@/components/common/NavigationBar';
