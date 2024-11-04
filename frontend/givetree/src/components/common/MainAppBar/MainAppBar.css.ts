@@ -1,4 +1,3 @@
-
 import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
 
@@ -15,7 +14,7 @@ export const header = style({
 export const leftSection = style({
   display: 'flex',
   alignItems: 'center',
-  marginLeft: '0.5rem'
+  marginLeft: '0.5rem',
 });
 
 export const rightSection = style({

@@ -36,7 +36,7 @@ const CampaignCard = ({
       <div>
         <Typography
           as="h2"
-          weight="bold"
+          weight="semiBold"
           color={colorPalette.text[900]}
           className={styles.campaignTitle}
         >
@@ -55,7 +55,7 @@ const CampaignCard = ({
       <div className={styles.progressContainer}>
         <ProgressBar progress={progress} />
         <div className={styles.amountContainer}>
-          <Typography as="h5" weight="bold" color={colorPalette.text[900]}>
+          <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
             {currentAmount.toLocaleString()}원
           </Typography>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>

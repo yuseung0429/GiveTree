@@ -16,7 +16,7 @@ const MainAppBar = ({ children }: AppBarProps) => {
         </Typography>
       </div>
       <div className={styles.rightSection}>
-        <HiOutlineBell color="#fff" size={24}/>
+        <HiOutlineBell color="#fff" size={24} />
       </div>
     </div>
   );

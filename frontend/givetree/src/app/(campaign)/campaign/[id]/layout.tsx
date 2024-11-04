@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Layout from '@/components/common/Layout';
 import NavigationBar from '@/components/common/NavigationBar';
@@ -9,9 +9,11 @@ import campaigns from '@/mock/campaigns.json';
 import { use } from 'react';
 
 export default function AuthLayout({
-  children, params
+  children,
+  params,
 }: {
-  children: React.ReactNode; params: Promise<{ id: string }>;
+  children: React.ReactNode;
+  params: Promise<{ id: string }>;
 }) {
   const unwrappedParams = use(params);
   const campaignId = parseInt(unwrappedParams.id, 10);
@@ -28,7 +30,7 @@ export default function AuthLayout({
     // Layout 컴포넌트는 main 태그를 기준으로 크기를 화면에 맞추므로 반드시 main 태그를 정의해야 함!!
     <Layout>
       <header>
-        <AppBar title={campaignData?.title || "" } onBackClick={goBack}>
+        <AppBar title={campaignData?.title || ''} onBackClick={goBack}>
           <AppBar.Menu onClick={() => alert('알림')}>
             <HiOutlineBell />
           </AppBar.Menu>

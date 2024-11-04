@@ -26,7 +26,7 @@ const TreeProgress: React.FC<TreeProgressProps> = ({
 
         <Typography
           as="h4"
-          weight="bold"
+          weight="semiBold"
           className={styles.amountText}
           style={{ bottom: `${progress}%` }}
         >

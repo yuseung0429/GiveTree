@@ -20,8 +20,8 @@ const CampaignMoney = ({
     <div>
       <Typography
         as="h3"
-        weight="bold"
-        color={colorPalette.text[900]}
+        weight="semiBold"
+        color={colorPalette.text[700]}
         className={styles.text}
       >
         모금 현황

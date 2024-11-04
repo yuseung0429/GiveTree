@@ -9,7 +9,9 @@ const Titile = () => {
     <div className={styles.header}>
       <div className={styles.leftSection}>
         <FaTree color={colorPalette.primary[900]} size={24} />
-        <Typography as='h2' color='#fff' weight='semiBold'>GIVE</Typography>
+        <Typography as="h2" color="#fff" weight="semiBold">
+          GIVE
+        </Typography>
       </div>
       <div className={styles.rightSection}>
         <HiOutlineBell color="#fff" size={24} />
