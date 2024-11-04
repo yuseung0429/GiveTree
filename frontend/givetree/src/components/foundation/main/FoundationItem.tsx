@@ -2,6 +2,7 @@ import Box from '@/components/common/Box';
 import * as style from './FoundationItemStyle.css';
 import Typography from '@/components/common/Typography';
 import { MdNavigateNext } from 'react-icons/md';
+import { memo } from 'react';
 
 type FoundationItemProps = {
   foundation: {
@@ -11,12 +12,17 @@ type FoundationItemProps = {
   onClick: () => void;
 };
 
-export default function FoundationItem({
+export default memo(function FoundationItem({
   foundation,
   onClick,
 }: FoundationItemProps) {
   return (
-    <Box className={style.container} onClick={onClick} role="button">
+    <Box
+      className={style.container}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+    >
       <Box className={style.flexbox}>
         <div className={style.foundationLogo}></div>
         <Box className={style.textbox}>
@@ -35,4 +41,4 @@ export default function FoundationItem({
       </Box>
     </Box>
   );
-}
+});

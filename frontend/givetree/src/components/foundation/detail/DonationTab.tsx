@@ -1,5 +1,5 @@
-import DonationChart from '@/app/foundation/[id]/detail/DonationChart';
-import * as style from './detail.css';
+import DonationChart from '@/components/foundation/detail/DonationChart';
+import * as style from '../../../app/foundation/[id]/detail/detail.css';
 import Box from '@/components/common/Box';
 import Typography from '@/components/common/Typography';
 

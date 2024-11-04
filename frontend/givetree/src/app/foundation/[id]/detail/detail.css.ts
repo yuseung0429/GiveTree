@@ -74,3 +74,10 @@ export const fixGiveBtn = style({
   position: 'fixed',
   bottom: '10px',
 });
+
+export const campaignCount = style({
+  color: colorPalette.primary[400],
+  fontWeight: '600',
+  fontSize: '20px',
+  marginRight: '3px',
+});

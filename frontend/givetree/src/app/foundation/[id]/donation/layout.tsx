@@ -1,4 +1,4 @@
-import DonationCash from '@/components/foundation/DonationCash';
+import DonationCash from '@/components/foundation/donation/DonationCash';
 import Box from '@/components/common/Box';
 import Layout from '@/components/common/Layout';
 import Account from '@/components/common/Account';

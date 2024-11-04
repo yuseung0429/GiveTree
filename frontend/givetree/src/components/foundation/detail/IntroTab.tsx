@@ -1,4 +1,4 @@
-import * as style from './detail.css';
+import * as style from '../../../app/foundation/[id]/detail/detail.css';
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
