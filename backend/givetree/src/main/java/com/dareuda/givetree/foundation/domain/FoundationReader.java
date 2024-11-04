@@ -1,5 +1,7 @@
 package com.dareuda.givetree.foundation.domain;
 
+import com.dareuda.givetree.common.errors.exception.RestApiException;
+import com.dareuda.givetree.foundation.controller.FoundationErrorCode;
 import com.dareuda.givetree.foundation.infrastructure.FoundationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,12 +15,12 @@ public class FoundationReader {
     @Transactional(readOnly = true)
     public Foundation read(long foundationId) {
         return foundationRepository.findById(foundationId)
-                .orElseThrow(() -> new RuntimeException("failed to read foundation"));
+                .orElseThrow(() -> new RestApiException(FoundationErrorCode.FOUNDATION_NOT_FOUND));
     }
 
     @Transactional(readOnly = true)
     public Foundation readByMemberId(long memberId) {
-        return foundationRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new RuntimeException("failed to read foundation with memberId"));
+        return foundationRepository.findByOwnerId(memberId)
+                .orElseThrow(() -> new RestApiException(FoundationErrorCode.FOUNDATION_NOT_FOUND));
     }
 }
