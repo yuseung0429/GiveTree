@@ -1,8 +1,6 @@
 package com.dareuda.givetree.account.infrastructure;
 
 import com.dareuda.givetree.account.domain.Bank;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;

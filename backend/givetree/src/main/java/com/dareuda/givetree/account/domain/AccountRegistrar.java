@@ -1,7 +1,6 @@
 package com.dareuda.givetree.account.domain;
 
 import com.dareuda.givetree.account.infrastructure.AccountRepository;
-import com.dareuda.givetree.common.utils.SHA256Utils;
 import com.dareuda.givetree.member.domain.Member;
 import com.dareuda.givetree.member.domain.MemberReader;
 import lombok.RequiredArgsConstructor;

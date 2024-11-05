@@ -1,7 +1,6 @@
 package com.dareuda.givetree.finance.domain;
 
 import com.dareuda.givetree.common.errors.exception.RestApiException;
-import com.dareuda.givetree.finance.controller.FinanceErrorCode;
 import com.dareuda.givetree.finance.controller.MemberFinanceErrorCode;
 import com.dareuda.givetree.member.domain.Member;
 import com.dareuda.givetree.member.domain.MemberReader;
