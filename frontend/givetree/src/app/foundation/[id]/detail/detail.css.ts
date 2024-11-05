@@ -30,19 +30,54 @@ export const tabContentContainer = style({
   },
 });
 
-// 탭 컨테이너
+// article
+export const article = style({
+  marginBottom: '30px',
+});
+
+// imageScrollContainer
+export const imageScrollContainer = style({
+  overflowX: 'auto', // 가로 스크롤 허용
+  marginTop: '10px',
+  scrollbarWidth: 'none', // Firefox에서 스크롤바 숨김
+  msOverflowStyle: 'none', // IE/Edge에서 스크롤바 숨김
+  '::-webkit-scrollbar': {
+    display: 'none', // Chrome, Safari에서 스크롤바 숨김
+  },
+});
+
+// introBox
+export const bottomBox = style({
+  marginTop: '10px',
+});
+
+// TabContainer
 export const TabContainer = style({
   width: '100%',
-  backgroundColor: colorPalette.primary[100],
-  height: '600px',
   flexGrow: 1,
   overflowY: 'auto',
-  padding: '16px',
   paddingBottom: '60px',
+});
+
+// imageBox
+export const imageBox = style({
+  width: '30%',
+  minWidth: '150px',
+  maxWidth: '280px',
+  aspectRatio: '4 / 3',
+  overflow: 'hidden',
+  backgroundColor: colorPalette.primary[50],
 });
 
 // 후원하기 버튼
 export const fixGiveBtn = style({
   position: 'fixed',
   bottom: '10px',
+});
+
+export const campaignCount = style({
+  color: colorPalette.primary[400],
+  fontWeight: '600',
+  fontSize: '20px',
+  marginRight: '3px',
 });

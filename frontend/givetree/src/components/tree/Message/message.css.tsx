@@ -7,8 +7,8 @@ export const modal = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'center',
-  width: '280px',
-  height: '240px',
+  width: '300px',
+  height: '260px',
   top: '60%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -38,7 +38,6 @@ export const decorationImg = style({
   height: '60px',
   zIndex: 1,
 });
-
 
 export const messageTextContainer = style({
   display: 'flex',
