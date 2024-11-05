@@ -27,30 +27,26 @@ public class Member extends BaseEntity {
     @NotNull
     private String name;
 
-    @Column
-    @NotNull
-    private String phoneNumber;
-
-    @Column
-    @NotNull
-    private String address;
-
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_image_id")
     private Image profileImage;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column
     @NotNull
     private boolean isDeleted;
 
-    public static Member createMember(String email, String password, String name, String phoneNumber, String address, Image image) {
+    private String phoneNumber;
+    private String address;
+
+    public static Member createMember(String email, String password, String name, Image image, Role role) {
         Member member = new Member();
         member.email = email;
         member.password = password;
         member.name = name;
-        member.phoneNumber = phoneNumber;
-        member.address = address;
-
+        member.role = role;
         member.isDeleted = false;
 
         return member;
@@ -82,5 +78,9 @@ public class Member extends BaseEntity {
 
     public void delete() {
         isDeleted = true;
+    }
+
+    public String getRoleKey() {
+        return this.role.getKey();
     }
 }

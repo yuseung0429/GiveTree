@@ -1,5 +1,6 @@
 package com.dareuda.givetree.member.controller.dto.request;
 
+import com.dareuda.givetree.member.domain.Role;
 import com.dareuda.givetree.member.domain.dto.CreateMemberCommand;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,15 +18,9 @@ public class CreateMemberRequest {
     @NotBlank
     private final String name;
 
-    @NotBlank
-    private final String phoneNumber;
-
-    @NotBlank
-    private final String address;
-
     private final String profileImageUrl;
 
     public CreateMemberCommand convertToCommand() {
-        return new CreateMemberCommand(email, password, name, phoneNumber, address, profileImageUrl);
+        return new CreateMemberCommand(email, password, name, profileImageUrl, Role.FOUNDATION);
     }
 }

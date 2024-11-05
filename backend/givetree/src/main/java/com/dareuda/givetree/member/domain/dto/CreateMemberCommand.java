@@ -1,5 +1,6 @@
 package com.dareuda.givetree.member.domain.dto;
 
+import com.dareuda.givetree.member.domain.Role;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -7,20 +8,13 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class CreateMemberCommand {
-    @NonNull
     private final String email;
 
-    @NonNull
     private final String password;
 
-    @NonNull
     private final String name;
 
-    @NonNull
-    private final String phoneNumber;
+    private final String imageUrl;
 
-    @NonNull
-    private final String address;
-
-    private final String profileImageUrl;
+    private final Role role;
 }

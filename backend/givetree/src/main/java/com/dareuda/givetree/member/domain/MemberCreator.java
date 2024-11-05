@@ -21,9 +21,8 @@ public class MemberCreator {
                         command.getEmail(),
                         command.getPassword(),
                         command.getName(),
-                        command.getPhoneNumber(),
-                        command.getAddress(),
-                        image
+                        image,
+                        command.getRole()
                 )
         );
 
