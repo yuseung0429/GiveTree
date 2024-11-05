@@ -26,8 +26,8 @@ export const chip = recipe({
 
       acc[palette as ColorPalette] = style({
         vars: {
-          [colorVar.main]: color[300],
-          [colorVar.active]: color[400],
+          [colorVar.main]: color[200],
+          [colorVar.active]: color[300],
           [colorVar.disabled]: color[50],
         },
       });
@@ -76,20 +76,20 @@ export const chip = recipe({
     size: {
       sm: {
         height: '1.5rem',
-        padding: '0 0.625rem',
+        padding: '0 0.5rem',
         borderRadius: '0.625rem',
         fontSize: '0.75rem',
       },
 
       md: {
-        height: '1.75rem',
+        height: '1.875rem',
         padding: '0 0.75rem',
         borderRadius: '0.75rem',
         fontSize: '0.875rem',
       },
 
       lg: {
-        height: '2rem',
+        height: '2.25rem',
         padding: '0 0.875rem',
         borderRadius: '0.875rem',
         fontSize: '1rem',
