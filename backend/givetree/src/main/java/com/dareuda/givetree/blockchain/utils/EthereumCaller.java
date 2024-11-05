@@ -1,9 +1,9 @@
-package com.dareuda.givetree.blockchain.caller;
+package com.dareuda.givetree.blockchain.utils;
 
-import com.dareuda.givetree.blockchain.exception.EthereumException;
-import com.dareuda.givetree.blockchain.handler.EthereumExceptionHandler;
+import com.dareuda.givetree.blockchain.errors.exception.EthereumException;
+import com.dareuda.givetree.blockchain.errors.handler.EthereumExceptionHandler;
 import lombok.RequiredArgsConstructor;
-import org.web3j.protocol.core.RemoteFunctionCall;
+import org.web3j.protocol.core.RemoteCall;
 import org.web3j.protocol.core.Request;
 import org.web3j.protocol.core.Response;
 
@@ -12,8 +12,8 @@ public class EthereumCaller {
 
     private final EthereumExceptionHandler exceptionHandler;
 
-    public <T> T call(RemoteFunctionCall<T> function) {
-        try{
+    public <T> T call(RemoteCall<T> function) {
+        try {
             return function.send();
         } catch (Exception e) {
             exceptionHandler.throwException(new EthereumException(e.getMessage(), e));
@@ -21,8 +21,8 @@ public class EthereumCaller {
         }
     }
 
-    public <S, T extends Response> T call(Request<S, T> request) {
-        try{
+    public <S, T extends Response<T>> T call(Request<S, T> request) {
+        try {
             return request.send();
         } catch (Exception e){
             exceptionHandler.throwException(new EthereumException(e.getMessage(), e));

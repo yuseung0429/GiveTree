@@ -1,4 +1,4 @@
-package com.dareuda.givetree.blockchain.config;
+package com.dareuda.givetree.common.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

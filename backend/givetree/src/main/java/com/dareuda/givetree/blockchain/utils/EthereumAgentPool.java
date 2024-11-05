@@ -1,8 +1,8 @@
-package com.dareuda.givetree.blockchain;
+package com.dareuda.givetree.blockchain.utils;
 
-import com.dareuda.givetree.blockchain.config.Web3jConfig;
-import com.dareuda.givetree.blockchain.exception.AddressLockException;
-import com.dareuda.givetree.blockchain.exception.AgentNotAvailableException;
+import com.dareuda.givetree.common.config.Web3jConfig;
+import com.dareuda.givetree.blockchain.errors.exception.AddressLockException;
+import com.dareuda.givetree.blockchain.errors.exception.AgentNotAvailableException;
 import com.dareuda.givetree.wallet.domain.AgentWallet;
 import com.dareuda.givetree.wallet.domain.AgentWalletCreator;
 import com.dareuda.givetree.wallet.domain.AgentWalletReader;
@@ -16,13 +16,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Component
-public class EthereumAgentQueue {
+public class EthereumAgentPool {
 
     private final Queue<AgentWallet> agentQueue;
     private final ConcurrentHashMap<String, Boolean> lockedAddresses;
     private final ConcurrentHashMap<String, HashSet<String>> holdAddresses;
 
-    public EthereumAgentQueue(Web3jConfig web3jConfig, AgentWalletReader agentWalletReader, AgentWalletCreator agentWalletCreator) {
+    public EthereumAgentPool(Web3jConfig web3jConfig, AgentWalletReader agentWalletReader, AgentWalletCreator agentWalletCreator) {
         int poolSize = web3jConfig.getAgentPoolSize();
         agentQueue = new ConcurrentLinkedQueue<>();
         lockedAddresses = new ConcurrentHashMap<>();
@@ -33,8 +33,9 @@ public class EthereumAgentQueue {
         }
 
         int currentSize = (int) agentWalletReader.countAgentWallets();
-        if (poolSize > currentSize)
+        if (poolSize > currentSize) {
             agentWalletCreator.create(poolSize - currentSize);
+        }
 
         List<AgentWallet> agentWallets = agentWalletReader.readAgentWalletsTop(poolSize);
         for (AgentWallet agentWallet : agentWallets) {

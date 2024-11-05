@@ -1,7 +1,7 @@
-package com.dareuda.givetree.blockchain.handler;
+package com.dareuda.givetree.blockchain.errors.handler;
 
-import com.dareuda.givetree.blockchain.exception.EthereumErrorCode;
-import com.dareuda.givetree.blockchain.exception.EthereumException;
+import com.dareuda.givetree.blockchain.controller.EthereumErrorCode;
+import com.dareuda.givetree.blockchain.errors.exception.EthereumException;
 
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import org.springframework.stereotype.Component;
