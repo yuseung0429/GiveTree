@@ -1,0 +1,6 @@
+blockchain:
+  network:
+    host: "http://givetree-chain.kro.kr"
+    port: 8545
+  agent:
+    pool-size: 100
