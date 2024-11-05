@@ -2,6 +2,7 @@ package com.dareuda.givetree.finance.domain;
 
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.finance.controller.FinanceErrorCode;
+import com.dareuda.givetree.finance.controller.MemberFinanceErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -36,7 +37,7 @@ public class MemberFinanceAspect {
         }
 
         if (memberId == null || !memberFinanceReader.isExists(memberId)) {
-            throw new RestApiException(FinanceErrorCode.NOT_FOUND);
+            throw new RestApiException(MemberFinanceErrorCode.MEMBER_FINANCE_NOT_FOUND);
         }
     }
 }

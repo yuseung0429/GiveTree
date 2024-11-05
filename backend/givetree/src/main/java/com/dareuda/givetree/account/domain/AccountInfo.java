@@ -14,14 +14,4 @@ public class AccountInfo {
     private final LocalDate createdAt;
     private final LocalDate expiryAt;
     private final String bankName;
-
-    public static AccountInfo from(Account account) {
-        return AccountInfo.builder()
-                .accountNumber(account.getAccountNumber())
-                .accountName(account.getName())
-                .createdAt(account.getCreatedAt())
-                .expiryAt(account.getExpiryAt())
-                .bankName(account.getBank().getName())
-                .build();
-    }
 }

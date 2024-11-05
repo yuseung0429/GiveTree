@@ -2,6 +2,7 @@ package com.dareuda.givetree.finance.domain;
 
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.finance.controller.FinanceErrorCode;
+import com.dareuda.givetree.finance.controller.MemberFinanceErrorCode;
 import com.dareuda.givetree.member.domain.Member;
 import com.dareuda.givetree.member.domain.MemberReader;
 import com.ssafy.finance.client.MemberApiClient;
@@ -26,7 +27,7 @@ public class MemberFinanceLoader {
             try {
                 return memberApiClient.searchMember(member.getEmail());
             } catch (MemberNotFoundException e2) {
-                throw new RestApiException(FinanceErrorCode.MEMBER_ALREADY_REGISTERED);
+                throw new RestApiException(MemberFinanceErrorCode.MEMBER_EXTERNAL_SERVER_ALREADY_REGISTERED);
             }
         }
     }

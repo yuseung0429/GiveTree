@@ -1,5 +1,6 @@
 package com.dareuda.givetree.account.domain;
 
+import com.dareuda.givetree.account.controller.AccountErrorCode;
 import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.common.utils.ListUtils;
@@ -31,7 +32,7 @@ public class AccountLoader {
         try {
             memberFinance = memberFinanceReader.read(memberId);
         } catch (AccountNotFoundException e) {
-            throw new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND);
+            throw new RestApiException(AccountErrorCode.EXTERNAL_ACCOUNT_NOT_FOUND);
         }
         return ExternalAccountInfo.from(demandDepositApiClient.searchAccount(memberFinance.getUserKey(), accountNo));
     }
@@ -41,7 +42,7 @@ public class AccountLoader {
         try {
             memberFinance = memberFinanceReader.read(memberId);
         } catch (AccountNotFoundException e) {
-            throw new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND);
+            throw new RestApiException(AccountErrorCode.EXTERNAL_ACCOUNT_NOT_FOUND);
         }
         return demandDepositApiClient.searchAccountBalance(memberFinance.getUserKey(), accountNo).getAccountBalance();
     }

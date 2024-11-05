@@ -45,7 +45,7 @@ public class Account {
     private Boolean isActive;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_code")
     private Bank bank;
 

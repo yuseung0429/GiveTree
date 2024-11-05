@@ -4,6 +4,7 @@ import com.dareuda.givetree.account.domain.*;
 import com.dareuda.givetree.finance.domain.RequiredMemberFinance;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,13 +13,14 @@ import java.util.List;
 public class AccountService {
 
     private final AccountReader accountReader;
+    private final AccountInfoReader accountInfoReader;
     private final AccountLoader accountLoader;
     private final AccountRegistrar accountRegistrar;
     private final AccountUpdater accountUpdater;
 
     @RequiredMemberFinance
     public AccountInfo getRegisteredAccount(long memberId) {
-        return AccountInfo.from(accountReader.readActiveAccount(memberId));
+        return accountInfoReader.readActiveAccountInfo(memberId);
     }
 
     @RequiredMemberFinance

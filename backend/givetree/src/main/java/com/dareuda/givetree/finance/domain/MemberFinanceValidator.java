@@ -1,7 +1,7 @@
 package com.dareuda.givetree.finance.domain;
 
-import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
+import com.dareuda.givetree.finance.controller.MemberFinanceErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ public class MemberFinanceValidator {
 
     public void validateAppendable(long memberId) {
         if (memberFinanceReader.isExists(memberId)) {
-            throw new RestApiException(CommonErrorCode.RESOURCE_CONFLICT);
+            throw new RestApiException(MemberFinanceErrorCode.MEMBER_FINANCE_ALREADY_EXISTS);
         }
     }
 }

@@ -16,13 +16,13 @@ public class AccountValidator {
 
     public void validateRegisterable(long memberId) {
         if (accountReader.existsActiveAccount(memberId)) {
-            throw new RestApiException(CommonErrorCode.RESOURCE_CONFLICT);
+            throw new RestApiException(AccountErrorCode.ACTIVE_ACCOUNT_ALREADY_EXISTS);
         }
     }
 
     public void validateExpired(LocalDate expiryAt) {
         if (LocalDate.now().isAfter(expiryAt)) {
-            throw new RestApiException(AccountErrorCode.EXPIRED);
+            throw new RestApiException(AccountErrorCode.ACCOUNT_EXPIRED);
         }
     }
 }
