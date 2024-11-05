@@ -1,6 +1,9 @@
 package com.dareuda.givetree.common.interceptor;
 
+import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
+import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.common.file_validator.FileValidator;
+import com.dareuda.givetree.media.controller.MediaErrorCode;
 import com.dareuda.givetree.media.controller.ValidExtension;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,12 +35,12 @@ public class MediaExtensionValidationInterceptor implements HandlerInterceptor {
         }
 
         if (!(request instanceof MultipartHttpServletRequest multipartRequest)) {
-            throw new RuntimeException();
+            throw new RestApiException(CommonErrorCode.INVALID_ARGUMENT, "잘못된 요청 형식입니다.");
         }
 
         MultipartFile multipartFile = multipartRequest.getFile(FILE_NAME);
         if (multipartFile == null) {
-            throw new RuntimeException();
+            throw new RestApiException(MediaErrorCode.MISSING_FILE);
         }
         validateIsRightFile(multipartFile);
 
