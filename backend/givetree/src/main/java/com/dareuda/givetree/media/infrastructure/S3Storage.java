@@ -1,5 +1,7 @@
 package com.dareuda.givetree.media.infrastructure;
 
+import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
+import com.dareuda.givetree.common.errors.exception.RestApiException;
 import io.awspring.cloud.s3.ObjectMetadata;
 import io.awspring.cloud.s3.S3Operations;
 import io.awspring.cloud.s3.S3Resource;
@@ -29,7 +31,7 @@ public class S3Storage {
             );
             return s3Resource.getURL().toString();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR);
         }
     }
 }

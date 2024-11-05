@@ -1,5 +1,7 @@
 package com.dareuda.givetree.media.domain;
 
+import com.dareuda.givetree.common.errors.exception.RestApiException;
+import com.dareuda.givetree.media.controller.MediaErrorCode;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,6 +12,6 @@ public class MediaValidator {
         if (extension.equals("jpg") || extension.equals("jpeg") || extension.equals("png")) {
             return;
         }
-        throw new RuntimeException();
+        throw new RestApiException(MediaErrorCode.UNSUPPORTED_IMAGE_EXTENSION);
     }
 }

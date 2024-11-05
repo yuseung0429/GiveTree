@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@RequestMapping("/media")
+@RequestMapping("/api/media")
 @RequiredArgsConstructor
 @RestController
 public class MediaController {

@@ -1,5 +1,7 @@
 package com.dareuda.givetree.media.domain;
 
+import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
+import com.dareuda.givetree.common.errors.exception.RestApiException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.tika.Tika;
 import org.apache.tika.mime.MimeType;
@@ -34,7 +36,7 @@ public class FileNameGenerator {
 
             return Hex.encodeHexString(messageDigest.digest());
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -44,7 +46,7 @@ public class FileNameGenerator {
             MimeType mimeType = defaultMimeType.forName(tika.detect(multipartFile.getBytes()));
             return mimeType.getExtension();
         } catch (MimeTypeException | IOException e) {
-            throw new RuntimeException(e);
+            throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR);
         }
     }
 }
