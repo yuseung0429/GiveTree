@@ -8,7 +8,7 @@ import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 import Button from '@/components/common/Button';
 
-export default function Search() {
+export default function SearchPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
   };

@@ -1,13 +1,13 @@
 'use client';
 
+import Chip from '@/components/common/Chip';
+import Flex from '@/components/common/Flex';
+
 import { HiMiniXMark } from 'react-icons/hi2';
 
-import Box from '@/components/common/Box';
-import Chip from '@/components/common/Chip';
-
-export default function MarketPage() {
+const SearchCondition = () => {
   return (
-    <Box>
+    <Flex gap="0.5rem">
       <Chip
         color="grey"
         size="md"
@@ -32,6 +32,8 @@ export default function MarketPage() {
       >
         판매중
       </Chip>
-    </Box>
+    </Flex>
   );
-}
+};
+
+export default SearchCondition;
