@@ -22,7 +22,8 @@ export const checkboxChip = recipe({
 
     selectors: {
       [`${input}:checked + &`]: {
-        backgroundColor: colorPalette.grey[900],
+        borderColor: '#171719',
+        backgroundColor: '#171719',
         color: colorPalette.grey[50],
       },
 
@@ -45,14 +46,14 @@ export const checkboxChip = recipe({
       sm: {
         height: '1.875rem',
         padding: '0 0.5rem',
-        borderRadius: '0.5rem',
+        borderRadius: '0.25rem',
         fontSize: '0.75rem',
       },
 
       md: {
         height: '2.25rem',
         padding: '0 0.75rem',
-        borderRadius: '0.5rem',
+        borderRadius: '0.375rem',
         fontSize: '0.875rem',
       },
 
