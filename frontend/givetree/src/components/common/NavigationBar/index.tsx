@@ -69,8 +69,8 @@ const NavigationBar = () => {
           <Typography className={styles.textWrapper}>거래</Typography>
         </Link>
         <Link
-          href="/signup"
-          className={`${styles.item} ${isActive('/signup') ? 'active' : ''}`}
+          href="/mypage"
+          className={`${styles.item} ${isActive('/mypage') ? 'active' : ''}`}
         >
           <div className={styles.iconWrapper}>
             <HiUserCircle size={24} />

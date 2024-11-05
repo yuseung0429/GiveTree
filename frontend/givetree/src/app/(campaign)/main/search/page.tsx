@@ -18,7 +18,7 @@ export default async function Page({
   });
 
   return (
-    <div className={styles.wrapper}>
+    
       <div className={styles.mainContainer}>
         <h3 className={styles.sectionTitle}>
           &#39;{q}&#39;&nbsp;으로 검색한 결과
@@ -36,6 +36,6 @@ export default async function Page({
           />
         ))}
       </div>
-    </div>
+   
   );
 }

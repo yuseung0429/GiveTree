@@ -7,7 +7,7 @@ export const wrapper = style({
 
 export const mainContainer = style({
   borderTopLeftRadius: '20px',
-  borderTopRightRadius: '16px',
+  borderTopRightRadius: '20px',
   padding: '0.75rem',
   minHeight: '100vh',
   backgroundColor: 'white',

@@ -2,8 +2,9 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
 
 export const wrapper = style({
-  backgroundColor: colorPalette.primary[300],
-  overflowY: 'auto',
+  // backgroundColor: colorPalette.primary[300],
+
+  // overflowY: 'auto',
 });
 
 export const mainContainer = style({
@@ -11,9 +12,8 @@ export const mainContainer = style({
   flexDirection: 'column',
   gap: '12px',
   borderTopLeftRadius: '20px',
-  borderTopRightRadius: '16px',
+  borderTopRightRadius: '20px',
   padding: '1.25rem',
-  minHeight: '100vh',
   backgroundColor: 'white',
 });
 
