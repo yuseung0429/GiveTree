@@ -12,7 +12,6 @@ public enum CommonErrorCode implements ErrorCode {
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "인증에 실패했습니다."),
     FORBIDDEN(HttpStatus.FORBIDDEN, "권한이 없습니다."),
     RESOURCE_CONFLICT(HttpStatus.CONFLICT, "자원 충돌이 발생했습니다."),
-
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부에 오류가 발생했습니다."),
     ;
 
