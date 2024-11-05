@@ -9,20 +9,20 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public enum OAuthAttributes {
 
-    GOOGLE("google", attributes ->
-            new UserProfile(
-                    String.valueOf(attributes.get("sub")),
-                    (String) attributes.get("name"),
-                    (String) attributes.get("email")
-            )
-    ),
+    GOOGLE("google", attributes -> {
+        return new UserProfile(
+                String.valueOf(attributes.get("sub")),
+                (String) attributes.get("name"),
+                (String) attributes.get("email")
+        );
+    }),
     KAKAO("kakao", attributes -> {
         Map<String, Object> kakaoAccountAttributes = (Map<String, Object>) attributes.get("kakao_account");
         Map<String, Object> profileAttribute = (Map<String, Object>) kakaoAccountAttributes.get("profile");
         return new UserProfile(
-                (String) attributes.get("id"),
-                (String) kakaoAccountAttributes.get("nickname"),
-                (String) profileAttribute.get("nickname")
+                attributes.get("id").toString(),
+                (String) profileAttribute.get("nickname"),
+                (String) kakaoAccountAttributes.get("email")
         );
     }),
     NAVER("naver", attributes -> {
