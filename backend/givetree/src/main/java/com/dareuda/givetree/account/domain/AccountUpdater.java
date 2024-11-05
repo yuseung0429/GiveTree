@@ -1,6 +1,5 @@
 package com.dareuda.givetree.account.domain;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

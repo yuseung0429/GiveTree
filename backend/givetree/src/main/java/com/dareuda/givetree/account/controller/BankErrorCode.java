@@ -1,8 +1,8 @@
 package com.dareuda.givetree.account.controller;
 
+import com.dareuda.givetree.common.errors.errorcode.ErrorCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import okhttp3.internal.http2.ErrorCode;
 import org.springframework.http.HttpStatus;
 
 @Getter

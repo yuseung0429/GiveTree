@@ -1,5 +1,6 @@
 package com.dareuda.givetree.finance.domain;
 
+import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.finance.controller.MemberFinanceErrorCode;
 import com.dareuda.givetree.finance.infrastructure.MemberFinanceRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ public class MemberFinanceReader {
 
     public MemberFinance read(long memberId) {
         return memberFinanceRepository.findById(memberId)
-                .orElseThrow(new RestApiException(MemberFinanceErrorCode.MEMBER_FINANCE_NOT_FOUND));
+                .orElseThrow(() -> new RestApiException(MemberFinanceErrorCode.MEMBER_FINANCE_NOT_FOUND));
     }
 
     public boolean isExists(long memberId) {

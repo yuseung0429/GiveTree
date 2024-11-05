@@ -2,7 +2,6 @@ package com.dareuda.givetree.account.domain;
 
 import com.dareuda.givetree.account.controller.AccountErrorCode;
 import com.dareuda.givetree.account.infrastructure.AccountRepository;
-import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
