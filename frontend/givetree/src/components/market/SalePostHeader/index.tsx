@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import typography from '@/styles/tokens/typography';
 
 import { HiChatBubbleOvalLeft } from 'react-icons/hi2';
@@ -8,6 +10,7 @@ import Chip from '@/components/common/Chip';
 import Button from '@/components/common/Button';
 
 interface SalePostHeaderProps {
+  id: number;
   title: string;
   price: number;
   tags: string[];
@@ -15,6 +18,7 @@ interface SalePostHeaderProps {
 }
 
 const SalePostHeader = ({
+  id,
   title,
   price,
   tags,
@@ -46,9 +50,11 @@ const SalePostHeader = ({
           {price.toLocaleString()}원
         </Typography>
         <div>
-          <Button size="sm" icon={<HiChatBubbleOvalLeft size={'1.25rem'} />}>
-            채팅하기
-          </Button>
+          <Link href={`/market/chat/${id}`}>
+            <Button size="sm" icon={<HiChatBubbleOvalLeft size={'1.25rem'} />}>
+              채팅하기
+            </Button>
+          </Link>
         </div>
       </Flex>
     </Flex>

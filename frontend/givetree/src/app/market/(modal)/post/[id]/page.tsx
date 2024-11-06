@@ -25,7 +25,7 @@ export default async function PostPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const id = (await params).id;
+  const id = parseInt((await params).id);
 
   return (
     <>
@@ -38,6 +38,7 @@ export default async function PostPage({
         />
         <Box padding="1rem 0">
           <SalePostHeader
+            id={id}
             title="갤럭시노트9 블루색상 512"
             price={180000}
             tags={['판매중', '직거래', '거의 새 것']}

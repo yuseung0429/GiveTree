@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { HiMagnifyingGlass, HiOutlineBell } from 'react-icons/hi2';
 
-import * as s from './Market.css';
+import * as s from './@modal/Modal.css';
 
 import AppBar from '@/components/common/AppBar';
 import FrozenRouter from '@/components/common/FrozenRouter';
