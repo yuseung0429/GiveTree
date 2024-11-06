@@ -26,7 +26,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleRestApiException(final RestApiException e) {
         log.warn("RestApiException occured: {}", e.getMessage(), e);
         final ErrorCode errorCode = e.getErrorCode();
-        return handleExceptionInternal(errorCode);
+        return handleExceptionInternal(errorCode, e.getMessage());
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

@@ -14,11 +14,14 @@ public class MemberDetailReader {
     public MemberDetail read(long memberId) {
         Member member = memberReader.read(memberId);
 
+        String profileImageUrl = member.getProfileImage() != null ? member.getProfileImage().getUrl() : null;
+
         return MemberDetail.builder()
+                .id(member.getId())
                 .email(member.getEmail())
                 .name(member.getName())
-                .phoneNumber(member.getPhoneNumber())
-                .address(member.getAddress())
+                .profileImageUrl(profileImageUrl)
+                .Role("foundation")
                 .build();
     }
 }
