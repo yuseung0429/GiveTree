@@ -1,5 +1,5 @@
-import ConditionalBottomBar from '@/components/foundation/ConditionalBottomBar';
 import AppBar from '@/components/common/AppBar';
+import Button from '@/components/common/Button';
 import Layout from '@/components/common/Layout';
 
 export default function FoundationLayout({
@@ -10,11 +10,11 @@ export default function FoundationLayout({
   return (
     <Layout>
       <header>
-        <AppBar>top</AppBar>
+        <AppBar title="재단" />
       </header>
       <main>{children}</main>
       <footer>
-        <ConditionalBottomBar />
+        <Button fullWidth>후원하기</Button>
       </footer>
     </Layout>
   );

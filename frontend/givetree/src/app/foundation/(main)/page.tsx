@@ -1,16 +1,13 @@
-'use client';
-
-import Link from 'next/link';
-import { Suspense } from 'react';
-import Searchbar from '@/components/foundation/searchbar';
-import Typography from '@/components/common/Typography';
-import RecomFoundation from '../../components/foundation/RecomFoundation';
 import * as style from './foundation.css';
+import Link from 'next/link';
+import Searchbar from '@/components/foundation/search/searchbar';
+import Typography from '@/components/common/Typography';
+import RecomFoundation from '../../../components/foundation/main/RecomFoundation';
 import Box from '@/components/common/Box';
-import Flex from '@/components/common/Flex';
-import FoundationItem from '@/components/foundation/FoundationItem';
-import { useRouter } from 'next/navigation';
+import { Suspense } from 'react';
+import FoundationList from '@/components/foundation/main/FoundationList';
 
+// 임시 데이터 타입
 type Foundation = {
   id: number;
   name: string;
@@ -26,13 +23,11 @@ const foundations: Foundation[] = [
 ];
 
 export default function Page() {
-  const router = useRouter();
-
   return (
     <Box className={style.mainBg}>
       {/* 검색창 */}
       <Box as="section" className={style.section}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>로딩중...</div>}>
           <Searchbar />
         </Suspense>
       </Box>
@@ -51,20 +46,12 @@ export default function Page() {
           <Typography as="h3" weight="semiBold" className={style.title}>
             재단 둘러보기
           </Typography>
-          <Link href="/foundation/all">
+          <Link href="/foundation/all" prefetch>
             <Typography className={style.link}>더보기</Typography>
           </Link>
         </Box>
 
-        <Flex flexDirection="column" gap="10px">
-          {foundations.map((foundation) => (
-            <FoundationItem
-              key={foundation.id}
-              foundation={foundation}
-              onClick={() => router.push(`/foundation/${foundation.id}/detail`)} // 클릭 시 이동 설정
-            />
-          ))}
-        </Flex>
+        <FoundationList foundations={foundations} />
       </Box>
     </Box>
   );

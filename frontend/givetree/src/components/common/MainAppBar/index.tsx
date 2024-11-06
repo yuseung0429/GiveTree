@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { FaRegBell } from 'react-icons/fa';
+import { HiOutlineBell } from 'react-icons/hi2';
 import * as styles from './MainAppBar.css';
 import Typography from '@/components/common/Typography';
 
@@ -16,7 +16,7 @@ const MainAppBar = ({ children }: AppBarProps) => {
         </Typography>
       </div>
       <div className={styles.rightSection}>
-        <FaRegBell color="#fff" size={22} />
+        <HiOutlineBell color="#fff" size={24} />
       </div>
     </div>
   );

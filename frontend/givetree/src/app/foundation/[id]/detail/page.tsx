@@ -5,9 +5,9 @@ import * as style from './detail.css';
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
 import { useState } from 'react';
-import IntroTab from '@/app/foundation/[id]/detail/IntroTab';
-import DonationTab from '@/app/foundation/[id]/detail/DonationTab';
-import CampaignTab from '@/app/foundation/[id]/detail/CampaignTab';
+import IntroTab from '@/components/foundation/detail/IntroTab';
+import DonationTab from '@/components/foundation/detail/DonationTab';
+import CampaignTab from '@/components/foundation/detail/CampaignTab';
 // import Button from "@/components/common/Button";
 // import Link from 'next/link';
 

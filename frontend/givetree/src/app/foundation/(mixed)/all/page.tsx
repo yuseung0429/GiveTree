@@ -1,10 +1,10 @@
 'use client';
 
-import FoundationItem from '@/components/foundation/FoundationItem';
+import * as style from '@/app/foundation/(mixed)/all/all.css';
+import FoundationItem from '@/components/foundation/main/FoundationItem';
 import Box from '@/components/common/Box';
-import * as style from '@/app/foundation/all/all.css';
 import Flex from '@/components/common/Flex';
-import TabItem from '@/app/foundation/all/TabItem';
+import TabItem from '@/components/foundation/main/TabItem';
 import { useRouter } from 'next/navigation';
 
 type Foundation = {
