@@ -60,8 +60,8 @@ const NavigationBar = () => {
           </div>
         </Link>
         <Link
-          href="/signin"
-          className={`${styles.item} ${isActive('/signin') ? 'active' : ''}`}
+          href="/market"
+          className={`${styles.item} ${isActive('/market') ? 'active' : ''}`}
         >
           <div className={styles.iconWrapper}>
             <HiShoppingBag size={24} />

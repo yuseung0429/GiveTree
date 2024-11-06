@@ -1,15 +1,11 @@
 import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
 
-export const wrapper = style({
-  // backgroundColor: colorPalette.primary[300],
-
-  // overflowY: 'auto',
-});
-
 export const mainContainer = style({
   display: 'flex',
   flexDirection: 'column',
+  width: '100%',
+  height: '100%',
   gap: '12px',
   borderTopLeftRadius: '20px',
   borderTopRightRadius: '20px',

@@ -6,10 +6,15 @@ import colorPalette from '@/styles/tokens/colorPalette';
 export default function Account() {
   return (
     <Box>
-      <Typography as="h4" weight="semiBold" color={colorPalette.grey[600]}>
+      <Typography
+        as="h3"
+        weight="medium"
+        size={20}
+        color={colorPalette.grey[600]}
+      >
         결제 수단
       </Typography>
-      <Box className={style.accountBox}>임시</Box>
+      <Box className={style.accountBox}></Box>
     </Box>
   );
 }

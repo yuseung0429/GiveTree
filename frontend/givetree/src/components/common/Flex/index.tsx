@@ -25,6 +25,7 @@ const Flex = ({
   width,
   height,
   className,
+  style,
   ...props
 }: FlexProps) => {
   return (
@@ -38,6 +39,7 @@ const Flex = ({
         justifyContent,
         width,
         height,
+        ...style,
       }}
       {...props}
     >
