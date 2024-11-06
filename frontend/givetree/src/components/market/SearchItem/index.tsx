@@ -12,7 +12,7 @@ import Chip from '@/components/common/Chip';
 const SearchItem = () => {
   return (
     <div className={s.wrapper}>
-      <Link href="/market/post">
+      <Link href="/market/post/1">
         <Flex gap="0.5rem" alignItems="center" className={s.container}>
           <Box
             padding="1rem"

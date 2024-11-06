@@ -20,13 +20,19 @@ const description = `갤럭시노트9 블루 512 대용량입니다.
 
 const createdAt = '2024-11-06T05:22:26.977Z';
 
-export default function PostPage() {
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+
   return (
     <>
       <Box width="100%" height="12rem" backgroundColor="#ccc" />
       <Box padding="1rem">
         <SimpleProfile
-          name="코딩하는 돌아이"
+          name={`코딩하는 돌아이 (${id})`}
           size="md"
           profileImage="https://github.com/user-attachments/assets/14513e04-bf23-4d90-8f29-7f6295690ea5"
         />
