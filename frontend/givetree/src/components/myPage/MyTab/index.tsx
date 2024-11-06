@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 interface MyTabProps {
   role: string;
-  userId: number;
+  userId: string;
 }
 
 const MyTab = ({ role, userId }: MyTabProps) => {
