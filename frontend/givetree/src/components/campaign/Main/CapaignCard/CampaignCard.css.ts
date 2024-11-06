@@ -14,11 +14,24 @@ export const campaignCard = style({
   scrollSnapAlign: 'start',
   flexShrink: '0',
   margin: '0 0.5rem 0.5rem 0',
+  position: 'relative',
 });
 
 export const campaignTitle = style({
   marginLeft: '0.25rem',
   marginBottom: '0.25rem',
+});
+
+export const cardIndex = style({
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
+  width: '50px',
+  padding: '0.5rem',
+  borderRadius: '20px',
+  backgroundColor: '#E0E0E0',
+  textAlign: 'center',
+  opacity: '0.8',
 });
 
 export const campaignSubtitle = style({

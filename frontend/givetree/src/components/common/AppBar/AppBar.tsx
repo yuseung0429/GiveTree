@@ -26,10 +26,10 @@ const AppBar = ({ children, title, onBackClick }: AppBarProps) => {
         </div>
       )}
       <Typography
-        as="h1"
+        as="h2"
         color="#fff"
         size={typography.size.xl}
-        weight="light"
+        weight="semiBold"
         className={s.title}
       >
         {title}

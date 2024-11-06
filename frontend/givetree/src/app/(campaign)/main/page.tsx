@@ -20,7 +20,7 @@ export default function Home() {
           진행 중인 캠페인
         </Typography>
         <div className={styles.slideContainer}>
-          {campaigns.map((campaign) => (
+          {campaigns.map((campaign, index) => (
             <CampaignCard
               key={campaign.id}
               id={campaign.id}
@@ -30,6 +30,8 @@ export default function Home() {
               currentAmount={campaign.currentAmount}
               goalAmount={campaign.goalAmount}
               imageUrl={campaign.imageUrl}
+              totalCampaign = {campaigns.length}
+              currentIndex = {index}
             />
           ))}
         </div>
@@ -50,6 +52,8 @@ export default function Home() {
               currentAmount={campaign.currentAmount}
               goalAmount={campaign.goalAmount}
               imageUrl={campaign.imageUrl}
+              totalCampaign = {endingSoonCampaigns.length}
+              currentIndex = {index}
             />
           ))}
         </div>

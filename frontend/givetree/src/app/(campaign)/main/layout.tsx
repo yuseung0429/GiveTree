@@ -3,6 +3,7 @@ import NavigationBar from '@/components/common/NavigationBar';
 import Titile from '@/components/campaign/Main/Title';
 import SearchBar from '@/components/campaign/Main/SearchBar';
 import { Suspense } from 'react';
+import colorPalette from '@/styles/tokens/colorPalette';
 
 export default function AuthLayout({
   children,
@@ -21,7 +22,7 @@ export default function AuthLayout({
           <SearchBar />
         </Suspense>
       </header>
-      <main>{children}</main>
+      <main style={{backgroundColor: colorPalette.primary[300]}}>{children}</main>
       <footer>
         <NavigationBar />
       </footer>
