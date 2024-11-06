@@ -27,10 +27,20 @@ export default function DonationCash() {
       <Flex gap="10px" alignItems="center">
         <div className={style.foundationLogo}></div>
         <Flex flexDirection="column" gap="3px">
-          <Typography weight="medium" color={colorPalette.primary[600]}>
+          <Typography
+            weight="semiBold"
+            size={20}
+            color={colorPalette.primary[600]}
+          >
             사회복지법인 굿네이버스
           </Typography>
-          <Typography color={colorPalette.grey[600]}>일시후원하기</Typography>
+          <Typography
+            size={18}
+            color={colorPalette.grey[600]}
+            style={{ marginTop: '2px' }}
+          >
+            일시후원하기
+          </Typography>
         </Flex>
       </Flex>
 
@@ -46,7 +56,7 @@ export default function DonationCash() {
       </Box>
 
       {/* 금액 버튼 */}
-      <Flex gap="10px" justifyContent="spaceBetween">
+      <Flex gap="15px">
         {[
           { label: '5천', value: 5000 },
           { label: '1만', value: 10000 },

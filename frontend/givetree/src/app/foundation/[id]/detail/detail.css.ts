@@ -32,7 +32,7 @@ export const tabContentContainer = style({
 
 // article
 export const article = style({
-  marginBottom: '30px',
+  marginBottom: '20px',
 });
 
 // imageScrollContainer
@@ -56,7 +56,6 @@ export const TabContainer = style({
   width: '100%',
   flexGrow: 1,
   overflowY: 'auto',
-  paddingBottom: '60px',
 });
 
 // imageBox

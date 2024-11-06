@@ -98,6 +98,13 @@ export const button = recipe({
         borderRadius: '1.5rem',
         fontSize: typography.size.lg,
       },
+
+      xl: {
+        height: '3.5rem',
+        padding: '0 1.375rem',
+        borderRadius: '1.75rem',
+        fontSize: typography.size.xl,
+      },
     },
 
     fullWidth: {
