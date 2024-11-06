@@ -1,6 +1,5 @@
 package com.dareuda.givetree.foundation.domain;
 
-import com.dareuda.givetree.foundation.infrastructure.FoundationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @RequiredArgsConstructor
 public class FoundationDetailReader {
-    private final FoundationRepository foundationRepository;
     private final FoundationReader foundationReader;
 
     @Transactional(readOnly = true)

@@ -1,6 +1,7 @@
 package com.dareuda.givetree.foundation.domain;
 
 import com.dareuda.givetree.common.domain.BaseEntity;
+import com.dareuda.givetree.media.domain.Image;
 import com.dareuda.givetree.member.domain.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -14,14 +15,14 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Foundation extends BaseEntity {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "foundation_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "member_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
     @NotNull
-    private Member member;
+    private Member owner;
 
     @Column
     @NotNull
@@ -31,11 +32,59 @@ public class Foundation extends BaseEntity {
     @NotNull
     private String corporateRegistrationNumber;
 
-    // private Image image;
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
+    private Image image;
 
-    @Builder
-    public Foundation(String introduction, String corporateRegistrationNumber) {
+    @Column
+    @NotNull
+    private long totalFundraisingAmount;
+
+    @Column
+    @NotNull
+    private long executedAmount;
+
+    @Column
+    @NotNull
+    private boolean isDeleted;
+
+    @PrePersist
+    public void prePersist() {
+        totalFundraisingAmount = 0L;
+        executedAmount = 0L;
+        isDeleted = false;
+    }
+
+    public static Foundation createFoundation(Member owner, String introduction, String corporateRegistrationNumber, Image image) {
+        Foundation foundation = new Foundation();
+        foundation.owner = owner;
+        foundation.introduction = introduction;
+        foundation.corporateRegistrationNumber = corporateRegistrationNumber;
+        foundation.image = image;
+
+        return foundation;
+    }
+
+    public void updateOwner(Member owner) {
+        this.owner = owner;
+    }
+    public void updateIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+    public void updateCorporateRegistrationNumber(String corporateRegistrationNumber) {
         this.corporateRegistrationNumber = corporateRegistrationNumber;
+    }
+    public void updateImage(Image image) {
+        this.image = image;
+    }
+    public void updateTotalFundraisingAmount(long totalFundraisingAmount) {
+        this.totalFundraisingAmount = totalFundraisingAmount;
+    }
+    public void updateExecutedAmount(long executedAmount) {
+        this.executedAmount = executedAmount;
+    }
+
+    public void delete() {
+        isDeleted = true;
     }
 }

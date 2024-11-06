@@ -1,9 +1,8 @@
 package com.dareuda.givetree.foundation.service;
 
-import com.dareuda.givetree.foundation.controller.dto.request.CreateFoundationRequest;
-import com.dareuda.givetree.foundation.domain.FoundationCreator;
-import com.dareuda.givetree.foundation.domain.FoundationDetail;
-import com.dareuda.givetree.foundation.domain.FoundationDetailReader;
+import com.dareuda.givetree.foundation.domain.*;
+import com.dareuda.givetree.foundation.domain.dto.UpdateFoundationCommand;
+import com.dareuda.givetree.foundation.domain.dto.CreateFoundationCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +11,24 @@ import org.springframework.stereotype.Service;
 public class FoundationService {
     private final FoundationCreator foundationCreator;
     private final FoundationDetailReader foundationDetailReader;
+    private final FoundationUpdater foundationUpdater;
+    private final FoundationDeleter foundationDeleter;
+    private final FoundationAuthorityValidator foundationAuthorityValidator;
 
-    public long createFoundation(CreateFoundationRequest request) {
-        return foundationCreator.create(request);
+    public long createFoundation(long memberId, CreateFoundationCommand command) {
+        return foundationCreator.create(memberId, command);
+    }
+
+    public void updateFoundation(long memberId, long foundationId, UpdateFoundationCommand command) {
+        foundationAuthorityValidator.validateModifyAuthority(memberId, foundationId);
+
+        foundationUpdater.update(foundationId, command);
+    }
+
+    public void deleteFoundation(long memberId, long foundationId) {
+        foundationAuthorityValidator.validateModifyAuthority(memberId, foundationId);
+
+        foundationDeleter.delete(foundationId);
     }
 
     public FoundationDetail getFoundationDetail(long foundationId) {

@@ -1,4 +1,4 @@
-package com.dareuda.givetree.finance.controller;
+package com.dareuda.givetree.member.controller;
 
 import com.dareuda.givetree.common.errors.errorcode.ErrorCode;
 import lombok.Getter;
@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @RequiredArgsConstructor
-public enum FinanceErrorCode implements ErrorCode {
-    MEMBER_ALREADY_REGISTERED(HttpStatus.UNPROCESSABLE_ENTITY, "이미 다른 애플리케이션에 등록된 사용자입니다.");
+public enum MemberErrorCode implements ErrorCode {
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."),
+    ;
+
     private final HttpStatus httpStatus;
     private final String message;
 }

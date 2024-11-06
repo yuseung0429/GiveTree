@@ -10,16 +10,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberDetail {
     @NonNull
+    private final Long id;
+
+    @NonNull
     private final String email;
 
     @NonNull
     private final String name;
 
     @NonNull
-    private final String phoneNumber;
-
-    @NonNull
-    private final String address;
+    private final String Role;
 
     private final String profileImageUrl;
 }

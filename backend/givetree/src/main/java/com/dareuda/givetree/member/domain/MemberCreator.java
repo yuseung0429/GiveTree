@@ -1,6 +1,7 @@
 package com.dareuda.givetree.member.domain;
 
 import com.dareuda.givetree.media.domain.Image;
+import com.dareuda.givetree.media.domain.ImageAppender;
 import com.dareuda.givetree.member.domain.dto.CreateMemberCommand;
 import com.dareuda.givetree.member.infrastructure.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,22 +11,20 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MemberCreator {
     private final MemberRepository memberRepository;
+    private final ImageAppender imageAppender;
 
-    public Member create(CreateMemberCommand command) {
-        // TODO: 이미지 읽기 추가되면 변경
-        //Image image = command.getProfileImageId() != null ? imageReader.read(command.getProfileImageId()) : null;
-        Image image = null;
+    public long create(CreateMemberCommand command) {
+        Image profileImage = command.getProfileImageUrl() != null ? imageAppender.append(command.getProfileImageUrl()) : null;
 
         Member member = memberRepository.save(
                 Member.createMember(
                         command.getEmail(),
                         command.getPassword(),
                         command.getName(),
-                        image,
-                        command.getRole()
+                        profileImage
                 )
         );
 
-        return member;
+        return member.getId();
     }
 }

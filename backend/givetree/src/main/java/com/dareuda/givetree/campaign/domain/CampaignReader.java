@@ -1,6 +1,5 @@
 package com.dareuda.givetree.campaign.domain;
 
-
 import com.dareuda.givetree.campaign.controller.CampaignErrorCode;
 import com.dareuda.givetree.campaign.infrastructure.CampaignRepository;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
