@@ -12,7 +12,7 @@ export const modifyButton = style({
   display: 'flex',
   position: 'absolute',
   top: '15%',
-  left: '55%',
+  left: '56%',
   marginLeft: 'auto',
   marginRight: '1rem',
   marginTop: '0.5rem',

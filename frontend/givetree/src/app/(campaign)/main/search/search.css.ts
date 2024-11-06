@@ -1,11 +1,18 @@
 import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
 
+export const Wrapper = style({
+  backgroundColor: '#fff',
+  height: '100%',
+  borderTopLeftRadius: '20px',
+  borderTopRightRadius: '20px',
+});
+
 export const mainContainer = style({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  height: '100%',
+  height: 'auto',
   gap: '12px',
   borderTopLeftRadius: '20px',
   borderTopRightRadius: '20px',

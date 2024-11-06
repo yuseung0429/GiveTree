@@ -11,7 +11,7 @@ import MyTab from '@/components/myPage/MyTab';
 import Link from 'next/link';
 
 export default function MyPage() {
-  const userId = 1;
+  const userId = '1';
   const role = 'user';
   const name = '눈사람';
   const totalDonation = 35000;
@@ -22,7 +22,7 @@ export default function MyPage() {
       <div className={styles.mainContainer}>
         {role === 'user' && (
           <Link className={styles.modifyButton} href={`/edit/user/${userId}`}>
-            <HiOutlinePencilSquare size={22} />
+            <HiOutlinePencilSquare size={24} />
           </Link>
         )}
         <Box className={styles.profileConatainer}>

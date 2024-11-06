@@ -32,6 +32,8 @@ export default function CampaignTab() {
             currentAmount={campaignData.currentAmount}
             goalAmount={campaignData.goalAmount}
             imageUrl={campaignData.imageUrl}
+            totalCampaign={1}
+            currentIndex={1}
           />
         </Box>
       </Box>

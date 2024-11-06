@@ -19,7 +19,7 @@ export const modal = style({
   maxWidth: '500px',
   aspectRatio: '1',
   maxHeight: '500px',
-  border: `2px dashed ${colorPalette.primary[300]} `,
+  border: `2px solid ${colorPalette.primary[300]} `,
   borderRadius: '12px',
   backgroundColor: 'white',
   padding: '20px',
@@ -29,7 +29,7 @@ export const modal = style({
   alignItems: 'center',
   marginTop: '50px',
   marginLeft: 'auto',
-  marginRight: '0.85rem'
+  marginRight: '0.85rem',
 });
 
 export const closeButton = style({
