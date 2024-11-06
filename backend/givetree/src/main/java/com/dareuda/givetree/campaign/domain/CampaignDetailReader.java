@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class CampaignDetailReader {
@@ -13,9 +16,10 @@ public class CampaignDetailReader {
     @Transactional(readOnly = true)
     public CampaignDetail read(long memberId) {
         Campaign campaign = campaignReader.read(memberId);
-        // TODO: image 도메인 기능 추가 후 수정
-        // String imageUrl = campaign.getImage() != null ? campaign.getImage().getUrl() ? null;
-        String imageUrl = null;
+
+        String titleImageUrl = campaign.getTitleImage() != null ? campaign.getTitleImage().getUrl() : null;
+        List<String> imageUrls = new ArrayList<>();
+        campaign.getImages().forEach(image -> imageUrls.add(image.getImage().getUrl()));
 
         return CampaignDetail.builder()
                 .id(campaign.getId())
@@ -23,7 +27,8 @@ public class CampaignDetailReader {
                 .name(campaign.getName())
                 .startDate(campaign.getStartDate())
                 .endDate(campaign.getEndDate())
-                .imageUrl(imageUrl)
+                .titleImageUrl(titleImageUrl)
+                .imageUrls(imageUrls)
                 .targetFundraisingAmount(campaign.getTargetFundraisingAmount())
                 .currentFundraisingAmount(campaign.getCurrentFundraisingAmount())
                 .build();

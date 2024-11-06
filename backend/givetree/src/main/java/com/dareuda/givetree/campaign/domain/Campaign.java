@@ -8,6 +8,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -33,36 +36,35 @@ public class Campaign extends BaseEntity {
     @NotNull
     private LocalDate endDate;
 
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id")
-    private Image image;
-
     @Column
     @NotNull
     private long targetFundraisingAmount;
 
     @Column
     @NotNull
-    private long currentFundraisingAmount;
+    private long currentFundraisingAmount = 0L;
+
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "title_image_id")
+    private Image titleImage;
+
+    @OneToMany(mappedBy = "campaign", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<CampaignImage> images = new ArrayList<>();
 
     @Column
     @NotNull
-    private boolean isDeleted;
+    private int nextImageOrderSequence = 1;
 
-    @PrePersist
-    public void prePersist() {
-        currentFundraisingAmount = 0L;
-        isDeleted = false;
-    }
-
-    public static Campaign createCampaign(Foundation foundation, String name, LocalDate startDate, LocalDate endDate, Image image, long targetFundraisingAmount) {
+    public static Campaign createCampaign(Foundation foundation, String name, LocalDate startDate, LocalDate endDate, long targetFundraisingAmount, Image titleImage, List<Image> images) {
         Campaign campaign = new Campaign();
         campaign.foundation = foundation;
         campaign.name = name;
         campaign.startDate = startDate;
         campaign.endDate = endDate;
-        campaign.image = image;
         campaign.targetFundraisingAmount = targetFundraisingAmount;
+
+        campaign.titleImage = titleImage;
+        images.forEach(campaign::addImage);
 
         return campaign;
     }
@@ -79,8 +81,8 @@ public class Campaign extends BaseEntity {
     public void updateEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-    public void updateImage(Image image) {
-        this.image = image;
+    public void updateTitleImage(Image titleImage) {
+        this.titleImage = titleImage;
     }
     public void updateTargetFundraisingAmount(long targetFundraisingAmount) {
         this.targetFundraisingAmount = targetFundraisingAmount;
@@ -89,7 +91,11 @@ public class Campaign extends BaseEntity {
         this.currentFundraisingAmount = currentFundraisingAmount;
     }
 
-    public void delete() {
-        isDeleted = true;
+    public void addImage(Image image) {
+        CampaignImage campaignImage = new CampaignImage(this, image, nextImageOrderSequence++);
+        images.add(campaignImage);
+    }
+    public void deleteImage(UUID imageId) {
+        images.removeIf(campaignImage -> campaignImage.getImage().getId().equals(imageId));
     }
 }
