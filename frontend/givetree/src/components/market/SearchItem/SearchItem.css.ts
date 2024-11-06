@@ -19,6 +19,7 @@ export const wrapper = style({
 export const container = style({
   padding: '1rem',
   transition: 'all 0.2s ease',
+  willChange: 'transform',
 
   selectors: {
     [`${wrapper}:active &`]: {

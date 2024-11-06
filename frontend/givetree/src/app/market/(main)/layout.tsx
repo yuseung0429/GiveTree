@@ -39,7 +39,7 @@ export default function MarketLayout({
         </AppBar>
       </header>
       <main>
-        <section>{children}</section>
+        <section style={{ height: '100%' }}>{children}</section>
         <section>
           <AnimatePresence mode="sync" initial={false}>
             <motion.div
