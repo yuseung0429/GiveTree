@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class CustomDetailsService implements UserDetailsService {
+public class JsonUserDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
@@ -19,7 +19,7 @@ public class CustomDetailsService implements UserDetailsService {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow();
 
-        return MemberPrinciple.builder()
+        return UserPrinciple.builder()
                 .id(member.getId())
                 .name(member.getName())
                 .email(member.getEmail())

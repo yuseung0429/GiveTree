@@ -1,10 +1,11 @@
 package com.dareuda.givetree.member.domain.dto;
 
+import com.dareuda.givetree.member.domain.Role;
 import lombok.*;
 
 @Getter
 @Builder
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class CreateMemberCommand {
     @NonNull
     private final String email;
@@ -16,4 +17,6 @@ public class CreateMemberCommand {
     private final String name;
 
     private final String profileImageUrl;
+
+    private final Role role;
 }

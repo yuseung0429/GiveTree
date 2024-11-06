@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Getter
 @Builder
-public class MemberPrinciple implements UserDetails, OAuth2User, Serializable {
+public class UserPrinciple implements UserDetails, OAuth2User, Serializable {
 
     private long id;
 

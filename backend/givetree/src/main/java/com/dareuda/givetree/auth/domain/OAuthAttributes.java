@@ -10,7 +10,7 @@ import java.util.function.Function;
 public enum OAuthAttributes {
 
     GOOGLE("google", attributes -> {
-        return new UserProfile(
+        return new OAuthUserProfile(
                 String.valueOf(attributes.get("sub")),
                 (String) attributes.get("name"),
                 (String) attributes.get("email")
@@ -19,7 +19,7 @@ public enum OAuthAttributes {
     KAKAO("kakao", attributes -> {
         Map<String, Object> kakaoAccountAttributes = (Map<String, Object>) attributes.get("kakao_account");
         Map<String, Object> profileAttribute = (Map<String, Object>) kakaoAccountAttributes.get("profile");
-        return new UserProfile(
+        return new OAuthUserProfile(
                 attributes.get("id").toString(),
                 (String) profileAttribute.get("nickname"),
                 (String) kakaoAccountAttributes.get("email")
@@ -27,7 +27,7 @@ public enum OAuthAttributes {
     }),
     NAVER("naver", attributes -> {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
-        return new UserProfile(
+        return new OAuthUserProfile(
                 (String) response.get("id"),
                 (String) response.get("name"),
                 (String) response.get("email")
@@ -36,9 +36,9 @@ public enum OAuthAttributes {
     ;
 
     private final String registrationId;
-    private final Function<Map<String, Object>, UserProfile> of;
+    private final Function<Map<String, Object>, OAuthUserProfile> of;
 
-    public static UserProfile extract(String registrationId, Map<String, Object> attributes) {
+    public static OAuthUserProfile extract(String registrationId, Map<String, Object> attributes) {
         return Arrays.stream(values())
                 .filter(provider -> registrationId.equals(provider.registrationId))
                 .findFirst()

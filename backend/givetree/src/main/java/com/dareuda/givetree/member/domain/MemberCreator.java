@@ -13,7 +13,7 @@ public class MemberCreator {
     private final MemberRepository memberRepository;
     private final ImageAppender imageAppender;
 
-    public long create(CreateMemberCommand command) {
+    public Member create(CreateMemberCommand command) {
         Image profileImage = command.getProfileImageUrl() != null ? imageAppender.append(command.getProfileImageUrl()) : null;
 
         Member member = memberRepository.save(
@@ -25,6 +25,6 @@ public class MemberCreator {
                 )
         );
 
-        return member.getId();
+        return member;
     }
 }

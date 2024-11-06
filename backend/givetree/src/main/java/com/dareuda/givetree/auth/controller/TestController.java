@@ -1,6 +1,6 @@
 package com.dareuda.givetree.auth.controller;
 
-import com.dareuda.givetree.auth.domain.MemberPrinciple;
+import com.dareuda.givetree.auth.domain.UserPrinciple;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -17,8 +17,8 @@ public class TestController {
     }
 
     @GetMapping("/argument-test")
-    public ResponseEntity<OAuth2User> argumentTest(@AuthenticationPrincipal MemberPrinciple memberPrinciple) {
-        long id = memberPrinciple.getId();
-        return ResponseEntity.ok().body(memberPrinciple);
+    public ResponseEntity<OAuth2User> argumentTest(@AuthenticationPrincipal UserPrinciple userPrinciple) {
+        long id = userPrinciple.getId();
+        return ResponseEntity.ok().body(userPrinciple);
     }
 }

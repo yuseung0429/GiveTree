@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class UserProfile {
+public class OAuthUserProfile {
 
     private final String oAuthId;
 

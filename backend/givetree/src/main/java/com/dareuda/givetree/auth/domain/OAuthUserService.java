@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
-public class CustomOAuthService extends DefaultOAuth2UserService {
+public class OAuthUserService extends DefaultOAuth2UserService {
 
     private final MemberCreator memberCreator;
     private final MemberRepository memberRepository;
@@ -28,11 +28,11 @@ public class CustomOAuthService extends DefaultOAuth2UserService {
                 .getRegistrationId();
 
         Map<String, Object> attributes = oauth2User.getAttributes();
-        UserProfile userProfile = OAuthAttributes.extract(registrationId, attributes);
+        OAuthUserProfile oAuthUserProfile = OAuthAttributes.extract(registrationId, attributes);
 
-        Member member = createMemberIfNotExists(userProfile);
+        Member member = createMemberIfNotExists(oAuthUserProfile);
 
-        return MemberPrinciple.builder()
+        return UserPrinciple.builder()
                 .id(member.getId())
                 .name(member.getName())
                 .email(member.getEmail())
@@ -41,8 +41,8 @@ public class CustomOAuthService extends DefaultOAuth2UserService {
                 .build();
     }
 
-    private Member createMemberIfNotExists(UserProfile userProfile) {
-        return memberRepository.findByEmail(userProfile.getEmail())
-                .orElseGet(() -> memberCreator.create(userProfile.toCreateMemberCommand()));
+    private Member createMemberIfNotExists(OAuthUserProfile oAuthUserProfile) {
+        return memberRepository.findByEmail(oAuthUserProfile.getEmail())
+                .orElseGet(() -> memberCreator.create(oAuthUserProfile.toCreateMemberCommand()));
     }
 }

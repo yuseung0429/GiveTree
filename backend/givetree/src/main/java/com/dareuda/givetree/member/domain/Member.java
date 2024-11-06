@@ -31,6 +31,8 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "profile_image_id")
     private Image profileImage;
 
+    private Role role;
+
     public static Member createMember(String email, String password, String name, Image profileImage) {
         Member member = new Member();
         member.email = email;
