@@ -32,7 +32,7 @@ public class FoundationService {
     }
 
     public FoundationDetail getFoundationDetail(long foundationId) {
-        return foundationDetailReader.readByMemberId(foundationId);
+        return foundationDetailReader.read(foundationId);
     }
 
     public FoundationDetail getFoundationDetailByMemberId(long memberId) {
