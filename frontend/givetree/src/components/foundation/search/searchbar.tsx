@@ -1,33 +1,39 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import * as style from './searchbarStyle.css';
+import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 
-export default function Searchbar() {
+interface SearchbarProps {
+  initialValue?: string;
+  onSearch?: (query: string) => void;
+}
+
+export default function Searchbar({
+  initialValue = '',
+  onSearch,
+}: SearchbarProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(initialValue);
 
-  const q = searchParams.get('q');
+  const handleSearch = () => {
+    if (!search.trim()) return;
 
-  useEffect(() => {
-    setSearch(q || '');
-  }, [q]);
+    if (onSearch) {
+      onSearch(search);
+    } else {
+      router.push(`/foundation/search?q=${search}`);
+    }
+  };
 
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const onSubmit = () => {
-    if (!search || q === search) return;
-    router.push(`/foundation/search?q=${search}`);
-  };
-
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      onSubmit();
+      handleSearch();
     }
   };
 
@@ -40,7 +46,7 @@ export default function Searchbar() {
         onKeyDown={onKeyDown}
         placeholder="찾고계신 재단이 있으신가요?"
       />
-      <button className={style.searchBtn} onClick={onSubmit}>
+      <button className={style.searchBtn} onClick={handleSearch}>
         <IoSearch size={22} />
       </button>
     </div>

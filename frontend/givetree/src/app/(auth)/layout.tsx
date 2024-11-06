@@ -4,9 +4,9 @@ import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import AppBar from '@/components/common/AppBar';
 import FrozenRouter from '@/components/common/FrozenRouter';
 import Layout from '@/components/common/Layout';
+import AppBar from '@/components/common/AppBar';
 
 export default function AuthLayout({
   children,
