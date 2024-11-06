@@ -46,6 +46,6 @@ type Story = StoryObj<typeof ProfileImage>;
 
 export const Primary: Story = {
   args: {
-    src: 'https://lab.ssafy.com/s11-final/S11P31D210/uploads/8647d5488af31025299be70aa7d29990/handsomeman.png?w=2048&q=75',
+    src: 'https://github.com/user-attachments/assets/14513e04-bf23-4d90-8f29-7f6295690ea5',
   },
 };
