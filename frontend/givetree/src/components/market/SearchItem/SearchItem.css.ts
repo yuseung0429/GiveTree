@@ -18,10 +18,10 @@ export const wrapper = style({
 
 export const container = style({
   padding: '1rem',
-  transition: 'inherit',
+  transition: 'all 0.2s ease',
 
   selectors: {
-    [`${wrapper}:active > &`]: {
+    [`${wrapper}:active &`]: {
       transform: 'scale(0.95)',
     },
   },

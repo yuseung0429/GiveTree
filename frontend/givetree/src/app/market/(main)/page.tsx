@@ -21,10 +21,9 @@ export default function MarketPage() {
         <SearchCondition />
       </Box>
       <Box>
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
+        {new Array(10).fill(0).map((_, index) => (
+          <SearchItem key={index} />
+        ))}
       </Box>
     </>
   );
