@@ -20,8 +20,6 @@ export default function UserEdit({
   const name = '눈사람';
   const profileImageUrl = Img;
   const email = 'ssafy123@naver.com';
-  console.log(userId);
-  console.log(params);
 
   return (
     <div className={styles.Wrapper}>
