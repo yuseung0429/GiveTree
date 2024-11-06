@@ -9,10 +9,14 @@ import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 import Chip from '@/components/common/Chip';
 
-const SearchItem = () => {
+interface SearchItemProps {
+  id: number;
+}
+
+const SearchItem = ({ id }: SearchItemProps) => {
   return (
     <div className={s.wrapper}>
-      <Link href="/market/post/1">
+      <Link href={`/market/post/${id}`}>
         <Flex gap="0.5rem" alignItems="center" className={s.container}>
           <Box
             padding="1rem"

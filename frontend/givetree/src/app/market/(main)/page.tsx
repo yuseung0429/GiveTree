@@ -22,7 +22,7 @@ export default function MarketPage() {
       </Box>
       <Box style={{ flex: '1 1 auto', overflow: 'auto' }}>
         {new Array(10).fill(0).map((_, index) => (
-          <SearchItem key={index} />
+          <SearchItem key={index} id={index} />
         ))}
       </Box>
     </Flex>
