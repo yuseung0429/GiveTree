@@ -17,15 +17,14 @@ public class CreateMemberRequest {
     @NotBlank
     private final String name;
 
-    @NotBlank
-    private final String phoneNumber;
-
-    @NotBlank
-    private final String address;
-
     private final String profileImageUrl;
 
     public CreateMemberCommand convertToCommand() {
-        return new CreateMemberCommand(email, password, name, phoneNumber, address, profileImageUrl);
+        return CreateMemberCommand.builder()
+                .email(email)
+                .password(password)
+                .name(name)
+                .profileImageUrl(profileImageUrl)
+                .build();
     }
 }

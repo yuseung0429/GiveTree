@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -27,31 +27,17 @@ public class Member extends BaseEntity {
     @NotNull
     private String name;
 
-    @Column
-    @NotNull
-    private String phoneNumber;
-
-    @Column
-    @NotNull
-    private String address;
-
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "profile_image_id")
     private Image profileImage;
 
-    @Column
-    @NotNull
-    private boolean isDeleted;
-
-    public static Member createMember(String email, String password, String name, String phoneNumber, String address, Image image) {
+    public static Member createMember(String email, String password, String name, Image profileImage) {
         Member member = new Member();
         member.email = email;
         member.password = password;
         member.name = name;
-        member.phoneNumber = phoneNumber;
-        member.address = address;
 
-        member.isDeleted = false;
+        member.profileImage = profileImage;
 
         return member;
     }
@@ -64,19 +50,7 @@ public class Member extends BaseEntity {
         this.name = name;
     }
 
-    public void updatePhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void updateAddress(String address) {
-        this.address = address;
-    }
-
     public void updateProfileImage(Image profileImage) {
         this.profileImage = profileImage;
-    }
-
-    public void delete() {
-        isDeleted = true;
     }
 }

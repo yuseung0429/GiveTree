@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/api/members")
 public class MemberController {
     private final MemberService memberService;
+    private static final long TEMP_MEMBER_ID = 1L;
 
     @PostMapping
     public ResponseEntity<Void> createMember(@Valid @RequestBody CreateMemberRequest request) {
@@ -31,16 +32,23 @@ public class MemberController {
 
     @PatchMapping
     public ResponseEntity<Void> updateMember(@Valid @RequestBody UpdateMemberRequest request) {
-        memberService.updateMember(1L, request.convertToCommand());
+        memberService.updateMember(TEMP_MEMBER_ID, request.convertToCommand());
 
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteMember() {
-        memberService.deleteMember(1L);
+        memberService.deleteMember(TEMP_MEMBER_ID);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/session")
+    public ResponseEntity<MemberDetail> getMemberDetail() {
+        MemberDetail memberDetail = memberService.getMemberDetail(TEMP_MEMBER_ID);
+
+        return ResponseEntity.ok().body(memberDetail);
     }
 
     @GetMapping("/{memberId}")
