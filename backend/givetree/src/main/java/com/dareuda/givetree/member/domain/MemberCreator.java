@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class MemberCreator {
     private final MemberRepository memberRepository;
 
-    public long create(CreateMemberCommand command) {
+    public Member create(CreateMemberCommand command) {
         // TODO: 이미지 읽기 추가되면 변경
         //Image image = command.getProfileImageId() != null ? imageReader.read(command.getProfileImageId()) : null;
         Image image = null;
@@ -26,6 +26,6 @@ public class MemberCreator {
                 )
         );
 
-        return member.getId();
+        return member;
     }
 }
