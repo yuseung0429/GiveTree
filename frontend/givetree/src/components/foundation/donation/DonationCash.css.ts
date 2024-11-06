@@ -8,9 +8,9 @@ export const cashbox = style({
 
 // 기업로고
 export const foundationLogo = style({
-  width: '50px',
-  height: '50px',
-  borderRadius: '25px',
+  width: '65px',
+  height: '65px',
+  borderRadius: '35px',
   padding: '10px',
   flexShrink: '0',
   border: `1px solid ${colorPalette.grey[400]}`,
@@ -18,7 +18,7 @@ export const foundationLogo = style({
 
 // 금액 입력 박스
 export const inputBox = style({
-  margin: '20px 0 10px 0',
+  margin: '30px 0 15px 0',
 });
 
 // 금액 입력 Input
@@ -26,10 +26,14 @@ export const amountInput = style({
   width: '100%',
   padding: '10px',
   border: 'none',
-  fontSize: '16px',
+  fontSize: '20px',
   borderBottom: `2px solid ${colorPalette.grey[400]}`,
   textAlign: 'right',
   outline: 'none',
+  '::placeholder': {
+    textAlign: 'left',
+    color: colorPalette.grey[600],
+  },
   ':focus': {
     borderBottom: `2px solid ${colorPalette.primary[400]}`,
   },
@@ -37,11 +41,12 @@ export const amountInput = style({
 
 // 금액 버튼 스타일
 export const amountButton = style({
-  padding: '6px 12px',
-  fontSize: '14px',
-  color: colorPalette.grey[800],
+  padding: '8px 16px',
+  fontSize: '16px',
+  fontWeight: '600',
+  color: colorPalette.grey[700],
   backgroundColor: 'white',
-  border: `1px solid ${colorPalette.grey[600]}`,
+  border: `1px solid ${colorPalette.grey[700]}`,
   borderRadius: '4px',
   cursor: 'pointer',
   ':hover': {

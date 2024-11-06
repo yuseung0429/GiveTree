@@ -60,7 +60,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       <div style={{ padding: '0.5rem 1rem' }}>
         <Typography
           as="h2"
-          weight="bold"
+          weight="semiBold"
           color={colorPalette.text[900]}
           className={styles.title}
         >
@@ -69,13 +69,13 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         <Typography
           as="h4"
           weight="semiBold"
-          color={colorPalette.text[900]}
+          color={colorPalette.text[600]}
           className={styles.subTitle}
         >
           {foundation}
         </Typography>
         <div className={styles.periodWrapper}>
-          <Typography as="h4" weight="semiBold" color={colorPalette.text[800]}>
+          <Typography as="h4" weight="medium" color={colorPalette.text[900]}>
             모금기간 &nbsp;|&nbsp; {startDate} ~ {endDate}
           </Typography>
         </div>

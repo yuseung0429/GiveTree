@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Box from '@/components/common/Box';
-import * as style from '@/app/foundation/all/all.css';
+import * as style from '@/app/foundation/(mixed)/all/all.css';
 import Flex from '@/components/common/Flex';
 import TabButton from '@/components/common/Tab';
 

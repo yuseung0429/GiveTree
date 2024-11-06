@@ -10,7 +10,7 @@ export const container = style({
 });
 
 export const goalAmountText = style({
-  marginBottom: '0.25rem'
+  marginBottom: '0.25rem',
 });
 
 export const treeContainer = style({
@@ -36,20 +36,19 @@ export const treeFill = style({
   position: 'absolute',
   bottom: '0',
   width: '100%',
-  backgroundColor: colorPalette.primary[400],
-  transition: 'height 2s ease-in-out',
+  background: `linear-gradient(to top, ${colorPalette.primary[300]}, ${colorPalette.primary[600]})`,
 });
 
 export const amountText = style({
   position: 'absolute',
   width: '100%',
   textAlign: 'center',
-  marginBottom : '0.25rem',
+  marginBottom: '0.25rem',
 });
 
 export const progressText = style({
   position: 'absolute',
   width: '100%',
   textAlign: 'center',
-  marginTop : '0.75rem',
-})
+  marginTop: '0.75rem',
+});
