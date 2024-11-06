@@ -1,17 +1,22 @@
+import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
 
 export const Wrapper = style({
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
+  background: `linear-gradient(to top, ${colorPalette.primary[700]} 70%, ${colorPalette.primary[300]})`,
 });
 
 export const modifyButton = style({
   display: 'flex',
+  position: 'absolute',
+  top: '15%',
+  left: '55%',
   marginLeft: 'auto',
   marginRight: '1rem',
   marginTop: '0.5rem',
-  width: '50px',
+  width: '48px',
   justifyContent: 'flex-end',
 });
 
@@ -21,7 +26,7 @@ export const mainContainer = style({
   overflow: 'visible',
 
   '@media': {
-    '(max-height: 800px)': {
+    '(max-height: 778px)': {
       marginTop: '70px',
     },
   },
@@ -51,7 +56,7 @@ export const tabBox = style({
   backgroundColor: '#fff',
   width: '100%',
   padding: '1.5rem 2rem',
-  gap: '2.75rem',
+  gap: '2.5rem',
 });
 
 export const tab = style({

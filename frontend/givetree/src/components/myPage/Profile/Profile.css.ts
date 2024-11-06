@@ -5,7 +5,7 @@ export const name = style({
   flexDirection: 'column',
   alignItems: 'center',
   gap: '0.25rem',
-  marginTop: '75px',
+  marginTop: '78px',
 });
 
 export const giveMoney = style({
@@ -18,5 +18,5 @@ export const giveMoney = style({
 
 export const footButton = style({
   width: '100%',
-  padding: '0 2rem 1.5rem',
+  padding: '0 2.25rem 1.5rem',
 });

@@ -1,35 +1,44 @@
 import Image from 'next/image';
 import * as styles from './mypage.css';
-import profileImg from '@/assets/images/profile.png';
+import profileImageUrl from '@/assets/images/profile.png';
 import Typography from '@/components/common/Typography';
 import { IoLogOutOutline } from 'react-icons/io5';
-import { HiOutlinePencil } from 'react-icons/hi2';
-import Button from '@/components/common/Button';
+import { HiOutlinePencilSquare } from 'react-icons/hi2';
 import colorPalette from '@/styles/tokens/colorPalette';
 import Box from '@/components/common/Box';
 import Profile from '@/components/myPage/Profile';
 import MyTab from '@/components/myPage/MyTab';
+import Link from 'next/link';
 
 export default function MyPage() {
-  const type = '개인';
+  const userId = 1;
+  const role = 'user';
   const name = '눈사람';
   const totalDonation = 35000;
+  const currentMoney = 1563000;
 
   return (
     <div className={styles.Wrapper}>
-      <Button size="sm" className={styles.modifyButton}>
-        <HiOutlinePencil size={20} />
-      </Button>
       <div className={styles.mainContainer}>
+        {role === 'user' && (
+          <Link className={styles.modifyButton} href={`/edit/user/${userId}`}>
+            <HiOutlinePencilSquare size={22} />
+          </Link>
+        )}
         <Box className={styles.profileConatainer}>
           <Image
-            src={profileImg}
+            src={profileImageUrl}
             alt="profile Image"
             width={130}
             height={130}
             className={styles.profileImg}
           />
-          <Profile type={type} name={name} totalDonation={totalDonation} />
+          <Profile
+            role={role}
+            name={name}
+            totalDonation={totalDonation}
+            currentMoney={currentMoney}
+          />
         </Box>
 
         <div
@@ -41,7 +50,7 @@ export default function MyPage() {
         ></div>
 
         <Box className={styles.tabBox}>
-          <MyTab type={type} />
+          <MyTab role={role} userId={userId} />
         </Box>
 
         <div

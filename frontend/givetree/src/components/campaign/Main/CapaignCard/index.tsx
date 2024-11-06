@@ -12,6 +12,8 @@ interface CampaignCardProps {
   currentAmount: number;
   goalAmount: number;
   imageUrl: string;
+  totalCampaign: number;
+  currentIndex: number;
 }
 
 const CampaignCard = ({
@@ -22,6 +24,8 @@ const CampaignCard = ({
   currentAmount,
   goalAmount,
   imageUrl,
+  totalCampaign,
+  currentIndex,
 }: CampaignCardProps) => {
   return (
     <Link
@@ -42,6 +46,11 @@ const CampaignCard = ({
         >
           {title}
         </Typography>
+        <div className={styles.cardIndex}>
+          <Typography as="h5" weight="medium">
+            {currentIndex + 1} / {totalCampaign}
+          </Typography>
+        </div>
         <Typography
           as="h4"
           weight="semiBold"
