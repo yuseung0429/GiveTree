@@ -2,12 +2,12 @@
 
 import Typography from '@/components/common/Typography';
 import { useState } from 'react';
-import * as s from './EditFoundationInfo.css';
+import * as s from './Introduce.css';
 import Box from '@/components/common/Box';
 import colorPalette from '@/styles/tokens/colorPalette';
 import Button from '@/components/common/Button';
 
-export default function EditFoundationInfo() {
+export default function FoundationIntroduce() {
   const [introduction, setIntroduction] = useState<string>('');
 
   const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

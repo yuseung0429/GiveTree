@@ -1,14 +1,11 @@
 import Box from '@/components/common/Box';
 import colorPalette from '@/styles/tokens/colorPalette';
-import Image from 'next/image';
 import * as styles from '../../../mypage/mypage.css';
-import * as s from './[id].css';
 import Img from '@/assets/images/profile.png';
 import Typography from '@/components/common/Typography';
-import { HiOutlinePlusCircle } from 'react-icons/hi';
 import React, { use } from 'react';
 import GiveFoot from '@/components/myPage/GiveFoot';
-import EditUserName from '@/components/myPage/Profile/EditUserName';
+import EditUser from '@/components/myPage/Profile/EditUser';
 
 export default function UserEdit({
   params,
@@ -24,19 +21,7 @@ export default function UserEdit({
   return (
     <div className={styles.Wrapper}>
       <div className={styles.mainContainer}>
-        <div className={s.changeImage}>
-          <HiOutlinePlusCircle size={28} />
-        </div>
-        <Box className={styles.profileConatainer}>
-          <Image
-            src={profileImageUrl}
-            alt="profile Image"
-            width={130}
-            height={130}
-            className={styles.profileImg}
-          />
-          <EditUserName email={email} />
-        </Box>
+        <EditUser email={email} image={profileImageUrl} />
 
         <div
           style={{
@@ -46,7 +31,7 @@ export default function UserEdit({
           }}
         ></div>
 
-        <Box className={s.introduceBox}>
+        <Box className={styles.introduceBox}>
           <GiveFoot name={name} />
         </Box>
 

@@ -2,17 +2,35 @@ import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import * as styles from './Profile.css';
 import Button from '@/components/common/Button';
+import Link from 'next/link';
+import Image, { StaticImageData } from 'next/image';
 
 interface ProfileProps {
   role: string;
+  userId: string;
   name: string;
+  image: StaticImageData;
   totalDonation: number;
   currentMoney: number;
 }
 
-const Profile = ({ role, name, totalDonation, currentMoney }: ProfileProps) => {
+const Profile = ({
+  role,
+  userId,
+  name,
+  image,
+  totalDonation,
+  currentMoney,
+}: ProfileProps) => {
   return (
     <>
+      <Image
+        src={image}
+        alt="profile Image"
+        width={130}
+        height={130}
+        className={styles.profileImg}
+      />
       <div className={styles.name}>
         <Typography as="h5" color={colorPalette.primary[700]}>
           {role === 'user' ? 'GIVE 회원' : '재단 회원'}
@@ -34,11 +52,14 @@ const Profile = ({ role, name, totalDonation, currentMoney }: ProfileProps) => {
         </Typography>
       </div>
 
-      <div className={styles.footButton}>
+      <Link
+        className={styles.footButton}
+        href={role === 'user' ? `/givefoot/${userId}` : ''}
+      >
         <Button variant="outlined" fullWidth>
           {role === 'user' ? '기부발자국 확인하기' : '후원 내역 확인하기'}
         </Button>
-      </div>
+      </Link>
     </>
   );
 };

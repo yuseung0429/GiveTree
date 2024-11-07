@@ -56,7 +56,7 @@ export const tabBox = style({
   backgroundColor: '#fff',
   width: '100%',
   padding: '1.5rem 2rem',
-  gap: '2.5rem',
+  gap: '2.25rem',
 });
 
 export const tab = style({
@@ -80,4 +80,15 @@ export const subContainer = style({
   alignItems: 'center',
   backgroundColor: '#fff',
   padding: '1.25rem 2rem',
+});
+
+export const introduceBox = style({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#fff',
+  width: '100%',
+  padding: '1.5rem 2rem',
+  gap: '1rem',
 });

@@ -1,11 +1,12 @@
 import colorPalette from '@/styles/tokens/colorPalette';
+import typography from '@/styles/tokens/typography';
 import { style } from '@vanilla-extract/css';
 
 export const introduceInput = style({
   height: 'auto',
   border: `1.2px solid ${colorPalette.primary[500]}`,
   padding: '0.75rem',
-  fontSize: '18px',
+  fontSize: typography.size.md,
   borderRadius: '12px',
   color: colorPalette.text[900],
   '::placeholder': {
@@ -23,7 +24,7 @@ export const introduceBox = style({
   backgroundColor: '#fff',
   width: '100%',
   padding: '1.25rem 2rem',
-  gap: '1rem',
+  gap: '0.75rem',
 });
 
 export const subContainer = style({

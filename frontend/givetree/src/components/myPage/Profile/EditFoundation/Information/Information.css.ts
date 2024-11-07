@@ -1,5 +1,15 @@
 import { style } from '@vanilla-extract/css';
 
+export const profileConatainer = style({
+  backgroundColor: '#fff',
+  borderTopLeftRadius: '50%',
+  borderTopRightRadius: '50%',
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+
 export const changeImage = style({
   display: 'flex',
   position: 'absolute',
@@ -23,7 +33,7 @@ export const name = style({
   marginBottom: '1rem',
 });
 
-export const email = style({
+export const info = style({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',

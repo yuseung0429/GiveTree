@@ -26,7 +26,7 @@ const MyTab = ({ role, userId }: MyTabProps) => {
             <HiOutlinePencilSquare size={22} />
           )}
           <Typography as="h3">
-            {role === 'user' ? '정기후원 내역' : '재단 소개글 등록/수정'}
+            {role === 'user' ? '기부금 사용 내역' : '재단 소개글 등록/수정'}
           </Typography>
         </div>
         <Link href={role === 'user' ? '' : `/edit/foundation/${userId}`}>
@@ -42,7 +42,7 @@ const MyTab = ({ role, userId }: MyTabProps) => {
             <PiHandHeart size={22} />
           )}
           <Typography as="h3">
-            {role === 'user' ? '장터 구매내역' : '캠페인 신청'}
+            {role === 'user' ? '장터 거래 내역' : '캠페인 신청'}
           </Typography>
         </div>
         <HiChevronRight size={20} />

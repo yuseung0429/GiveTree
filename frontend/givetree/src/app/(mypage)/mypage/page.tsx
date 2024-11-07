@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import * as styles from './mypage.css';
 import profileImageUrl from '@/assets/images/profile.png';
 import Typography from '@/components/common/Typography';
@@ -11,7 +10,8 @@ import MyTab from '@/components/myPage/MyTab';
 import Link from 'next/link';
 
 export default function MyPage() {
-  const userId = '1';
+  const id = 1;
+  const userId = id.toString();
   const role = 'user';
   const name = '눈사람';
   const totalDonation = 35000;
@@ -26,16 +26,11 @@ export default function MyPage() {
           </Link>
         )}
         <Box className={styles.profileConatainer}>
-          <Image
-            src={profileImageUrl}
-            alt="profile Image"
-            width={130}
-            height={130}
-            className={styles.profileImg}
-          />
           <Profile
             role={role}
+            userId={userId}
             name={name}
+            image={profileImageUrl}
             totalDonation={totalDonation}
             currentMoney={currentMoney}
           />
