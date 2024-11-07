@@ -24,7 +24,7 @@ export const button = recipe({
     overflow: 'hidden',
     border: '0.0625rem solid',
     cursor: 'pointer',
-    transition: 'all 0.1s ease',
+    transition: 'all 0.2s ease',
     userSelect: 'none',
   },
 

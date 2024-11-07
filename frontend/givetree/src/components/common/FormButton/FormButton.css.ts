@@ -15,7 +15,7 @@ const pulse = keyframes({
 export const loading = style({
   position: 'absolute',
   inset: '0',
-  background: `linear-gradient(90deg, ${colorPalette.grey[400]} 0%, ${colorPalette.grey[900]} 50%, ${colorPalette.grey[400]} 100%)`,
+  background: `linear-gradient(90deg, ${colorPalette.grey[50]} 0%, ${colorPalette.grey[900]} 50%, ${colorPalette.grey[50]} 100%)`,
   backgroundSize: '200% 100%',
   animation: `${pulse} 2s linear 0s infinite`,
   opacity: 0.1,
