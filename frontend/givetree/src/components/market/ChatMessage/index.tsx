@@ -33,7 +33,10 @@ const ChatMessage = ({
       >
         <Box padding="0.25rem 0">
           <Typography color={colorPalette.text[400]} size={typography.size.xs}>
-            14:00
+            {new Date(createdAt).toLocaleTimeString('en-GB', {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
           </Typography>
         </Box>
         <div className={s.balloon({ me })}>{children}</div>
