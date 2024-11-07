@@ -5,7 +5,9 @@ import com.dareuda.givetree.account.domain.BankLoader;
 import com.dareuda.givetree.account.domain.BankReader;
 import com.dareuda.givetree.account.domain.BankRegistrar;
 import com.dareuda.givetree.common.utils.ListUtils;
-import com.ssafy.finance.client.BankApiClient;
+import com.dareuda.givetree.member.domain.MemberCreator;
+import com.dareuda.givetree.member.domain.Role;
+import com.dareuda.givetree.member.domain.dto.CreateMemberCommand;
 import com.ssafy.finance.response.bank.BankCodeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
@@ -24,10 +26,12 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
     private final BankLoader bankLoader;
     private final BankReader bankReader;
     private final BankRegistrar bankRegistrar;
+    private final MemberCreator memberCreator;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         initializeBankCode();
+        createTestMember();
     }
 
     private void initializeBankCode() {
@@ -43,5 +47,14 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
         }
 
         bankRegistrar.registerBanks(banksToSave);
+    }
+
+    private void createTestMember() {
+        memberCreator.create(CreateMemberCommand.builder()
+                        .email("test@test.com")
+                        .password("test123")
+                        .name("유저테스트계정")
+                        .role(Role.USER)
+                        .build());
     }
 }

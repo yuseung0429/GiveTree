@@ -1,6 +1,5 @@
 package com.dareuda.givetree.auth.config;
 
-import com.dareuda.givetree.auth.domain.JsonUserDetailsService;
 import com.dareuda.givetree.auth.domain.OAuthUserService;
 import com.dareuda.givetree.auth.filter.JsonUsernamePasswordAuthenticationFilter;
 import com.dareuda.givetree.auth.handler.CustomAuthenticationEntryPoint;
@@ -12,17 +11,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
-@Configuration
 @RequiredArgsConstructor
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
@@ -32,11 +30,13 @@ public class SecurityConfig {
     private final CustomLoginSuccessHandler customLoginSuccessHandler;
     private final CustomLoginFailureHandler customLoginFailureHandler;
     private final ObjectMapper objectMapper;
-    private final JsonUserDetailsService jsonUserDetailsService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        AuthenticationManager authenticationManager =
+                authenticationManager(http.getSharedObject(AuthenticationConfiguration.class));
+        JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter =
+                jsonUsernamePasswordAuthenticationFilter(authenticationManager);
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -55,7 +55,7 @@ public class SecurityConfig {
                         .failureHandler(customLoginFailureHandler));
 
         http
-                .addFilterAt(jsonUsernamePasswordAuthenticationFilter(),
+                .addFilterAt(jsonUsernamePasswordAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class);
 
         http
@@ -66,8 +66,8 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/oauth2/**", "/api/login/**").permitAll()
-                    .anyRequest().authenticated());
+                        .requestMatchers("/api/oauth2/**", "/api/login/**", "api/signup").permitAll()
+                        .anyRequest().permitAll());
 
         http.
                 exceptionHandling(exception -> exception
@@ -77,20 +77,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter() {
+    public JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
         JsonUsernamePasswordAuthenticationFilter filter =
                 new JsonUsernamePasswordAuthenticationFilter(objectMapper, customLoginSuccessHandler, customLoginFailureHandler);
-        filter.setAuthenticationManager(authenticationManager());
+        filter.setAuthenticationManager(authenticationManager);
+
+        filter.setSecurityContextRepository(new HttpSessionSecurityContextRepository());
         return filter;
     }
 
     @Bean
-    public AuthenticationManager authenticationManager() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-
-        provider.setPasswordEncoder(bCryptPasswordEncoder);
-        provider.setUserDetailsService(jsonUserDetailsService);
-
-        return new ProviderManager(provider);
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }
