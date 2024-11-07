@@ -2,6 +2,7 @@ package com.dareuda.givetree.member.controller;
 
 import com.dareuda.givetree.member.controller.dto.request.CreateMemberRequest;
 import com.dareuda.givetree.member.controller.dto.request.UpdateMemberRequest;
+import com.dareuda.givetree.member.domain.Member;
 import com.dareuda.givetree.member.domain.dto.MemberDetail;
 import com.dareuda.givetree.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -19,12 +20,12 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity<Void> createMember(@Valid @RequestBody CreateMemberRequest request) {
-        long memberId = memberService.createMember(request.convertToCommand());
+        Member member = memberService.createMember(request.convertToCommand());
 
         return ResponseEntity.created(
                         UriComponentsBuilder
                                 .fromPath("/members/{memberId}")
-                                .buildAndExpand(memberId)
+                                .buildAndExpand(member.getId())
                                 .toUri()
                 )
                 .build();

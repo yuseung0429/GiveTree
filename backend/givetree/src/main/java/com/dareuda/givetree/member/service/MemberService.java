@@ -1,11 +1,8 @@
 package com.dareuda.givetree.member.service;
 
-import com.dareuda.givetree.member.domain.MemberCreator;
-import com.dareuda.givetree.member.domain.MemberDeleter;
-import com.dareuda.givetree.member.domain.MemberUpdater;
+import com.dareuda.givetree.member.domain.*;
 import com.dareuda.givetree.member.domain.dto.CreateMemberCommand;
 import com.dareuda.givetree.member.domain.dto.MemberDetail;
-import com.dareuda.givetree.member.domain.MemberDetailReader;
 import com.dareuda.givetree.member.domain.dto.UpdateMemberCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +15,7 @@ public class MemberService {
     private final MemberDeleter memberDeleter;
     private final MemberDetailReader memberDetailReader;
 
-    public long createMember(CreateMemberCommand command) {
+    public Member createMember(CreateMemberCommand command) {
         return memberCreator.create(command);
     }
 

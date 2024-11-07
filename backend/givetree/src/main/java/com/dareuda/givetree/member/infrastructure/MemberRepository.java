@@ -11,4 +11,5 @@ public interface MemberRepository extends Repository<Member, Long> {
 
     @Query("SELECT m FROM Member m WHERE m.id = :id and m.isDeleted = false")
     Optional<Member> findById(long id);
+    Optional<Member> findByEmail(String email);
 }
