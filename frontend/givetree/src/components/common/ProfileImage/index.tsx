@@ -29,7 +29,7 @@ const ProfileImage = ({
       style={{ boxShadow: `0 0 0 0.0625rem ${borderColor}`, ...style }}
       {...props}
     >
-      <Image src={src} alt="Profile" layout="fill" />
+      <Image src={src} alt="Profile" fill={true} sizes="4rem, 4rem" />
     </div>
   );
 };
