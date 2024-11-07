@@ -16,6 +16,10 @@ public class OAuthUserProfile {
     private final String email;
 
     public CreateMemberCommand toCreateMemberCommand() {
-        return new CreateMemberCommand(email, null, name, null, Role.USER);
+        return CreateMemberCommand.builder()
+                .email(email)
+                .name(name)
+                .role(Role.USER)
+                .build();
     }
 }

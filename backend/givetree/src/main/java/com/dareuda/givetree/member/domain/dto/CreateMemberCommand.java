@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter
 @Builder
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CreateMemberCommand {
     @NonNull
     private final String email;
