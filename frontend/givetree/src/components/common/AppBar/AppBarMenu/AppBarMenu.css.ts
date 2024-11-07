@@ -9,7 +9,7 @@ export const menu = style({
   border: '0',
   borderRadius: '50%',
   backgroundColor: 'transparent',
-  color: '#fff',
+  color: 'inherit',
   fontSize: '1.5rem',
   transition: 'all 0.2s ease',
 

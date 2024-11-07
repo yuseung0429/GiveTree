@@ -31,6 +31,11 @@ const meta = {
       type: 'string',
     },
 
+    transparent: {
+      description: 'AppBar를 투명하게',
+      type: 'boolean',
+    },
+
     onBackClick: {
       description: '뒤로가기 버튼 클릭 이벤트',
       control: false,

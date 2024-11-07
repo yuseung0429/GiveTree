@@ -1,15 +1,49 @@
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 import colorPalette from '@/styles/tokens/colorPalette';
 
-export const container = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flex: '0 0 auto',
-  position: 'relative',
-  height: '3.5rem',
-  backgroundColor: colorPalette.primary[300],
+export const appbar = recipe({
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: '0 0 auto',
+    position: 'relative',
+    height: '3.5rem',
+  },
+
+  variants: {
+    transparent: {
+      false: {
+        backgroundColor: colorPalette.primary[300],
+        color: '#fff',
+      },
+
+      true: {
+        backgroundColor: 'transparent',
+        color: colorPalette.text[900],
+      },
+    },
+
+    position: {
+      static: {
+        position: 'static',
+      },
+
+      sticky: {
+        position: 'sticky',
+        top: 0,
+      },
+
+      absolute: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+      },
+    },
+  },
 });
 
 export const title = style({
