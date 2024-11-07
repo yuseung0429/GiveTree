@@ -1,12 +1,26 @@
 package com.dareuda.givetree.foundation.domain.dto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
-@RequiredArgsConstructor
+@Builder
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CreateFoundationCommand {
+    @NonNull
     private final String introduction;
+
+    @NonNull
     private final String corporateRegistrationNumber;
-    private final String imageUrl;
+
+    @NonNull
+    private final String phoneNumber;
+
+    @NonNull
+    private final String address;
+
+    private final String titleImageUrl;
+
+    private final List<String> imageUrls;
 }

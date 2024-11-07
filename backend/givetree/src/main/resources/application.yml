@@ -4,7 +4,7 @@ spring:
       givetree
 
   profiles:
-    include: finance, local
+    include: finance, local, blockchain
 
   config:
     import:

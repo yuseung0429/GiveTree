@@ -1,27 +1,36 @@
 package com.dareuda.givetree.wallet.domain;
 
-import com.dareuda.givetree.member.domain.Member;
-import com.dareuda.givetree.member.domain.MemberReader;
 import com.dareuda.givetree.wallet.infrastructure.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
-public class MemberWalletCreator {
+public class AgentWalletCreator {
 
-    private final MemberReader memberReader;
     private final WalletKeyPairGenerator walletKeyPairGenerator;
     private final WalletRepository walletRepository;
 
-    public void create(long memberId) {
+    public void create() {
+        walletRepository.save(createAgentWallet());
+    }
+
+    public void create(int count) {
+        List<AgentWallet> wallets = new ArrayList<>();
+        for (int i=0; i<count; i++)
+            wallets.add(createAgentWallet());
+        walletRepository.saveAll(wallets);
+    }
+
+    private AgentWallet createAgentWallet() {
         WalletKeyPair walletKeyPair = walletKeyPairGenerator.generate();
-        Member member = memberReader.read(memberId);
-        MemberWallet wallet = MemberWallet.builder()
-                .member(member)
+        return AgentWallet.builder()
                 .address(walletKeyPair.getAddress())
                 .privateKey(walletKeyPair.getPrivateKey())
                 .build();
-        walletRepository.save(wallet);
     }
+
 }

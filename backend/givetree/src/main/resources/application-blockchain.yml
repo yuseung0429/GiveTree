@@ -1,0 +1,11 @@
+blockchain:
+  network:
+    host: "http://givetree-chain.kro.kr"
+    port: 8545
+  agent:
+    pool-size: 20
+    threshold-balance-gwei: 1000000000
+    recharge-amount-gwei: 5000000000
+  contract:
+    token:
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
