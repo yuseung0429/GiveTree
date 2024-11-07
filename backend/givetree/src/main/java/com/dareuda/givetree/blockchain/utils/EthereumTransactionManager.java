@@ -8,15 +8,9 @@ import com.dareuda.givetree.common.config.Web3jConfig;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.wallet.domain.AgentWallet;
 import com.dareuda.givetree.wallet.domain.Wallet;
-import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.loadtime.Agent;
 import org.springframework.stereotype.Component;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.core.Ethereum;
 import org.web3j.tx.Contract;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Set;
 import java.util.function.Function;
 

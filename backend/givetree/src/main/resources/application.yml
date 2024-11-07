@@ -2,7 +2,6 @@ spring:
   application:
     name:
       givetree
-
   profiles:
     include: finance, local, blockchain
 
@@ -22,3 +21,7 @@ spring:
         discriminator:
           ignore_explicit_for_joined: true
     defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always

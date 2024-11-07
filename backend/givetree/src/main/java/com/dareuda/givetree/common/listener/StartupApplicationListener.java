@@ -5,7 +5,6 @@ import com.dareuda.givetree.account.domain.BankLoader;
 import com.dareuda.givetree.account.domain.BankReader;
 import com.dareuda.givetree.account.domain.BankRegistrar;
 import com.dareuda.givetree.common.utils.ListUtils;
-import com.ssafy.finance.client.BankApiClient;
 import com.ssafy.finance.response.bank.BankCodeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
