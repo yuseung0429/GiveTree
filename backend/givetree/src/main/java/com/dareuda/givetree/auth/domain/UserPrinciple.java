@@ -22,14 +22,11 @@ public class UserPrinciple implements UserDetails, OAuth2User, Serializable {
 
     private String email;
 
+    private String password;
+
     private Role role;
 
     private Map<String, Object> attributes;
-
-    @Override
-    public String getPassword() {
-        return "";
-    }
 
     @Override
     public String getUsername() {

@@ -6,10 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Service
+@Component
 public class JsonUserDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
@@ -17,12 +18,17 @@ public class JsonUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email)
-                .orElseThrow();
+                .orElseThrow(() -> new UsernameNotFoundException(email));
+
+        if (member.getPassword() == null) {
+            throw new RuntimeException();
+        }
 
         return UserPrinciple.builder()
                 .id(member.getId())
                 .name(member.getName())
                 .email(member.getEmail())
+                .password(member.getPassword())
                 .role(member.getRole())
                 .build();
     }

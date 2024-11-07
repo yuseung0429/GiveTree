@@ -10,7 +10,6 @@ public class CreateMemberCommand {
     @NonNull
     private final String email;
 
-    @NonNull
     private final String password;
 
     @NonNull

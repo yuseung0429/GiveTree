@@ -31,6 +31,7 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "profile_image_id")
     private Image profileImage;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public static Member createMember(String email, String password, String name, Image profileImage) {

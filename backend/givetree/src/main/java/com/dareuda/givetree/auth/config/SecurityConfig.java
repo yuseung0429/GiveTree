@@ -17,8 +17,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -30,10 +29,11 @@ public class SecurityConfig {
     private final OAuthUserService OAuthUserService;
     private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-    private final JsonUserDetailsService jsonUserDetailsService;
     private final CustomLoginSuccessHandler customLoginSuccessHandler;
     private final CustomLoginFailureHandler customLoginFailureHandler;
     private final ObjectMapper objectMapper;
+    private final JsonUserDetailsService jsonUserDetailsService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -46,7 +46,13 @@ public class SecurityConfig {
         http
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
-                                .userService(OAuthUserService)));
+                                .userService(OAuthUserService))
+                        .authorizationEndpoint(authorization -> authorization
+                                .baseUri("/api/oauth2/authorization/**"))
+                        .redirectionEndpoint(redirection -> redirection
+                                .baseUri("/api/login/oauth2/**"))
+                        .successHandler(customLoginSuccessHandler)
+                        .failureHandler(customLoginFailureHandler));
 
         http
                 .addFilterAt(jsonUsernamePasswordAuthenticationFilter(),
@@ -60,7 +66,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/oauth2/**", "/api/login").permitAll()
+                    .requestMatchers("/api/oauth2/**", "/api/login/**").permitAll()
                     .anyRequest().authenticated());
 
         http.
@@ -71,7 +77,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter( ) {
+    public JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter() {
         JsonUsernamePasswordAuthenticationFilter filter =
                 new JsonUsernamePasswordAuthenticationFilter(objectMapper, customLoginSuccessHandler, customLoginFailureHandler);
         filter.setAuthenticationManager(authenticationManager());
@@ -82,14 +88,9 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
-        provider.setPasswordEncoder(passwordEncoder());
+        provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(jsonUserDetailsService);
 
         return new ProviderManager(provider);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
