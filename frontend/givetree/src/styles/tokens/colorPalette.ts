@@ -4,7 +4,7 @@ const colorPalette = {
   primary: color.teal,
   secondary: color.deepOrange,
   tertiary: color.amber,
-  text: color.brown,
+  text: color.black,
   grey: color.grey,
   success: color.green,
   danger: color.red,

@@ -36,6 +36,11 @@ const meta = {
       control: 'text',
     },
 
+    ellipsis: {
+      description: '부모 크기 초과시 ...으로 표시',
+      control: 'boolean',
+    },
+
     as: {
       description: 'HTML Element의 종류',
       control: 'select',
