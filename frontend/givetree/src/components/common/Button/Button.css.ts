@@ -20,6 +20,8 @@ export const button = recipe({
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
+    overflow: 'hidden',
     border: '0.0625rem solid',
     cursor: 'pointer',
     transition: 'all 0.1s ease',

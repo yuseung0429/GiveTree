@@ -8,7 +8,7 @@ import { mergeClasses } from '@/utils/mergeClasses';
 
 type ButtonVariants = NonNullable<RecipeVariants<typeof s.button>>;
 
-interface ButtonProps
+export interface ButtonProps
   extends ButtonVariants,
     Omit<React.ComponentProps<'button'>, keyof ButtonVariants> {
   children: ReactNode;
