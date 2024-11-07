@@ -5,7 +5,7 @@ import colorPalette from '@/styles/tokens/colorPalette';
 export const accountBox = style({
   width: '200px',
   height: '120px',
-  backgroundColor: colorPalette.primary[50],
+  backgroundColor: colorPalette.grey[300],
   borderRadius: '5px',
   marginTop: '15px',
 });

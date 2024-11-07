@@ -1,4 +1,4 @@
-import CompletePage from '@/app/wallet/exchange/(modal)/complete/page';
+import CompletePage from '../../(modal)/complete/page';
 
 export default function Page() {
   return <CompletePage />;
