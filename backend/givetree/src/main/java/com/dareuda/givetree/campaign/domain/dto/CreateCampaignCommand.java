@@ -1,19 +1,30 @@
 package com.dareuda.givetree.campaign.domain.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
-@RequiredArgsConstructor
+@Builder
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CreateCampaignCommand {
-    private final long foundationId;
+    @NonNull
+    private final Long foundationId;
+
+    @NonNull
     private final String name;
+
+    @NonNull
     private final LocalDate startDate;
+
+    @NonNull
     private final LocalDate endDate;
-    private final String imageUrl;
-    private final long targetFundraisingAmount;
+
+    @NonNull
+    private final Long targetFundraisingAmount;
+
+    private final String titleImageUrl;
+
+    private final List<String> imageUrls;
 }
