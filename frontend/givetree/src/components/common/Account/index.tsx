@@ -7,12 +7,12 @@ export default function Account() {
   return (
     <Box>
       <Typography
-        as="h3"
+        as="h4"
+        size={18}
         weight="medium"
-        size={20}
-        color={colorPalette.grey[600]}
+        color={colorPalette.grey[900]}
       >
-        결제 수단
+        출금계좌
       </Typography>
       <Box className={style.accountBox}></Box>
     </Box>
