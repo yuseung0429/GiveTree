@@ -31,6 +31,12 @@ public class Web3jConfig {
     @Value("${blockchain.agent.pool-size:20}")
     private Integer agentPoolSize;
 
+    @Value("${blockchain.agent.threshold-balance-gwei:1000000000}")
+    private long agentThresholdBalanceGWEI;
+
+    @Value("${blockchain.agent.recharge-amount-gwei:5000000000}")
+    private long agentRechargeAmountGWEI;
+
     @Bean
     public Credentials adminCredentials() {
         return Credentials.create(adminPrivateKey);

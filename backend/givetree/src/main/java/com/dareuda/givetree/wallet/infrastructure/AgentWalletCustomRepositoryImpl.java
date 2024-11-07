@@ -15,7 +15,7 @@ public class AgentWalletCustomRepositoryImpl implements AgentWalletCustomReposit
 
     @Override
     public List<AgentWallet> findTop(int n) {
-        Pageable pageable = PageRequest.of(0, 5);
+        Pageable pageable = PageRequest.of(0, n);
         return entityManager.createQuery("SELECT a FROM AgentWallet a", AgentWallet.class)
                 .setFirstResult((int) pageable.getOffset())
                 .setMaxResults(pageable.getPageSize())

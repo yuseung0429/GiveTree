@@ -21,10 +21,10 @@ public class EthereumCaller {
         }
     }
 
-    public <S, T extends Response<T>> T call(Request<S, T> request) {
+    public <S, T extends Response<?>> T call(Request<S, T> request) {
         try {
             return request.send();
-        } catch (Exception e){
+        } catch (Exception e) {
             exceptionHandler.throwException(new EthereumException(e.getMessage(), e));
             return null;
         }

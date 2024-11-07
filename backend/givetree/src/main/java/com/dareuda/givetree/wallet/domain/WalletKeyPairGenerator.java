@@ -18,8 +18,8 @@ public class WalletKeyPairGenerator {
         } catch (Exception e){
             throw new RestApiException(WalletErrorCode.GENERATE_FAIL);
         }
-        String address = Keys.getAddress(keyPair);
-        String privateKey = String.format("%064x", keyPair.getPrivateKey());
+        String address = "0x"+Keys.getAddress(keyPair);
+        String privateKey = "0x"+String.format("%064x", keyPair.getPrivateKey());
         return new WalletKeyPair(address, privateKey);
     }
 }
