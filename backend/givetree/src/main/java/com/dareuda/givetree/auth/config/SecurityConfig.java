@@ -20,10 +20,11 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
     private final OAuthUserService OAuthUserService;
@@ -55,7 +56,7 @@ public class SecurityConfig {
                         .failureHandler(customLoginFailureHandler));
 
         http
-                .addFilterAt(jsonUsernamePasswordAuthenticationFilter(),
+                .addFilterAt(jsonUsernamePasswordAuthenticationFilter(http),
                         UsernamePasswordAuthenticationFilter.class);
 
         http
@@ -66,8 +67,8 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/oauth2/**", "/api/login/**").permitAll()
-                    .anyRequest().authenticated());
+                        .requestMatchers("/api/oauth2/**", "/api/login/**", "api/signup").permitAll()
+                        .anyRequest().permitAll());
 
         http.
                 exceptionHandling(exception -> exception
@@ -77,10 +78,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter() {
+    public JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter(HttpSecurity http) {
         JsonUsernamePasswordAuthenticationFilter filter =
                 new JsonUsernamePasswordAuthenticationFilter(objectMapper, customLoginSuccessHandler, customLoginFailureHandler);
         filter.setAuthenticationManager(authenticationManager());
+        filter.setAuthenticationSuccessHandler(customLoginSuccessHandler);
+        filter.setAuthenticationFailureHandler(customLoginFailureHandler);
+        filter.setSessionAuthenticationStrategy(http.getSharedObject(SessionAuthenticationStrategy.class));
         return filter;
     }
 

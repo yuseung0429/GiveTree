@@ -34,11 +34,12 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static Member createMember(String email, String password, String name, Image profileImage) {
+    public static Member createMember(String email, String password, String name, Image profileImage, Role role) {
         Member member = new Member();
         member.email = email;
         member.password = password;
         member.name = name;
+        member.role = role;
 
         member.profileImage = profileImage;
 
