@@ -1,6 +1,7 @@
 import CampaignCard from '@/components/campaign/Main/CapaignCard';
 import * as styles from './search.css';
 import campaigns from '@/mock/campaigns.json';
+import Typography from '@/components/common/Typography';
 
 export default async function Page({
   searchParams,
@@ -20,9 +21,9 @@ export default async function Page({
   return (
     <div className={styles.Wrapper}>
       <div className={styles.mainContainer}>
-        <h3 className={styles.sectionTitle}>
+        <Typography as="h3" weight="semiBold" className={styles.sectionTitle}>
           &#39;{q}&#39;&nbsp;으로 검색한 결과
-        </h3>
+        </Typography>
         {filteredCampaigns.map((campaign, index) => (
           <CampaignCard
             key={campaign.id}

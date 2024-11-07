@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "campaignName": "희망 나눔 캠페인",
+    "foundation": "사랑의 열매",
+    "donationDate": "2024-10-15",
+    "donationAmount": 30000
+  },
+  {
+    "id": 2,
+    "campaignName": "자립청소년 지원 캠페인",
+    "foundation": "초록우산 어린이재단",
+    "donationDate": "2024-09-10",
+    "donationAmount": 20000
+  },
+  {
+    "id": 3,
+    "campaignName": "아나바다 캠페인",
+    "foundation": "대한적십자사",
+    "donationDate": "2024-08-21",
+    "donationAmount": 10000
+  },
+  {
+    "id": 4,
+    "campaignName": "소외계층 지원 캠페인",
+    "foundation": "굿네이버스",
+    "donationDate": "2024-07-17",
+    "donationAmount": 20000
+  }
+]
