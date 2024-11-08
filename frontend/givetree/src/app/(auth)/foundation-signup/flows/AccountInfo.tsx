@@ -1,10 +1,8 @@
 'use client';
 
-import { FormEvent } from 'react';
-
 import Box from '@/components/common/Box';
-import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
+import FormButton from '@/components/common/FormButton';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
 
@@ -13,11 +11,6 @@ interface AccountInfoProps {
 }
 
 const AccountInfo = ({ onSubmit }: AccountInfoProps) => {
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    onSubmit();
-  };
-
   return (
     <Flex flexDirection="column">
       <Flex flexDirection="column" gap="0.5rem">
@@ -27,7 +20,7 @@ const AccountInfo = ({ onSubmit }: AccountInfoProps) => {
         <Typography>로그인에 필요한 정보를 입력해 주세요.</Typography>
       </Flex>
       <Box marginTop="1.5rem">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <Flex flexDirection="column" gap="1rem">
             <TextField name="email" size="lg" placeholder="이메일 주소" />
             <TextField
@@ -42,9 +35,9 @@ const AccountInfo = ({ onSubmit }: AccountInfoProps) => {
               size="lg"
               placeholder="비밀번호 확인"
             />
-            <Button type="submit" size="lg">
+            <FormButton type="submit" size="lg">
               다음
-            </Button>
+            </FormButton>
           </Flex>
         </form>
       </Box>
