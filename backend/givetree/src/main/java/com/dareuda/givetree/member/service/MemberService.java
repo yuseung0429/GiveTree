@@ -15,8 +15,8 @@ public class MemberService {
     private final MemberDeleter memberDeleter;
     private final MemberDetailReader memberDetailReader;
 
-    public Member createMember(CreateMemberCommand command) {
-        return memberCreator.create(command);
+    public long createMember(CreateMemberCommand command) {
+        return memberCreator.create(command).getId();
     }
 
     public void updateMember(long memberId, UpdateMemberCommand command) {
