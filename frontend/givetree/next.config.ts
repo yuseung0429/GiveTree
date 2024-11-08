@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['givetree.co.kr', 'localhost:3000'],
+    },
+  },
+
   async redirects() {
     return [
       {
