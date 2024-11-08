@@ -1,4 +1,4 @@
-export interface FormState {
+export interface FormState<T> {
   message?: string;
-  errors?: Record<string, string | undefined>;
+  errors?: Partial<Record<T, string>>;
 }

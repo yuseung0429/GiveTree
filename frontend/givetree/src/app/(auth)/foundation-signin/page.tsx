@@ -2,14 +2,14 @@ import Link from 'next/link';
 
 import { HiChevronLeft } from 'react-icons/hi2';
 
-import colorPalette from '@/styles/tokens/colorPalette';
 import color from '@/styles/tokens/color';
+import colorPalette from '@/styles/tokens/colorPalette';
 
+import FoundationSigninForm from '@/components/auth/FoundationSigninForm';
 import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
-import TextField from '@/components/common/TextField';
 
 export default function FoundationSignIn() {
   return (
@@ -26,21 +26,7 @@ export default function FoundationSignIn() {
         </Flex>
 
         <Box padding="2rem 0.5rem">
-          <Flex flexDirection="column" gap="0.75rem">
-            <TextField variant="outlined" placeholder="이메일 주소" />
-
-            <TextField
-              variant="outlined"
-              type="password"
-              placeholder="비밀번호"
-            />
-
-            <Box paddingTop="1rem">
-              <Button variant="contained" size="lg" fullWidth>
-                로그인
-              </Button>
-            </Box>
-          </Flex>
+          <FoundationSigninForm />
         </Box>
 
         <Box
