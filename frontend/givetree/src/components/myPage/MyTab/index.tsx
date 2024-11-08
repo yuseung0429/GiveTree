@@ -18,7 +18,10 @@ interface MyTabProps {
 const MyTab = ({ role, userId }: MyTabProps) => {
   return (
     <>
-      <div className={styles.tab}>
+      <Link
+        className={styles.tab}
+        href={role === 'user' ? '' : `/edit/foundation/${userId}`}
+      >
         <div className={styles.IconBox}>
           {role === 'user' ? (
             <PiHandHeart size={22} />
@@ -29,12 +32,10 @@ const MyTab = ({ role, userId }: MyTabProps) => {
             {role === 'user' ? '기부금 사용 내역' : '재단 소개글 등록/수정'}
           </Typography>
         </div>
-        <Link href={role === 'user' ? '' : `/edit/foundation/${userId}`}>
-          <HiChevronRight size={20} />
-        </Link>
-      </div>
+        <HiChevronRight size={20} />
+      </Link>
 
-      <div className={styles.tab}>
+      <Link className={styles.tab} href={role === 'user' ? '' : ''}>
         <div className={styles.IconBox}>
           {role === 'user' ? (
             <HiOutlineShoppingBag size={22} />
@@ -46,9 +47,9 @@ const MyTab = ({ role, userId }: MyTabProps) => {
           </Typography>
         </div>
         <HiChevronRight size={20} />
-      </div>
+      </Link>
 
-      <div className={styles.tab}>
+      <Link className={styles.tab} href={role === 'user' ? '' : ''}>
         <div className={styles.IconBox}>
           {role === 'user' ? (
             <HiOutlineWallet size={22} />
@@ -60,9 +61,9 @@ const MyTab = ({ role, userId }: MyTabProps) => {
           </Typography>
         </div>
         <HiChevronRight size={20} />
-      </div>
+      </Link>
 
-      <div className={styles.tab}>
+      <Link className={styles.tab} href={role === 'user' ? '/tax' : ''}>
         <div className={styles.IconBox}>
           {role === 'user' ? (
             <HiOutlineNewspaper size={22} />
@@ -74,7 +75,7 @@ const MyTab = ({ role, userId }: MyTabProps) => {
           </Typography>
         </div>
         <HiChevronRight size={20} />
-      </div>
+      </Link>
     </>
   );
 };
