@@ -2,10 +2,7 @@ package com.dareuda.givetree.auth.config;
 
 import com.dareuda.givetree.auth.domain.OAuthUserService;
 import com.dareuda.givetree.auth.filter.JsonUsernamePasswordAuthenticationFilter;
-import com.dareuda.givetree.auth.handler.CustomAuthenticationEntryPoint;
-import com.dareuda.givetree.auth.handler.CustomLoginFailureHandler;
-import com.dareuda.givetree.auth.handler.CustomLoginSuccessHandler;
-import com.dareuda.givetree.auth.handler.CustomLogoutSuccessHandler;
+import com.dareuda.givetree.auth.handler.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -29,8 +26,11 @@ public class SecurityConfig {
     private final OAuthUserService OAuthUserService;
     private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-    private final CustomLoginSuccessHandler customLoginSuccessHandler;
-    private final CustomLoginFailureHandler customLoginFailureHandler;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final OAuthLoginSuccessHandler OAuthLoginSuccessHandler;
+    private final OAuthLoginFailureHandler OAuthLoginFailureHandler;
+    private final JsonLoginSuccessHandler jsonLoginSuccessHandler;
+    private final JsonLoginFailureHandler jsonLoginFailureHandler;
     private final ObjectMapper objectMapper;
 
     @Bean
@@ -55,8 +55,8 @@ public class SecurityConfig {
                                 .baseUri("/api/oauth2/authorization/**"))
                         .redirectionEndpoint(redirection -> redirection
                                 .baseUri("/api/login/oauth2/**"))
-                        .successHandler(customLoginSuccessHandler)
-                        .failureHandler(customLoginFailureHandler));
+                        .successHandler(OAuthLoginSuccessHandler)
+                        .failureHandler(OAuthLoginFailureHandler));
 
         http
                 .addFilterAt(jsonUsernamePasswordAuthenticationFilter,
@@ -75,7 +75,8 @@ public class SecurityConfig {
 
         http.
                 exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(customAuthenticationEntryPoint));
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                        .accessDeniedHandler(customAccessDeniedHandler));
 
         return http.build();
     }
@@ -83,7 +84,7 @@ public class SecurityConfig {
     @Bean
     public JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
         JsonUsernamePasswordAuthenticationFilter filter =
-                new JsonUsernamePasswordAuthenticationFilter(objectMapper, customLoginSuccessHandler, customLoginFailureHandler);
+                new JsonUsernamePasswordAuthenticationFilter(objectMapper, jsonLoginSuccessHandler, jsonLoginFailureHandler);
         filter.setAuthenticationManager(authenticationManager);
 
         filter.setSecurityContextRepository(new HttpSessionSecurityContextRepository());
