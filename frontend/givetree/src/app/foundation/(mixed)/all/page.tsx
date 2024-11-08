@@ -33,7 +33,7 @@ export default function AllFoundation() {
 
       {/* 재단 리스트 */}
       <Box className={style.listBox}>
-        <Flex flexDirection="column" gap="10px">
+        <Flex flexDirection="column" gap="0.75rem">
           {foundations.map((foundation) => (
             <FoundationItem
               key={foundation.id}

@@ -48,18 +48,22 @@ function SearchContent() {
 
   return (
     <Flex flexDirection="column" className={style.container}>
-      <Box className={style.searchSection} marginBottom="20px">
+      <Box className={style.searchSection} marginBottom="1.5rem">
         <Searchbar onSearch={handleSearch} initialValue={query} />
       </Box>
 
-      <Box className={style.resultCount} marginBottom="20px" paddingLeft="5px">
+      <Box
+        className={style.resultCount}
+        marginBottom="0.75rem"
+        paddingLeft="5px"
+      >
         <Typography weight="medium" size={16} color={colorPalette.grey[700]}>
           {filteredFoundations.length}개의 검색결과가 있습니다
         </Typography>
       </Box>
 
       <Box className={style.searchbox}>
-        <Flex flexDirection="column" gap="10px">
+        <Flex flexDirection="column" gap="0.75rem">
           {filteredFoundations.map((foundation) => (
             <FoundationItem
               key={foundation.id}

@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 export const container = style({
   height: '100%',
   background: '#F5F5F5',
-  padding: '20px 10px',
+  padding: '1rem',
 });
 
 export const searchSection = style({
