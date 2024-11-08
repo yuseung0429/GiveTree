@@ -23,7 +23,7 @@ export default function CampaignTab() {
           현재 <span className={style.campaignCount}>1</span>개의 캠페인이
           진행중입니다.
         </Typography>
-        <Box marginTop="15px">
+        <Box marginTop="1rem">
           <CampaignCard
             id={campaignData.id}
             title={campaignData.title}

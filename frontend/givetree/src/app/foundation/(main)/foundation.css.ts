@@ -8,7 +8,7 @@ export const mainBg = style({
 });
 
 export const section = style({
-  padding: '20px 10px',
+  padding: '1rem',
 });
 
 export const title = style({

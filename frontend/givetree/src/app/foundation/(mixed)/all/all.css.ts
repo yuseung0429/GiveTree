@@ -8,7 +8,7 @@ export const mainBg = style({
 });
 
 export const listBox = style({
-  padding: '20px 10px',
+  padding: '1rem',
 });
 
 export const TabBox = style({
