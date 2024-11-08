@@ -1,6 +1,7 @@
 package com.dareuda.givetree.member.domain.dto;
 
 import com.dareuda.givetree.member.domain.Role;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -17,5 +18,6 @@ public class CreateMemberCommand {
 
     private final String profileImageUrl;
 
+    @NotNull
     private final Role role;
 }
