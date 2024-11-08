@@ -12,7 +12,9 @@ import color from '@/styles/tokens/color';
 const OAuthList = () => {
   return (
     <Flex flexDirection="column" gap="1rem">
-      <Link href="/signup">
+      <Link
+        href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao`}
+      >
         <OAuthButton
           borderColor="#fee500"
           backgroundColor="#fee500"
@@ -23,7 +25,9 @@ const OAuthList = () => {
         </OAuthButton>
       </Link>
 
-      <Link href="/signup">
+      <Link
+        href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/naver`}
+      >
         <OAuthButton
           borderColor="#03c75a"
           backgroundColor="#03c75a"
@@ -34,7 +38,9 @@ const OAuthList = () => {
         </OAuthButton>
       </Link>
 
-      <Link href="/signup">
+      <Link
+        href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/google`}
+      >
         <OAuthButton
           borderColor={color.grey[600]}
           backgroundColor="#fff"
