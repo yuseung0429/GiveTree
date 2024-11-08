@@ -22,7 +22,7 @@ export default function IntroTab() {
 
       {/* 단체사진 */}
       <Box as="article" className={style.article}>
-        <Typography as="h3" weight="semiBold" color={colorPalette.primary[400]}>
+        <Typography as="h3" weight="semiBold" color={colorPalette.primary[600]}>
           단체사진
         </Typography>
         <Flex gap="10px" className={style.imageScrollContainer}>
@@ -35,7 +35,7 @@ export default function IntroTab() {
 
       {/* 단체정보 */}
       <Box as="article" className={style.article}>
-        <Typography as="h3" weight="semiBold" color={colorPalette.primary[400]}>
+        <Typography as="h3" weight="semiBold" color={colorPalette.primary[600]}>
           단체정보
         </Typography>
         <Flex gap="20px" flexDirection="column" className={style.bottomBox}>
@@ -48,11 +48,9 @@ export default function IntroTab() {
               color={colorPalette.grey[600]}
               style={{ marginBottom: '10px' }}
             >
-              ◾ 공식단체명
+              공식단체명
             </Typography>
-            <Typography style={{ paddingLeft: '10px' }}>
-              사회복지법인 굿네이버스
-            </Typography>
+            <Typography>사회복지법인 굿네이버스</Typography>
           </Box>
 
           {/* 사업자등록번호 */}
@@ -64,11 +62,9 @@ export default function IntroTab() {
               color={colorPalette.grey[600]}
               style={{ marginBottom: '10px' }}
             >
-              ◾ 사업자등록번호/고유번호
+              사업자등록번호/고유번호
             </Typography>
-            <Typography style={{ paddingLeft: '10px' }}>
-              123-45-67890/비영리법인
-            </Typography>
+            <Typography>123-45-67890/비영리법인</Typography>
           </Box>
 
           {/* 주소 및 연락처 */}
@@ -80,17 +76,13 @@ export default function IntroTab() {
               color={colorPalette.grey[600]}
               style={{ marginBottom: '10px' }}
             >
-              ◾ 주소 및 연락처
+              주소 및 연락처
             </Typography>
-            <Box paddingLeft="10px">
-              <Typography style={{ marginBottom: '10px' }}>
-                (07253) 서울 영등포구 버드나루로 13
-              </Typography>
-              <Typography style={{ marginBottom: '10px' }}>
-                02-6717-4000
-              </Typography>
+            <Flex flexDirection="column" gap={5}>
+              <Typography>(07253) 서울 영등포구 버드나루로 13</Typography>
+              <Typography>02-6717-4000</Typography>
               <Typography>sypark3@gnk.or.kr</Typography>
-            </Box>
+            </Flex>
           </Box>
         </Flex>
       </Box>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@/components/common/Button';
-import * as style from './DonationModal.css'; // Vanilla Extract 스타일
+import * as style from './DonationModal.css';
 import Flex from '@/components/common/Flex';
 import { useRouter } from 'next/navigation';
 

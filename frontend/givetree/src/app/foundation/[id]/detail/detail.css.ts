@@ -22,7 +22,7 @@ export const foundationBanner = style({
 export const tabContentContainer = style({
   flexGrow: 1,
   overflowY: 'auto',
-  padding: '16px',
+  padding: '1rem',
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
   '::-webkit-scrollbar': {
@@ -32,7 +32,7 @@ export const tabContentContainer = style({
 
 // article
 export const article = style({
-  marginBottom: '20px',
+  marginBottom: '1.25rem',
 });
 
 // imageScrollContainer
@@ -49,6 +49,7 @@ export const imageScrollContainer = style({
 // introBox
 export const bottomBox = style({
   marginTop: '10px',
+  textAlign: 'justify',
 });
 
 // TabContainer
@@ -56,6 +57,7 @@ export const TabContainer = style({
   width: '100%',
   flexGrow: 1,
   overflowY: 'auto',
+  padding: '0.75rem',
 });
 
 // imageBox
@@ -66,6 +68,13 @@ export const imageBox = style({
   aspectRatio: '4 / 3',
   overflow: 'hidden',
   backgroundColor: colorPalette.primary[50],
+});
+
+export const moneybox = style({
+  width: '100%',
+  height: '60px',
+  borderBottom: `1px solid ${colorPalette.grey[800]}`,
+  padding: '0.75rem 0.5rem',
 });
 
 // 후원하기 버튼

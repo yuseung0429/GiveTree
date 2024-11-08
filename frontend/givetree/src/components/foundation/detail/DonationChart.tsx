@@ -1,3 +1,4 @@
+import * as style from './DonationChart.css';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import Box from '@/components/common/Box';
@@ -19,49 +20,46 @@ export default function DonationChart({
   const executionRate = Math.round((spentAmount / collectedAmount) * 100);
 
   const data = {
-    labels: ['사용된 금액', '남은 금액'],
+    labels: ['총 모금 금액', '지출 금액'],
     datasets: [
       {
         data: [spentAmount, collectedAmount - spentAmount],
-        backgroundColor: [colorPalette.primary[500], colorPalette.grey[300]],
-        hoverBackgroundColor: [
-          colorPalette.primary[600],
-          colorPalette.grey[400],
-        ],
+        backgroundColor: [colorPalette.secondary[300], colorPalette.grey[300]],
         borderWidth: 0,
       },
     ],
   };
 
   const options = {
-    cutout: '70%', // 도넛 모양의 내부 반지름 크기
+    cutout: '65%',
     plugins: {
-      legend: { display: false }, // 레이블 표시 제거
-      tooltip: { enabled: false }, // 툴팁 표시 제거
+      legend: { display: false },
+      tooltip: { enabled: false },
     },
+    animation: false,
   };
 
   return (
     <Box
       style={{
         position: 'relative',
-        width: '70%',
+        width: '75%',
         maxWidth: '250px',
+        aspectRatio: '1',
         margin: 'auto',
       }}
     >
-      <Doughnut data={data} options={options} />
+      <Doughnut data={data} options={options} className={style.doughnutChart} />
       <Flex
+        flexDirection="column"
         alignItems="center"
-        justifyContent="center"
-        style={{
-          textAlign: 'center',
-        }}
+        gap={5}
+        className={style.doughnutText}
       >
-        <Typography weight="bold" size="24px" color={colorPalette.grey[900]}>
+        <Typography weight="semiBold" size={22} color={colorPalette.grey[900]}>
           집행률
         </Typography>
-        <Typography weight="medium" size="20px" color={colorPalette.grey[700]}>
+        <Typography weight="semiBold" size={20} color={colorPalette.grey[700]}>
           {executionRate}%
         </Typography>
       </Flex>
