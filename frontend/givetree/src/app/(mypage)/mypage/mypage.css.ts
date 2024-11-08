@@ -55,8 +55,8 @@ export const tabBox = style({
   flexDirection: 'column',
   backgroundColor: '#fff',
   width: '100%',
-  padding: '1.5rem 2rem',
-  gap: '2.25rem',
+  // padding: '1.5rem 2rem',
+  // gap: '2.25rem',
 });
 
 export const tab = style({
