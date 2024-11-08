@@ -21,7 +21,3 @@ spring:
         discriminator:
           ignore_explicit_for_joined: true
     defer-datasource-initialization: true
-
-  sql:
-    init:
-      mode: always
