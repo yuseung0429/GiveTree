@@ -3,7 +3,6 @@ package com.dareuda.givetree.member.controller;
 import com.dareuda.givetree.auth.domain.UserPrinciple;
 import com.dareuda.givetree.member.controller.dto.request.CreateMemberRequest;
 import com.dareuda.givetree.member.controller.dto.request.UpdateMemberRequest;
-import com.dareuda.givetree.member.domain.Member;
 import com.dareuda.givetree.member.domain.dto.MemberDetail;
 import com.dareuda.givetree.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -18,38 +17,40 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/api/members")
 public class MemberController {
     private final MemberService memberService;
-    private static final long TEMP_MEMBER_ID = 1L;
 
     @PostMapping
     public ResponseEntity<Void> createMember(@Valid @RequestBody CreateMemberRequest request) {
-        Member member = memberService.createMember(request.convertToCommand());
+        long memberId = memberService.createMember(request.convertToCommand());
 
         return ResponseEntity.created(
                         UriComponentsBuilder
                                 .fromPath("/members/{memberId}")
-                                .buildAndExpand(member.getId())
+                                .buildAndExpand(memberId)
                                 .toUri()
                 )
                 .build();
     }
 
     @PatchMapping
-    public ResponseEntity<Void> updateMember(@Valid @RequestBody UpdateMemberRequest request) {
-        memberService.updateMember(TEMP_MEMBER_ID, request.convertToCommand());
+    public ResponseEntity<Void> updateMember(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @Valid @RequestBody UpdateMemberRequest request
+    ) {
+        memberService.updateMember(userPrinciple.getId(), request.convertToCommand());
 
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteMember() {
-        memberService.deleteMember(TEMP_MEMBER_ID);
+    public ResponseEntity<Void> deleteMember(@AuthenticationPrincipal UserPrinciple userPrinciple) {
+        memberService.deleteMember(userPrinciple.getId());
 
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/session")
-    public ResponseEntity<MemberDetail> getMemberDetail() {
-        MemberDetail memberDetail = memberService.getMemberDetail(TEMP_MEMBER_ID);
+    public ResponseEntity<MemberDetail> getMemberDetail(@AuthenticationPrincipal UserPrinciple userPrinciple) {
+        MemberDetail memberDetail = memberService.getMemberDetail(userPrinciple.getId());
 
         return ResponseEntity.ok().body(memberDetail);
     }
@@ -59,14 +60,5 @@ public class MemberController {
         MemberDetail memberDetail = memberService.getMemberDetail(memberId);
 
         return ResponseEntity.ok(memberDetail);
-    }
-
-    /*
-    * 개발용
-    * 로그인 테스트
-    * */
-    @GetMapping("/login-test")
-    public ResponseEntity<UserPrinciple> getMemberDetailTest(@AuthenticationPrincipal UserPrinciple user) {
-        return ResponseEntity.ok().body(user);
     }
 }

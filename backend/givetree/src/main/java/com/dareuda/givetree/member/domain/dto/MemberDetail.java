@@ -19,7 +19,7 @@ public class MemberDetail {
     private final String name;
 
     @NonNull
-    private final String Role;
+    private final String role;
 
     private final String profileImageUrl;
 }
