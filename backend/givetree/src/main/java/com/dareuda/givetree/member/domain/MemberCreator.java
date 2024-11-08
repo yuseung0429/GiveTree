@@ -17,11 +17,13 @@ public class MemberCreator {
 
     public Member create(CreateMemberCommand command) {
         Image profileImage = command.getProfileImageUrl() != null ? imageAppender.append(command.getProfileImageUrl()) : null;
+        String encodedPassword = command.getPassword() == null ?
+                null : bCryptPasswordEncoder.encode(command.getPassword());
 
         Member member = memberRepository.save(
                 Member.createMember(
                         command.getEmail(),
-                        bCryptPasswordEncoder.encode(command.getPassword()),
+                        encodedPassword,
                         command.getName(),
                         profileImage,
                         command.getRole()

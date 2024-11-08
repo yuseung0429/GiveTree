@@ -1,5 +1,6 @@
 package com.dareuda.givetree.member.controller;
 
+import com.dareuda.givetree.auth.domain.UserPrinciple;
 import com.dareuda.givetree.member.controller.dto.request.CreateMemberRequest;
 import com.dareuda.givetree.member.controller.dto.request.UpdateMemberRequest;
 import com.dareuda.givetree.member.domain.Member;
@@ -8,6 +9,7 @@ import com.dareuda.givetree.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -57,5 +59,14 @@ public class MemberController {
         MemberDetail memberDetail = memberService.getMemberDetail(memberId);
 
         return ResponseEntity.ok(memberDetail);
+    }
+
+    /*
+    * 개발용
+    * 로그인 테스트
+    * */
+    @GetMapping("/login-test")
+    public ResponseEntity<UserPrinciple> getMemberDetailTest(@AuthenticationPrincipal UserPrinciple user) {
+        return ResponseEntity.ok().body(user);
     }
 }
