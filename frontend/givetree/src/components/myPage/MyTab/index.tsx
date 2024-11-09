@@ -35,7 +35,7 @@ const MyTab = ({ role, userId }: MyTabProps) => {
         <HiChevronRight size={20} />
       </Link>
 
-      <Link className={styles.tab} href={role === 'user' ? '' : ''}>
+      <Link className={styles.tab} href={role === 'user' ? '' : `myfoundation/campaign/register`}>
         <div className={styles.IconBox}>
           {role === 'user' ? (
             <HiOutlineShoppingBag size={22} />
@@ -49,7 +49,7 @@ const MyTab = ({ role, userId }: MyTabProps) => {
         <HiChevronRight size={20} />
       </Link>
 
-      <Link className={styles.tab} href={role === 'user' ? '' : ''}>
+      <Link className={styles.tab} href={role === 'user' ? '' : `myfoundation/campaign`}>
         <div className={styles.IconBox}>
           {role === 'user' ? (
             <HiOutlineWallet size={22} />
@@ -63,7 +63,7 @@ const MyTab = ({ role, userId }: MyTabProps) => {
         <HiChevronRight size={20} />
       </Link>
 
-      <Link className={styles.tab} href={role === 'user' ? '/tax' : ''}>
+      <Link className={styles.tab} href={role === 'user' ? '/tax' : `myfoundation/account`}>
         <div className={styles.IconBox}>
           {role === 'user' ? (
             <HiOutlineNewspaper size={22} />
