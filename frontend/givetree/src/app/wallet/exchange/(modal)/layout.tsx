@@ -3,5 +3,5 @@ export default function ModalLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div style={{ position: 'fixed', inset: 0 }}>{children}</div>;
+  return <div style={{ position: 'fixed', inset: 0, zIndex: '100' }}>{children}</div>;
 }
