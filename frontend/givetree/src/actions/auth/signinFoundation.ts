@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
-import { setSession } from '@/app/lib/session';
+import { setSession } from '@/lib/session';
 
 import { FormState } from '@/types/formState';
 

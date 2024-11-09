@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect } from 'react';
 
-import signinFoundation from '@/app/actions/auth/signinFoundation';
+import signinFoundation from '@/actions/auth/signinFoundation';
 
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
