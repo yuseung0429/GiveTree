@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import AccountInfo from './flows/AccountInfo';
 import FoundationInfo from './flows/FoundationInfo';
-import FoundationIntro from './flows/FoundationIntro';
 import ProgressIndicator from '@/components/common/ProgressIndicator';
 import Box from '@/components/common/Box';
 
@@ -20,7 +19,7 @@ export default function FoundationSignUp() {
 
   return (
     <>
-      <ProgressIndicator value={step} max={3} />
+      <ProgressIndicator value={step} max={2} />
       <Box padding="1rem">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
@@ -34,7 +33,6 @@ export default function FoundationSignUp() {
               [
                 <AccountInfo key={0} onSubmit={() => changeStep(1)} />,
                 <FoundationInfo key={1} onSubmit={() => changeStep(2)} />,
-                <FoundationIntro key={2} onSubmit={() => changeStep(0)} />,
               ][step]
             }
           </motion.div>
