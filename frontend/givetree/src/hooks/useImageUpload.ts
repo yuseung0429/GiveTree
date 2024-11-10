@@ -10,7 +10,7 @@ export interface ImageData {
 interface ImageUploadEventHandler {
   onSelect?: (fileList: FileList) => void;
   onUpload?: (key: number, url: string) => void;
-  onError?: (key: number) => void;
+  onError?: (key: number, status: number) => void;
 }
 
 const useImageUpload = (
@@ -44,8 +44,8 @@ const useImageUpload = (
           (url) => {
             eventHandler.onUpload?.(imageItem.key, url);
           },
-          () => {
-            eventHandler.onError?.(imageItem.key);
+          (status) => {
+            eventHandler.onError?.(imageItem.key, status);
           }
         )
       );
@@ -77,7 +77,7 @@ const useImageUpload = (
   const uploadImage = (
     file: File,
     onSuccess: (url: string) => void,
-    onError: () => void
+    onError: (status: number) => void
   ) => {
     const formData = new FormData();
     formData.append('file', file);
@@ -87,17 +87,22 @@ const useImageUpload = (
       body: formData,
     })
       .then((result) => {
+        if (result.status !== 200) {
+          onError(result.status);
+          return;
+        }
+
         result
           .text()
           .then((data) => {
             onSuccess(data);
           })
           .catch(() => {
-            onError();
+            onError(-1);
           });
       })
       .catch(() => {
-        onError();
+        onError(-1);
       });
   };
 

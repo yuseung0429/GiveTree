@@ -55,6 +55,18 @@ const ImageUploader = ({ maxFileCount = 5, onUpload }: ImageUploaderProps) => {
         }, [] as ImageData[])
       );
     },
+
+    onError: (key, status) => {
+      setImages((images) => images.filter((image) => image.key !== key));
+
+      switch (status) {
+        case 413:
+          alert('1MB를 초과하는 이미지는 업로드 할 수 없습니다.');
+          break;
+        default:
+          alert('알 수 없는 오류로 이미지를 업로드에 실패했습니다.');
+      }
+    },
   });
 
   const handleUploadClick = () => {

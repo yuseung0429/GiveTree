@@ -6,6 +6,7 @@ export const container = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  position: 'relative',
   overflow: 'hidden',
   width: '6rem',
   height: '6rem',
