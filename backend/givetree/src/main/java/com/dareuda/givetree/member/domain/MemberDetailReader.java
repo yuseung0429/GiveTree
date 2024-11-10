@@ -21,7 +21,7 @@ public class MemberDetailReader {
                 .email(member.getEmail())
                 .name(member.getName())
                 .profileImageUrl(profileImageUrl)
-                .Role("foundation")
+                .role(member.getRole().toString())
                 .build();
     }
 }

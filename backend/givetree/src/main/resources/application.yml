@@ -6,7 +6,9 @@ spring:
     include: finance, local, blockchain
 
   config:
-    import: classpath:/properties/application-secret.yml
+    import:
+      - classpath:/properties/application-secret.yml
+      - classpath:/properties/application-oauth.yml
 
   jpa:
     show-sql: true

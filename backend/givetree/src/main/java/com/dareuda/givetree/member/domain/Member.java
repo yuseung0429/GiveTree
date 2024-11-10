@@ -16,7 +16,7 @@ public class Member extends BaseEntity {
     @Column(name = "member_id")
     private Long id;
 
-    @Column
+    @Column(unique = true)
     @NotNull
     private String email;
 
@@ -31,11 +31,15 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "profile_image_id")
     private Image profileImage;
 
-    public static Member createMember(String email, String password, String name, Image profileImage) {
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public static Member createMember(String email, String password, String name, Image profileImage, Role role) {
         Member member = new Member();
         member.email = email;
         member.password = password;
         member.name = name;
+        member.role = role;
 
         member.profileImage = profileImage;
 

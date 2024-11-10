@@ -4,6 +4,7 @@ import com.dareuda.givetree.campaign.domain.*;
 import com.dareuda.givetree.campaign.domain.dto.CampaignDetail;
 import com.dareuda.givetree.campaign.domain.dto.CreateCampaignCommand;
 import com.dareuda.givetree.campaign.domain.dto.UpdateCampaignCommand;
+import com.dareuda.givetree.foundation.domain.FoundationAuthorityValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,11 @@ public class CampaignService {
     private final CampaignDeleter campaignDeleter;
     private final CampaignDetailReader campaignDetailReader;
     private final CampaignAuthorityValidator campaignAuthorityValidator;
+    private final FoundationAuthorityValidator foundationAuthorityValidator;
 
-    public long createCampaign(CreateCampaignCommand command) {
+    public long createCampaign(long memberId, CreateCampaignCommand command) {
+        foundationAuthorityValidator.validateModifyAuthority(memberId, command.getFoundationId());
+
         return campaignCreator.create(command);
     }
 
