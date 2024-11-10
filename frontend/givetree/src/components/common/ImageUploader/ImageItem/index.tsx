@@ -1,10 +1,6 @@
-import {
-  HiMiniXCircle,
-  HiMiniXMark,
-  HiOutlineXMark,
-  HiTrash,
-  HiXMark,
-} from 'react-icons/hi2';
+import Image from 'next/image';
+
+import { HiMiniXCircle } from 'react-icons/hi2';
 
 import { mergeClasses } from '@/utils/mergeClasses';
 
@@ -20,10 +16,11 @@ interface ImageItemProps {
 const ImageItem = ({ src, file, isLoading, onDeleteClick }: ImageItemProps) => {
   return (
     <div className={s.container}>
-      <img
-        src={isLoading ? URL.createObjectURL(file) : src}
+      <Image
+        src={isLoading ? URL.createObjectURL(file) : src || ''}
         className={mergeClasses(s.image, isLoading && s.dark)}
         alt="Image"
+        fill={true}
       />
       {isLoading ? (
         <div className={s.loading} />
