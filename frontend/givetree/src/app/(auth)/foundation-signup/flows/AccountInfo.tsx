@@ -89,13 +89,8 @@ const AccountInfo = ({ onSubmit }: AccountInfoProps) => {
               </Typography>
               <ImageUploader name="profileImageUrl" maxFileCount={1} />
             </Flex>
-            <FormButton
-              variant="contained"
-              size="lg"
-              pending={isPending}
-              fullWidth
-            >
-              로그인
+            <FormButton size="lg" pending={isPending} fullWidth>
+              다음
             </FormButton>
           </Flex>
         </form>
