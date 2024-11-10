@@ -8,6 +8,8 @@ import FrozenRouter from '@/components/common/FrozenRouter';
 import Layout from '@/components/common/Layout';
 import AppBar from '@/components/common/AppBar';
 
+import * as s from './Auth.css';
+
 export default function AuthLayout({
   children,
 }: {
@@ -32,7 +34,9 @@ export default function AuthLayout({
             transition={{ duration: 0.3 }}
             style={{ position: 'absolute', inset: '0' }}
           >
-            <FrozenRouter>{children}</FrozenRouter>
+            <div className={s.pageContainer}>
+              <FrozenRouter>{children}</FrozenRouter>
+            </div>
           </motion.div>
         </AnimatePresence>
       </main>
