@@ -52,6 +52,7 @@ export const deleteButton = style({
   right: '0',
   width: '2.5rem',
   height: '2.5rem',
+  padding: '0',
   border: '0',
   borderBottomLeftRadius: '0.25rem',
   backgroundColor: 'transparent',

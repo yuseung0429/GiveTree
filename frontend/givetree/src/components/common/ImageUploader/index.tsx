@@ -102,7 +102,9 @@ const ImageUploader = ({
         />
       ))}
 
-      <UploadButton onClick={handleUploadClick} />
+      {images.length < maxFileCount && (
+        <UploadButton onClick={handleUploadClick} />
+      )}
 
       {name &&
         images
