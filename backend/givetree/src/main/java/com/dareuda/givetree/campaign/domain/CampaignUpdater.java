@@ -9,9 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class CampaignUpdater {
@@ -41,9 +38,7 @@ public class CampaignUpdater {
             campaign.updateTitleImage(image);
         }
         if (command.getNewImageUrls() != null) {
-            command.getNewImageUrls().forEach(newImageUrl ->
-                    campaign.addImage(imageAppender.append(newImageUrl))
-            );
+            command.getNewImageUrls().forEach(newImageUrl -> campaign.addImage(imageAppender.append(newImageUrl)));
         }
         if (command.getDeleteImageIds() != null) {
             command.getDeleteImageIds().forEach(campaign::deleteImage);

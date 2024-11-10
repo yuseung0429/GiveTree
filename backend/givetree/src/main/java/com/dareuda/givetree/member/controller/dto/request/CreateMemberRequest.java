@@ -21,16 +21,13 @@ public class CreateMemberRequest {
 
     private final String profileImageUrl;
 
-    @NotBlank
-    private final String role;
-
     public CreateMemberCommand convertToCommand() {
         return CreateMemberCommand.builder()
                 .email(email)
                 .password(password)
                 .name(name)
                 .profileImageUrl(profileImageUrl)
-                .role(Role.valueOf(role))
+                .role(Role.USER)
                 .build();
     }
 }
