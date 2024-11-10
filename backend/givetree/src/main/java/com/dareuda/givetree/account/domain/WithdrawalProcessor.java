@@ -8,11 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Component
 @RequiredArgsConstructor
-public class RefundProcessor {
+public class WithdrawalProcessor {
 
     private final AccountReader accountReader;
     private final AdminConfig adminConfig;
@@ -25,19 +23,17 @@ public class RefundProcessor {
                 adminConfig.getSimplePassword(),
                 receiverId,
                 amount,
-                LedgerType.REFUND.getWithdrawalMessage(),
-                LedgerType.REFUND.getDepositMessage()
+                LedgerType.EXCHANGE.getWithdrawalMessage(),
+                LedgerType.EXCHANGE.getDepositMessage()
         );
     }
 
     @Transactional
     public Ledger saveLedger(long receiverId, long amount, AccountTransferResponse response) {
-        Account receiverAccount = accountReader.read(receiverId);
-        return ledgerAppender.append(
-                receiverAccount.getId(),
-                amount,
-                LedgerType.REFUND,
-                response.getSenderReceipt().getTransactionDate().atStartOfDay()
-        );
+        Account senderAccount = accountReader.read(receiverId);
+        return ledgerAppender.append(senderAccount.getId(),
+                -amount,
+                LedgerType.EXCHANGE,
+                response.getSenderReceipt().getTransactionDate().atStartOfDay());
     }
 }

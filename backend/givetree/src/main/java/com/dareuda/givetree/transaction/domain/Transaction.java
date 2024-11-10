@@ -48,6 +48,10 @@ public class Transaction {
     @Convert(converter = ByteArrayToHexStringConverter.class)
     private String transactionHash;
 
+    public void recordLedger(Ledger ledger) {
+        this.ledger = ledger;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

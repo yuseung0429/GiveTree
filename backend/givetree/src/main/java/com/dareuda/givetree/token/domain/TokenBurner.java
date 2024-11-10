@@ -1,24 +1,32 @@
 package com.dareuda.givetree.token.domain;
 
+import com.dareuda.givetree.account.domain.DepositProcessor;
+import com.dareuda.givetree.account.domain.RefundFailureAppender;
+import com.dareuda.givetree.account.domain.RefundProcessor;
 import com.dareuda.givetree.blockchain.utils.EthereumCaller;
 import com.dareuda.givetree.blockchain.utils.EthereumTransactionManager;
 import com.dareuda.givetree.common.config.AdminConfig;
 import com.dareuda.givetree.common.config.ContractConfig;
 import com.dareuda.givetree.token.infrastructure.TokenContract;
 import com.dareuda.givetree.token.infrastructure.TokenContractExceptionHandler;
+import com.dareuda.givetree.transaction.domain.Transaction;
 import com.dareuda.givetree.transaction.domain.TransactionAppender;
+import com.dareuda.givetree.transaction.domain.TransactionUpdater;
+import com.dareuda.givetree.wallet.domain.MemberWalletReader;
 import com.dareuda.givetree.wallet.domain.Wallet;
 import com.dareuda.givetree.wallet.domain.WalletReader;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.math.BigInteger;
 import java.util.Set;
 
 @Component
-public class TokenGenerator {
+public class TokenBurner {
 
-    public TokenGenerator(
+    public TokenBurner(
             AdminConfig adminConfig,
             WalletReader walletReader,
             ContractConfig contractConfig,
@@ -41,18 +49,24 @@ public class TokenGenerator {
     private final EthereumTransactionManager transactionManager;
     private final EthereumCaller caller;
 
-    public TransactionReceipt generate(long walletId, long amount, long ledgerId) {
+    public TransactionReceipt burn(long walletId, long amount) {
         Wallet wallet = walletReader.read(walletId);
 
-        TransactionReceipt receipt = transactionManager.execute(
+        return transactionManager.execute(
                 Set.of(wallet.getAddress()),
                 contractConfig.getTokenContractAddress(),
                 TokenContract.class,
-                (TokenContract tokenContract) -> caller.call(tokenContract.mintToken(wallet.getAddress(), BigInteger.valueOf(amount)))
+                (TokenContract tokenContract) -> caller.call(tokenContract.burnToken(wallet.getAddress(), BigInteger.valueOf(amount)))
         );
-
-        transactionAppender.append(adminConfig.getWalletId(), walletId, amount, receipt.getTransactionHash(), ledgerId);
-        return receipt;
     }
 
+    @Transactional
+    public Transaction saveTransaction(long walletId, long amount, TransactionReceipt receipt) {
+        return transactionAppender.append(
+                walletId,
+                adminConfig.getWalletId(),
+                amount,
+                receipt.getTransactionHash()
+        );
+    }
 }

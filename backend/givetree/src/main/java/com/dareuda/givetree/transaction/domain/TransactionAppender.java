@@ -14,22 +14,10 @@ public class TransactionAppender {
     private final LedgerReader ledgerReader;
     private final TransactionRepository transactionRepository;
 
-
-    public void append(long senderWalletId, long receiverWalletId, long amount, String transactionHash, long ledgerId) {
-        transactionRepository.save(Transaction.builder()
+    public Transaction append(long senderWalletId, long receiverWalletId, long amount, String transactionHash) {
+        return transactionRepository.save(Transaction.builder()
                 .senderWallet(walletReader.read(senderWalletId))
                 .receiverWallet(walletReader.read(receiverWalletId))
-                .ledger(ledgerReader.read(ledgerId))
-                .amount(amount)
-                .transactionHash(transactionHash)
-                .build());
-    }
-
-    public void append(long senderWalletId, long receiverWalletId, long amount, String transactionHash) {
-        transactionRepository.save(Transaction.builder()
-                .senderWallet(walletReader.read(senderWalletId))
-                .receiverWallet(walletReader.read(receiverWalletId))
-                .ledger(null)
                 .amount(amount)
                 .transactionHash(transactionHash)
                 .build());
