@@ -7,9 +7,11 @@ import Layout from '@/components/common/Layout';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 
 export default function Page() {
+  const router = useRouter();
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
   const [targetAmount, setTargetAmount] = useState<string>('');
@@ -34,7 +36,7 @@ export default function Page() {
   return (
     <Layout>
       <header>
-        <AppBar title="캠페인 신청" />
+        <AppBar title="캠페인 신청" onBackClick={() => router.back()} />
       </header>
       <main style={{ backgroundColor: '#F5F5F5', padding: '1rem' }}>
         <Flex flexDirection="column" gap="1.5rem">

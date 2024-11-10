@@ -1,20 +1,31 @@
 import Box from '@/components/common/Box';
 import * as style from './Account.css';
+import Flex from '@/components/common/Flex';
+import { BiPlus } from 'react-icons/bi';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 
 export default function Account() {
   return (
     <Box>
-      <Typography
-        as="h4"
-        size={18}
-        weight="medium"
-        color={colorPalette.grey[900]}
+      <Flex
+        className={style.accountBox}
+        justifyContent="center"
+        alignItems="center"
       >
-        출금계좌
-      </Typography>
-      <Box className={style.accountBox}></Box>
+        <Flex alignItems="center" flexDirection="column" gap={10}>
+          <Flex
+            className={style.plus}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <BiPlus size={20} color={colorPalette.grey[700]} />
+          </Flex>
+          <Typography size={12} weight="medium" color={colorPalette.grey[700]}>
+            간편계좌 추가
+          </Typography>
+        </Flex>
+      </Flex>
     </Box>
   );
 }
