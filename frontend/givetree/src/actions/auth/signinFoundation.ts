@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation';
 
 import { setSession } from '@/lib/session';
+import fetchWrapper from '@/lib/fetchWrapper';
 
 import { FormState } from '@/types/formState';
 
@@ -16,7 +17,7 @@ export default async function signinFoundation(
     password = formData.get('password');
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+    const response = await fetchWrapper(`/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
