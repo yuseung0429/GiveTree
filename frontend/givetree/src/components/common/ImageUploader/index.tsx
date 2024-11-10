@@ -10,11 +10,16 @@ import ImageItem from './ImageItem';
 import * as s from './ImageUploader.css';
 
 interface ImageUploaderProps {
+  name?: string;
   maxFileCount?: number;
-  onUpload: (images: string[]) => void;
+  onUpload?: (images: string[]) => void;
 }
 
-const ImageUploader = ({ maxFileCount = 5, onUpload }: ImageUploaderProps) => {
+const ImageUploader = ({
+  name,
+  maxFileCount = 5,
+  onUpload,
+}: ImageUploaderProps) => {
   const fileRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +32,7 @@ const ImageUploader = ({ maxFileCount = 5, onUpload }: ImageUploaderProps) => {
       return;
     }
 
-    onUpload(
+    onUpload?.(
       images.filter((image) => image.done).map((image) => image.url || '')
     );
 
@@ -98,6 +103,18 @@ const ImageUploader = ({ maxFileCount = 5, onUpload }: ImageUploaderProps) => {
       ))}
 
       <UploadButton onClick={handleUploadClick} />
+
+      {name &&
+        images
+          .filter((image) => image.done)
+          .map((image) => (
+            <input
+              type="hidden"
+              key={image.key}
+              name={name}
+              value={image.url}
+            />
+          ))}
     </div>
   );
 };
