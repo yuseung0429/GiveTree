@@ -42,3 +42,18 @@ export const image = style({
 export const dark = style({
   filter: 'contrast(50%)',
 });
+
+export const deleteButton = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  width: '2.5rem',
+  height: '2.5rem',
+  border: '0',
+  borderBottomLeftRadius: '0.25rem',
+  backgroundColor: 'transparent',
+  color: colorPalette.grey[900],
+});

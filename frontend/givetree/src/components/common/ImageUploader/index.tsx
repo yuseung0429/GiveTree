@@ -73,6 +73,10 @@ const ImageUploader = ({ maxFileCount = 5, onUpload }: ImageUploaderProps) => {
     select();
   };
 
+  const handleDeleteClick = (key: number) => {
+    setImages((images) => images.filter((image) => image.key !== key));
+  };
+
   return (
     <div className={s.container} ref={containerRef}>
       <input
@@ -89,6 +93,7 @@ const ImageUploader = ({ maxFileCount = 5, onUpload }: ImageUploaderProps) => {
           file={image.file}
           src={image.url}
           isLoading={!image.done}
+          onDeleteClick={() => handleDeleteClick(image.key)}
         />
       ))}
 
