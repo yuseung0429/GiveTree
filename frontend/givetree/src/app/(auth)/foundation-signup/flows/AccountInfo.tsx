@@ -2,6 +2,8 @@
 
 import { FormEvent, startTransition, useActionState, useEffect } from 'react';
 
+import useDialog from '@/hooks/useDialog';
+
 import colorPalette from '@/styles/tokens/colorPalette';
 
 import signupFoundation from '@/actions/auth/signupFoundation';
@@ -18,6 +20,8 @@ interface AccountInfoProps {
 }
 
 const AccountInfo = ({ onSubmit }: AccountInfoProps) => {
+  const { alert } = useDialog();
+
   const [state, action, isPending] = useActionState(signupFoundation, {});
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const AccountInfo = ({ onSubmit }: AccountInfoProps) => {
     if (state.message) {
       alert(state.message);
     }
-  }, [state, onSubmit]);
+  }, [alert, state, onSubmit]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

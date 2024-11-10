@@ -2,6 +2,7 @@
 
 import { FormEvent, startTransition, useActionState, useEffect } from 'react';
 
+import useDialog from '@/hooks/useDialog';
 import colorPalette from '@/styles/tokens/colorPalette';
 import typography from '@/styles/tokens/typography';
 
@@ -19,6 +20,8 @@ interface FoundationInfoProps {
 }
 
 const FoundationInfo = ({ onSubmit }: FoundationInfoProps) => {
+  const { alert } = useDialog();
+
   const [state, action, isPending] = useActionState(createFoundation, {});
 
   useEffect(() => {
@@ -29,7 +32,7 @@ const FoundationInfo = ({ onSubmit }: FoundationInfoProps) => {
     if (state.message) {
       alert(state.message);
     }
-  }, [state, onSubmit]);
+  }, [alert, state, onSubmit]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
