@@ -2,14 +2,16 @@
 
 import { FormEvent, startTransition, useActionState, useEffect } from 'react';
 
+import colorPalette from '@/styles/tokens/colorPalette';
+
 import signupFoundation from '@/actions/auth/signupFoundation';
+
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
 import FormButton from '@/components/common/FormButton';
 import ImageUploader from '@/components/common/ImageUploader';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
-import colorPalette from '@/styles/tokens/colorPalette';
 
 interface AccountInfoProps {
   onSubmit: () => void;
@@ -54,6 +56,7 @@ const AccountInfo = ({ onSubmit }: AccountInfoProps) => {
                 placeholder="example@givetree.co.kr"
               />
             </Flex>
+
             <Flex flexDirection="column" gap="0.5rem">
               <Typography color={colorPalette.primary[600]} weight="semiBold">
                 비밀번호
