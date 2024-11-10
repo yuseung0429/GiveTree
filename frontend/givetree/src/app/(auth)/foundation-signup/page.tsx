@@ -6,9 +6,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import AccountInfo from './flows/AccountInfo';
 import FoundationInfo from './flows/FoundationInfo';
-import FoundationIntro from './flows/FoundationIntro';
 import ProgressIndicator from '@/components/common/ProgressIndicator';
 import Box from '@/components/common/Box';
+
+import * as s from '../Auth.css';
+import Flex from '@/components/common/Flex';
 
 export default function FoundationSignUp() {
   const [step, setStep] = useState<number>(0);
@@ -19,9 +21,11 @@ export default function FoundationSignUp() {
   };
 
   return (
-    <>
-      <ProgressIndicator value={step} max={3} />
-      <Box padding="1rem">
+    <Flex flexDirection="column" height="100%">
+      <div style={{ flex: '0 0 auto' }}>
+        <ProgressIndicator value={step} max={2} />
+      </div>
+      <Box padding="1rem" style={{ flex: '1 1 auto', overflow: 'auto' }}>
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={step}
@@ -29,17 +33,19 @@ export default function FoundationSignUp() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
+            style={{ height: '100%' }}
           >
-            {
-              [
-                <AccountInfo key={0} onSubmit={() => changeStep(1)} />,
-                <FoundationInfo key={1} onSubmit={() => changeStep(2)} />,
-                <FoundationIntro key={2} onSubmit={() => changeStep(0)} />,
-              ][step]
-            }
+            <div className={s.pageContainer} key={0}>
+              {
+                [
+                  <AccountInfo key={0} onSubmit={() => changeStep(1)} />,
+                  <FoundationInfo key={1} onSubmit={() => changeStep(0)} />,
+                ][step]
+              }
+            </div>
           </motion.div>
         </AnimatePresence>
       </Box>
-    </>
+    </Flex>
   );
 }
