@@ -16,10 +16,30 @@ export default function Page() {
       </header>
       <main style={{ backgroundColor: '#F5F5F5', padding: '1rem 0' }}>
         <Flex flexDirection="column" gap="1rem">
-          <CampaignItem />
-          <CampaignItem />
-          <CampaignItem />
-          <CampaignItem />
+          <CampaignItem
+            name="유기견 보호 캠페인"
+            startDate="2024.03.22"
+            endDate="2024.05.22"
+            targetFundraisingAmount={200000}
+            currentFundraisingAmount={150000}
+            titleImageUrl="/api/placeholder/400/400"
+          />
+          <CampaignItem
+            name="유기견 보호 캠페인"
+            startDate="2024.09.22"
+            endDate="2024.12.22"
+            targetFundraisingAmount={200000}
+            currentFundraisingAmount={300000}
+            titleImageUrl="/api/placeholder/400/400"
+          />
+          <CampaignItem
+            name="유기견 보호 캠페인"
+            startDate="2024.09.22"
+            endDate="2024.12.22"
+            targetFundraisingAmount={200000}
+            currentFundraisingAmount={100000}
+            titleImageUrl="/api/placeholder/400/400"
+          />
         </Flex>
       </main>
     </Layout>

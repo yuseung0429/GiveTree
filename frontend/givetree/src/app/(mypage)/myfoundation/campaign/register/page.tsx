@@ -3,6 +3,7 @@
 import AppBar from '@/components/common/AppBar';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
+import ImageUploader from '@/components/common/ImageUploader';
 import Layout from '@/components/common/Layout';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
@@ -15,6 +16,20 @@ export default function Page() {
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
   const [targetAmount, setTargetAmount] = useState<string>('');
+
+  const handleImageUpload = (url: string[]) => {
+    /**
+     * 이 콜백은 이미지가 업로드 될 때마다 호출됨.
+     * (3개의 이미지를 한번에 업로드하면 3번 호출됨)
+     * 업로드한 이미지의 주소들의 배열 형태로 주어짐
+     * example:
+     * ['https://s3.amazonaws.com/1.png', 'https://s3.amazonaws.com/2.png']
+     */
+    console.log(url);
+    /**
+     * 여기서 받은 url을 ref로 저장했다가 api 호출할 때 같이 주면 됨
+     */
+  };
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -118,9 +133,21 @@ export default function Page() {
             >
               대표사진 등록
             </Typography>
-            <Typography color={colorPalette.grey[600]}>
-              메인화면에 들어갈 대표사진을 등록해주세요.
+            <Typography
+              size={14}
+              color={colorPalette.grey[600]}
+              weight="medium"
+              style={{ marginBottom: '0.75rem' }}
+            >
+              메인화면에 들어갈 대표사진{' '}
+              <span
+                style={{ color: colorPalette.primary[500], fontWeight: '600' }}
+              >
+                1장
+              </span>
+              을 등록해주세요.
             </Typography>
+            <ImageUploader onUpload={handleImageUpload} maxFileCount={1} />
           </Flex>
 
           <Flex flexDirection="column" gap="0.25rem">
@@ -131,9 +158,21 @@ export default function Page() {
             >
               추가사진 등록
             </Typography>
-            <Typography color={colorPalette.grey[600]}>
-              상세페이지에 들어갈 사진을 등록해주세요.
+            <Typography
+              size={14}
+              color={colorPalette.grey[600]}
+              weight="medium"
+              style={{ marginBottom: '0.75rem' }}
+            >
+              상세페이지에 들어갈 사진을{' '}
+              <span
+                style={{ color: colorPalette.primary[500], fontWeight: '600' }}
+              >
+                최대 5장
+              </span>
+              까지 등록해주세요.
             </Typography>
+            <ImageUploader onUpload={handleImageUpload} />
           </Flex>
         </Flex>
       </main>

@@ -1,41 +1,106 @@
+'use client';
+
 import Flex from '@/components/common/Flex';
 import * as style from './CampaignItem.css';
 import Box from '@/components/common/Box';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
+import Image from 'next/image';
 
-export default function CampaignItem() {
+interface CampaignItemProps {
+  name: string;
+  startDate: string;
+  endDate: string;
+  targetFundraisingAmount: number;
+  currentFundraisingAmount: number;
+  titleImageUrl: string;
+}
+
+export default function CampaignItem({
+  name,
+  startDate,
+  endDate,
+  targetFundraisingAmount,
+  currentFundraisingAmount,
+  titleImageUrl,
+}: CampaignItemProps) {
+  const today = new Date();
+  const endDateTime = new Date(endDate);
+
+  // 캠페인 상태 확인
+  const isCompleted = endDateTime < today;
+  const campaignStatus = isCompleted ? '진행 완료' : '진행중';
+  const campaignStatusColor = isCompleted
+    ? colorPalette.secondary[400]
+    : colorPalette.primary[300];
+
+  // 목표 달성 상태 확인
+  const isTargetAchieved = currentFundraisingAmount >= targetFundraisingAmount;
+  const achievementStatus = isTargetAchieved ? '목표 달성' : '목표 미달성';
+  const achievementStatusColor = isTargetAchieved
+    ? colorPalette.primary[600]
+    : colorPalette.secondary[600];
+
+  // 금액 포맷팅 함수
+  const formatAmount = (amount: number) => {
+    return amount.toLocaleString('ko-KR') + '원';
+  };
   return (
     <Flex gap="1rem" className={style.container}>
       {/* 사진 */}
-      <Box className={style.imgbox}>d</Box>
+      <Box className={style.imgbox}>
+        <Image
+          src={titleImageUrl}
+          alt="캠페인사진"
+          fill
+          style={{ objectFit: 'cover' }}
+          sizes="125px"
+        />
+      </Box>
 
       {/* 설명 */}
       <Flex flexDirection="column" justifyContent="space-between">
+        {/* 캠페인명 */}
         <Typography size={18} weight="semiBold">
-          캠페인명
+          {name}
         </Typography>
-        <Typography color={colorPalette.grey[600]}>
-          2024.03.22 ~ 2024.05.22
+
+        {/* 날짜 */}
+        <Typography color={colorPalette.grey[800]} size={14}>
+          {startDate} ~ {endDate}
         </Typography>
-        <Typography weight="medium">목표 금액 : 200,000원</Typography>
-        <Typography weight="medium">
-          모금 금액 : <span className={style.money}>200,000원</span>
+
+        {/* 목표금액 */}
+        <Typography weight="medium" color={colorPalette.grey[800]}>
+          목표 금액 :{' '}
+          <span className={style.money2}>
+            {formatAmount(targetFundraisingAmount)}
+          </span>
         </Typography>
+
+        {/* 모금금액 */}
+        <Typography weight="medium" color={colorPalette.grey[800]}>
+          모금 금액 :{' '}
+          <span className={style.money}>
+            {formatAmount(currentFundraisingAmount)}
+          </span>
+        </Typography>
+
+        {/* 태그 */}
         <Flex gap={8} style={{ marginTop: '4px' }}>
           <Box
             padding="5px 10px"
-            backgroundColor={colorPalette.primary[300]}
+            backgroundColor={campaignStatusColor}
             className={style.tag}
           >
-            진행중
+            {campaignStatus}
           </Box>
           <Box
             padding="5px 10px"
-            backgroundColor={colorPalette.primary[600]}
+            backgroundColor={achievementStatusColor}
             className={style.tag}
           >
-            목표달성
+            {achievementStatus}
           </Box>
         </Flex>
       </Flex>

@@ -10,9 +10,10 @@ export const imgbox = style({
   width: '38%',
   aspectRatio: '1',
   maxWidth: '125px',
-  backgroundColor: 'skyblue',
+  backgroundColor: '#bae6db',
   borderRadius: '5px',
   overflow: ' hidden',
+  position: 'relative',
 });
 
 export const tag = style({
@@ -23,5 +24,9 @@ export const tag = style({
 
 export const money = style({
   color: colorPalette.primary[500],
-  fontWeight: '700',
+  fontWeight: '600',
+});
+
+export const money2 = style({
+  fontWeight: '600',
 });
