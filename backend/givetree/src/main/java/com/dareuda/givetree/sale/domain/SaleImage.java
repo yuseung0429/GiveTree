@@ -3,8 +3,11 @@ package com.dareuda.givetree.sale.domain;
 import com.dareuda.givetree.media.domain.Image;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 public class SaleImage {
@@ -24,7 +27,8 @@ public class SaleImage {
     @JoinColumn(name = "image_id")
     private Image image;
 
-    @NotNull
-    @Column
-    private int imageOrder;
+    public SaleImage(Sale sale, Image image) {
+        this.sale = sale;
+        this.image = image;
+    }
 }

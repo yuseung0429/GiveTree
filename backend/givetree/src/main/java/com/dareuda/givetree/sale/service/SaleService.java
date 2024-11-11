@@ -13,6 +13,7 @@ public class SaleService {
 
     private final SaleDetailReader saleDetailReader;
     private final SaleHitsUpdater saleHitsUpdater;
+    private final SaleAppender saleAppender;
 
     public SaleDetail readSale(long saleId) {
         saleHitsUpdater.update(saleId);
@@ -24,5 +25,9 @@ public class SaleService {
             Pageable pageable
     ) {
         return saleDetailReader.readBySearch(salesSearchQuery, pageable);
+    }
+
+    public void appendSale(long memberId, SaleCommand command) {
+        saleAppender.append(memberId, command);
     }
 }
