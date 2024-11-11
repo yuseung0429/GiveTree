@@ -1,19 +1,13 @@
 import Box from '@/components/common/Box';
 import colorPalette from '@/styles/tokens/colorPalette';
-import * as styles from '../../../mypage/mypage.css';
+import * as styles from '../../mypage/mypage.css';
 import Img from '@/assets/images/profile.png';
 import Typography from '@/components/common/Typography';
-import React, { use } from 'react';
+import React from 'react';
 import GiveFoot from '@/components/myPage/GiveFoot';
 import EditUser from '@/components/myPage/Profile/EditUser';
 
-export default function UserEdit({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const unwrappedParams = use(params);
-  const userId = parseInt(unwrappedParams.id, 10);
+export default function UserEdit() {
   const name = '눈사람';
   const profileImageUrl = Img;
   const email = 'ssafy123@naver.com';
@@ -46,7 +40,7 @@ export default function UserEdit({
 
         <Box className={styles.subContainer}>
           <Typography as="h3" weight="medium">
-            {userId}번째 GIVE TREE 회원입니다.
+            GIVE TREE 회원이 되신 것을 환영합니다.
           </Typography>
         </Box>
       </div>

@@ -12,15 +12,14 @@ import Link from 'next/link';
 
 interface MyTabProps {
   role: string;
-  userId: string;
 }
 
-const MyTab = ({ role, userId }: MyTabProps) => {
+const MyTab = ({ role }: MyTabProps) => {
   return (
     <>
       <Link
         className={styles.tab}
-        href={role === 'user' ? '' : `/edit/foundation/${userId}`}
+        href={role === 'user' ? '' : '/edit/foundation'}
       >
         <div className={styles.IconBox}>
           {role === 'user' ? (

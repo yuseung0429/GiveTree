@@ -5,7 +5,7 @@ import colorPalette from '@/styles/tokens/colorPalette';
 
 interface CampaignInfoProps {
   introduction: string;
-  introduceImage: string;
+  introduceImage: string[];
 }
 
 const CampaignInfo = ({ introduction, introduceImage }: CampaignInfoProps) => {
@@ -20,12 +20,15 @@ const CampaignInfo = ({ introduction, introduceImage }: CampaignInfoProps) => {
         {introduction}
       </Typography>
       <div className={styles.introduceImage}>
-        <Image
-          src={introduceImage}
-          alt="introduce image"
-          width={300}
-          height={420}
-        />
+        {introduceImage.map((image, index) => (
+          <Image
+            key={index}
+            src={image}
+            alt="introduce image"
+            width={300}
+            height={420}
+          />
+        ))}
       </div>
     </div>
   );

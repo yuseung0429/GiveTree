@@ -9,9 +9,9 @@ interface CampaignCardProps {
   title: string;
   foundation: string;
   progress: number;
-  currentAmount: number;
-  goalAmount: number;
-  imageUrl: string;
+  currentFundraisingAmount: number;
+  targetFundraisingAmount: number;
+  titleImageUrl: string;
   totalCampaign: number;
   currentIndex: number;
 }
@@ -21,9 +21,9 @@ const CampaignCard = ({
   title,
   foundation,
   progress,
-  currentAmount,
-  goalAmount,
-  imageUrl,
+  currentFundraisingAmount,
+  targetFundraisingAmount,
+  titleImageUrl,
   totalCampaign,
   currentIndex,
 }: CampaignCardProps) => {
@@ -32,7 +32,7 @@ const CampaignCard = ({
       href={`/campaign/${id}`}
       className={styles.campaignCard}
       style={{
-        backgroundImage: `url(${imageUrl})`,
+        backgroundImage: `url(${titleImageUrl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -65,10 +65,10 @@ const CampaignCard = ({
         <ProgressBar progress={progress} />
         <div className={styles.amountContainer}>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {currentAmount.toLocaleString()}원
+            {currentFundraisingAmount.toLocaleString()}원
           </Typography>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {goalAmount.toLocaleString()}원 목표
+            {targetFundraisingAmount.toLocaleString()}원 목표
           </Typography>
         </div>
       </div>

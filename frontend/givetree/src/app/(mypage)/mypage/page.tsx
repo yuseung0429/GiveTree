@@ -10,8 +10,6 @@ import MyTab from '@/components/myPage/MyTab';
 import Link from 'next/link';
 
 export default function MyPage() {
-  const id = 1;
-  const userId = id.toString();
   const role = 'user';
   const name = '눈사람';
   const totalDonation = 35000;
@@ -21,14 +19,13 @@ export default function MyPage() {
     <div className={styles.Wrapper}>
       <div className={styles.mainContainer}>
         {role === 'user' && (
-          <Link className={styles.modifyButton} href={`/edit/user/${userId}`}>
+          <Link className={styles.modifyButton} href={`/edit/user`}>
             <HiOutlinePencilSquare size={24} />
           </Link>
         )}
         <Box className={styles.profileConatainer}>
           <Profile
             role={role}
-            userId={userId}
             name={name}
             image={profileImageUrl}
             totalDonation={totalDonation}
@@ -45,7 +42,7 @@ export default function MyPage() {
         ></div>
 
         <Box className={styles.tabBox}>
-          <MyTab role={role} userId={userId} />
+          <MyTab role={role} />
         </Box>
 
         <div

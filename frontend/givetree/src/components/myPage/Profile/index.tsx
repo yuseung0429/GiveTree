@@ -7,7 +7,6 @@ import Image, { StaticImageData } from 'next/image';
 
 interface ProfileProps {
   role: string;
-  userId: string;
   name: string;
   image: StaticImageData;
   totalDonation: number;
@@ -16,7 +15,6 @@ interface ProfileProps {
 
 const Profile = ({
   role,
-  userId,
   name,
   image,
   totalDonation,
@@ -54,7 +52,7 @@ const Profile = ({
 
       <Link
         className={styles.footButton}
-        href={role === 'user' ? `/givefoot/${userId}` : ''}
+        href={role === 'user' ? '/givefoot' : ''}
       >
         <Button variant="outlined" fullWidth>
           {role === 'user' ? '기부발자국 확인하기' : '후원 내역 확인하기'}

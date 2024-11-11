@@ -43,6 +43,13 @@ export const title = style({
   marginBottom: '8px',
 });
 
+export const stickyBox = style({
+  display: 'flex',
+  position: 'sticky',
+  top: '0',
+  zIndex: '10'
+})
+
 export const subTitle = style({
   marginBottom: '10px',
 });
