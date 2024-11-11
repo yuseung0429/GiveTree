@@ -19,10 +19,11 @@ public class AccountInfoReader {
     private AccountInfo convertAccount(Account account) {
         return AccountInfo.builder()
                 .accountNumber(account.getAccountNumber())
-                .accountName(account.getName())
+                .name(account.getName())
                 .createdAt(account.getCreatedAt())
                 .expiryAt(account.getExpiryAt())
                 .bankName(account.getBank().getName())
+                .bankCode(account.getBank().getCode())
                 .build();
     }
 }

@@ -38,6 +38,7 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         initializeBankCode();
+        initializeDataSql();
     }
 
     private void initializeBankCode() {
@@ -62,14 +63,5 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
         } catch (Exception e) {
             throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR, e);
         }
-    }
-
-    private void createTestMember() {
-        memberCreator.create(CreateMemberCommand.builder()
-                        .email("test@test.com")
-                        .password("test123")
-                        .name("유저테스트계정")
-                        .role(Role.USER)
-                        .build());
     }
 }
