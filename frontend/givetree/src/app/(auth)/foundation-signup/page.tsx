@@ -1,23 +1,46 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
+import { useRouter } from 'next/navigation';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
+import useDialog from '@/hooks/useDialog';
+
+import Box from '@/components/common/Box';
+import Flex from '@/components/common/Flex';
+import ProgressIndicator from '@/components/common/ProgressIndicator';
 import AccountInfo from './flows/AccountInfo';
 import FoundationInfo from './flows/FoundationInfo';
-import ProgressIndicator from '@/components/common/ProgressIndicator';
-import Box from '@/components/common/Box';
 
 import * as s from '../Auth.css';
-import Flex from '@/components/common/Flex';
 
 export default function FoundationSignUp() {
+  const { alert } = useDialog();
+
+  const router = useRouter();
+
   const [step, setStep] = useState<number>(0);
+
+  const formDataRef = useRef<FormData>(new FormData());
 
   const changeStep = (step: number) => {
     navigator.vibrate(10);
     setStep(step);
+  };
+
+  const handleAccountInfoSubmit = (formData: FormData) => {
+    formData.forEach((value, key) => {
+      formDataRef.current.set(key, value);
+    });
+
+    changeStep(1);
+  };
+
+  const handleFoundationInfoSubmit = async () => {
+    await alert('재단 계정 가입을 완료했습니다.');
+    router.push('/foundation-signin');
   };
 
   return (
@@ -38,8 +61,17 @@ export default function FoundationSignUp() {
             <div className={s.pageContainer} key={0}>
               {
                 [
-                  <AccountInfo key={0} onSubmit={() => changeStep(1)} />,
-                  <FoundationInfo key={1} onSubmit={() => changeStep(0)} />,
+                  <AccountInfo
+                    key={0}
+                    formData={formDataRef.current}
+                    onSubmit={handleAccountInfoSubmit}
+                  />,
+                  <FoundationInfo
+                    key={1}
+                    formData={formDataRef.current}
+                    onBackClick={() => setStep(0)}
+                    onSubmit={handleFoundationInfoSubmit}
+                  />,
                 ][step]
               }
             </div>

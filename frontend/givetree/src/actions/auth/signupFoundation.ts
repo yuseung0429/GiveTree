@@ -5,7 +5,17 @@ import fetchWrapper from '@/lib/fetchWrapper';
 import { FormState } from '@/types/formState';
 
 type SignupFoundationState = FormState<
-  'email' | 'password' | 'password_check' | 'name' | 'profileImageUrl'
+  | 'email'
+  | 'password'
+  | 'password_check'
+  | 'name'
+  | 'profileImageUrl'
+  | 'introduction'
+  | 'corporateRegistrationNumber'
+  | 'phoneNumber'
+  | 'address'
+  | 'titleImageUrl'
+  | 'imageUrls'
 >;
 
 export default async function signupFoundation(
@@ -15,10 +25,17 @@ export default async function signupFoundation(
   const email = formData.get('email'),
     password = formData.get('password'),
     name = formData.get('name'),
-    profileImageUrl = formData.get('profileImageUrl');
+    profileImageUrl = formData.get('profileImageUrl'),
+    introduction = formData.get('introduction'),
+    corporateRegistrationNumber = formData.get('corporateRegistrationNumber'),
+    phoneNumber = formData.get('phoneNumber'),
+    address = formData.get('address'),
+    titleImageUrl = formData.get('titleImageUrl'),
+    imageUrls = formData.getAll('imageUrls'),
+    categories = (formData.get('categories') as string).split(',');
 
   try {
-    const response = await fetchWrapper(`/members`, {
+    const response = await fetchWrapper(`/foundations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,11 +45,18 @@ export default async function signupFoundation(
         password,
         name,
         profileImageUrl,
+        introduction,
+        corporateRegistrationNumber,
+        phoneNumber,
+        address,
+        titleImageUrl,
+        imageUrls,
+        categories,
       }),
     });
 
     switch (response.status) {
-      case 200:
+      case 201:
         return { success: true };
       default:
         return {
