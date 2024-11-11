@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
 import '@/styles/global.css';
+
 import { ModalProvider } from '@/hooks/useModal';
 
 const pretendard = localFont({
