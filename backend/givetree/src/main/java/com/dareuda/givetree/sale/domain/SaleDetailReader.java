@@ -4,6 +4,7 @@ import com.dareuda.givetree.sale.infrastructure.SaleCustomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class SaleDetailReader {
     private final SaleReader saleReader;
     private final SaleCustomRepository saleCustomRepository;
 
+    @Transactional(readOnly = true)
     public SaleDetail read(long saleId) {
         Sale sale = saleReader.read(saleId);
         List<String> imageUrls = sale.getImages().stream()
