@@ -6,9 +6,10 @@ import useDialog from '@/hooks/useDialog';
 import colorPalette from '@/styles/tokens/colorPalette';
 import typography from '@/styles/tokens/typography';
 
-import createFoundation from '@/actions/auth/createFoundation';
+import signupFoundation from '@/actions/auth/signupFoundation';
 
 import Box from '@/components/common/Box';
+import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import FormButton from '@/components/common/FormButton';
 import ImageUploader from '@/components/common/ImageUploader';
@@ -16,13 +17,19 @@ import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
 
 interface FoundationInfoProps {
+  formData: FormData;
+  onBackClick: () => void;
   onSubmit: () => void;
 }
 
-const FoundationInfo = ({ onSubmit }: FoundationInfoProps) => {
+const FoundationInfo = ({
+  formData,
+  onBackClick,
+  onSubmit,
+}: FoundationInfoProps) => {
   const { alert } = useDialog();
 
-  const [state, action, isPending] = useActionState(createFoundation, {});
+  const [state, action, isPending] = useActionState(signupFoundation, {});
 
   useEffect(() => {
     if (state.success) {
@@ -36,16 +43,36 @@ const FoundationInfo = ({ onSubmit }: FoundationInfoProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    startTransition(() => action(new FormData(e.target as HTMLFormElement)));
+
+    const signupFormData = new FormData(e.target as HTMLFormElement);
+
+    formData?.forEach((value, key) => {
+      signupFormData.set(key, value);
+    });
+
+    startTransition(() => action(signupFormData));
   };
   return (
     <Flex flexDirection="column">
-      <Flex flexDirection="column" gap="0.5rem">
-        <Typography as="h2" weight="bold">
-          재단 정보
-        </Typography>
-        <Typography>재단에 관한 정보를 입력해 주세요.</Typography>
+      <Flex alignItems="center" justifyContent="space-between" gap="0.5rem">
+        <Flex flexDirection="column" gap="0.5rem">
+          <Typography as="h2" weight="semiBold">
+            재단 정보
+          </Typography>
+          <Typography>재단에 관한 정보를 입력해 주세요.</Typography>
+        </Flex>
+        <div>
+          <Button
+            size="sm"
+            variant="outlined"
+            color="secondary"
+            onClick={onBackClick}
+          >
+            이전 단계로
+          </Button>
+        </div>
       </Flex>
+
       <Box marginTop="1.5rem">
         <form onSubmit={handleSubmit}>
           <Flex flexDirection="column" gap="1.5rem">
@@ -108,6 +135,16 @@ const FoundationInfo = ({ onSubmit }: FoundationInfoProps) => {
                 재단을 소개할 수 있는 이미지가 있으면 추가해 주세요.
               </Typography>
               <ImageUploader name="imageUrls" maxFileCount={5} />
+            </Flex>
+
+            <Flex flexDirection="column" gap="0.5rem">
+              <Typography color={colorPalette.primary[600]} weight="semiBold">
+                카테고리
+              </Typography>
+              <Typography size={typography.size.sm}>
+                쉼표(,)로 구분하여 여러 개의 카테고리를 등록할 수 있습니다.
+              </Typography>
+              <TextField name="categories" size="lg" />
             </Flex>
 
             <FormButton size="lg" pending={isPending} fullWidth>
