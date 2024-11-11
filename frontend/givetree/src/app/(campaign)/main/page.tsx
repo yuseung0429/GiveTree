@@ -1,6 +1,7 @@
 import * as styles from './main.css';
 import CampaignCard from '@/components/campaign/Main/CapaignCard';
 import Typography from '@/components/common/Typography';
+
 import campaigns from '@/mock/campaigns.json';
 
 const today = new Date();
@@ -30,8 +31,8 @@ export default function Home() {
               currentFundraisingAmount={campaign.currentFundraisingAmount}
               targetFundraisingAmount={campaign.targetFundraisingAmount}
               titleImageUrl={campaign.titleImageUrl}
-              totalCampaign = {campaigns.length}
-              currentIndex = {index}
+              totalCampaign={campaigns.length}
+              currentIndex={index}
             />
           ))}
         </div>
@@ -52,8 +53,8 @@ export default function Home() {
               currentFundraisingAmount={campaign.currentFundraisingAmount}
               targetFundraisingAmount={campaign.targetFundraisingAmount}
               titleImageUrl={campaign.titleImageUrl}
-              totalCampaign = {endingSoonCampaigns.length}
-              currentIndex = {index}
+              totalCampaign={endingSoonCampaigns.length}
+              currentIndex={index}
             />
           ))}
         </div>

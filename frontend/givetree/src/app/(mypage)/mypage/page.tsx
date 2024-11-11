@@ -9,7 +9,7 @@ import Profile from '@/components/myPage/Profile';
 import MyTab from '@/components/myPage/MyTab';
 import Link from 'next/link';
 
-export default function MyPage() {
+export default async function MyPage() {
   const role = 'user';
   const name = '눈사람';
   const totalDonation = 35000;

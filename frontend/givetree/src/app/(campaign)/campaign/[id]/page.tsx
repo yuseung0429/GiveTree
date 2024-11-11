@@ -5,7 +5,7 @@ import * as styles from './[id].css';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import TabButton from '@/components/common/Tab';
-import { use, useEffect, useRef, useState } from 'react';
+import { use, useState } from 'react';
 import CampaignInfo from '@/components/campaign/CampaignInfo';
 import CampaignMoney from '@/components/campaign/CampaignMoney';
 import campaigns from '@/mock/campaigns.json';
@@ -18,20 +18,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const campaignData = campaigns.find((data) => data.id === campaignId);
   const [selectedCategory, setSelectedCategory] = useState('소개');
   const width = `calc(100% / ${categories.length})`;
-  const tabRef = useRef<HTMLDivElement>(null);
-  const [isSticky, setIsSticky] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (tabRef.current) {
-        const offsetTop = tabRef.current.getBoundingClientRect().top;
-        setIsSticky(offsetTop <= 60);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const {
     title,
@@ -72,39 +58,38 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         />
       </div>
       <div style={{ padding: '0.5rem 1rem' }}>
-        <div ref={tabRef} className={`${isSticky ? styles.stickyBox : ''}`}>
-          <Typography
-            as="h2"
-            weight="semiBold"
-            color={colorPalette.text[900]}
-            className={styles.title}
-          >
-            {title}
-          </Typography>
+        <Typography
+          as="h2"
+          weight="semiBold"
+          color={colorPalette.text[900]}
+          className={styles.title}
+        >
+          {title}
+        </Typography>
 
-          <Typography
-            as="h4"
-            weight="semiBold"
-            color={colorPalette.text[600]}
-            className={styles.subTitle}
-          >
-            {foundation}
+        <Typography
+          as="h4"
+          weight="semiBold"
+          color={colorPalette.text[600]}
+          className={styles.subTitle}
+        >
+          {foundation}
+        </Typography>
+        <div className={styles.periodWrapper}>
+          <Typography as="h4" weight="medium" color={colorPalette.text[900]}>
+            모금기간 &nbsp;|&nbsp; {startDate} ~ {endDate}
           </Typography>
-          <div className={styles.periodWrapper}>
-            <Typography as="h4" weight="medium" color={colorPalette.text[900]}>
-              모금기간 &nbsp;|&nbsp; {startDate} ~ {endDate}
-            </Typography>
-          </div>
-          {categories.map((category) => (
-            <TabButton
-              key={category}
-              label={category}
-              isSelected={selectedCategory === category}
-              onClick={() => setSelectedCategory(category)}
-              width={width}
-            />
-          ))}
         </div>
+
+        {categories.map((category) => (
+          <TabButton
+            key={category}
+            label={category}
+            isSelected={selectedCategory === category}
+            onClick={() => setSelectedCategory(category)}
+            width={width}
+          />
+        ))}
 
         {selectedCategory === '소개' && (
           <CampaignInfo

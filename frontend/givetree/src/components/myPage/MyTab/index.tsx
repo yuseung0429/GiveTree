@@ -19,7 +19,7 @@ const MyTab = ({ role }: MyTabProps) => {
     <>
       <Link
         className={styles.tab}
-        href={role === 'user' ? '' : '/edit/foundation'}
+        href={role === 'user' ? '/donationusage' : '/edit/foundation'}
       >
         <div className={styles.IconBox}>
           {role === 'user' ? (

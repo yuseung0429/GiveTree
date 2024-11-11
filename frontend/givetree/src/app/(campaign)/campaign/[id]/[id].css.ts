@@ -46,9 +46,9 @@ export const title = style({
 export const stickyBox = style({
   display: 'flex',
   position: 'sticky',
-  top: '0',
-  zIndex: '10'
-})
+  top: '50px',
+  zIndex: '10',
+});
 
 export const subTitle = style({
   marginBottom: '10px',
@@ -61,13 +61,3 @@ export const periodWrapper = style({
   borderRadius: '12px',
   padding: '0.75rem 0.5rem',
 });
-
-// export const introduction = style({
-//   backgroundColor: 'rgb(245, 245, 245)',
-//   padding: '0.75rem 0.5rem',
-//   lineHeight: 1.3,
-//   whiteSpace: 'pre-line',
-//   borderRadius: '5px',
-//   marginBottom: '10px',
-//   textAlign: 'center',
-// });

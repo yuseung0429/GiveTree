@@ -31,9 +31,9 @@ export default async function Page({
             title={campaign.title}
             foundation={campaign.foundation}
             progress={campaign.progress}
-            currentAmount={campaign.currentAmount}
-            goalAmount={campaign.goalAmount}
-            imageUrl={campaign.imageUrl}
+            currentFundraisingAmount={campaign.currentFundraisingAmount}
+            targetFundraisingAmount={campaign.targetFundraisingAmount}
+            titleImageUrl={campaign.titleImageUrl}
             totalCampaign={filteredCampaigns.length}
             currentIndex={index}
           />

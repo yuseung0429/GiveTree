@@ -52,7 +52,7 @@ const Profile = ({
 
       <Link
         className={styles.footButton}
-        href={role === 'user' ? '/givefoot' : ''}
+        href={role === 'user' ? '/givefoot' : '/myfoundation/donation'}
       >
         <Button variant="outlined" fullWidth>
           {role === 'user' ? '기부발자국 확인하기' : '후원 내역 확인하기'}
