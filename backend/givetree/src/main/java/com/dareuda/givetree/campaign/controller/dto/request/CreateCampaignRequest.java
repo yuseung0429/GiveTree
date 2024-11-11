@@ -7,14 +7,12 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
 public class CreateCampaignRequest {
-    @NotNull
-    private final long foundationId;
-
     @NotBlank
     private final String name;
 
@@ -26,14 +24,13 @@ public class CreateCampaignRequest {
 
     private final String titleImageUrl;
 
-    private final List<String> imageUrls;
+    private final List<String> imageUrls = new ArrayList<>();
 
     @NotNull
     private final long targetFundraisingAmount;
 
     public CreateCampaignCommand convertToCommand() {
         return CreateCampaignCommand.builder()
-                .foundationId(foundationId)
                 .name(name)
                 .startDate(startDate)
                 .endDate(endDate)

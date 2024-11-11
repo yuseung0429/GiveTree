@@ -17,10 +17,4 @@ public class FoundationReader {
         return foundationRepository.findById(foundationId)
                 .orElseThrow(() -> new RestApiException(FoundationErrorCode.FOUNDATION_NOT_FOUND));
     }
-
-    @Transactional(readOnly = true)
-    public Foundation readByMemberId(long memberId) {
-        return foundationRepository.findByOwnerId(memberId)
-                .orElseThrow(() -> new RestApiException(FoundationErrorCode.FOUNDATION_NOT_FOUND));
-    }
 }

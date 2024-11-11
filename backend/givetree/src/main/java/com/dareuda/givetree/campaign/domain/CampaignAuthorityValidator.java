@@ -12,10 +12,10 @@ public class CampaignAuthorityValidator {
     private final CampaignReader campaignReader;
 
     @Transactional(readOnly = true)
-    public void validateModifyAuthority(long memberId, long campaignId) {
+    public void validateModifyAuthority(long foundationId, long campaignId) {
         long campaignFoundationOwnerId = campaignReader.read(campaignId).getFoundation().getId();
 
-        if (memberId != campaignFoundationOwnerId) {
+        if (foundationId != campaignFoundationOwnerId) {
             throw new RestApiException(CommonErrorCode.FORBIDDEN, "캠페인 변경 권한이 없습니다.");
         }
     }

@@ -15,7 +15,15 @@ public class FoundationDetail {
     private final Long id;
 
     @NonNull
-    private final Long ownerId;
+    private final String email;
+
+    @NonNull
+    private final String name;
+
+    @NonNull
+    private final String role;
+
+    private final String profileImageUrl;
 
     @NonNull
     private final String introduction;
@@ -38,4 +46,10 @@ public class FoundationDetail {
     private final String titleImageUrl;
 
     private final List<String> imageUrls;
+
+    @NonNull
+    private final Integer holdingCampaignCount;
+
+    @NonNull
+    private final List<String> categories;
 }

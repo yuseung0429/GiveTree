@@ -12,6 +12,6 @@ public class FoundationDeleter {
     @Transactional
     public void delete(long foundationId) {
         Foundation foundation = foundationReader.read(foundationId);
-        foundation.delete();
+        foundation.getMember().delete();
     }
 }

@@ -21,20 +21,12 @@ public class CampaignCreator {
     private final ImageAppender imageAppender;
 
     @Transactional
-    public long create(CreateCampaignCommand command) {
-        Foundation foundation = foundationReader.read(command.getFoundationId());
+    public long create(long foundationId, CreateCampaignCommand command) {
+        Foundation foundation = foundationReader.read(foundationId);
 
-        Image titleImage = null;
-        List<Image> images = new ArrayList<>();
 
-        if (command.getTitleImageUrl() != null) {
-            titleImage = imageAppender.append(command.getTitleImageUrl());
-        }
-        if (command.getImageUrls() != null) {
-            command.getImageUrls().forEach(imageUrl ->
-                    images.add(imageAppender.append(imageUrl))
-            );
-        }
+        Image titleImage = command.getTitleImageUrl() != null ? imageAppender.append(command.getTitleImageUrl()) : null;
+        List<Image> images = command.getImageUrls().stream().map(imageAppender::append).toList();
 
         Campaign campaign = campaignRepository.save(
                 Campaign.createCampaign(

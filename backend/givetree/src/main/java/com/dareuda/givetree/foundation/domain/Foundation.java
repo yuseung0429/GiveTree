@@ -1,6 +1,6 @@
 package com.dareuda.givetree.foundation.domain;
 
-import com.dareuda.givetree.common.domain.BaseEntity;
+import com.dareuda.givetree.category.domain.Category;
 import com.dareuda.givetree.media.domain.Image;
 import com.dareuda.givetree.member.domain.Member;
 import jakarta.persistence.*;
@@ -10,22 +10,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Foundation extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "foundation_id")
+public class Foundation {
+    @Id
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     @NotNull
-    private Member owner;
+    private Member member;
 
     @Column
     @NotNull
@@ -62,9 +62,12 @@ public class Foundation extends BaseEntity {
     @OneToMany(mappedBy = "foundation", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<FoundationImage> images = new ArrayList<>();
 
-    public static Foundation createFoundation(Member owner, String introduction, String corporateRegistrationNumber, String phoneNumber, String address, Image titleImage, List<Image> images) {
+    @OneToMany(mappedBy = "foundation", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<FoundationCategory> categories = new ArrayList<>();
+
+    public static Foundation createFoundation(Member member, String introduction, String corporateRegistrationNumber, String phoneNumber, String address, Image titleImage, List<Image> images, List<Category> categories) {
         Foundation foundation = new Foundation();
-        foundation.owner = owner;
+        foundation.member = member;
         foundation.introduction = introduction;
         foundation.corporateRegistrationNumber = corporateRegistrationNumber;
         foundation.phoneNumber = phoneNumber;
@@ -72,13 +75,11 @@ public class Foundation extends BaseEntity {
         foundation.titleImage = titleImage;
 
         images.forEach(foundation::addImage);
+        categories.forEach(foundation::addCategory);
 
         return foundation;
     }
 
-    public void updateOwner(Member owner) {
-        this.owner = owner;
-    }
     public void updateIntroduction(String introduction) {
         this.introduction = introduction;
     }
@@ -105,7 +106,17 @@ public class Foundation extends BaseEntity {
         FoundationImage foundationImage = new FoundationImage(this, image, nextImageOrderSequence++);
         images.add(foundationImage);
     }
-    public void deleteImage(UUID imageId) {
-        images.removeIf(foundationImage -> foundationImage.getImage().getId().equals(imageId));
+    public void deleteImages(List<Integer> removeImageOrders) {
+        removeImageOrders.sort(Collections.reverseOrder());
+        removeImageOrders.forEach(i -> images.remove(i));
+        nextImageOrderSequence = images.size() + 1;
+    }
+
+    public void addCategory(Category category) {
+        FoundationCategory foundationCategory = new FoundationCategory(this, category);
+        categories.add(foundationCategory);
+    }
+    public void deleteCategory(String category) {
+        categories.removeIf(foundationCategory -> foundationCategory.getCategory().getName().equals(category));
     }
 }
