@@ -38,5 +38,4 @@ next-env.d.ts
 
 *storybook.log
 *.map
-workbox-*.js
-sw.js
+certificates
