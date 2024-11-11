@@ -1,4 +1,4 @@
-package com.dareuda.givetree.member.domain.dto;
+package com.dareuda.givetree.foundation.domain.dto;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,8 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @Builder
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class UpdateMemberCommand {
-    private final String password;
+public class FoundationSearchFilter {
     private final String name;
-    private final String profileImageUrl;
+    private final String category;
 }

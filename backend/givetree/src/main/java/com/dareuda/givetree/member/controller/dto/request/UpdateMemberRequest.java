@@ -9,11 +9,13 @@ import lombok.RequiredArgsConstructor;
 public class UpdateMemberRequest {
     private final String password;
     private final String name;
-    private final String phoneNumber;
-    private final String address;
     private final String profileImageUrl;
 
     public UpdateMemberCommand convertToCommand() {
-        return new UpdateMemberCommand(password, name, phoneNumber, address, profileImageUrl);
+        return UpdateMemberCommand.builder()
+                .password(password)
+                .name(name)
+                .profileImageUrl(profileImageUrl)
+                .build();
     }
 }

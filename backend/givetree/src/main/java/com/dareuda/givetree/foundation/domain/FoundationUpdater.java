@@ -3,6 +3,7 @@ package com.dareuda.givetree.foundation.domain;
 import com.dareuda.givetree.foundation.domain.dto.UpdateFoundationCommand;
 import com.dareuda.givetree.media.domain.Image;
 import com.dareuda.givetree.media.domain.ImageAppender;
+import com.dareuda.givetree.member.domain.MemberUpdater;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,10 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class FoundationUpdater {
     private final FoundationReader foundationReader;
     private final ImageAppender imageAppender;
+    private final MemberUpdater memberUpdater;
 
     @Transactional
     public void update(long foundationId, UpdateFoundationCommand command) {
         Foundation foundation = foundationReader.read(foundationId);
+
+        memberUpdater.update(foundationId, command.getUpdateMemberCommand());
 
         if (command.getIntroduction() != null) {
             foundation.updateIntroduction(command.getIntroduction());
@@ -38,8 +42,8 @@ public class FoundationUpdater {
                     foundation.addImage(imageAppender.append(newImageUrl))
             );
         }
-        if (command.getDeleteImageIds() != null) {
-            command.getDeleteImageIds().forEach(foundation::deleteImage);
+        if (command.getDeleteImageOrders() != null) {
+            foundation.deleteImages(command.getDeleteImageOrders());
         }
     }
 }

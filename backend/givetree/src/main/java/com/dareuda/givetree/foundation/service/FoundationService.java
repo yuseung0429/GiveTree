@@ -1,9 +1,12 @@
 package com.dareuda.givetree.foundation.service;
 
 import com.dareuda.givetree.foundation.domain.*;
+import com.dareuda.givetree.foundation.domain.dto.FoundationSearchFilter;
 import com.dareuda.givetree.foundation.domain.dto.UpdateFoundationCommand;
 import com.dareuda.givetree.foundation.domain.dto.CreateFoundationCommand;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,21 +16,17 @@ public class FoundationService {
     private final FoundationDetailReader foundationDetailReader;
     private final FoundationUpdater foundationUpdater;
     private final FoundationDeleter foundationDeleter;
-    private final FoundationAuthorityValidator foundationAuthorityValidator;
+    private final FoundationDetailSearcher foundationDetailSearcher;
 
-    public long createFoundation(long memberId, CreateFoundationCommand command) {
-        return foundationCreator.create(memberId, command);
+    public long createFoundation(CreateFoundationCommand command) {
+        return foundationCreator.create(command).getId();
     }
 
-    public void updateFoundation(long memberId, long foundationId, UpdateFoundationCommand command) {
-        foundationAuthorityValidator.validateModifyAuthority(memberId, foundationId);
-
+    public void updateFoundation(long foundationId, UpdateFoundationCommand command) {
         foundationUpdater.update(foundationId, command);
     }
 
-    public void deleteFoundation(long memberId, long foundationId) {
-        foundationAuthorityValidator.validateModifyAuthority(memberId, foundationId);
-
+    public void deleteFoundation(long foundationId) {
         foundationDeleter.delete(foundationId);
     }
 
@@ -35,7 +34,7 @@ public class FoundationService {
         return foundationDetailReader.read(foundationId);
     }
 
-    public FoundationDetail getFoundationDetailByMemberId(long memberId) {
-        return foundationDetailReader.readByMemberId(memberId);
+    public Page<FoundationDetail> searchFoundationDetail(FoundationSearchFilter filter, Pageable pageable) {
+        return foundationDetailSearcher.searchFoundations(filter, pageable);
     }
 }

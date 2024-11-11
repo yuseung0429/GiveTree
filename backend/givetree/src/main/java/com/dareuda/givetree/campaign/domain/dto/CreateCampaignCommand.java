@@ -10,9 +10,6 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CreateCampaignCommand {
     @NonNull
-    private final Long foundationId;
-
-    @NonNull
     private final String name;
 
     @NonNull
@@ -26,5 +23,6 @@ public class CreateCampaignCommand {
 
     private final String titleImageUrl;
 
+    @NonNull
     private final List<String> imageUrls;
 }

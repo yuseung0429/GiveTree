@@ -23,6 +23,8 @@ services:
       MYSQL_DATABASE: givetree
       MYSQL_ROOT_PASSWORD: givetreed210
       TZ: "Asia/Seoul"
+    volumes:
+      - ~/givetree/database/mysql:/var/lib/mysql
     networks:
       - internal_network
 

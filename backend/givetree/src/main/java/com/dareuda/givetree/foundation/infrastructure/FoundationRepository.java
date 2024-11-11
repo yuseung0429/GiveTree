@@ -9,9 +9,13 @@ import java.util.Optional;
 public interface FoundationRepository extends Repository<Foundation, Long> {
     Foundation save(Foundation foundation);
 
-    @Query("SELECT f FROM Foundation f WHERE f.id = :id and f.isDeleted = false")
+    @Query("""
+        SELECT DISTINCT f
+        FROM Foundation f
+        join fetch f.member m
+        left join fetch f.titleImage
+        left join fetch f.images
+        WHERE f.id = :id and m.isDeleted = false
+    """)
     Optional<Foundation> findById(long id);
-
-    @Query("SELECT f FROM Foundation f WHERE f.owner.id = :ownerId and f.isDeleted = false")
-    Optional<Foundation> findByOwnerId(long ownerId);
 }

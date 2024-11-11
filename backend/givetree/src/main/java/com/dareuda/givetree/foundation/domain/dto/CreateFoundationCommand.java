@@ -1,5 +1,6 @@
 package com.dareuda.givetree.foundation.domain.dto;
 
+import com.dareuda.givetree.member.domain.dto.CreateMemberCommand;
 import lombok.*;
 
 import java.util.List;
@@ -8,6 +9,9 @@ import java.util.List;
 @Builder
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CreateFoundationCommand {
+    @NonNull
+    private final CreateMemberCommand createMemberCommand;
+
     @NonNull
     private final String introduction;
 
@@ -22,5 +26,9 @@ public class CreateFoundationCommand {
 
     private final String titleImageUrl;
 
+    @NonNull
     private final List<String> imageUrls;
+
+    @NonNull
+    private final List<String> categories;
 }

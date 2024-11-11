@@ -1,12 +1,16 @@
 package com.dareuda.givetree.foundation.controller;
 
 import com.dareuda.givetree.auth.domain.UserPrinciple;
+import com.dareuda.givetree.foundation.controller.dto.request.SearchFoundationRequest;
 import com.dareuda.givetree.foundation.controller.dto.request.UpdateFoundationRequest;
 import com.dareuda.givetree.foundation.controller.dto.request.CreateFoundationRequest;
 import com.dareuda.givetree.foundation.domain.FoundationDetail;
 import com.dareuda.givetree.foundation.service.FoundationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +24,9 @@ public class FoundationController {
 
     @PostMapping
     public ResponseEntity<Void> createFoundation(
-            @AuthenticationPrincipal UserPrinciple userPrinciple,
             @Valid @RequestBody CreateFoundationRequest request
     ) {
-        long foundationId = foundationService.createFoundation(userPrinciple.getId(), request.convertToCommand());
+        long foundationId = foundationService.createFoundation(request.convertToCommand());
 
         return ResponseEntity.created(
                 UriComponentsBuilder
@@ -34,23 +37,12 @@ public class FoundationController {
                 .build();
     }
 
-    @PatchMapping("/{foundationId}")
+    @PatchMapping
     public ResponseEntity<Void> updateFoundation(
             @AuthenticationPrincipal UserPrinciple userPrinciple,
-            @PathVariable long foundationId,
             @Valid @RequestBody UpdateFoundationRequest request
     ) {
-        foundationService.updateFoundation(userPrinciple.getId(), foundationId, request.convertToCommand());
-
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping("/{foundationId}")
-    public ResponseEntity<Void> deleteFoundation(
-            @AuthenticationPrincipal UserPrinciple userPrinciple,
-            @PathVariable long foundationId
-    ) {
-        foundationService.deleteFoundation(userPrinciple.getId(), foundationId);
+        foundationService.updateFoundation(userPrinciple.getId(), request.convertToCommand());
 
         return ResponseEntity.ok().build();
     }
@@ -62,10 +54,20 @@ public class FoundationController {
         return ResponseEntity.ok(foundationDetail);
     }
 
-    @GetMapping
+    @GetMapping("/session")
     public ResponseEntity<FoundationDetail> getSessionFoundation(@AuthenticationPrincipal UserPrinciple userPrinciple) {
-        FoundationDetail foundationDetail = foundationService.getFoundationDetailByMemberId(userPrinciple.getId());
+        FoundationDetail foundationDetail = foundationService.getFoundationDetail(userPrinciple.getId());
 
         return ResponseEntity.ok(foundationDetail);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<FoundationDetail>> searchFoundations(
+            SearchFoundationRequest request,
+            @PageableDefault Pageable pageable
+    ) {
+        Page<FoundationDetail> foundationDetails = foundationService.searchFoundationDetail(request.convertToSearchFilter(), pageable);
+
+        return ResponseEntity.ok(foundationDetails);
     }
 }
