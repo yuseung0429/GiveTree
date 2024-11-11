@@ -2,9 +2,12 @@ package com.dareuda.givetree.campaign.service;
 
 import com.dareuda.givetree.campaign.domain.*;
 import com.dareuda.givetree.campaign.domain.dto.CampaignDetail;
+import com.dareuda.givetree.campaign.domain.dto.CampaignSearchFilter;
 import com.dareuda.givetree.campaign.domain.dto.CreateCampaignCommand;
 import com.dareuda.givetree.campaign.domain.dto.UpdateCampaignCommand;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +18,7 @@ public class CampaignService {
     private final CampaignDeleter campaignDeleter;
     private final CampaignDetailReader campaignDetailReader;
     private final CampaignAuthorityValidator campaignAuthorityValidator;
+    private final CampaignSearcher campaignSearcher;
 
     public long createCampaign(long foundationId, CreateCampaignCommand command) {
         return campaignCreator.create(foundationId, command);
@@ -34,5 +38,9 @@ public class CampaignService {
 
     public CampaignDetail getCampaignDetail(long campaignId) {
         return campaignDetailReader.read(campaignId);
+    }
+
+    public Page<CampaignDetail> searchFoundationDetail(CampaignSearchFilter filter, Pageable pageable) {
+        return campaignSearcher.searchFoundations(filter, pageable);
     }
 }
