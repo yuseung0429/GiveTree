@@ -2,7 +2,9 @@
 
 import { useActionState, useEffect } from 'react';
 
-import signinFoundation from '@/app/actions/auth/signinFoundation';
+import useDialog from '@/hooks/useDialog';
+
+import signinFoundation from '@/actions/auth/signinFoundation';
 
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
@@ -10,13 +12,15 @@ import FormButton from '@/components/common/FormButton';
 import TextField from '@/components/common/TextField';
 
 const FoundationSigninForm = () => {
+  const { alert } = useDialog();
+
   const [state, action, isPending] = useActionState(signinFoundation, {});
 
   useEffect(() => {
     if (state.message) {
       alert(state.message);
     }
-  }, [state]);
+  }, [alert, state]);
 
   return (
     <form action={action}>

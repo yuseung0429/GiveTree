@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
         hostname: 'github.com',
         pathname: '/**',
       },
+
+      {
+        protocol: 'https',
+        hostname: 'givetree-bucket.s3.amazonaws.com',
+        pathname: '/**',
+      },
     ],
   },
 
