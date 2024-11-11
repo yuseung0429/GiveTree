@@ -14,7 +14,7 @@ const Titile = () => {
           GIVE
         </Typography>
       </div>
-      <Link className={styles.rightSection} href={'/alarm'}>
+      <Link className={styles.rightSection} href={'/notification'}>
         <HiOutlineBell color="#fff" size={24} />
       </Link>
     </div>

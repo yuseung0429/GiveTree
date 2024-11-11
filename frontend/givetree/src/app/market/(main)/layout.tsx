@@ -24,6 +24,7 @@ export default function MarketLayout({
   modal: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const exceptions = ['/notification'];
 
   return (
     <Layout>
@@ -34,28 +35,34 @@ export default function MarketLayout({
               <HiMagnifyingGlass />
             </AppBar.Menu>
           </Link>
-          <AppBar.Menu onClick={() => alert('알림')}>
-            <HiOutlineBell />
-          </AppBar.Menu>
+          <Link href="/notification">
+            <AppBar.Menu>
+              <HiOutlineBell />
+            </AppBar.Menu>
+          </Link>
         </AppBar>
       </header>
       <main>
         <section style={{ height: '100%' }}>{children}</section>
         {/* 리팩토링 필요 */}
-        <section>
-          <AnimatePresence mode="sync" initial={false}>
-            <motion.div
-              key={pathname === '/market' ? 'market' : 'modal'}
-              initial={{ y: '5%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: '5%', opacity: 0 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-              className={mergeClasses(pathname !== '/market' && s.modal)}
-            >
-              <FrozenRouter key={pathname}>{modal}</FrozenRouter>
-            </motion.div>
-          </AnimatePresence>
-        </section>
+        {exceptions.includes(pathname) ? (
+          <>{modal}</>
+        ) : (
+          <section>
+            <AnimatePresence mode="sync" initial={false}>
+              <motion.div
+                key={pathname === '/market' ? 'market' : 'modal'}
+                initial={{ y: '5%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: '5%', opacity: 0 }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+                className={mergeClasses(pathname !== '/market' && s.modal)}
+              >
+                <FrozenRouter key={pathname}>{modal}</FrozenRouter>
+              </motion.div>
+            </AnimatePresence>
+          </section>
+        )}
       </main>
       <footer>
         <NavigationBar />
