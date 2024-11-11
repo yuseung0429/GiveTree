@@ -30,8 +30,8 @@ public class AccountService {
     }
 
     @RequiredMemberFinance
-    public ExternalAccountInfo getExternalAccount(long memberId, String accountNo) {
-        return accountLoader.load(memberId, accountNo);
+    public ExternalAccountInfo getExternalAccount(long memberId, String accountNumber) {
+        return accountLoader.load(memberId, accountNumber);
     }
 
     @RequiredMemberFinance
@@ -40,8 +40,8 @@ public class AccountService {
     }
 
     @RequiredMemberFinance
-    public void registerAccount(long memberId, String accountNo) {
-        accountRegistrar.register(memberId, accountNo);
+    public void registerAccount(long memberId, String accountNumber) {
+        accountRegistrar.register(memberId, accountNumber);
     }
 
     @RequiredMemberFinance

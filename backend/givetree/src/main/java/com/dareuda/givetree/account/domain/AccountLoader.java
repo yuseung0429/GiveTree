@@ -26,23 +26,23 @@ public class AccountLoader {
         return ListUtils.applyFunctionToElements(response, ExternalAccountInfo::from);
     }
 
-    public ExternalAccountInfo load(long memberId, String accountNo) {
+    public ExternalAccountInfo load(long memberId, String accountNumber) {
         MemberFinance memberFinance = null;
         try {
             memberFinance = memberFinanceReader.read(memberId);
         } catch (AccountNotFoundException e) {
             throw new RestApiException(AccountErrorCode.EXTERNAL_ACCOUNT_NOT_FOUND);
         }
-        return ExternalAccountInfo.from(demandDepositApiClient.searchAccount(memberFinance.getUserKey(), accountNo));
+        return ExternalAccountInfo.from(demandDepositApiClient.searchAccount(memberFinance.getUserKey(), accountNumber));
     }
 
-    public long loadAccountBalance(long memberId, String accountNo) {
+    public long loadAccountBalance(long memberId, String accountNumber) {
         MemberFinance memberFinance = null;
         try {
             memberFinance = memberFinanceReader.read(memberId);
         } catch (AccountNotFoundException e) {
             throw new RestApiException(AccountErrorCode.EXTERNAL_ACCOUNT_NOT_FOUND);
         }
-        return demandDepositApiClient.searchAccountBalance(memberFinance.getUserKey(), accountNo).getAccountBalance();
+        return demandDepositApiClient.searchAccountBalance(memberFinance.getUserKey(), accountNumber).getAccountBalance();
     }
 }
