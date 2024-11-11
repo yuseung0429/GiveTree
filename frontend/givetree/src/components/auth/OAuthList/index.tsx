@@ -14,6 +14,7 @@ const OAuthList = () => {
     <Flex flexDirection="column" gap="1rem">
       <Link
         href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao`}
+        prefetch={false}
       >
         <OAuthButton
           borderColor="#fee500"
@@ -27,6 +28,7 @@ const OAuthList = () => {
 
       <Link
         href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/naver`}
+        prefetch={false}
       >
         <OAuthButton
           borderColor="#03c75a"
@@ -40,6 +42,7 @@ const OAuthList = () => {
 
       <Link
         href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/google`}
+        prefetch={false}
       >
         <OAuthButton
           borderColor={color.grey[600]}
