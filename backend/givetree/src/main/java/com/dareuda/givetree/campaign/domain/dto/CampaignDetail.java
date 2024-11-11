@@ -1,16 +1,13 @@
 package com.dareuda.givetree.campaign.domain.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Builder
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CampaignDetail {
     @NonNull
     private final Long id;
@@ -19,7 +16,13 @@ public class CampaignDetail {
     private final Long foundationId;
 
     @NonNull
+    private final String foundationName;
+
+    @NonNull
     private final String name;
+
+    @NonNull
+    private final String introduction;
 
     @NonNull
     private final LocalDate startDate;

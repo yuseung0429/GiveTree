@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -24,7 +23,6 @@ public class CampaignCreator {
     public long create(long foundationId, CreateCampaignCommand command) {
         Foundation foundation = foundationReader.read(foundationId);
 
-
         Image titleImage = command.getTitleImageUrl() != null ? imageAppender.append(command.getTitleImageUrl()) : null;
         List<Image> images = command.getImageUrls().stream().map(imageAppender::append).toList();
 
@@ -32,6 +30,7 @@ public class CampaignCreator {
                 Campaign.createCampaign(
                         foundation,
                         command.getName(),
+                        command.getIntroduction(),
                         command.getStartDate(),
                         command.getEndDate(),
                         command.getTargetFundraisingAmount(),

@@ -20,4 +20,6 @@ public class UpdateFoundationCommand {
     private final String titleImageUrl;
     private final List<String> newImageUrls;
     private final List<Integer> deleteImageOrders;
+    private final List<String> newCategories;
+    private final List<String> deleteCategories;
 }
