@@ -7,21 +7,17 @@ import Typography from '@/components/common/Typography';
 import Button from '@/components/common/Button';
 import { FaCheck } from 'react-icons/fa6';
 import colorPalette from '@/styles/tokens/colorPalette';
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-
-export default function SelectePage() {
-  return (
-    <Suspense>
-      <SelectePageContent />
-    </Suspense>
-  );
-}
+import { useEffect, useState } from 'react';
 
 interface AmountItem {
   id: number;
   amount: number;
   nickname: string;
+}
+interface AmountSelectProps {
+  onClose: () => void;
+  onSelect: (amount: number, selectedIds: number[]) => void;
+  initialSelectedIds?: number[];
 }
 
 const formatKRW = (amount: number) => {
@@ -44,92 +40,71 @@ const AMOUNT_LIST: AmountItem[] = [
   { id: 12, amount: 11100, nickname: '감자칩' },
 ];
 
-function SelectePageContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
+export default function AmountSelect({
+  onClose,
+  onSelect,
+  initialSelectedIds,
+}: AmountSelectProps) {
+  const [selectedIds, setSelectedIds] = useState<Set<number>>(
+    new Set(initialSelectedIds)
+  );
   const [isAllSelected, setIsAllSelected] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
 
-  // 현재 선택된 금액 가져오기
-  const selectedIdsParam = searchParams.get('selectedIds');
-
-  // 초기 선택 상태 설정
-  useEffect(() => {
-    if (selectedIdsParam) {
-      const ids = selectedIdsParam.split(',').map(Number);
-      setSelectedItems(new Set(ids));
-    }
-  }, [selectedIdsParam]);
-
-  const totalAmount = useMemo(() => {
-    if (isAllSelected) {
-      return AMOUNT_LIST.reduce((sum, item) => sum + item.amount, 0);
-    }
-    return Array.from(selectedItems).reduce((sum, id) => {
-      const item = AMOUNT_LIST.find((item) => item.id === id);
-      return sum + (item?.amount || 0);
-    }, 0);
-  }, [selectedItems, isAllSelected]);
-
-  const closeModal = useCallback(() => {
-    setIsClosing(true);
-    setTimeout(() => {
-      router.back();
-    }, 300);
-  }, [router]);
-
-  const handleApply = () => {
-    setIsClosing(true);
-    const totalAmount = Array.from(selectedItems).reduce((sum, id) => {
-      const item = AMOUNT_LIST.find((item) => item.id === id);
-      return sum + (item?.amount || 0);
-    }, 0);
-
-    router.replace(
-      `/wallet/exchange?amount=${totalAmount}&selectedIds=${Array.from(
-        selectedItems
-      ).join(',')}`
-    );
-
-    setTimeout(() => {
-      router.back();
-    }, 300);
-  };
-
-  // 안드로이드 뒤로가기 감지
+  // 뒤로가기 처리
   useEffect(() => {
     const handlePopState = () => {
-      closeModal();
+      onClose();
     };
 
+    window.history.pushState(null, '', window.location.href);
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, [closeModal]);
 
-  // 배경 클릭 시 모달 닫기
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [onClose]);
+
+  // 배경 클릭시 닫기
   const handleBackgroundClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      closeModal();
+      onClose();
     }
   };
 
   const handleItemClick = (id: number) => {
-    setSelectedItems((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
-      } else {
-        newSet.add(id);
-      }
-      return newSet;
-    });
-    setIsAllSelected(false);
+    if (isAllSelected) {
+      setIsAllSelected(false);
+      setSelectedIds(new Set([id]));
+    } else {
+      setSelectedIds((prev) => {
+        const newSet = new Set(prev);
+        if (newSet.has(id)) {
+          newSet.delete(id);
+        } else {
+          newSet.add(id);
+        }
+        return newSet;
+      });
+    }
   };
 
   const handleAllClick = () => {
-    setIsAllSelected((prev) => !prev);
-    setSelectedItems(new Set());
+    if (isAllSelected) {
+      setSelectedIds(new Set());
+      setIsAllSelected(false);
+    } else {
+      setSelectedIds(new Set(AMOUNT_LIST.map((item) => item.id)));
+      setIsAllSelected(true);
+    }
+  };
+
+  const handleApply = () => {
+    const totalAmount = Array.from(selectedIds).reduce((sum, id) => {
+      const item = AMOUNT_LIST.find((item) => item.id === id);
+      return sum + (item?.amount || 0);
+    }, 0);
+    onSelect(totalAmount, Array.from(selectedIds));
+    onClose();
   };
 
   return (
@@ -139,23 +114,21 @@ function SelectePageContent() {
     >
       <Flex
         flexDirection="column"
-        className={`${style.fixedContainer} ${
-          isClosing ? style.slideDown : style.slideUp
-        }`}
+        className={style.fixedContainer}
+        onClick={(e) => e.stopPropagation()}
       >
         <Box className={style.topLine} />
 
         {/* 금액선택 */}
         <Flex flexDirection="column" gap={18} className={style.selectbox}>
-          {/* 금액아이템 (디폴트) */}
           <Flex
             justifyContent="space-between"
             alignItems="center"
-            onClick={handleAllClick}
             style={{ cursor: 'pointer' }}
+            onClick={handleAllClick}
           >
             <Typography
-              weight={isAllSelected ? 'semiBold' : 'medium'}
+              weight="medium"
               size={18}
               color={
                 isAllSelected
@@ -176,40 +149,47 @@ function SelectePageContent() {
           </Flex>
 
           {/* 금액아이템 */}
-          <Flex flexDirection="column" justifyContent="space-between" gap={15}>
+          <Flex flexDirection="column" justifyContent="space-between" gap={16}>
             {AMOUNT_LIST.map((item) => (
               <Flex
                 key={item.id}
                 justifyContent="space-between"
                 alignItems="center"
-                onClick={() => handleItemClick(item.id)}
                 className={style.itemContainer}
+                onClick={() => handleItemClick(item.id)}
               >
                 <Typography
-                  weight={isAllSelected ? 'semiBold' : 'medium'}
+                  weight="medium"
                   size={18}
                   color={
-                    selectedItems.has(item.id)
+                    !isAllSelected && selectedIds.has(item.id)
                       ? colorPalette.primary[700]
                       : colorPalette.grey[600]
                   }
                 >
                   {formatKRW(item.amount)} [{item.nickname}]
                 </Typography>
-                <FaCheck
-                  size={18}
-                  color={
-                    selectedItems.has(item.id)
-                      ? colorPalette.primary[700]
-                      : colorPalette.grey[300]
-                  }
-                />
+                {!isAllSelected && (
+                  <FaCheck
+                    size={18}
+                    color={
+                      selectedIds.has(item.id)
+                        ? colorPalette.primary[700]
+                        : colorPalette.grey[300]
+                    }
+                  />
+                )}
               </Flex>
             ))}
           </Flex>
         </Flex>
-        <Button className={style.btn} onClick={handleApply}>
-          {formatKRW(totalAmount)} 적용하기
+        <Button
+          size="lg"
+          className={style.btn}
+          onClick={handleApply}
+          disabled={!(selectedIds.size > 0 || isAllSelected)}
+        >
+          적용하기
         </Button>
       </Flex>
     </Box>
