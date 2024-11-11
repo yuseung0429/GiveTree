@@ -4,8 +4,13 @@ import { keyframes, style } from '@vanilla-extract/css';
 export const container = style({
   width: '100%',
   height: '100vh',
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  position: 'relative',
+  zIndex: 1000,
 });
 
 export const fixedContainer = style({
@@ -31,7 +36,7 @@ export const topLine = style({
 
 export const selectbox = style({
   overflowY: 'scroll',
-  height: 'calc(100% - 65px)',
+  height: 'calc(100% - 75px)',
   padding: '20px 30px',
   '::-webkit-scrollbar': {
     width: '4px',
