@@ -13,6 +13,9 @@ public class CreateCampaignCommand {
     private final String name;
 
     @NonNull
+    private final String introduction;
+
+    @NonNull
     private final LocalDate startDate;
 
     @NonNull
