@@ -19,21 +19,6 @@ const firebaseConfig = {
 export default function AlarmPage() {
   const [token, setToken] = useState<string>('');
 
-  function notifyMe() {
-    if (!('Notification' in window)) {
-      alert('This browser does not support desktop notification');
-    } else if (Notification.permission === 'granted') {
-      new Notification('Hi there!');
-    } else if (Notification.permission !== 'denied') {
-      Notification.requestPermission().then((permission) => {
-        if (permission === 'granted') {
-          new Notification('Hi there!');
-          // …
-        }
-      });
-    }
-  }
-
   useEffect(() => {
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
@@ -54,19 +39,13 @@ export default function AlarmPage() {
         setToken(result);
       })
       .catch((error) => {
-        console.log(error);
+        alert(JSON.stringify(error));
       });
 
     onMessage(messaging, (payload) => {
-      console.log('Message received. ', payload);
-      // ...
+      alert(JSON.stringify(payload));
     });
   }, []);
 
-  return (
-    <>
-      {token}
-      <button onClick={notifyMe}>Notify me!</button>
-    </>
-  );
+  return <>{token}</>;
 }
