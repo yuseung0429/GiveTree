@@ -37,8 +37,8 @@ public class SaleCustomRepositoryImpl implements SaleCustomRepository{
                         sale.isDirectSale,
                         sale.isDeliverySale))
                 .from(sale)
-                .where(sale.title.containsIgnoreCase(salesSearchQuery.getQuery())
-                        .or(sale.title.containsIgnoreCase(salesSearchQuery.getQuery())),
+                .where((sale.title.containsIgnoreCase(salesSearchQuery.getQuery())
+                        .or(sale.description.containsIgnoreCase(salesSearchQuery.getQuery()))),
                         statusIn(salesSearchQuery.getStatuses()),
                         productionConditionIn(salesSearchQuery.getProductionConditions()),
                         isDirectSaleEq(salesSearchQuery.isDirectSale()),
