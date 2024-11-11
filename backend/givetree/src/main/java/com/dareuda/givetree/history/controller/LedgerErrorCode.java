@@ -1,4 +1,4 @@
-package com.dareuda.givetree.ledger.controller;
+package com.dareuda.givetree.history.controller;
 
 import com.dareuda.givetree.common.errors.errorcode.ErrorCode;
 import lombok.Getter;

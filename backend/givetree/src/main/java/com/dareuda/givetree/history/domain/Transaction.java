@@ -1,7 +1,6 @@
-package com.dareuda.givetree.transaction.domain;
+package com.dareuda.givetree.history.domain;
 
 import com.dareuda.givetree.common.utils.ByteArrayToHexStringConverter;
-import com.dareuda.givetree.ledger.domain.Ledger;
 import com.dareuda.givetree.wallet.domain.Wallet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -31,10 +30,6 @@ public class Transaction {
     @JoinColumn(name = "receiver_wallet_id")
     private Wallet receiverWallet;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ledger_id")
-    private Ledger ledger;
-
     @NotNull
     @Column(name = "amount")
     private Long amount;
@@ -48,9 +43,9 @@ public class Transaction {
     @Convert(converter = ByteArrayToHexStringConverter.class)
     private String transactionHash;
 
-    public void recordLedger(Ledger ledger) {
-        this.ledger = ledger;
-    }
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private TransactionType type;
 
     @PrePersist
     protected void onCreate() {

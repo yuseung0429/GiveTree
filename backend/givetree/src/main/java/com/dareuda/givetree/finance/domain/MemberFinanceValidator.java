@@ -28,6 +28,5 @@ public class MemberFinanceValidator {
         if (Objects.equals(memberFinance.getSimplePassword(), simplePassword)) {
             throw new RestApiException(MemberFinanceErrorCode.MEMBER_FINANCE_SIMPLE_PASSWORD_MISMATCH);
         }
-
     }
 }

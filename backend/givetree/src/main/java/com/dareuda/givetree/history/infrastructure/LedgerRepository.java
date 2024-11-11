@@ -1,6 +1,6 @@
-package com.dareuda.givetree.ledger.infrastructure;
+package com.dareuda.givetree.history.infrastructure;
 
-import com.dareuda.givetree.ledger.domain.Ledger;
+import com.dareuda.givetree.history.domain.Ledger;
 import org.springframework.data.repository.Repository;
 
 import java.util.Optional;

@@ -4,11 +4,11 @@ import com.dareuda.givetree.blockchain.utils.EthereumCaller;
 import com.dareuda.givetree.blockchain.utils.EthereumTransactionManager;
 import com.dareuda.givetree.common.config.AdminConfig;
 import com.dareuda.givetree.common.config.ContractConfig;
+import com.dareuda.givetree.history.domain.TransactionType;
 import com.dareuda.givetree.token.infrastructure.TokenContract;
 import com.dareuda.givetree.token.infrastructure.TokenContractExceptionHandler;
-import com.dareuda.givetree.transaction.domain.Transaction;
-import com.dareuda.givetree.transaction.domain.TransactionAppender;
-import com.dareuda.givetree.wallet.domain.WalletReader;
+import com.dareuda.givetree.history.domain.Transaction;
+import com.dareuda.givetree.history.domain.TransactionAppender;
 import com.dareuda.givetree.wallet.domain.WalletVO;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +55,7 @@ public class TokenBurner {
                 walletId,
                 adminConfig.getWalletId(),
                 amount,
+                TransactionType.EXCHANGE,
                 receipt.getTransactionHash()
         );
     }

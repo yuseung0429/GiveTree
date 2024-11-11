@@ -1,7 +1,6 @@
 package com.dareuda.givetree.account.domain;
 
-import com.dareuda.givetree.ledger.domain.Ledger;
-import com.dareuda.givetree.member.domain.Member;
+import com.dareuda.givetree.history.domain.Ledger;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

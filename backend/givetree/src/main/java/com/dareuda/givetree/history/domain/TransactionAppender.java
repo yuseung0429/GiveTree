@@ -1,7 +1,6 @@
-package com.dareuda.givetree.transaction.domain;
+package com.dareuda.givetree.history.domain;
 
-import com.dareuda.givetree.ledger.domain.LedgerReader;
-import com.dareuda.givetree.transaction.infrastructure.TransactionRepository;
+import com.dareuda.givetree.history.infrastructure.TransactionRepository;
 import com.dareuda.givetree.wallet.domain.WalletReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,15 +10,16 @@ import org.springframework.stereotype.Component;
 public class TransactionAppender {
 
     private final WalletReader walletReader;
-    private final LedgerReader ledgerReader;
     private final TransactionRepository transactionRepository;
 
-    public Transaction append(long senderWalletId, long receiverWalletId, long amount, String transactionHash) {
+    public Transaction append(long senderWalletId, long receiverWalletId, long amount, TransactionType type, String transactionHash) {
         return transactionRepository.save(Transaction.builder()
                 .senderWallet(walletReader.read(senderWalletId))
                 .receiverWallet(walletReader.read(receiverWalletId))
                 .amount(amount)
+                .type(type)
                 .transactionHash(transactionHash)
-                .build());
+                .build()
+        );
     }
 }

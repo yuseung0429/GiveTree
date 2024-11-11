@@ -1,8 +1,8 @@
-package com.dareuda.givetree.ledger.domain;
+package com.dareuda.givetree.history.domain;
 
 import com.dareuda.givetree.common.errors.exception.RestApiException;
-import com.dareuda.givetree.ledger.controller.LedgerErrorCode;
-import com.dareuda.givetree.ledger.infrastructure.LedgerRepository;
+import com.dareuda.givetree.history.controller.LedgerErrorCode;
+import com.dareuda.givetree.history.infrastructure.LedgerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

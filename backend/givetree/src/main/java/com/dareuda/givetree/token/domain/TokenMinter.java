@@ -4,14 +4,14 @@ import com.dareuda.givetree.blockchain.utils.EthereumCaller;
 import com.dareuda.givetree.blockchain.utils.EthereumTransactionManager;
 import com.dareuda.givetree.common.config.AdminConfig;
 import com.dareuda.givetree.common.config.ContractConfig;
+import com.dareuda.givetree.history.domain.TransactionType;
 import com.dareuda.givetree.token.infrastructure.TokenContract;
 import com.dareuda.givetree.token.infrastructure.TokenContractExceptionHandler;
-import com.dareuda.givetree.transaction.domain.Transaction;
-import com.dareuda.givetree.transaction.domain.TransactionAppender;
-import com.dareuda.givetree.wallet.domain.Wallet;
-import com.dareuda.givetree.wallet.domain.WalletReader;
+import com.dareuda.givetree.history.domain.Transaction;
+import com.dareuda.givetree.history.domain.TransactionAppender;
 import com.dareuda.givetree.wallet.domain.WalletVO;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.math.BigInteger;
@@ -49,11 +49,13 @@ public class TokenMinter  {
         );
     }
 
+    @Transactional
     public Transaction saveTransaction(long walletId, long amount, TransactionReceipt receipt) {
         return transactionAppender.append(
                 adminConfig.getWalletId(),
                 walletId,
                 amount,
+                TransactionType.EXCHANGE,
                 receipt.getTransactionHash()
         );
     }
