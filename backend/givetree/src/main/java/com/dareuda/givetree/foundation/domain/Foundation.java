@@ -55,10 +55,6 @@ public class Foundation {
     @JoinColumn(name = "title_image_id")
     private Image titleImage;
 
-    @Column
-    @NotNull
-    private int nextImageOrderSequence = 1;
-
     @OneToMany(mappedBy = "foundation", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<FoundationImage> images = new ArrayList<>();
 
@@ -103,13 +99,12 @@ public class Foundation {
     }
 
     public void addImage(Image image) {
-        FoundationImage foundationImage = new FoundationImage(this, image, nextImageOrderSequence++);
+        FoundationImage foundationImage = new FoundationImage(this, image);
         images.add(foundationImage);
     }
     public void deleteImages(List<Integer> removeImageOrders) {
         removeImageOrders.sort(Collections.reverseOrder());
-        removeImageOrders.forEach(i -> images.remove(i));
-        nextImageOrderSequence = images.size() + 1;
+        removeImageOrders.forEach(i -> images.remove((int) i));
     }
 
     public void addCategory(Category category) {

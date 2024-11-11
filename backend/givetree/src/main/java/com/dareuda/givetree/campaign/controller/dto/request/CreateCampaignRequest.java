@@ -16,6 +16,9 @@ public class CreateCampaignRequest {
     @NotBlank
     private final String name;
 
+    @NotBlank
+    private final String introduction;
+
     @NotNull
     private final LocalDate startDate;
 
@@ -32,6 +35,7 @@ public class CreateCampaignRequest {
     public CreateCampaignCommand convertToCommand() {
         return CreateCampaignCommand.builder()
                 .name(name)
+                .introduction(introduction)
                 .startDate(startDate)
                 .endDate(endDate)
                 .titleImageUrl(titleImageUrl)

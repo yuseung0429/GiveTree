@@ -15,7 +15,6 @@ public class FoundationService {
     private final FoundationCreator foundationCreator;
     private final FoundationDetailReader foundationDetailReader;
     private final FoundationUpdater foundationUpdater;
-    private final FoundationDeleter foundationDeleter;
     private final FoundationDetailSearcher foundationDetailSearcher;
 
     public long createFoundation(CreateFoundationCommand command) {
@@ -24,10 +23,6 @@ public class FoundationService {
 
     public void updateFoundation(long foundationId, UpdateFoundationCommand command) {
         foundationUpdater.update(foundationId, command);
-    }
-
-    public void deleteFoundation(long foundationId) {
-        foundationDeleter.delete(foundationId);
     }
 
     public FoundationDetail getFoundationDetail(long foundationId) {

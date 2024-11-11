@@ -9,8 +9,8 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -27,6 +27,10 @@ public class Campaign extends BaseEntity {
     @Column
     @NotNull
     private String name;
+
+    @Column
+    @NotNull
+    private String introduction;
 
     @Column
     @NotNull
@@ -55,10 +59,11 @@ public class Campaign extends BaseEntity {
     @NotNull
     private int nextImageOrderSequence = 1;
 
-    public static Campaign createCampaign(Foundation foundation, String name, LocalDate startDate, LocalDate endDate, long targetFundraisingAmount, Image titleImage, List<Image> images) {
+    public static Campaign createCampaign(Foundation foundation, String name, String introduction, LocalDate startDate, LocalDate endDate, long targetFundraisingAmount, Image titleImage, List<Image> images) {
         Campaign campaign = new Campaign();
         campaign.foundation = foundation;
         campaign.name = name;
+        campaign.introduction = introduction;
         campaign.startDate = startDate;
         campaign.endDate = endDate;
         campaign.targetFundraisingAmount = targetFundraisingAmount;
@@ -69,11 +74,11 @@ public class Campaign extends BaseEntity {
         return campaign;
     }
 
-    public void updateFoundation(Foundation foundation) {
-        this.foundation = foundation;
-    }
     public void updateName(String name) {
         this.name = name;
+    }
+    public void updateIntroduction(String introduction) {
+        this.introduction = introduction;
     }
     public void updateStartDate(LocalDate startDate) {
         this.startDate = startDate;
@@ -95,7 +100,8 @@ public class Campaign extends BaseEntity {
         CampaignImage campaignImage = new CampaignImage(this, image, nextImageOrderSequence++);
         images.add(campaignImage);
     }
-    public void deleteImage(UUID imageId) {
-        images.removeIf(campaignImage -> campaignImage.getImage().getId().equals(imageId));
+    public void deleteImages(List<Integer> removeImageOrders) {
+        removeImageOrders.sort(Collections.reverseOrder());
+        removeImageOrders.forEach(i -> images.remove((int) i));
     }
 }

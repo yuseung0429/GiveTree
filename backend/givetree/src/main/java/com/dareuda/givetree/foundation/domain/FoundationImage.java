@@ -26,13 +26,8 @@ public class FoundationImage {
     @NotNull
     private Image image;
 
-    @Column
-    @NotNull
-    private int imageOrder;
-
-    public FoundationImage(Foundation foundation, Image image, int imageOrder) {
+    public FoundationImage(Foundation foundation, Image image) {
         this.foundation = foundation;
         this.image = image;
-        this.imageOrder = imageOrder;
     }
 }

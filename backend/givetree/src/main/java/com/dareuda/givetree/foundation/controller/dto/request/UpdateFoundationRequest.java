@@ -20,6 +20,8 @@ public class UpdateFoundationRequest {
     private final String titleImageUrl;
     private final List<String> newImageUrls;
     private final List<Integer> deleteImageOrders;
+    private final List<String> newCategories;
+    private final List<String> deleteCategories;
 
     public UpdateFoundationCommand convertToCommand() {
         UpdateMemberCommand updateMemberCommand = UpdateMemberCommand.builder()
@@ -37,6 +39,8 @@ public class UpdateFoundationRequest {
                 .titleImageUrl(titleImageUrl)
                 .newImageUrls(newImageUrls)
                 .deleteImageOrders(deleteImageOrders)
+                .newCategories(newCategories)
+                .deleteCategories(deleteCategories)
                 .build();
     }
 }
