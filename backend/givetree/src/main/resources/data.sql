@@ -1,7 +1,7 @@
 SET
 SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-INSERT IGNORE INTO member (member_id, is_deleted, created_at, email, name, password, profile_image_id)
+INSERT IGNORE INTO member (member_id, is_deleted, created_at, email, name, password, profile_image_id, `role`)
 VALUES (
      0,
      0,
@@ -9,10 +9,11 @@ VALUES (
      'givetree@givetree.co.kr',
      '관리자',
      '$2a$10$/.Jodl2CFABK5kOvvQPO3eMSGpJ4BqcCwJ2F6iD6A.h6N6sRY0VLe',
-     NULL
+     NULL,
+     'ADMIN'
 );
 
-INSERT IGNORE INTO member (member_id, is_deleted, created_at, email, name, password, profile_image_id)
+INSERT IGNORE INTO member (member_id, is_deleted, created_at, email, `name`, password, profile_image_id, `role`)
 VALUES (
      1,
      0,
@@ -20,7 +21,8 @@ VALUES (
      'crash_a@naver.com',
      '이유승',
      '$2a$10$o9AU3Lpwul/Zxw0iXPk2kO1xABAakPKeDEfsjhUudcVkX/zgADb0i',
-     NULL
+     NULL,
+     'USER'
 );
 
 INSERT IGNORE INTO member_finance (member_id, user_key, salt, simple_password)
@@ -88,8 +90,3 @@ VALUES (
      1,
      1
 );
-
-
-
-
-

@@ -1,4 +1,4 @@
-package com.dareuda.givetree.wallet.domain;
+package com.dareuda.givetree.wallet.domain.member;
 
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.wallet.controller.WalletErrorCode;

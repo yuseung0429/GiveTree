@@ -1,6 +1,6 @@
 package com.dareuda.givetree.wallet.infrastructure;
 
-import com.dareuda.givetree.wallet.domain.AgentWallet;
+import com.dareuda.givetree.wallet.domain.agent.AgentWallet;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.data.domain.PageRequest;

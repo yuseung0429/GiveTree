@@ -1,4 +1,4 @@
-package com.dareuda.givetree.wallet.domain;
+package com.dareuda.givetree.wallet.domain.agent;
 
 import com.dareuda.givetree.wallet.infrastructure.AgentWalletRepository;
 import lombok.RequiredArgsConstructor;

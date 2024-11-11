@@ -6,7 +6,7 @@ import com.dareuda.givetree.blockchain.factory.ContractFactory;
 import com.dareuda.givetree.blockchain.factory.ContractFactoryProvider;
 import com.dareuda.givetree.common.config.Web3jConfig;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
-import com.dareuda.givetree.wallet.domain.AgentWallet;
+import com.dareuda.givetree.wallet.domain.agent.AgentWallet;
 import com.dareuda.givetree.wallet.domain.Wallet;
 import org.springframework.stereotype.Component;
 import org.web3j.tx.Contract;

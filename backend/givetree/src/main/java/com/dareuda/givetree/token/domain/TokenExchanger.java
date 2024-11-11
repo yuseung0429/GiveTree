@@ -8,6 +8,7 @@ import com.dareuda.givetree.transaction.domain.Transaction;
 import com.dareuda.givetree.transaction.domain.TransactionUpdater;
 import com.dareuda.givetree.wallet.domain.Wallet;
 import com.dareuda.givetree.wallet.domain.WalletReader;
+import com.dareuda.givetree.wallet.domain.WalletVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
@@ -24,7 +25,7 @@ public class TokenExchanger {
 
     public void exchange(long receiverId, long amount) {
         Wallet wallet = walletReader.read(receiverId);
-        TransactionReceipt burnReceipt = tokenBurner.burn(wallet.getId(), amount);
+        TransactionReceipt burnReceipt = tokenBurner.burn(WalletVO.from(wallet), amount);
         Transaction burnTransaction = tokenBurner.saveTransaction(wallet.getId(), amount, burnReceipt);
         try {
             AccountTransferResponse withdrawalResponse  = withdrawalProcessor.process(wallet.getId(), amount);

@@ -7,8 +7,9 @@ import com.dareuda.givetree.account.domain.RefundProcessor;
 import com.dareuda.givetree.ledger.domain.Ledger;
 import com.dareuda.givetree.transaction.domain.Transaction;
 import com.dareuda.givetree.transaction.domain.TransactionUpdater;
-import com.dareuda.givetree.wallet.domain.MemberWalletReader;
+import com.dareuda.givetree.wallet.domain.member.MemberWalletReader;
 import com.dareuda.givetree.wallet.domain.Wallet;
+import com.dareuda.givetree.wallet.domain.WalletVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
@@ -29,7 +30,7 @@ public class TokenCharger {
         Ledger depositLedger = depositProcessor.saveLedger(memberId, amount, depositResponse);
         try {
             Wallet wallet = memberWalletReader.readByMemberId(memberId);
-            TransactionReceipt mintReceipt = tokenMinter.mint(wallet.getId(), amount);
+            TransactionReceipt mintReceipt = tokenMinter.mint(WalletVO.from(wallet), amount);
             Transaction mintTransaction = tokenMinter.saveTransaction(wallet.getId(), amount, mintReceipt);
             transactionUpdater.updateLedgerId(mintTransaction.getId(), depositLedger.getId());
         } catch (Exception e1) {

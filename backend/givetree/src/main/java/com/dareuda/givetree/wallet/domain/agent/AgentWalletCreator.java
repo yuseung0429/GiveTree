@@ -1,5 +1,7 @@
-package com.dareuda.givetree.wallet.domain;
+package com.dareuda.givetree.wallet.domain.agent;
 
+import com.dareuda.givetree.wallet.domain.WalletKeyPair;
+import com.dareuda.givetree.wallet.domain.WalletKeyPairGenerator;
 import com.dareuda.givetree.wallet.infrastructure.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

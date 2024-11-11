@@ -10,6 +10,7 @@ import com.dareuda.givetree.transaction.domain.Transaction;
 import com.dareuda.givetree.transaction.domain.TransactionAppender;
 import com.dareuda.givetree.wallet.domain.Wallet;
 import com.dareuda.givetree.wallet.domain.WalletReader;
+import com.dareuda.givetree.wallet.domain.WalletVO;
 import org.springframework.stereotype.Component;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
@@ -19,32 +20,27 @@ import java.util.Set;
 @Component
 public class TokenMinter  {
 
+    private final AdminConfig adminConfig;
+    private final ContractConfig contractConfig;
+    private final TransactionAppender transactionAppender;
+    private final EthereumTransactionManager transactionManager;
+    private final EthereumCaller caller;
+
     public TokenMinter(
             AdminConfig adminConfig,
-            WalletReader walletReader,
             ContractConfig contractConfig,
             EthereumTransactionManager transactionManager,
             TransactionAppender transactionAppender,
             TokenContractExceptionHandler exceptionHandler
     ) {
         this.adminConfig = adminConfig;
-        this.walletReader = walletReader;
         this.contractConfig = contractConfig;
         this.transactionManager = transactionManager;
         this.transactionAppender = transactionAppender;
         this.caller = new EthereumCaller(exceptionHandler);
     }
 
-    private final AdminConfig adminConfig;
-    private final WalletReader walletReader;
-    private final ContractConfig contractConfig;
-    private final TransactionAppender transactionAppender;
-    private final EthereumTransactionManager transactionManager;
-    private final EthereumCaller caller;
-
-    public TransactionReceipt mint(long walletId, long amount) {
-        Wallet wallet = walletReader.read(walletId);
-
+    public TransactionReceipt mint(WalletVO wallet, long amount) {
         return transactionManager.execute(
                 Set.of(wallet.getAddress()),
                 contractConfig.getTokenContractAddress(),
@@ -61,5 +57,4 @@ public class TokenMinter  {
                 receipt.getTransactionHash()
         );
     }
-
 }

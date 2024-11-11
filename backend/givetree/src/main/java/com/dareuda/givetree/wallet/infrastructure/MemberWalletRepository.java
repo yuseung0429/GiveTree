@@ -1,6 +1,6 @@
 package com.dareuda.givetree.wallet.infrastructure;
 
-import com.dareuda.givetree.wallet.domain.MemberWallet;
+import com.dareuda.givetree.wallet.domain.member.MemberWallet;
 
 import java.util.Optional;
 
