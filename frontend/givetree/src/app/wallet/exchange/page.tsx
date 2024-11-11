@@ -7,65 +7,28 @@ import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import TextField from '@/components/common/TextField';
 import Account from '@/components/common/Account';
-import { Suspense, useCallback, useEffect, useState } from 'react';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useState } from 'react';
+import AmountSelect from '@/components/wallet/select';
 
 export default function Page() {
-  const [amount, setAmount] = useState(0);
+  const [isAmountSelectOpen, setIsAmountSelectOpen] = useState(false);
+  const [selectedAmount, setSelectedAmount] = useState(0);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ExchangeContent
-        amount={amount}
-        setAmount={setAmount}
-        selectedIds={selectedIds}
-        setSelectedIds={setSelectedIds}
-      />
-    </Suspense>
-  );
-}
-
-function ExchangeContent({
-  amount,
-  setAmount,
-  selectedIds,
-  setSelectedIds,
-}: {
-  amount: number;
-  setAmount: (amount: number) => void;
-  selectedIds: number[];
-  setSelectedIds: (ids: number[]) => void;
-}) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const updateFromSearchParams = useCallback(() => {
-    if (!pathname.includes('/select')) {
-      const amountParam = searchParams.get('amount');
-      const selectedIdsParam = searchParams.get('selectedIds');
-
-      if (amountParam) {
-        setAmount(Number(amountParam));
-      }
-      if (selectedIdsParam) {
-        setSelectedIds(selectedIdsParam.split(',').map(Number));
-      }
-
-      // 파라미터 처리 후 URL 정리
-      router.replace('/wallet/exchange');
-    }
-  }, [pathname, router, searchParams, setAmount, setSelectedIds]);
-
-  useEffect(() => {
-    updateFromSearchParams();
-  }, [updateFromSearchParams]);
-
-  const handleSelectClick = () => {
-    // 현재 선택된 ID들도 함께 전달
-    router.push(`/wallet/exchange/select?selectedIds=${selectedIds.join(',')}`);
+  const handleAmountClick = () => {
+    setIsAmountSelectOpen(true);
   };
+
+  const handleAmountClose = () => {
+    setIsAmountSelectOpen(false);
+  };
+
+  const handleAmountSelect = (amount: number, ids: number[]) => {
+    setSelectedAmount(amount);
+    setSelectedIds(ids);
+    setIsAmountSelectOpen(false);
+  };
+
   return (
     <Flex flexDirection="column" gap={40} className={style.padding20}>
       {/* 출금 금액 설정 */}
@@ -83,18 +46,16 @@ function ExchangeContent({
         <Typography
           size={28}
           weight="semiBold"
-          color={
-            amount > 0 ? colorPalette.primary[700] : colorPalette.grey[500]
-          }
+          color={colorPalette.primary[500]}
           className={style.alignCenter}
         >
-          {amount.toLocaleString()}원
+          {selectedAmount.toLocaleString()}원
         </Typography>
         <Button
           size="sm"
           variant="outlined"
           style={{ width: '200px' }}
-          onClick={handleSelectClick}
+          onClick={handleAmountClick}
         >
           금액 선택
         </Button>
@@ -135,9 +96,18 @@ function ExchangeContent({
           계좌 입금액
         </Typography>
         <Typography size={18} weight="bold" color={colorPalette.primary[700]}>
-          {amount.toLocaleString()}원
+          {selectedAmount.toLocaleString()} 원
         </Typography>
       </Flex>
+
+      {/* 금액선택 모달 */}
+      {isAmountSelectOpen && (
+        <AmountSelect
+          onClose={handleAmountClose}
+          onSelect={handleAmountSelect}
+          initialSelectedIds={selectedIds}
+        />
+      )}
     </Flex>
   );
 }
