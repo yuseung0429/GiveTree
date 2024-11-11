@@ -24,14 +24,11 @@ public class TransferExecutor {
 
     public AccountTransferResponse execute(
             long senderId,
-            String senderSimplePassword,
             long receiverId,
             long amount,
             String senderAccountSummary,
             String receiverAccountSummary
     ) {
-        memberFinanceValidator.validateSimplePassword(senderId, senderSimplePassword);
-
         Account senderAccount = accountReader.readActiveAccount(senderId);
         Account receiverAccount = accountReader.readActiveAccount(receiverId);
 

@@ -17,10 +17,9 @@ public class DepositProcessor {
     private final TransferExecutor transferExecutor;
     private final LedgerAppender ledgerAppender;
 
-    public AccountTransferResponse process(long senderId, long amount, String simplePassword) {
+    public AccountTransferResponse process(long senderId, long amount) {
         return transferExecutor.execute(
                 senderId,
-                simplePassword,
                 adminConfig.getMemberId(),
                 amount,
                 LedgerType.CHARGE.getWithdrawalMessage(),

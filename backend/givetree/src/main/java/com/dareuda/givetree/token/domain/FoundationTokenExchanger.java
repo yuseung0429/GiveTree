@@ -1,5 +1,6 @@
 package com.dareuda.givetree.token.domain;
 
+import com.dareuda.givetree.account.domain.AccountValidator;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.finance.domain.MemberFinanceValidator;
 import com.dareuda.givetree.history.controller.TransactionErrorCode;
@@ -19,14 +20,12 @@ public class FoundationTokenExchanger {
 
     private final TokenExchanger tokenExchanger;
     private final MemberFinanceValidator memberFinanceValidator;
-    private final TransactionLedgerReader transactionLedgerReader;
     private final MemberValidator memberValidator;
     private final TransactionReader transactionReader;
     private final MemberWalletReader memberWalletReader;
-    private final TransactionLedgerRepository transactionLedgerRepository;
     private final TransactionLedgerAppender transactionLedgerAppender;
 
-    public void exchange(long foundationId, String simplePassword, List<Long> transactionIds) {
+    public void exchange(long foundationId, List<Long> transactionIds, String simplePassword) {
         memberValidator.validateFoundation(foundationId);
         memberFinanceValidator.validateSimplePassword(foundationId, simplePassword);
 
@@ -41,12 +40,11 @@ public class FoundationTokenExchanger {
         }
 
         long amount = 0;
-
         for (Transaction transaction : transactions) {
             amount += transaction.getAmount();
         }
 
-        long ledgerId =  tokenExchanger.exchange(foundationId, amount);
+        long ledgerId = tokenExchanger.exchange(foundationId, amount);
         transactionLedgerAppender.appendAll(transactionIds, ledgerId);
     }
 }

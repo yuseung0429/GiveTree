@@ -26,4 +26,8 @@ public class TransactionReader {
     public List<Transaction> readUnreceivedTransactionByReceiverWalletIdAndTransactionIds(long receiverWalletId, List<Long> transactionIds) {
         return transactionRepository.findUnreceivedTransactionByReceiverWalletIdAndTransactionIds(receiverWalletId, transactionIds);
     }
+
+    public List<Transaction> readUnreceivedTransactionByReceiverWalletId(long receiverWalletId) {
+        return transactionRepository.findUnreceivedTransactionByReceiverWalletId(receiverWalletId);
+    }
 }

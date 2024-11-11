@@ -20,7 +20,6 @@ public class RefundProcessor {
     public AccountTransferResponse process(long receiverId, long amount) {
         return transferExecutor.execute(
                 adminConfig.getMemberId(),
-                adminConfig.getSimplePassword(),
                 receiverId,
                 amount,
                 LedgerType.REFUND.getWithdrawalMessage(),

@@ -40,12 +40,19 @@ public class TokenTransferrer {
                 Set.of(senderWallet.getAddress(), receiverWallet.getAddress()),
                 contractConfig.getTokenContractAddress(),
                 TokenContract.class,
-                (TokenContract tokenContract) -> caller.call(tokenContract.transferToken(senderWallet.getAddress(), receiverWallet.getAddress(), BigInteger.valueOf(amount)))
+                (TokenContract tokenContract)
+                        -> caller.call(tokenContract.transferToken(senderWallet.getAddress(), receiverWallet.getAddress(), BigInteger.valueOf(amount)))
         );
     }
 
     @Transactional
-    public Transaction saveTransaction(long senderWalletId, long receiverWalletId, long amount, TransactionType type, TransactionReceipt receipt) {
+    public Transaction saveTransaction(
+            long senderWalletId,
+            long receiverWalletId,
+            long amount,
+            TransactionType type,
+            TransactionReceipt receipt
+    ) {
         return transactionAppender.append(
                 senderWalletId,
                 receiverWalletId,

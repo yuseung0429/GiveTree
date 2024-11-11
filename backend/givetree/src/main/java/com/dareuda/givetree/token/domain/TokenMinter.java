@@ -45,17 +45,18 @@ public class TokenMinter  {
                 Set.of(wallet.getAddress()),
                 contractConfig.getTokenContractAddress(),
                 TokenContract.class,
-                (TokenContract tokenContract) -> caller.call(tokenContract.mintToken(wallet.getAddress(), BigInteger.valueOf(amount)))
+                (TokenContract tokenContract)
+                        -> caller.call(tokenContract.mintToken(wallet.getAddress(), BigInteger.valueOf(amount)))
         );
     }
 
     @Transactional
-    public Transaction saveTransaction(long walletId, long amount, TransactionReceipt receipt) {
+    public Transaction saveTransaction(long walletId, long amount, TransactionType type, TransactionReceipt receipt) {
         return transactionAppender.append(
                 adminConfig.getWalletId(),
                 walletId,
                 amount,
-                TransactionType.EXCHANGE,
+                type,
                 receipt.getTransactionHash()
         );
     }

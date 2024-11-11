@@ -1,16 +1,18 @@
 package com.dareuda.givetree.token.domain;
 
 import com.dareuda.givetree.account.domain.AccountTransferResponse;
+import com.dareuda.givetree.account.domain.AccountValidator;
 import com.dareuda.givetree.account.domain.ExchangeFailureAppender;
 import com.dareuda.givetree.account.domain.WithdrawalProcessor;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.history.domain.Ledger;
 import com.dareuda.givetree.history.domain.Transaction;
 import com.dareuda.givetree.history.domain.TransactionLedgerAppender;
+import com.dareuda.givetree.history.domain.TransactionType;
 import com.dareuda.givetree.token.controller.TokenErrorCode;
 import com.dareuda.givetree.wallet.domain.Wallet;
-import com.dareuda.givetree.wallet.domain.WalletReader;
 import com.dareuda.givetree.wallet.domain.WalletVO;
+import com.dareuda.givetree.wallet.domain.member.MemberWalletReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
@@ -20,18 +22,25 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 public class TokenExchanger {
 
     private final TokenBurner tokenBurner;
-    private final WalletReader walletReader;
     private final WithdrawalProcessor withdrawalProcessor;
     private final ExchangeFailureAppender exchangeFailureAppender;
     private final TransactionLedgerAppender transactionLedgerAppender;
+    private final MemberWalletReader memberWalletReader;
+    private final TokenValidator tokenValidator;
 
-    public long exchange(long receiverId, long amount) {
-        Wallet wallet = walletReader.read(receiverId);
+    public long exchange(long memberId, long amount) {
+        tokenValidator.validateExchangeable(memberId);
+        Wallet wallet = memberWalletReader.readByMemberId(memberId);
         TransactionReceipt burnReceipt = tokenBurner.burn(WalletVO.from(wallet), amount);
-        Transaction burnTransaction = tokenBurner.saveTransaction(wallet.getId(), amount, burnReceipt);
+        Transaction burnTransaction = tokenBurner.saveTransaction(
+                wallet.getId(),
+                amount,
+                TransactionType.EXCHANGE,
+                burnReceipt
+        );
         try {
-            AccountTransferResponse withdrawalResponse  = withdrawalProcessor.process(wallet.getId(), amount);
-            Ledger ledger = withdrawalProcessor.saveLedger(receiverId, amount, withdrawalResponse);
+            AccountTransferResponse withdrawalResponse = withdrawalProcessor.process(wallet.getId(), amount);
+            Ledger ledger = withdrawalProcessor.saveLedger(memberId, amount, withdrawalResponse);
             transactionLedgerAppender.append(burnTransaction.getId(), ledger.getId());
             return ledger.getId();
         } catch (Exception e) {

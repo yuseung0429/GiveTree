@@ -23,12 +23,16 @@ public class FoundationDonationTokenTransferrer {
         memberValidator.validateUser(memberId);
         memberValidator.validateFoundation(foundationId);
 
+        memberFinanceValidator.validateSimplePassword(memberId, simplePassword);
+
         MemberWallet memberWallet = memberWalletReader.readByMemberId(memberId);
         MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
 
-        memberFinanceValidator.validateSimplePassword(memberId, simplePassword);
-
-        TransactionReceipt receipt = tokenTransferrer.transfer(WalletVO.from(memberWallet), WalletVO.from(foundationWallet), amount);
+        TransactionReceipt receipt = tokenTransferrer.transfer(
+                WalletVO.from(memberWallet),
+                WalletVO.from(foundationWallet),
+                amount
+        );
         tokenTransferrer.saveTransaction(
                 memberWallet.getId(),
                 foundationWallet.getId(),

@@ -10,13 +10,12 @@ import org.springframework.stereotype.Component;
 public class UserTokenExchanger {
 
     private final TokenExchanger tokenExchanger;
-    private final MemberFinanceValidator memberFinanceValidator;
     private final MemberValidator memberValidator;
+    private final MemberFinanceValidator memberFinanceValidator;
 
     public void exchange(long userId, long amount, String simplePassword) {
         memberValidator.validateUser(userId);
         memberFinanceValidator.validateSimplePassword(userId, simplePassword);
-
         tokenExchanger.exchange(userId, amount);
     }
 }
