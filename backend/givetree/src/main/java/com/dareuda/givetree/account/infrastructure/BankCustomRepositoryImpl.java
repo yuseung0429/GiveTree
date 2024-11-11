@@ -19,7 +19,6 @@ public class BankCustomRepositoryImpl implements BankCustomRepository {
     @Override
     public void saveAll(List<Bank> banks) {
 
-
         jdbcTemplate.batchUpdate("INSERT INTO bank(bank_code, name) values (?, ?)",
                 new BatchPreparedStatementSetter() {
                     @Override

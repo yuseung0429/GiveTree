@@ -1,6 +1,6 @@
 package com.dareuda.givetree.account.domain;
 
-import com.dareuda.givetree.transaction.domain.Transaction;
+import com.dareuda.givetree.history.domain.Transaction;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

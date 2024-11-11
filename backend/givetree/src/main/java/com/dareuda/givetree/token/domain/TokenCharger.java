@@ -4,9 +4,12 @@ import com.dareuda.givetree.account.domain.AccountTransferResponse;
 import com.dareuda.givetree.account.domain.DepositProcessor;
 import com.dareuda.givetree.account.domain.RefundFailureAppender;
 import com.dareuda.givetree.account.domain.RefundProcessor;
-import com.dareuda.givetree.ledger.domain.Ledger;
-import com.dareuda.givetree.transaction.domain.Transaction;
-import com.dareuda.givetree.transaction.domain.TransactionUpdater;
+import com.dareuda.givetree.common.errors.exception.RestApiException;
+import com.dareuda.givetree.history.domain.Ledger;
+import com.dareuda.givetree.history.domain.Transaction;
+import com.dareuda.givetree.history.domain.TransactionLedgerAppender;
+import com.dareuda.givetree.history.domain.TransactionType;
+import com.dareuda.givetree.token.controller.TokenErrorCode;
 import com.dareuda.givetree.wallet.domain.member.MemberWalletReader;
 import com.dareuda.givetree.wallet.domain.Wallet;
 import com.dareuda.givetree.wallet.domain.WalletVO;
@@ -18,27 +21,36 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 @RequiredArgsConstructor
 public class TokenCharger {
 
-    private final TransactionUpdater transactionUpdater;
+    private final TransactionLedgerAppender transactionLedgerAppender;
     private final DepositProcessor depositProcessor;
     private final RefundProcessor refundProcessor;
     private final TokenMinter tokenMinter;
     private final MemberWalletReader memberWalletReader;
     private final RefundFailureAppender refundFailureAppender;
+    private final TokenValidator tokenValidator;
 
-    public void charge(long memberId, long amount, String simplePassword) {
-        AccountTransferResponse depositResponse = depositProcessor.process(memberId, amount, simplePassword);
+    public void charge(long memberId, long amount) {
+        tokenValidator.validateChargeable(memberId);
+        AccountTransferResponse depositResponse = depositProcessor.process(memberId, amount);
         Ledger depositLedger = depositProcessor.saveLedger(memberId, amount, depositResponse);
         try {
             Wallet wallet = memberWalletReader.readByMemberId(memberId);
             TransactionReceipt mintReceipt = tokenMinter.mint(WalletVO.from(wallet), amount);
-            Transaction mintTransaction = tokenMinter.saveTransaction(wallet.getId(), amount, mintReceipt);
-            transactionUpdater.updateLedgerId(mintTransaction.getId(), depositLedger.getId());
+            Transaction mintTransaction = tokenMinter.saveTransaction(
+                    wallet.getId(),
+                    amount,
+                    TransactionType.CHARGE,
+                    mintReceipt
+            );
+            transactionLedgerAppender.append(mintTransaction.getId(), depositLedger.getId());
         } catch (Exception e1) {
             try {
                 AccountTransferResponse refundResponse = refundProcessor.process(memberId, amount);
                 refundProcessor.saveLedger(memberId, amount, refundResponse);
+                throw new RestApiException(TokenErrorCode.TOKEN_CHARGE_FAILURE);
             } catch (Exception e2) {
                 refundFailureAppender.append(depositLedger.getId(), amount);
+                throw new RestApiException(TokenErrorCode.TOKEN_CHARGE_FAILURE);
             }
         }
     }

@@ -1,13 +1,11 @@
 package com.dareuda.givetree.account.domain;
 
 import com.dareuda.givetree.account.infrastructure.ExchangeFailureRepository;
-import com.dareuda.givetree.account.infrastructure.RefundFailureRepository;
-import com.dareuda.givetree.ledger.domain.Ledger;
-import com.dareuda.givetree.ledger.domain.LedgerReader;
-import com.dareuda.givetree.transaction.domain.Transaction;
-import com.dareuda.givetree.transaction.domain.TransactionReader;
+import com.dareuda.givetree.history.domain.Transaction;
+import com.dareuda.givetree.history.domain.TransactionReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -16,13 +14,13 @@ public class ExchangeFailureAppender {
     private final TransactionReader transactionReader;
     private final ExchangeFailureRepository exchangeFailureRepository;
 
+    @Transactional
     public void append(long transactionId, long amount) {
         Transaction transaction = transactionReader.read(transactionId);
-        exchangeFailureRepository.save(
-                ExchangeFailure.builder()
-                        .transaction(transaction)
-                        .amount(amount)
-                        .build()
-        );
+        ExchangeFailure exchangeFailure = ExchangeFailure.builder()
+                .transaction(transaction)
+                .amount(amount)
+                .build();
+        exchangeFailureRepository.save(exchangeFailure);
     }
 }

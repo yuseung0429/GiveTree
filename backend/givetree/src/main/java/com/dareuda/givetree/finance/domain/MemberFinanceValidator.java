@@ -24,10 +24,9 @@ public class MemberFinanceValidator {
     public void validateSimplePassword(long memberId, String inputPassword) {
         MemberFinance memberFinance = memberFinanceReader.read(memberId);
 
-        String simplePassword = sha256Utils.generate(memberFinance.getSimplePassword() + memberFinance.getSalt());
-        if (Objects.equals(memberFinance.getSimplePassword(), simplePassword)) {
+        String simplePassword = sha256Utils.generate(inputPassword + memberFinance.getSalt());
+        if (!Objects.equals(memberFinance.getSimplePassword(), simplePassword)) {
             throw new RestApiException(MemberFinanceErrorCode.MEMBER_FINANCE_SIMPLE_PASSWORD_MISMATCH);
         }
-
     }
 }

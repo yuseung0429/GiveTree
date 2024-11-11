@@ -1,4 +1,4 @@
-package com.dareuda.givetree.ledger.domain;
+package com.dareuda.givetree.history.domain;
 
 import com.dareuda.givetree.account.domain.Account;
 import jakarta.persistence.*;
