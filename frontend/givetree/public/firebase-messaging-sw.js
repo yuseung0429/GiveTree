@@ -1,6 +1,9 @@
 importScripts(
   'https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js'
 );
+importScripts(
+  'https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js'
+);
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAZr-m0xCeUHEcVIxeYd3g3DPmOqsWs0q4',
@@ -11,3 +14,5 @@ firebase.initializeApp({
   appId: '1:686256830414:web:e05211a41b25bcaba09d9f',
   measurementId: 'G-MYJ2SCRWKP',
 });
+
+firebase.messaging();
