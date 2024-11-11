@@ -4,7 +4,6 @@ import com.dareuda.givetree.member.domain.*;
 import com.dareuda.givetree.member.domain.dto.CreateMemberCommand;
 import com.dareuda.givetree.member.domain.dto.MemberDetail;
 import com.dareuda.givetree.member.domain.dto.UpdateMemberCommand;
-import com.dareuda.givetree.wallet.domain.member.MemberWalletCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +14,9 @@ public class MemberService {
     private final MemberUpdater memberUpdater;
     private final MemberDeleter memberDeleter;
     private final MemberDetailReader memberDetailReader;
-    private final MemberWalletCreator memberWalletCreator;
 
     public long createMember(CreateMemberCommand command) {
-        long memberId = memberCreator.create(command).getId();
-        memberWalletCreator.create(memberId);
-        return memberId;
+        return memberCreator.create(command).getId();
     }
 
     public void updateMember(long memberId, UpdateMemberCommand command) {
