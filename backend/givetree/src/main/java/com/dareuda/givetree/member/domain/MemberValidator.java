@@ -13,14 +13,16 @@ public class MemberValidator {
 
     public void validateUser(long memberId) {
         Member member = memberReader.read(memberId);
-        if (member.getRole() != Role.USER)
+        if (member.getRole() != Role.USER) {
             throw new RestApiException(MemberErrorCode.MEMBER_NOT_USER);
+        }
     }
 
     public void validateFoundation(long memberId) {
         Member member = memberReader.read(memberId);
-        if (member.getRole() != Role.FOUNDATION)
+        if (member.getRole() != Role.FOUNDATION) {
             throw new RestApiException(MemberErrorCode.MEMBER_NOT_FOUNDATION);
+        }
     }
 
 }

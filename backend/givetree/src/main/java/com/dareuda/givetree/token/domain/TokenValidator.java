@@ -13,12 +13,14 @@ public class TokenValidator {
     private final AccountReader accountReader;
 
     public void validateChargeable(long memberId) {
-        if (!accountReader.existsActiveAccount(memberId))
+        if (!accountReader.existsActiveAccount(memberId)) {
             throw new RestApiException(AccountErrorCode.ACTIVE_ACCOUNT_NOT_FOUND);
+        }
     }
 
     public void validateExchangeable(long memberId) {
-        if (!accountReader.existsActiveAccount(memberId))
+        if (!accountReader.existsActiveAccount(memberId)) {
             throw new RestApiException(AccountErrorCode.ACTIVE_ACCOUNT_NOT_FOUND);
+        }
     }
 }
