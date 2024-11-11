@@ -31,7 +31,7 @@ const Profile = ({
       />
       <div className={styles.name}>
         <Typography as="h5" color={colorPalette.primary[700]}>
-          {role === 'user' ? 'GIVE 회원' : '재단 회원'}
+          {role === 'USER' ? 'GIVE 회원' : '재단 회원'}
         </Typography>
 
         <Typography as="h2" weight="semiBold">
@@ -41,10 +41,10 @@ const Profile = ({
 
       <div className={styles.giveMoney}>
         <Typography as="h3" weight="medium">
-          {role === 'user' ? '총 기부금액' : '현재 모금액'}
+          {role === 'USER' ? '총 기부금액' : '현재 모금액'}
         </Typography>
         <Typography as="h3" weight="semiBold">
-          {role === 'user'
+          {role === 'USER'
             ? `${totalDonation.toLocaleString()}트리`
             : `${currentMoney.toLocaleString()}트리`}
         </Typography>
@@ -52,10 +52,10 @@ const Profile = ({
 
       <Link
         className={styles.footButton}
-        href={role === 'user' ? '/givefoot' : '/myfoundation/donation'}
+        href={role === 'USER' ? '/givefoot' : '/myfoundation/donation'}
       >
         <Button variant="outlined" fullWidth>
-          {role === 'user' ? '기부발자국 확인하기' : '후원 내역 확인하기'}
+          {role === 'USER' ? '기부발자국 확인하기' : '후원 내역 확인하기'}
         </Button>
       </Link>
     </>

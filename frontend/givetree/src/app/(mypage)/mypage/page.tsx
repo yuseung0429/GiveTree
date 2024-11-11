@@ -8,17 +8,21 @@ import Box from '@/components/common/Box';
 import Profile from '@/components/myPage/Profile';
 import MyTab from '@/components/myPage/MyTab';
 import Link from 'next/link';
+import fetchWrapper from '@/lib/fetchWrapper';
+import { UserData } from '@/types/user/types';
 
 export default async function MyPage() {
-  const role = 'user';
-  const name = '눈사람';
+  const response = await fetchWrapper('/members/session', { method: 'GET' });
+  const user: UserData = await response.json();
+  const { role, name } = user;
+
   const totalDonation = 35000;
   const currentMoney = 1563000;
 
   return (
     <div className={styles.Wrapper}>
       <div className={styles.mainContainer}>
-        {role === 'user' && (
+        {role === 'USER' && (
           <Link className={styles.modifyButton} href={`/edit/user`}>
             <HiOutlinePencilSquare size={24} />
           </Link>
