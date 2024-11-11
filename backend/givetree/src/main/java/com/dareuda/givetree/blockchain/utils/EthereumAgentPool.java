@@ -2,9 +2,9 @@ package com.dareuda.givetree.blockchain.utils;
 
 import com.dareuda.givetree.common.config.Web3jConfig;
 import com.dareuda.givetree.token.infrastructure.TokenContractAgentRegistrar;
-import com.dareuda.givetree.wallet.domain.AgentWallet;
-import com.dareuda.givetree.wallet.domain.AgentWalletCreator;
-import com.dareuda.givetree.wallet.domain.AgentWalletReader;
+import com.dareuda.givetree.wallet.domain.agent.AgentWallet;
+import com.dareuda.givetree.wallet.domain.agent.AgentWalletCreator;
+import com.dareuda.givetree.wallet.domain.agent.AgentWalletReader;
 import com.dareuda.givetree.wallet.domain.Wallet;
 import org.springframework.stereotype.Component;
 

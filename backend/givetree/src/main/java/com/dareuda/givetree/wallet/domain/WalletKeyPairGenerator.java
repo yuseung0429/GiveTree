@@ -16,7 +16,7 @@ public class WalletKeyPairGenerator {
         try {
             keyPair = Keys.createEcKeyPair();
         } catch (Exception e){
-            throw new RestApiException(WalletErrorCode.GENERATE_FAIL);
+            throw new RestApiException(WalletErrorCode.WALLET_GENERATE_FAIL);
         }
         String address = "0x"+Keys.getAddress(keyPair);
         String privateKey = "0x"+String.format("%064x", keyPair.getPrivateKey());

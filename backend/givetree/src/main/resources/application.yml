@@ -2,7 +2,6 @@ spring:
   application:
     name:
       givetree
-
   profiles:
     include: finance, local, blockchain
 

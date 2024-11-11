@@ -18,7 +18,7 @@ public class MemberFinanceAppender {
     private final MemberFinanceValidator memberFinanceValidator;
     private final MemberFinanceRepository memberFinanceRepository;
 
-    public void append(long memberId, String password) {
+    public void append(long memberId, String simplePassword) {
         memberFinanceValidator.validateAppendable(memberId);
 
         Member member = memberReader.read(memberId);
@@ -26,7 +26,7 @@ public class MemberFinanceAppender {
         MemberResponse response = memberFinanceLoader.load(member.getId());
 
         String salt = sha256Utils.generate();
-        String hashedPassword = sha256Utils.generate(password+salt);
+        String hashedPassword = sha256Utils.generate(simplePassword+salt);
 
         MemberFinance info = MemberFinance.builder()
                 .id(member.getId())

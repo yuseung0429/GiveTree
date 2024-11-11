@@ -32,15 +32,6 @@ public class MemberFinance {
     @Convert(converter = ByteArrayToHexStringConverter.class)
     private String salt;
 
-    @NotNull
-    @Column(name = "failure_count")
-    private Integer failureCount;
-
-    @PrePersist
-    private void prePersist() {
-        failureCount = 0;
-    }
-
     public void changeSimplePassword(String simplePassword) {
         this.simplePassword = simplePassword;
     }
