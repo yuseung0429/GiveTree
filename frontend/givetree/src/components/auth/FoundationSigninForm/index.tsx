@@ -1,6 +1,8 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { FormEvent, startTransition, useActionState, useEffect } from 'react';
+
+import { useRouter } from 'next/navigation';
 
 import useDialog from '@/hooks/useDialog';
 
@@ -12,18 +14,32 @@ import FormButton from '@/components/common/FormButton';
 import TextField from '@/components/common/TextField';
 
 const FoundationSigninForm = () => {
+  const router = useRouter();
+
   const { alert } = useDialog();
 
   const [state, action, isPending] = useActionState(signinFoundation, {});
 
   useEffect(() => {
+    if (state.success) {
+      router.replace('/');
+      return;
+    }
+
     if (state.message) {
       alert(state.message);
+      return;
     }
-  }, [alert, state]);
+  }, [router, alert, state]);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    startTransition(() => action(new FormData(e.target as HTMLFormElement)));
+  };
 
   return (
-    <form action={action}>
+    <form onSubmit={handleSubmit}>
       <Flex flexDirection="column" gap="0.75rem">
         <TextField
           variant="outlined"
