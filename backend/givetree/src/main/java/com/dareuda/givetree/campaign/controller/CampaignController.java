@@ -2,11 +2,15 @@ package com.dareuda.givetree.campaign.controller;
 
 import com.dareuda.givetree.auth.domain.UserPrinciple;
 import com.dareuda.givetree.campaign.controller.dto.request.CreateCampaignRequest;
+import com.dareuda.givetree.campaign.controller.dto.request.SearchCampaignRequest;
 import com.dareuda.givetree.campaign.domain.dto.CampaignDetail;
 import com.dareuda.givetree.campaign.service.CampaignService;
 import com.dareuda.givetree.campaign.controller.dto.request.UpdateCampaignRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -61,4 +65,15 @@ public class CampaignController {
 
         return ResponseEntity.ok(campaignDetail);
     }
+
+    @GetMapping
+    public ResponseEntity<Page<CampaignDetail>> searchFoundations(
+            SearchCampaignRequest request,
+            @PageableDefault Pageable pageable
+    ) {
+        Page<CampaignDetail> campaignDetails = campaignService.searchFoundationDetail(request.convertToSearchFilter(), pageable);
+
+        return ResponseEntity.ok(campaignDetails);
+    }
+
 }

@@ -14,9 +14,7 @@ public class CampaignDetailReader {
     private final CampaignReader campaignReader;
 
     @Transactional(readOnly = true)
-    public CampaignDetail read(long memberId) {
-        Campaign campaign = campaignReader.read(memberId);
-
+    public CampaignDetail read(Campaign campaign) {
         String titleImageUrl = campaign.getTitleImage() != null ? campaign.getTitleImage().getUrl() : null;
         List<String> imageUrls = campaign.getImages().stream().map(CampaignImage::getImage).map(Media::getUrl).toList();
 
@@ -33,5 +31,10 @@ public class CampaignDetailReader {
                 .targetFundraisingAmount(campaign.getTargetFundraisingAmount())
                 .currentFundraisingAmount(campaign.getCurrentFundraisingAmount())
                 .build();
+    }
+
+    @Transactional(readOnly = true)
+    public CampaignDetail read(long campaignId) {
+        return read(campaignReader.read(campaignId));
     }
 }
