@@ -33,9 +33,9 @@ public class ReadSaleResponse {
 
     private String productionCondition;
 
-    private boolean isDirectSale;
+    private Boolean isDirectSale;
 
-    private boolean isDeliverySale;
+    private Boolean isDeliverySale;
 
     private long hits;
 

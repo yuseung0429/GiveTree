@@ -20,16 +20,21 @@ public class ReadSaleBySearchResponse {
 
     private String productionsCondition;
 
-    private boolean isDirectSale;
+    private Boolean isDirectSale;
 
-    private boolean isDeliverySale;
+    private Boolean isDeliverySale;
 
     public static ReadSaleBySearchResponse from(SaleDetail saleDetail) {
+        String imageUrl = null;
+        if (!saleDetail.getImageUrls().isEmpty()) {
+            imageUrl = saleDetail.getImageUrls().get(0);
+        }
+
         return ReadSaleBySearchResponse.builder()
                 .id(saleDetail.getId())
                 .price(saleDetail.getPrice())
                 .title(saleDetail.getTitle())
-                .imageUrl(saleDetail.getImageUrls().get(0))
+                .imageUrl(imageUrl)
                 .status(saleDetail.getStatus())
                 .productionsCondition(saleDetail.getProductionCondition())
                 .isDirectSale(saleDetail.isDirectSale())

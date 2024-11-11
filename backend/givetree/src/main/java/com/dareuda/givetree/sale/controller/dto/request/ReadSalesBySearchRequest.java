@@ -3,11 +3,14 @@ package com.dareuda.givetree.sale.controller.dto.request;
 import com.dareuda.givetree.sale.domain.ProductionCondition;
 import com.dareuda.givetree.sale.domain.SaleStatus;
 import com.dareuda.givetree.sale.domain.SalesSearchQuery;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@AllArgsConstructor
 public class ReadSalesBySearchRequest {
 
     private String query;
@@ -21,18 +24,23 @@ public class ReadSalesBySearchRequest {
     private Boolean isDeliverySale;
 
     public SalesSearchQuery toSalesSearchQuery() {
-        List<SaleStatus> statuses = this.statuses.stream()
+        if (statuses == null) {
+            statuses = new ArrayList<>();
+        }
+        if (productionConditions == null) {
+            productionConditions = new ArrayList<>();
+        }
+        List<SaleStatus> saleStatuses = this.statuses.stream()
                 .map(SaleStatus::of)
                 .toList();
-
-        List<ProductionCondition> productionConditions = this.productionConditions.stream()
+        List<ProductionCondition> saleProductionConditions = this.productionConditions.stream()
                 .map(ProductionCondition::of)
                 .toList();
 
         return SalesSearchQuery.builder()
                 .query(query)
-                .statuses(statuses)
-                .productionConditions(productionConditions)
+                .statuses(saleStatuses)
+                .productionConditions(saleProductionConditions)
                 .isDirectSale(isDirectSale)
                 .isDeliverySale(isDeliverySale)
                 .build();

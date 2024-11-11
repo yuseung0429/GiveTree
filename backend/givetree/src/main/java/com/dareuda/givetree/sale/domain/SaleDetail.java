@@ -37,4 +37,27 @@ public class SaleDetail {
     private long hits;
 
     private LocalDateTime createdDateTime;
+
+    public static SaleDetail from(Sale sale) {
+        List<String> imageUrls = sale.getImages().stream()
+                .map(image -> image.getImage().getUrl())
+                .toList();
+
+        return SaleDetail.builder()
+                .id(sale.getId())
+                .sellerId(sale.getSellerId())
+                .foundationId(sale.getFundedFoundationId())
+                .price(sale.getPrice())
+                .donationRate(sale.getDonationRate())
+                .title(sale.getTitle())
+                .description(sale.getDescription())
+                .imageUrls(imageUrls)
+                .status(sale.getStatus().getTitle())
+                .productionCondition(sale.getProductionCondition().getTitle())
+                .isDirectSale(sale.isDirectSale())
+                .isDeliverySale(sale.isDeliverySale())
+                .hits(builder().hits)
+                .createdDateTime(sale.getCreatedAt())
+                .build();
+    }
 }
