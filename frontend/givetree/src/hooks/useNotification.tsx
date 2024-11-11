@@ -27,7 +27,7 @@ const useNotification = () => {
         return;
       }
 
-      const app = initializeApp(firebaseConfig);
+      initializeApp(firebaseConfig);
 
       const messaging = getMessaging();
 
