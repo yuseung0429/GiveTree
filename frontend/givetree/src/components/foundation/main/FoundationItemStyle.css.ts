@@ -13,6 +13,7 @@ export const container = style({
   alignItems: 'center',
   cursor: 'pointer',
   gap: '10px',
+  userSelect: 'none',
 });
 
 export const flexbox = style({
@@ -20,17 +21,6 @@ export const flexbox = style({
   gap: '10px',
   alignItems: 'center',
   width: 'calc(100% - 40px)',
-});
-
-export const foundationLogo = style({
-  position: 'relative',
-  overflow: 'hidden',
-  width: '50px',
-  height: '50px',
-  borderRadius: '25px',
-  padding: '10px',
-  flexShrink: '0',
-  border: '1px solid grey',
 });
 
 export const btn = style({

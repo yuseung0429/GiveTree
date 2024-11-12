@@ -7,14 +7,17 @@ import Box from '@/components/common/Box';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
 import Flex from '@/components/common/Flex';
-import Button from '@/components/common/Button';
+import FoundationSelector from '@/components/market/FoundationSelector';
 
 interface DonationSelectorProps {
   price: number;
+  onChange: (contribution: number, foundationId: number) => void;
 }
 
-const DonationSelector = ({ price }: DonationSelectorProps) => {
+const DonationSelector = ({ price, onChange }: DonationSelectorProps) => {
   const [contribution, handleContributionChange] = useNumericInput(0, price);
+
+  onChange(contribution, 1);
 
   return (
     <Box
@@ -31,16 +34,7 @@ const DonationSelector = ({ price }: DonationSelectorProps) => {
           기부할 금액을 입력해 주세요.
         </Typography>
         <TextField onChange={handleContributionChange} defaultValue={0} />
-        <Box
-          padding="0.75rem"
-          borderRadius="0.5rem"
-          backgroundColor={colorPalette.grey[300]}
-        >
-          <Flex alignItems="center" justifyContent="space-between">
-            <Typography>기부할 재단을 선택해 주세요.</Typography>
-            <Button size="sm">선택</Button>
-          </Flex>
-        </Box>
+        <FoundationSelector />
       </Flex>
     </Box>
   );

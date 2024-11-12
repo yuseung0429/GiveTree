@@ -1,9 +1,10 @@
-import Image from 'next/image';
-
 import { MdNavigateNext } from 'react-icons/md';
+
+import colorPalette from '@/styles/tokens/colorPalette';
 
 import Box from '@/components/common/Box';
 import Typography from '@/components/common/Typography';
+import ProfileImage from '@/components/common/ProfileImage';
 
 import * as style from './FoundationItemStyle.css';
 
@@ -29,9 +30,11 @@ export default function FoundationItem({
       tabIndex={0}
     >
       <Box className={style.flexbox}>
-        <div className={style.foundationLogo}>
-          <Image src={foundation.profileImageUrl} alt="Profile" fill={true} />
-        </div>
+        <ProfileImage
+          src={foundation.profileImageUrl}
+          borderColor={colorPalette.grey[400]}
+          size="md"
+        />
         <Box className={style.textbox}>
           <Typography as="h4" weight="medium">
             {foundation.name}

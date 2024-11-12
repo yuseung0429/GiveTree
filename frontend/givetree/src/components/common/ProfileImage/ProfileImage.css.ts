@@ -15,13 +15,13 @@ export const profileImage = recipe({
       },
 
       md: {
-        width: '4rem',
-        height: '4rem',
+        width: '3rem',
+        height: '3rem',
       },
 
       lg: {
-        width: '6rem',
-        height: '6rem',
+        width: '4rem',
+        height: '4rem',
       },
     },
   },
