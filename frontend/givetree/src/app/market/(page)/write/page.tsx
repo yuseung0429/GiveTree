@@ -1,3 +1,7 @@
+'use client';
+
+import useNumericInput from '@/hooks/useNumericInput';
+
 import Box from '@/components/common/Box';
 import CheckboxChip from '@/components/common/CheckboxChip';
 import Flex from '@/components/common/Flex';
@@ -5,8 +9,11 @@ import FormButton from '@/components/common/FormButton';
 import FormField from '@/components/common/FormField';
 import ImageUploader from '@/components/common/ImageUploader';
 import TextField from '@/components/common/TextField';
+import DonationSelector from '@/components/market/DonationSelector';
 
 export default function WritePage() {
+  const [price, handlePriceChange] = useNumericInput();
+
   return (
     <Box padding="1rem">
       <Flex flexDirection="column" gap="0.75rem">
@@ -52,7 +59,11 @@ export default function WritePage() {
           label="판매 가격"
           description="구매자에게 물품을 판매할 가격을 입력해 주세요."
         >
-          <TextField type="number" size="lg" placeholder="판매 가격" />
+          <TextField
+            size="lg"
+            placeholder="판매 가격"
+            onChange={handlePriceChange}
+          />
         </FormField>
 
         <FormField label="상품 사진">
@@ -63,7 +74,7 @@ export default function WritePage() {
           label="후원 정보"
           description="후원 금액과 후원할 재단을 선택해 주세요."
         >
-          <ImageUploader maxFileCount={5} />
+          <DonationSelector price={price} />
         </FormField>
 
         <FormButton size="lg">글쓰기</FormButton>
