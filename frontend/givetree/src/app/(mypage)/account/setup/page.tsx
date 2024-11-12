@@ -1,36 +1,15 @@
-'use client';
-
 import Flex from '@/components/common/Flex';
-import AccountItem from '@/components/myPage/Myfoundation/Account/AccountItem';
-import { useState } from 'react';
+import { getAllAccounts } from '@/api/account/getAllAcounts';
+import AccountList from '@/components/myPage/Myfoundation/Account/AccountList';
 
-export default function Page() {
-  const [selectedAccountId, setSelectedAccountId] = useState<number | null>(
-    null
-  );
-
-  const accounts = [
-    { id: 1, accountNumber: '기업은행 8757', balance: '567,000' },
-    { id: 2, accountNumber: '국민은행 1234', balance: '1,234,000' },
-    { id: 3, accountNumber: '신한은행 5678', balance: '890,000' },
-  ];
-
-  const handleSelect = (id: number) => {
-    setSelectedAccountId(id === selectedAccountId ? null : id);
-  };
+export default async function Page() {
+  const result = await getAllAccounts();
+  console.log('Server Component - API Result:', result); // 서버 사이드 로그
+  const accounts = result.ok && result.data ? result.data : [];
 
   return (
     <Flex flexDirection="column" gap={16}>
-      {accounts.map((account) => (
-        <AccountItem
-          key={account.id}
-          id={account.id}
-          accountNumber={account.accountNumber}
-          balance={account.balance}
-          isSelected={account.id === selectedAccountId}
-          onSelect={handleSelect}
-        />
-      ))}
+      <AccountList accounts={accounts} />
     </Flex>
   );
 }

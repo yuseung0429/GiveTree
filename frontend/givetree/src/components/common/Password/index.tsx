@@ -12,13 +12,13 @@ import { useRouter } from 'next/navigation';
 interface PasswordProps {
   title?: string;
   subtitle?: string;
-  redirectPath: string;
+  onSubmit?: (password: string) => Promise<{ error?: string }>;
 }
 
 export default function Password({
   title = '비밀번호 입력',
   subtitle = '비밀번호를 입력해주세요.',
-  redirectPath,
+  onSubmit,
 }: PasswordProps) {
   const router = useRouter();
   const [password, setPassword] = useState('');
@@ -36,21 +36,16 @@ export default function Password({
   ]);
   const [error, setError] = useState('');
 
-  //임시 비밀번호
-  const tempPassword = '123456';
-
   useEffect(() => {
     if (password.length === 6) {
-      if (password === tempPassword) {
-        router.push(redirectPath);
-      } else {
-        setError('비밀번호가 일치하지 않습니다.');
-        setPassword('');
-      }
-    } else {
-      setError('');
+      onSubmit?.(password).then((result) => {
+        if (result?.error) {
+          setError(result.error);
+          setPassword('');
+        }
+      });
     }
-  }, [password, redirectPath, router]);
+  }, [password, onSubmit]);
 
   const shuffleNumbers = useCallback(() => {
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
