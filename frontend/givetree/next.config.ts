@@ -9,13 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'github.com',
-        pathname: '/**',
-      },
-
-      {
-        protocol: 'https',
-        hostname: 'givetree-bucket.s3.amazonaws.com',
+        hostname: '**.*',
         pathname: '/**',
       },
     ],

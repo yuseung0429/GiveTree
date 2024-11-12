@@ -7,12 +7,11 @@ export default function CampaignTab() {
   // 임시 확인용 데이터
   const campaignData = {
     id: 1,
-    title: '캠페인 제목',
-    foundation: '재단명',
-    progress: 65,
-    currentAmount: 650000,
-    goalAmount: 1000000,
-    imageUrl: 'https://via.placeholder.com/400x300',
+    name: '캠페인 제목',
+    foundationName: '재단명',
+    currentFundraisingAmount: 650000,
+    targetFundraisingAmount: 1000000,
+    titleImageUrl: 'https://via.placeholder.com/400x300',
   };
 
   return (
@@ -26,12 +25,11 @@ export default function CampaignTab() {
         <Box marginTop="1rem">
           <CampaignCard
             id={campaignData.id}
-            title={campaignData.title}
-            foundation={campaignData.foundation}
-            progress={campaignData.progress}
-            currentAmount={campaignData.currentAmount}
-            goalAmount={campaignData.goalAmount}
-            imageUrl={campaignData.imageUrl}
+            title={campaignData.name}
+            foundation={campaignData.foundationName}
+            currentFundraisingAmount={campaignData.currentFundraisingAmount}
+            targetFundraisingAmount={campaignData.targetFundraisingAmount}
+            titleImageUrl={campaignData.titleImageUrl}
             totalCampaign={1}
             currentIndex={1}
           />

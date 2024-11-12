@@ -12,5 +12,8 @@ export const introduction = style({
 
 export const introduceImage = style({
   display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
   justifyContent: 'center',
+  gap: '1rem'
 });

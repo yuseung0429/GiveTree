@@ -7,7 +7,7 @@ import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import { useState } from 'react';
 
-export default function DonationCash() {
+export default function DonationCash({name} : {name : string}) {
   const [amount, setAmount] = useState<number>(0);
 
   // 금액을 직접 입력하는 함수
@@ -32,7 +32,7 @@ export default function DonationCash() {
             size={20}
             color={colorPalette.primary[600]}
           >
-            사회복지법인 굿네이버스
+            {name}
           </Typography>
           <Typography
             size={18}

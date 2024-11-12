@@ -1,43 +1,42 @@
-'use client';
-
 import Image from 'next/image';
 import * as styles from './[id].css';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
-import TabButton from '@/components/common/Tab';
-import { use, useState } from 'react';
-import CampaignInfo from '@/components/campaign/CampaignInfo';
-import CampaignMoney from '@/components/campaign/CampaignMoney';
-import campaigns from '@/mock/campaigns.json';
 
-const categories = ['소개', '모금함'];
+// import campaigns from '@/mock/campaigns.json';
+import CampaignDetail from '@/components/campaign/CampaignDetail';
+import fetchWrapper from '@/lib/fetchWrapper';
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
-  const unwrappedParams = use(params);
-  const campaignId = parseInt(unwrappedParams.id, 10);
-  const campaignData = campaigns.find((data) => data.id === campaignId);
-  const [selectedCategory, setSelectedCategory] = useState('소개');
-  const width = `calc(100% / ${categories.length})`;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const campaignId = (await params).id;
+  const response = await fetchWrapper(`/campaigns/${campaignId}`, {
+    method: 'GET',
+  });
+  const campaignData = await response.json();
 
   const {
-    title,
-    foundation,
-    currentAmount,
-    goalAmount,
-    progress,
-    imageUrl,
-    introduceImage,
+    id,
+    name,
+    foundationName,
+    currentFundraisingAmount,
+    targetFundraisingAmount,
+    titleImageUrl,
+    imageUrls,
     startDate,
     endDate,
     introduction,
   } = campaignData || {
-    title: '',
-    foundation: '',
-    currentAmount: 0,
-    goalAmount: 0,
-    progress: 0,
-    imageUrl: '',
-    introduceImage: '',
+    id: 0,
+    name: '',
+    foundationName: '',
+    currentFundraisingAmount: 0,
+    targetFundraisingAmount: 0,
+    titleImageUrl: '',
+    imageUrls: [],
     startDate: '',
     endDate: '',
     introduction: '',
@@ -47,10 +46,10 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     <div className={styles.container}>
       <div
         className={styles.coverImgContainer}
-        style={{ backgroundImage: `url('${imageUrl}')` }}
+        style={{ backgroundImage: `url('${titleImageUrl}')` }}
       >
         <Image
-          src={imageUrl}
+          src={titleImageUrl}
           alt="campaign main image"
           width={250}
           height={250}
@@ -64,43 +63,30 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           color={colorPalette.text[900]}
           className={styles.title}
         >
-          {title}
+          {name}
         </Typography>
+
         <Typography
           as="h4"
           weight="semiBold"
           color={colorPalette.text[600]}
           className={styles.subTitle}
         >
-          {foundation}
+          {foundationName}
         </Typography>
         <div className={styles.periodWrapper}>
           <Typography as="h4" weight="medium" color={colorPalette.text[900]}>
             모금기간 &nbsp;|&nbsp; {startDate} ~ {endDate}
           </Typography>
         </div>
-        {categories.map((category) => (
-          <TabButton
-            key={category}
-            label={category}
-            isSelected={selectedCategory === category}
-            onClick={() => setSelectedCategory(category)}
-            width={width}
-          />
-        ))}
-        {selectedCategory === '소개' && (
-          <CampaignInfo
-            introduction={introduction}
-            introduceImage={introduceImage}
-          />
-        )}
-        {selectedCategory === '모금함' && (
-          <CampaignMoney
-            progress={progress}
-            currentAmount={currentAmount}
-            goalAmount={goalAmount}
-          />
-        )}
+
+        <CampaignDetail
+          id={id}
+          introduction={introduction}
+          imageUrls={imageUrls}
+          currentFundraisingAmount={currentFundraisingAmount}
+          targetFundraisingAmount={targetFundraisingAmount}
+        />
       </div>
     </div>
   );

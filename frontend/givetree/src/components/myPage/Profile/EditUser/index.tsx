@@ -11,15 +11,16 @@ import Box from '@/components/common/Box';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 
 interface EditUserNameProps {
+  name: string;
   email: string;
-  image: StaticImageData;
+  image: StaticImageData | string;
 }
 
-export default function EditUser({ email, image }: EditUserNameProps) {
-  const [name, setName] = useState<string>('눈사람');
+export default function EditUser({ name, email, image }: EditUserNameProps) {
+  const [newName, setNewName] = useState<string>(name);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+    setNewName(e.target.value);
   };
 
   return (
@@ -43,7 +44,7 @@ export default function EditUser({ email, image }: EditUserNameProps) {
             <input
               type="text"
               style={{ textAlign: 'center' }}
-              value={name}
+              value={newName}
               onChange={handleNameChange}
               className={s.nameInput}
               placeholder={name}

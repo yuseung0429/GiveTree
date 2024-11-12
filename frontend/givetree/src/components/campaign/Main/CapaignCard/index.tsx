@@ -8,10 +8,9 @@ interface CampaignCardProps {
   id: number;
   title: string;
   foundation: string;
-  progress: number;
-  currentAmount: number;
-  goalAmount: number;
-  imageUrl: string;
+  currentFundraisingAmount: number;
+  targetFundraisingAmount: number;
+  titleImageUrl: string;
   totalCampaign: number;
   currentIndex: number;
 }
@@ -20,10 +19,9 @@ const CampaignCard = ({
   id,
   title,
   foundation,
-  progress,
-  currentAmount,
-  goalAmount,
-  imageUrl,
+  currentFundraisingAmount,
+  targetFundraisingAmount,
+  titleImageUrl,
   totalCampaign,
   currentIndex,
 }: CampaignCardProps) => {
@@ -32,7 +30,7 @@ const CampaignCard = ({
       href={`/campaign/${id}`}
       className={styles.campaignCard}
       style={{
-        backgroundImage: `url(${imageUrl})`,
+        backgroundImage: `url(${titleImageUrl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -62,13 +60,15 @@ const CampaignCard = ({
       </div>
 
       <div className={styles.progressContainer}>
-        <ProgressBar progress={progress} />
+        <ProgressBar
+          progress={(currentFundraisingAmount / targetFundraisingAmount) * 100}
+        />
         <div className={styles.amountContainer}>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {currentAmount.toLocaleString()}원
+            {currentFundraisingAmount.toLocaleString()}원
           </Typography>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {goalAmount.toLocaleString()}원 목표
+            {targetFundraisingAmount.toLocaleString()}원 목표
           </Typography>
         </div>
       </div>

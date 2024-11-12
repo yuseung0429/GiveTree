@@ -1,0 +1,52 @@
+'use client';
+
+import CampaignInfo from '@/components/campaign/CampaignInfo';
+import CampaignMoney from '@/components/campaign/CampaignMoney';
+import TabButton from '@/components/common/Tab';
+import { useState } from 'react';
+
+const categories = ['소개', '모금함'];
+
+interface CampaignDetailProps {
+  id: number;
+  introduction: string;
+  imageUrls: string[];
+  currentFundraisingAmount: number;
+  targetFundraisingAmount: number;
+}
+
+export default function CampaignDetail({
+  id,
+  introduction,
+  imageUrls,
+  currentFundraisingAmount,
+  targetFundraisingAmount,
+}: CampaignDetailProps) {
+  const [selectedCategory, setSelectedCategory] = useState('소개');
+  const width = `calc(100% / ${categories.length})`;
+
+  return (
+    <>
+      {categories.map((category) => (
+        <TabButton
+          key={category}
+          label={category}
+          isSelected={selectedCategory === category}
+          onClick={() => setSelectedCategory(category)}
+          width={width}
+        />
+      ))}
+
+      {selectedCategory === '소개' && (
+        <CampaignInfo introduction={introduction} introduceImage={imageUrls} />
+      )}
+      {selectedCategory === '모금함' && (
+        <CampaignMoney
+          id={id}
+          currentAmount={currentFundraisingAmount}
+          goalAmount={targetFundraisingAmount}
+        />
+      )}
+    </>
+  );
+}
