@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -59,6 +57,23 @@ public class Sale extends BaseEntity {
 
     @NotNull
     private LocalDateTime updatedDateTime;
+
+    @Builder
+    private Sale(int donationRate, Long sellerId, Long fundedFoundationId, Long purchaserId, Long transactionId, long price, String title, String description, SaleStatus status, ProductionCondition productionCondition, boolean isDirectSale, boolean isDeliverySale, LocalDateTime updatedDateTime) {
+        this.donationRate = donationRate;
+        this.sellerId = sellerId;
+        this.fundedFoundationId = fundedFoundationId;
+        this.purchaserId = purchaserId;
+        this.transactionId = transactionId;
+        this.price = price;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.productionCondition = productionCondition;
+        this.isDirectSale = isDirectSale;
+        this.isDeliverySale = isDeliverySale;
+        this.updatedDateTime = updatedDateTime;
+    }
 
     public void updateHits() {
         this.hits++;

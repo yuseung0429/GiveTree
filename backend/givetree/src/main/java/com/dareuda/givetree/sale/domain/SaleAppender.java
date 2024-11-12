@@ -35,11 +35,9 @@ public class SaleAppender {
                 .updatedDateTime(LocalDateTime.now())
                 .build();
 
-        if (!images.isEmpty()) {
-            images.stream()
-                    .map(image -> new SaleImage(sale, image))
-                    .forEach(sale.getImages()::add);
-        }
+        images.stream()
+                .map(image -> new SaleImage(sale, image))
+                .forEach(sale.getImages()::add);
 
         saleRepository.save(sale);
     }
