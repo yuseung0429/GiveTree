@@ -1,6 +1,7 @@
 package com.dareuda.givetree.foundation.domain;
 
 import com.dareuda.givetree.category.domain.Category;
+import com.dareuda.givetree.category.domain.FoundationCategory;
 import com.dareuda.givetree.media.domain.Image;
 import com.dareuda.givetree.member.domain.Member;
 import jakarta.persistence.*;

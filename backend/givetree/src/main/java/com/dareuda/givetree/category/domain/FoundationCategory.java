@@ -1,7 +1,6 @@
-package com.dareuda.givetree.foundation.domain;
+package com.dareuda.givetree.category.domain;
 
-
-import com.dareuda.givetree.category.domain.Category;
+import com.dareuda.givetree.foundation.domain.Foundation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;

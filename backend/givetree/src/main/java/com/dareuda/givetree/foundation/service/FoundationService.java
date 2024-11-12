@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class FoundationService {
@@ -16,6 +18,7 @@ public class FoundationService {
     private final FoundationDetailReader foundationDetailReader;
     private final FoundationUpdater foundationUpdater;
     private final FoundationDetailSearcher foundationDetailSearcher;
+    private final FoundationCategoryFinder foundationCategoryFinder;
 
     public long createFoundation(CreateFoundationCommand command) {
         return foundationCreator.create(command).getId();
@@ -31,5 +34,9 @@ public class FoundationService {
 
     public Page<FoundationDetail> searchFoundationDetail(FoundationSearchFilter filter, Pageable pageable) {
         return foundationDetailSearcher.searchFoundations(filter, pageable);
+    }
+
+    public List<String> getAllCategories() {
+        return foundationCategoryFinder.findAll();
     }
 }

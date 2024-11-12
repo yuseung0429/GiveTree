@@ -16,6 +16,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/foundations")
 @RequiredArgsConstructor
@@ -69,5 +71,12 @@ public class FoundationController {
         Page<FoundationDetail> foundationDetails = foundationService.searchFoundationDetail(request.convertToSearchFilter(), pageable);
 
         return ResponseEntity.ok(foundationDetails);
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<String>> getAllFoundationCategories() {
+        List<String> categories = foundationService.getAllCategories();
+
+        return ResponseEntity.ok(categories);
     }
 }

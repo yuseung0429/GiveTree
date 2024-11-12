@@ -2,6 +2,7 @@ package com.dareuda.givetree.foundation.domain;
 
 import com.dareuda.givetree.campaign.infrastructure.CampaignRepository;
 import com.dareuda.givetree.category.domain.Category;
+import com.dareuda.givetree.category.domain.FoundationCategory;
 import com.dareuda.givetree.media.domain.Media;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
