@@ -1,11 +1,15 @@
 import { ReactNode } from 'react';
 
+import usePreventKeyboardInput from '../hooks/usePreventKeyboardInput';
+
 interface ConfirmProps {
   children: ReactNode;
   onClose: (confirm: boolean) => void;
 }
 
 const Confirm = ({ children, onClose }: ConfirmProps) => {
+  usePreventKeyboardInput();
+
   return (
     <div>
       <div>{children}</div>
