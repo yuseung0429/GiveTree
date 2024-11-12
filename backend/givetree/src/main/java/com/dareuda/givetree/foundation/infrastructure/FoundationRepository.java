@@ -18,4 +18,6 @@ public interface FoundationRepository extends Repository<Foundation, Long> {
         WHERE f.id = :id and m.isDeleted = false
     """)
     Optional<Foundation> findById(long id);
+
+    boolean existsById(long id);
 }

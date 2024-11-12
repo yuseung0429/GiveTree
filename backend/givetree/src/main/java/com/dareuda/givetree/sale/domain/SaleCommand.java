@@ -9,11 +9,11 @@ import java.util.List;
 @Getter
 public class SaleCommand {
 
-    private long foundationId;
+    private Long foundationId;
 
-    private long price;
+    private Long price;
 
-    private int donationRate;
+    private Integer donationRate;
 
     private String title;
 
@@ -25,7 +25,7 @@ public class SaleCommand {
 
     private ProductionCondition productionCondition;
 
-    private boolean isDirectSale;
+    private Boolean isDirectSale;
 
-    private boolean isDeliverySale;
+    private Boolean isDeliverySale;
 }
