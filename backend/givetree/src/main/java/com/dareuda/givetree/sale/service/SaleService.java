@@ -19,8 +19,7 @@ public class SaleService {
 
     public SaleDetail readSale(long saleId) {
         saleHitsUpdater.update(saleId);
-        SaleDetail result =  saleDetailReader.read(saleId);
-        return result;
+        return saleDetailReader.read(saleId);
     }
 
     public List<SaleDetail> readSalesBySearch(
