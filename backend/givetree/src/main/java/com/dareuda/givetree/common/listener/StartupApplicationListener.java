@@ -82,7 +82,7 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
                             .email(email)
                             .password("test123")
                             .name("테스트 회원 " + i)
-                            .role(Role.FOUNDATION)
+                            .role(Role.USER)
                             .build()
             );
         }
