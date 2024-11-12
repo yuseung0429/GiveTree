@@ -23,7 +23,7 @@ export default function FoundationLayout({
           backgroundColor="white"
           padding="25px 15px"
         >
-          <DonationCash />
+          <DonationCash name={'사회복지법인 굿네이버스'} />
         </Box>
 
         <Box
