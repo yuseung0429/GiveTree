@@ -78,4 +78,87 @@ public class Sale extends BaseEntity {
     public void updateHits() {
         this.hits++;
     }
+
+    public void updateFoundationId(Long fundedFoundationId) {
+        if (fundedFoundationId == null) {
+            return;
+        }
+        if (fundedFoundationId < 1) {
+            return;
+        }
+        this.fundedFoundationId = fundedFoundationId;
+    }
+
+    public void updatePrice(Long price) {
+        if (price == null) {
+            return;
+        }
+        if (price < 0) {
+            return;
+        }
+        this.price = price;
+    }
+
+    public void updateDonationRate(Integer donationRate) {
+        if (donationRate == null) {
+            return;
+        }
+        if (donationRate < 0 || donationRate > 100) {
+            return;
+        }
+
+        this.donationRate = donationRate;
+    }
+
+    public void updateTitle(String title) {
+        if (title != null) {
+            this.title = title;
+        }
+    }
+
+    public void updateDescription(String description) {
+        if (description != null) {
+            this.description = description;
+        }
+    }
+
+    public void updateImages(List<SaleImage> images) {
+        if (images == null) {
+            return;
+        }
+        this.images.clear();
+        this.images.addAll(images);
+    }
+
+    public void updateStatus(SaleStatus status) {
+        if (status != null) {
+            this.status = status;
+        }
+    }
+
+    public void updateProductionCondition(ProductionCondition productionCondition) {
+        if (productionCondition != null) {
+            this.productionCondition = productionCondition;
+        }
+    }
+
+    public void updateIsDirectSale(Boolean isDirectSale) {
+        if (isDirectSale != null) {
+            this.isDirectSale = isDirectSale;
+        }
+    }
+
+    public void updateIsDeliverySale(Boolean isDeliverySale) {
+        if (isDeliverySale != null) {
+            this.isDeliverySale = isDeliverySale;
+        }
+    }
+
+    public void updateUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
+    }
+
+    public void remove() {
+        delete();
+    }
 }

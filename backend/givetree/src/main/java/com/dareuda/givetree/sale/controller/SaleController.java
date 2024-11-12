@@ -4,6 +4,7 @@ import com.dareuda.givetree.auth.domain.UserPrinciple;
 import com.dareuda.givetree.sale.controller.dto.SaleDtoConverter;
 import com.dareuda.givetree.sale.controller.dto.request.AppendSaleRequest;
 import com.dareuda.givetree.sale.controller.dto.request.ReadSalesBySearchRequest;
+import com.dareuda.givetree.sale.controller.dto.request.UpdateSaleRequest;
 import com.dareuda.givetree.sale.controller.dto.response.ReadSaleBySearchResponse;
 import com.dareuda.givetree.sale.controller.dto.response.ReadSaleResponse;
 import com.dareuda.givetree.sale.domain.SaleDetail;
@@ -45,6 +46,25 @@ public class SaleController {
             @RequestBody @Valid AppendSaleRequest request
     ) {
         saleService.appendSale(userPrinciple.getId(), request.toCommand());
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{saleId}")
+    public ResponseEntity<Void> updateSale(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long saleId,
+            @RequestBody @Valid UpdateSaleRequest request
+    ) {
+        saleService.updateSale(userPrinciple.getId(), saleId, request.toCommand());
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{saleId}")
+    public ResponseEntity<Void> removeSale(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long saleId
+    ) {
+        saleService.removeSale(userPrinciple.getId(), saleId);
         return ResponseEntity.ok().build();
     }
 }

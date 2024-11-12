@@ -29,8 +29,6 @@ public class ReadSaleResponse {
 
     private String saleStatus;
 
-    private String saleType;
-
     private String productionCondition;
 
     private Boolean isDirectSale;

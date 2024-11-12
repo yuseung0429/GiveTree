@@ -17,27 +17,7 @@ public class SaleDetailReader {
 
     @Transactional(readOnly = true)
     public SaleDetail read(long saleId) {
-        Sale sale = saleReader.read(saleId);
-        List<String> imageUrls = sale.getImages().stream()
-                .map(image -> image.getImage().getUrl())
-                .toList();
-
-        return SaleDetail.builder()
-                .id(sale.getId())
-                .sellerId(sale.getSellerId())
-                .foundationId(sale.getFundedFoundationId())
-                .price(sale.getPrice())
-                .donationRate(sale.getDonationRate())
-                .title(sale.getTitle())
-                .description(sale.getDescription())
-                .imageUrls(imageUrls)
-                .status(sale.getStatus().getTitle())
-                .productionCondition(sale.getProductionCondition().getTitle())
-                .isDirectSale(sale.isDirectSale())
-                .isDeliverySale(sale.isDeliverySale())
-                .hits(sale.getHits())
-                .createdDateTime(sale.getCreatedAt())
-                .build();
+        return SaleDetail.from(saleReader.read(saleId));
     }
 
     @Transactional(readOnly = true)

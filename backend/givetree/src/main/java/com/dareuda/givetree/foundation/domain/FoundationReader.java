@@ -17,4 +17,8 @@ public class FoundationReader {
         return foundationRepository.findById(foundationId)
                 .orElseThrow(() -> new RestApiException(FoundationErrorCode.FOUNDATION_NOT_FOUND));
     }
+
+    public boolean isExist(long foundationId) {
+        return foundationRepository.existsById(foundationId);
+    }
 }

@@ -5,8 +5,10 @@ import com.dareuda.givetree.media.domain.ImageAppender;
 import com.dareuda.givetree.sale.infrastructure.SaleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,10 +19,6 @@ public class SaleAppender {
     private final SaleRepository saleRepository;
 
     public void append(long memberId, SaleCommand command) {
-        List<Image> images = command.getImageUrls().stream()
-                .map(imageAppender::append)
-                .toList();
-
         Sale sale = Sale.builder()
                 .sellerId(memberId)
                 .fundedFoundationId(command.getFoundationId())
@@ -30,14 +28,19 @@ public class SaleAppender {
                 .description(command.getDescription())
                 .status(command.getStatus())
                 .productionCondition(command.getProductionCondition())
-                .isDirectSale(command.isDirectSale())
-                .isDeliverySale(command.isDeliverySale())
+                .isDirectSale(command.getIsDirectSale())
+                .isDeliverySale(command.getIsDeliverySale())
                 .updatedDateTime(LocalDateTime.now())
                 .build();
 
-        images.stream()
-                .map(image -> new SaleImage(sale, image))
-                .forEach(sale.getImages()::add);
+        List<String> imageUrls = command.getImageUrls();
+        if (imageUrls != null) {
+            List<SaleImage> images = imageUrls.stream()
+                    .map(imageAppender::append)
+                    .map(image -> new SaleImage(sale, image))
+                    .toList();
+            sale.getImages().addAll(images);
+        }
 
         saleRepository.save(sale);
     }
