@@ -12,10 +12,12 @@ interface CheckboxChipProps
   extends CheckboxChipVariants,
     Omit<React.ComponentProps<'input'>, keyof CheckboxChipVariants> {
   children: ReactNode;
+  type?: 'checkbox' | 'radio';
 }
 
 const CheckboxChip = ({
   children,
+  type = 'checkbox',
   size = 'md',
   className,
   style,
@@ -25,12 +27,7 @@ const CheckboxChip = ({
 
   return (
     <span>
-      <input
-        type="checkbox"
-        id={props.id || id}
-        className={s.input}
-        {...props}
-      />
+      <input type={type} id={props.id || id} className={s.input} {...props} />
       <label
         htmlFor={props.id || id}
         className={mergeClasses(s.checkboxChip({ size }), className)}
