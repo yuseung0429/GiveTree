@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useState } from 'react';
 
 const useNumericInput = (
   min: number = 0,
-  max: number = 9_999_999_999
+  max: number = 999_999_999
 ): [
   number,
   (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
