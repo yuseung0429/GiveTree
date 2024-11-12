@@ -3,8 +3,6 @@
 import { FormEvent, startTransition, useActionState, useEffect } from 'react';
 
 import useDialog from '@/hooks/useDialog';
-import colorPalette from '@/styles/tokens/colorPalette';
-import typography from '@/styles/tokens/typography';
 
 import signupFoundation from '@/actions/auth/signupFoundation';
 
@@ -12,6 +10,7 @@ import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import FormButton from '@/components/common/FormButton';
+import FormField from '@/components/common/FormField';
 import ImageUploader from '@/components/common/ImageUploader';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
@@ -76,41 +75,29 @@ const FoundationInfo = ({
       <Box marginTop="1.5rem">
         <form onSubmit={handleSubmit}>
           <Flex flexDirection="column" gap="1.5rem">
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                사업자 등록번호
-              </Typography>
+            <FormField label="사업자 등록번호">
               <TextField
                 type="tel"
                 name="corporateRegistrationNumber"
                 size="lg"
                 placeholder="000-00-00000"
               />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                전화번호
-              </Typography>
+            <FormField label="전화번호">
               <TextField
                 type="tel"
                 name="phoneNumber"
                 size="lg"
                 placeholder="010-0000-000"
               />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                주소
-              </Typography>
+            <FormField label="주소">
               <TextField name="address" size="lg" />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                재단 소개
-              </Typography>
+            <FormField label="재단 소개">
               <TextField
                 name="introduction"
                 size="lg"
@@ -118,34 +105,25 @@ const FoundationInfo = ({
                 height="10rem"
                 multiline
               />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                대표 이미지
-              </Typography>
+            <FormField label="대표 이미지">
               <ImageUploader name="titleImageUrl" maxFileCount={1} />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                기타 이미지
-              </Typography>
-              <Typography size={typography.size.sm}>
-                재단을 소개할 수 있는 이미지가 있으면 추가해 주세요.
-              </Typography>
+            <FormField
+              label="기타 이미지"
+              description="재단을 소개할 수 있는 이미지가 있으면 추가해 주세요."
+            >
               <ImageUploader name="imageUrls" maxFileCount={5} />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                카테고리
-              </Typography>
-              <Typography size={typography.size.sm}>
-                쉼표(,)로 구분하여 여러 개의 카테고리를 등록할 수 있습니다.
-              </Typography>
+            <FormField
+              label="카테고리"
+              description="쉼표(,)로 구분하여 여러 개의 카테고리를 등록할 수 있습니다."
+            >
               <TextField name="categories" size="lg" />
-            </Flex>
+            </FormField>
 
             <FormButton size="lg" pending={isPending} fullWidth>
               재단 계정 만들기
