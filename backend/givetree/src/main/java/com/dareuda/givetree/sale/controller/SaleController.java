@@ -2,9 +2,7 @@ package com.dareuda.givetree.sale.controller;
 
 import com.dareuda.givetree.auth.domain.UserPrinciple;
 import com.dareuda.givetree.sale.controller.dto.SaleDtoConverter;
-import com.dareuda.givetree.sale.controller.dto.request.AppendSaleRequest;
-import com.dareuda.givetree.sale.controller.dto.request.ReadSalesBySearchRequest;
-import com.dareuda.givetree.sale.controller.dto.request.UpdateSaleRequest;
+import com.dareuda.givetree.sale.controller.dto.request.*;
 import com.dareuda.givetree.sale.controller.dto.response.ReadSaleBySearchResponse;
 import com.dareuda.givetree.sale.controller.dto.response.ReadSaleResponse;
 import com.dareuda.givetree.sale.domain.SaleDetail;
@@ -65,6 +63,43 @@ public class SaleController {
             @PathVariable long saleId
     ) {
         saleService.removeSale(userPrinciple.getId(), saleId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{saleId}/reserve")
+    public ResponseEntity<Void> reserveSale(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long saleId,
+            @RequestBody @Valid ReserveSaleRequest request
+    ) {
+        saleService.reserveSale(userPrinciple.getId(), request.getPurchaserId(), saleId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{saleId}/cancel-reserve")
+    public ResponseEntity<Void> cancelReservation(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long saleId
+    ) {
+        saleService.cancelReservation(userPrinciple.getId(), saleId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{saleId}/is-current-user-reserved")
+    public ResponseEntity<Boolean> isCurrentUserReserved(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long saleId
+    ) {
+        return ResponseEntity.ok().body(saleService.isCurrentUserReserved(userPrinciple.getId(), saleId));
+    }
+
+    @PostMapping("/{saleId}/pay")
+    public ResponseEntity<Void> processPayment(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long saleId,
+            @RequestBody @Valid ProcessPaymentRequest request
+    ) {
+        saleService.processPayment(userPrinciple.getId(), saleId, request.getSimplePassword());
         return ResponseEntity.ok().build();
     }
 }

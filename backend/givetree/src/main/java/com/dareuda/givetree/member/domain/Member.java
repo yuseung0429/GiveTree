@@ -57,4 +57,8 @@ public class Member extends BaseEntity {
     public void updateProfileImage(Image profileImage) {
         this.profileImage = profileImage;
     }
+
+    public boolean isUser() {
+       return role == Role.USER;
+    }
 }

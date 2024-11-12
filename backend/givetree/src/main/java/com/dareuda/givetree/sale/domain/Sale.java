@@ -81,6 +81,13 @@ public class Sale extends BaseEntity {
         this.hits++;
     }
 
+    public void updatePurchaserId(Long memberId) {
+        if (memberId != null && memberId < 1) {
+            return;
+        }
+        this.purchaserId = memberId;
+    }
+
     public void updateFoundationId(Long fundedFoundationId) {
         if (fundedFoundationId == null) {
             return;
@@ -170,5 +177,13 @@ public class Sale extends BaseEntity {
 
     public void remove() {
         delete();
+    }
+
+    public boolean isReserved() {
+        return this.status == SaleStatus.RESERVED;
+    }
+
+    public boolean isOnSale() {
+        return this.status == SaleStatus.ON_SALE;
     }
 }

@@ -16,4 +16,9 @@ public class SaleReader {
         return saleRepository.findByIdAndIsDeletedFalse(saleId)
                 .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
     }
+
+    public boolean isCurrentUserReserved(long memberId, long saleId) {
+        Sale sale = read(saleId);
+        return sale.getPurchaserId() == memberId;
+    }
 }

@@ -1,7 +1,11 @@
 package com.dareuda.givetree.sale.domain;
 
+import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
+import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.foundation.domain.FoundationReader;
 import com.dareuda.givetree.media.domain.ImageAppender;
+import com.dareuda.givetree.member.domain.Member;
+import com.dareuda.givetree.member.domain.MemberReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +21,7 @@ public class SaleUpdater {
     private final SaleValidator saleValidator;
     private final FoundationReader foundationReader;
     private final ImageAppender imageAppender;
+    private final MemberReader memberReader;
 
     @Transactional
     public void update(long memberId, long saleId, SaleCommand command) {
@@ -46,5 +51,36 @@ public class SaleUpdater {
         }
 
         sale.updateUpdatedDateTime(LocalDateTime.now());
+    }
+
+    @Transactional
+    public void reserve(long sellerId, long purchaserId, long saleId) {
+        Sale sale = saleReader.read(saleId);
+        saleValidator.validateOwner(sellerId, sale);
+
+        if (!sale.isOnSale()) {
+            throw new RestApiException(CommonErrorCode.FORBIDDEN);
+        }
+
+        Member member = memberReader.read(purchaserId);
+        if (!member.isUser()) {
+            throw new RestApiException(CommonErrorCode.FORBIDDEN);
+        }
+
+        sale.updateStatus(SaleStatus.RESERVED);
+        sale.updatePurchaserId(purchaserId);
+    }
+
+    @Transactional
+    public void cancelReservation(long memberId, long saleId) {
+        Sale sale = saleReader.read(saleId);
+        saleValidator.validateOwner(memberId, sale);
+
+        if (!sale.isReserved()) {
+            throw new RestApiException(CommonErrorCode.FORBIDDEN);
+        }
+
+        sale.updateStatus(SaleStatus.ON_SALE);
+        sale.updatePurchaserId(null);
     }
 }

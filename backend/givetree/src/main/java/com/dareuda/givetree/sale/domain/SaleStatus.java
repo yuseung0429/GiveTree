@@ -18,6 +18,8 @@ public enum SaleStatus {
 
     private final String title;
 
+
+
     public static SaleStatus of(String desc) {
         return Arrays.stream(SaleStatus.values())
                 .filter(v -> v.getTitle().equals(desc))
