@@ -8,6 +8,7 @@ import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
 import Flex from '@/components/common/Flex';
 import FoundationSelector from '@/components/market/FoundationSelector';
+import { useEffect, useRef } from 'react';
 
 interface DonationSelectorProps {
   price: number;
@@ -16,8 +17,16 @@ interface DonationSelectorProps {
 
 const DonationSelector = ({ price, onChange }: DonationSelectorProps) => {
   const [contribution, handleContributionChange] = useNumericInput(0, price);
+  const foundationIdRef = useRef<number>(0);
 
-  onChange(contribution, 1);
+  useEffect(() => {
+    onChange(contribution, foundationIdRef.current);
+  }, [contribution]);
+
+  const handleFoundationChange = (id: number) => {
+    foundationIdRef.current = id;
+    onChange(contribution, foundationIdRef.current);
+  };
 
   return (
     <Box
@@ -34,7 +43,7 @@ const DonationSelector = ({ price, onChange }: DonationSelectorProps) => {
           기부할 금액을 입력해 주세요.
         </Typography>
         <TextField onChange={handleContributionChange} defaultValue={0} />
-        <FoundationSelector />
+        <FoundationSelector onChange={handleFoundationChange} />
       </Flex>
     </Box>
   );
