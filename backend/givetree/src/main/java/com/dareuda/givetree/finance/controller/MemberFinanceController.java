@@ -9,12 +9,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/finance")
 @RequiredArgsConstructor
 public class MemberFinanceController {
 
     private final MemberFinanceService memberFinanceService;
+
+    @GetMapping("/exists")
+    public ResponseEntity<?> existsMemberFinance(@AuthenticationPrincipal UserPrinciple user) {
+        boolean exists = memberFinanceService.existsMemberFinance(user.getId());
+        return ResponseEntity.ok().body(Map.of("exists", exists));
+    }
 
     @PostMapping
     public ResponseEntity<?> appendMemberFinance(@AuthenticationPrincipal UserPrinciple user,

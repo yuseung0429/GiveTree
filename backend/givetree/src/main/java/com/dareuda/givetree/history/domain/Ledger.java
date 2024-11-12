@@ -34,6 +34,10 @@ public class Ledger {
     private LedgerType type;
 
     @NotNull
+    @Column(name = "message")
+    private String message;
+
+    @NotNull
     @Column(name = "processed_at")
     private LocalDateTime processedAt;
 }

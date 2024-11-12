@@ -19,12 +19,16 @@ public class SaleTokenTransferrer {
     private final MemberFinanceValidator memberFinanceValidator;
     private final TokenTransferrer tokenTransferrer;
     private final MemberValidator memberValidator;
+    private final TokenCharger tokenCharger;
+    private final TokenExchanger tokenExchanger;
 
-    public void transfer(long senderId, long receiverId, long amount, String simplePassword) {
+    public void transfer(long senderId, long receiverId, long amount, String simplePassword, String message) {
         memberValidator.validateUser(senderId);
         memberValidator.validateUser(receiverId);
 
         memberFinanceValidator.validateSimplePassword(senderId, simplePassword);
+
+        tokenCharger.charge(senderId, amount, message);
 
         MemberWallet senderWallet = memberWalletReader.readByMemberId(senderId);
         MemberWallet receiverWallet = memberWalletReader.readByMemberId(receiverId);
@@ -32,9 +36,9 @@ public class SaleTokenTransferrer {
         transferReceiver(senderWallet, receiverWallet, amount);
     }
 
-    public void transfer(long senderId, long receiverId, long foundationId, int donationRate, long amount, String simplePassword) {
-        if(donationRate <= 0 || donationRate > 100) {
-            throw new IllegalArgumentException("donation rate must be between 1 and 100");
+    public void transfer(long senderId, long receiverId, long foundationId, long amount, long donationAmount, String simplePassword, String message) {
+        if(amount > donationAmount) {
+            throw new IllegalArgumentException("amount > donationAmount");
         }
 
         memberValidator.validateUser(senderId);
@@ -43,15 +47,15 @@ public class SaleTokenTransferrer {
 
         memberFinanceValidator.validateSimplePassword(senderId, simplePassword);
 
+        tokenCharger.charge(senderId, amount, message);
+
         MemberWallet senderWallet = memberWalletReader.readByMemberId(senderId);
         MemberWallet receiverWallet = memberWalletReader.readByMemberId(receiverId);
         MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
 
-        long amountForFoundation = amount*donationRate/100;
-        long amountForReceiver = amount - amountForFoundation;
-
-        transferReceiver(senderWallet, receiverWallet, amountForReceiver);
-        transferFoundation(receiverWallet, foundationWallet, amountForFoundation);
+        transferReceiver(senderWallet, receiverWallet, amount - donationAmount);
+        tokenExchanger.exchange(receiverId, amount - donationAmount, message);
+        transferFoundation(receiverWallet, foundationWallet, donationAmount);
     }
 
     private void transferReceiver(Wallet senderWallet, Wallet receiverWallet, long amount) {
