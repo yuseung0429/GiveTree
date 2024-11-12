@@ -23,6 +23,8 @@ export const flexbox = style({
 });
 
 export const foundationLogo = style({
+  position: 'relative',
+  overflow: 'hidden',
   width: '50px',
   height: '50px',
   borderRadius: '25px',
