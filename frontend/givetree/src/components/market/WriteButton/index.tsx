@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef } from 'react';
 
 import { HiPencilSquare } from 'react-icons/hi2';
@@ -9,7 +11,7 @@ import Button from '@/components/common/Button';
 import * as s from './WriteButton.css';
 
 interface WriteButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const WriteButon = ({ onClick }: WriteButtonProps) => {
