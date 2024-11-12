@@ -7,5 +7,5 @@ import lombok.Getter;
 public class ReserveSaleRequest {
 
     @NotNull
-    private long purchaserId;
+    private Long purchaserId;
 }
