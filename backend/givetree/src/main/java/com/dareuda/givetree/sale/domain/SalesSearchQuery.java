@@ -15,7 +15,7 @@ public class SalesSearchQuery {
 
     private List<ProductionCondition> productionConditions;
 
-    private boolean isDirectSale;
+    private Boolean isDirectSale;
 
-    private boolean isDeliverySale;
+    private Boolean isDeliverySale;
 }

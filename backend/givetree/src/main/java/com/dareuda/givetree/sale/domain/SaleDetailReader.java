@@ -40,10 +40,14 @@ public class SaleDetailReader {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     public List<SaleDetail> readBySearch(
             SalesSearchQuery salesSearchQuery,
             Pageable pageable
     ) {
-        return saleCustomRepository.findBySearch(salesSearchQuery, pageable);
+        List<Sale> sales = saleCustomRepository.findBySearch(salesSearchQuery, pageable);
+        return sales.stream()
+                .map(SaleDetail::from)
+                .toList();
     }
 }

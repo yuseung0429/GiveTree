@@ -13,7 +13,7 @@ public class SaleReader {
     private final SaleRepository saleRepository;
 
     public Sale read(long saleId) {
-        return saleRepository.findByIdAndIsDeleted(saleId, false)
+        return saleRepository.findByIdAndIsDeletedFalse(saleId)
                 .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
     }
 }

@@ -7,5 +7,7 @@ import java.util.Optional;
 
 public interface SaleRepository extends Repository<Sale, Long> {
 
-    Optional<Sale> findByIdAndIsDeleted(long id, boolean isDeleted);
+    Optional<Sale> findByIdAndIsDeletedFalse(long id);
+
+    Sale save(Sale sale);
 }

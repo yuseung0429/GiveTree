@@ -2,11 +2,7 @@ package com.dareuda.givetree.sale.infrastructure;
 
 import static com.dareuda.givetree.sale.domain.QSale.sale;
 
-import com.dareuda.givetree.sale.domain.ProductionCondition;
-import com.dareuda.givetree.sale.domain.SaleDetail;
-import com.dareuda.givetree.sale.domain.SaleStatus;
-import com.dareuda.givetree.sale.domain.SalesSearchQuery;
-import com.querydsl.core.types.Projections;
+import com.dareuda.givetree.sale.domain.*;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -25,29 +21,28 @@ public class SaleCustomRepositoryImpl implements SaleCustomRepository{
     }
 
     @Override
-    public List<SaleDetail> findBySearch(SalesSearchQuery salesSearchQuery, Pageable pageable) {
+    public List<Sale> findBySearch(SalesSearchQuery salesSearchQuery, Pageable pageable) {
         return query.
-                select(Projections.constructor(SaleDetail.class,
-                        sale.id,
-                        sale.price,
-                        sale.title,
-                        sale.images.get(0).image.url,
-                        sale.status,
-                        sale.productionCondition,
-                        sale.isDirectSale,
-                        sale.isDeliverySale))
+                select(sale)
                 .from(sale)
-                .where((sale.title.containsIgnoreCase(salesSearchQuery.getQuery())
-                        .or(sale.description.containsIgnoreCase(salesSearchQuery.getQuery()))),
+                .where(sale.isDeleted.eq(false),
+                        containsCondition(salesSearchQuery.getQuery()),
                         statusIn(salesSearchQuery.getStatuses()),
                         productionConditionIn(salesSearchQuery.getProductionConditions()),
-                        isDirectSaleEq(salesSearchQuery.isDirectSale()),
-                        isDeliverySaleEq(salesSearchQuery.isDeliverySale()),
-                        sale.isDeleted.eq(false))
+                        isDirectSaleEq(salesSearchQuery.getIsDirectSale()),
+                        isDeliverySaleEq(salesSearchQuery.getIsDeliverySale()))
                 .orderBy(sale.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
+    }
+
+    private BooleanExpression containsCondition(String query) {
+        if (query == null) {
+            return null;
+        }
+        return sale.title.containsIgnoreCase(query)
+                .or(sale.description.containsIgnoreCase(query));
     }
 
     private BooleanExpression statusIn(List<SaleStatus> statuses) {
