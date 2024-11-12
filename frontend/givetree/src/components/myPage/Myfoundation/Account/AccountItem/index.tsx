@@ -5,15 +5,17 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 
 interface AccountItemProps {
-  id: number;
+  id: string;
+  name: string;
   accountNumber: string;
   balance: string;
   isSelected: boolean;
-  onSelect: (id: number) => void;
+  onSelect: (id: string) => void;
 }
 
 export default function AccountItem({
   id,
+  name,
   accountNumber,
   balance,
   isSelected,
@@ -33,16 +35,19 @@ export default function AccountItem({
     >
       <Flex gap={16} alignItems="center">
         <Box
-          width={45}
-          height={45}
+          width={50}
+          height={50}
           backgroundColor={colorPalette.danger[100]}
           borderRadius={30}
         />
         <Flex flexDirection="column" gap={6}>
-          <Typography weight="semiBold" color={colorPalette.grey[800]}>
+          <Typography size={18} weight="semiBold" color={colorPalette.grey[800]}>
+            {name}
+          </Typography>
+          <Typography color={colorPalette.grey[600]}>
             {accountNumber}
           </Typography>
-          <Typography size={14} weight="medium" color={colorPalette.grey[500]}>
+          <Typography weight="medium" color={colorPalette.grey[600]}>
             잔액 {balance} 원
           </Typography>
         </Flex>
