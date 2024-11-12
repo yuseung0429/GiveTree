@@ -28,7 +28,7 @@ public class TokenExchanger {
     private final MemberWalletReader memberWalletReader;
     private final TokenValidator tokenValidator;
 
-    public long exchange(long memberId, long amount) {
+    public long exchange(long memberId, long amount, String message) {
         tokenValidator.validateExchangeable(memberId);
         Wallet wallet = memberWalletReader.readByMemberId(memberId);
         TransactionReceipt burnReceipt = tokenBurner.burn(WalletVO.from(wallet), amount);
@@ -39,8 +39,8 @@ public class TokenExchanger {
                 burnReceipt
         );
         try {
-            AccountTransferResponse withdrawalResponse = withdrawalProcessor.process(wallet.getId(), amount);
-            Ledger ledger = withdrawalProcessor.saveLedger(memberId, amount, withdrawalResponse);
+            withdrawalProcessor.process(wallet.getId(), amount);
+            Ledger ledger = withdrawalProcessor.saveLedger(memberId, amount, message);
             transactionLedgerAppender.append(burnTransaction.getId(), ledger.getId());
             return ledger.getId();
         } catch (Exception e) {

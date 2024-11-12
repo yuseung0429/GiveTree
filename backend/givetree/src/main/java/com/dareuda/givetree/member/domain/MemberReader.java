@@ -17,4 +17,9 @@ public class MemberReader {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new RestApiException(MemberErrorCode.MEMBER_NOT_FOUND));
     }
+
+    public Member readByEmail(String email) {
+        return memberRepository.findByEmail(email)
+                .orElseThrow(() -> new RestApiException(MemberErrorCode.MEMBER_NOT_FOUND));
+    }
 }

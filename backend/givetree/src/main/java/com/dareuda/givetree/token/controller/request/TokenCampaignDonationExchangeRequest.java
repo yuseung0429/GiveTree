@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TokenFoundationExchangeRequest {
+public class TokenCampaignDonationExchangeRequest {
     private List<Long> transactionIds;
     private String simplePassword;
 }

@@ -28,13 +28,13 @@ public class WithdrawalProcessor {
     }
 
     @Transactional
-    public Ledger saveLedger(long receiverId, long amount, AccountTransferResponse response) {
+    public Ledger saveLedger(long receiverId, long amount, String message) {
         Account senderAccount = accountReader.read(receiverId);
         return ledgerAppender.append(
                 senderAccount.getId(),
-                -amount,
+                amount,
                 LedgerType.EXCHANGE,
-                response.getSenderReceipt().getTransactionDate().atStartOfDay()
+                message
         );
     }
 }

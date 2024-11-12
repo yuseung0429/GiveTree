@@ -28,13 +28,13 @@ public class DepositProcessor {
     }
 
     @Transactional
-    public Ledger saveLedger(long senderId, long amount, AccountTransferResponse response) {
+    public Ledger saveLedger(long senderId, long amount, String message) {
         Account senderAccount = accountReader.read(senderId);
         return ledgerAppender.append(
                 senderAccount.getId(),
-                amount,
+                -amount,
                 LedgerType.CHARGE,
-                response.getSenderReceipt().getTransactionDate().atStartOfDay()
+                message
         );
     }
 }

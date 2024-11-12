@@ -4,6 +4,8 @@ import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.history.controller.TransactionErrorCode;
 import com.dareuda.givetree.history.infrastructure.TransactionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,11 +25,35 @@ public class TransactionReader {
         return transactionRepository.findByIds(transactionIds);
     }
 
-    public List<Transaction> readUnreceivedTransactionByReceiverWalletIdAndTransactionIds(long receiverWalletId, List<Long> transactionIds) {
-        return transactionRepository.findUnreceivedTransactionByReceiverWalletIdAndTransactionIds(receiverWalletId, transactionIds);
+    public List<Transaction> readUnreceivedFoundationDonationWithInTransactionIds(long receiverWalletId, List<Long> transactionIds) {
+        return transactionRepository
+                .findUnreceivedFoundationDonationTransactionByReceiverWalletIdAndTransactionIds(
+                        receiverWalletId,
+                        transactionIds
+                );
     }
 
-    public List<Transaction> readUnreceivedTransactionByReceiverWalletId(long receiverWalletId) {
-        return transactionRepository.findUnreceivedTransactionByReceiverWalletId(receiverWalletId);
+    public Slice<Transaction> readUnreceivedFoundationDonation(long receiverWalletId, Pageable pageable) {
+        return transactionRepository
+                .findUnreceivedFoundationDonationTransactionByReceiverWalletId(
+                        receiverWalletId,
+                        pageable
+                );
+    }
+
+    public List<Transaction> readUnreceivedCampaignDonationWithInTransactionIds(long receiverWalletId, List<Long> transactionIds) {
+        return transactionRepository
+                .findUnreceivedCampaignDonationTransactionByReceiverWalletIdAndTransactionIds(
+                        receiverWalletId,
+                        transactionIds
+                );
+    }
+
+    public Slice<Transaction> readUnreceivedCampaignDonation(long receiverWalletId, Pageable pageable) {
+        return transactionRepository
+                .findUnreceivedCampaignDonationTransactionByReceiverWalletId(
+                        receiverWalletId,
+                        pageable
+                );
     }
 }

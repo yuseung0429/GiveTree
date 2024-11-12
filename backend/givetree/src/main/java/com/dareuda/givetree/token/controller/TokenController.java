@@ -1,11 +1,13 @@
 package com.dareuda.givetree.token.controller;
 
 import com.dareuda.givetree.auth.domain.UserPrinciple;
-import com.dareuda.givetree.token.controller.request.TokenFoundationExchangeRequest;
-import com.dareuda.givetree.token.controller.request.TokenUserChargeRequest;
-import com.dareuda.givetree.token.controller.request.TokenUserExchangeRequest;
+import com.dareuda.givetree.history.domain.TransactionInfo;
+import com.dareuda.givetree.token.controller.request.TokenCampaignDonationExchangeRequest;
+import com.dareuda.givetree.token.controller.request.TokenFoundationDonationExchangeRequest;
 import com.dareuda.givetree.token.service.TokenService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -25,24 +27,41 @@ public class TokenController {
         return ResponseEntity.ok().body(Map.of("balance", balance));
     }
 
-    @PostMapping("/user/charge")
-    public ResponseEntity<?> chargeUserToken(@AuthenticationPrincipal UserPrinciple user,
-                                             @RequestBody TokenUserChargeRequest request) {
-        tokenService.chargeUserToken(user.getId(), request.getAmount(), request.getSimplePassword());
+    @GetMapping("/donations/foundations")
+    public ResponseEntity<?> getFoundationDonationTransactionInfos(@AuthenticationPrincipal UserPrinciple user,
+                                                    Pageable pageable) {
+        Slice<TransactionInfo> infos = tokenService.getFoundationDonationTransactionInfos(user.getId(), pageable);
+        return ResponseEntity.ok().body(infos);
+    }
+
+    @GetMapping("/donations/campaigns")
+    public ResponseEntity<?> getCampaignDonationTransactionInfos(@AuthenticationPrincipal UserPrinciple user,
+                                                                   Pageable pageable) {
+        Slice<TransactionInfo> infos = tokenService.getCampaignDonationTransactionInfos(user.getId(), pageable);
+        return ResponseEntity.ok().body(infos);
+    }
+
+
+    @PostMapping("/donations/foundations/exchange")
+    public ResponseEntity<?> exchangeFoundationDonationToken(@AuthenticationPrincipal UserPrinciple user,
+                                                             @RequestBody TokenFoundationDonationExchangeRequest request) {
+        tokenService.exchangeFoundationDonationToken(
+                user.getId(),
+                request.getTransactionIds(),
+                request.getSimplePassword(),
+                request.getMessage()
+        );
         return ResponseEntity.ok().body(null);
     }
 
-    @PostMapping("/user/exchange")
-    public ResponseEntity<?> exchangeUserToken(@AuthenticationPrincipal UserPrinciple user,
-                                               @RequestBody TokenUserExchangeRequest request) {
-        tokenService.exchangeUserToken(user.getId(), request.getAmount(), request.getSimplePassword());
-        return ResponseEntity.ok().body(null);
-    }
-
-    @PostMapping("/foundation/exchange")
-    public ResponseEntity<?> exchangeFoundationToken(@AuthenticationPrincipal UserPrinciple user,
-                                                     @RequestBody TokenFoundationExchangeRequest request) {
-        tokenService.exchangeFoundationToken(user.getId(), request.getTransactionIds(), request.getSimplePassword());
+    @PostMapping("/donations/campaigns/exchange")
+    public ResponseEntity<?> exchangeCampaignDonationToken(@AuthenticationPrincipal UserPrinciple user,
+                                                           @RequestBody TokenCampaignDonationExchangeRequest request) {
+        tokenService.exchangeCampaignDonationToken(
+                user.getId(),
+                request.getTransactionIds(),
+                request.getSimplePassword()
+        );
         return ResponseEntity.ok().body(null);
     }
 }

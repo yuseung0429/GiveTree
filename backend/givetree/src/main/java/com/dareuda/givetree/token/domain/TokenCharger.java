@@ -1,6 +1,5 @@
 package com.dareuda.givetree.token.domain;
 
-import com.dareuda.givetree.account.domain.AccountTransferResponse;
 import com.dareuda.givetree.account.domain.DepositProcessor;
 import com.dareuda.givetree.account.domain.RefundFailureAppender;
 import com.dareuda.givetree.account.domain.RefundProcessor;
@@ -29,10 +28,10 @@ public class TokenCharger {
     private final RefundFailureAppender refundFailureAppender;
     private final TokenValidator tokenValidator;
 
-    public void charge(long memberId, long amount) {
+    public void charge(long memberId, long amount, String message) {
         tokenValidator.validateChargeable(memberId);
-        AccountTransferResponse depositResponse = depositProcessor.process(memberId, amount);
-        Ledger depositLedger = depositProcessor.saveLedger(memberId, amount, depositResponse);
+        depositProcessor.process(memberId, amount);
+        Ledger depositLedger = depositProcessor.saveLedger(memberId, amount, message);
         try {
             Wallet wallet = memberWalletReader.readByMemberId(memberId);
             TransactionReceipt mintReceipt = tokenMinter.mint(WalletVO.from(wallet), amount);
@@ -45,8 +44,8 @@ public class TokenCharger {
             transactionLedgerAppender.append(mintTransaction.getId(), depositLedger.getId());
         } catch (Exception e1) {
             try {
-                AccountTransferResponse refundResponse = refundProcessor.process(memberId, amount);
-                refundProcessor.saveLedger(memberId, amount, refundResponse);
+                refundProcessor.process(memberId, amount);
+                refundProcessor.saveLedger(memberId, amount, message);
                 throw new RestApiException(TokenErrorCode.TOKEN_CHARGE_FAILURE);
             } catch (Exception e2) {
                 refundFailureAppender.append(depositLedger.getId(), amount);

@@ -18,8 +18,9 @@ public class FoundationDonationTokenTransferrer {
     private final MemberWalletReader memberWalletReader;
     private final MemberFinanceValidator memberFinanceValidator;
     private final MemberValidator memberValidator;
+    private final TokenCharger tokenCharger;
 
-    public void transfer(long memberId, long foundationId, long amount, String simplePassword) {
+    public void transfer(long memberId, long foundationId, long amount, String simplePassword, String message) {
         memberValidator.validateUser(memberId);
         memberValidator.validateFoundation(foundationId);
 
@@ -27,6 +28,8 @@ public class FoundationDonationTokenTransferrer {
 
         MemberWallet memberWallet = memberWalletReader.readByMemberId(memberId);
         MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
+
+        tokenCharger.charge(memberId, amount, message);
 
         TransactionReceipt receipt = tokenTransferrer.transfer(
                 WalletVO.from(memberWallet),

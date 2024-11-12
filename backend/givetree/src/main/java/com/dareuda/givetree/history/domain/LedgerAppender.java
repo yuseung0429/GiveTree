@@ -15,13 +15,14 @@ public class LedgerAppender {
 
     private final LedgerRepository ledgerRepository;
 
-    public Ledger append(long accountId, long amount, LedgerType ledgerType, LocalDateTime processedAt) {
+    public Ledger append(long accountId, long amount, LedgerType ledgerType, String message) {
         return ledgerRepository.save(
                 Ledger.builder()
                     .account(accountReader.read(accountId))
                     .amount(amount)
                     .type(ledgerType)
-                    .processedAt(processedAt)
+                    .message(message)
+                    .processedAt(LocalDateTime.now())
                     .build()
         );
     }

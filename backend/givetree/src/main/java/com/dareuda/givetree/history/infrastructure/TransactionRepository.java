@@ -1,6 +1,9 @@
 package com.dareuda.givetree.history.infrastructure;
 
 import com.dareuda.givetree.history.domain.Transaction;
+import com.dareuda.givetree.wallet.domain.member.MemberWallet;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
@@ -15,19 +18,51 @@ public interface TransactionRepository extends Repository<Transaction, Long> {
            SELECT t
            FROM Transaction t
            LEFT JOIN TransactionLedger tl ON t.id = tl.transaction.id
-           WHERE t.receiverWallet.id = :receiverWalletId AND tl is null
+           JOIN FETCH t.senderWallet sw
+           JOIN FETCH TREAT(sw AS MemberWallet).member
+           WHERE t.receiverWallet.id = :receiverWalletId
+           AND tl is null
+           ORDER BY t.createdAt DESC
            """)
-    List<Transaction> findUnreceivedTransactionByReceiverWalletId(long receiverWalletId);
+    Slice<Transaction> findUnreceivedFoundationDonationTransactionByReceiverWalletId(long receiverWalletId, Pageable pageable);
 
     @Query("""
            SELECT t
            FROM Transaction t
            LEFT JOIN TransactionLedger tl ON t.id = tl.transaction.id
+           JOIN FETCH t.senderWallet sw
+           JOIN FETCH TREAT(sw AS MemberWallet).member
            WHERE t.receiverWallet.id = :receiverWalletId
            AND tl is null
            AND t.id in :transactionIds
            """)
-    List<Transaction> findUnreceivedTransactionByReceiverWalletIdAndTransactionIds(long receiverWalletId, List<Long> transactionIds);
+    List<Transaction> findUnreceivedFoundationDonationTransactionByReceiverWalletIdAndTransactionIds(long receiverWalletId, List<Long> transactionIds);
+
+    @Query("""
+           SELECT t
+           FROM Transaction t
+           LEFT JOIN TransactionLedger tl ON t.id = tl.transaction.id
+           JOIN FETCH t.senderWallet sw
+           JOIN FETCH TREAT(sw AS CampaignWallet).campaign
+           WHERE t.receiverWallet.id = :receiverWalletId
+           AND tl is null
+           ORDER BY t.createdAt DESC
+           """)
+    Slice<Transaction> findUnreceivedCampaignDonationTransactionByReceiverWalletId(long receiverWalletId, Pageable pageable);
+
+
+    @Query("""
+           SELECT t
+           FROM Transaction t
+           LEFT JOIN TransactionLedger tl ON t.id = tl.transaction.id
+           JOIN FETCH t.senderWallet sw
+           JOIN FETCH TREAT(sw AS CampaignWallet).campaign
+           WHERE t.receiverWallet.id = :receiverWalletId
+           AND tl is null
+           AND t.id in :transactionIds
+           """)
+    List<Transaction> findUnreceivedCampaignDonationTransactionByReceiverWalletIdAndTransactionIds(long receiverWalletId, List<Long> transactionIds);
+
 
     @Query("""
            SELECT t

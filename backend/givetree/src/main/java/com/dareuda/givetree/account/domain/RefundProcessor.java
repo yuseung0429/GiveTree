@@ -28,13 +28,13 @@ public class RefundProcessor {
     }
 
     @Transactional
-    public Ledger saveLedger(long receiverId, long amount, AccountTransferResponse response) {
+    public Ledger saveLedger(long receiverId, long amount, String message) {
         Account receiverAccount = accountReader.read(receiverId);
         return ledgerAppender.append(
                 receiverAccount.getId(),
                 amount,
                 LedgerType.REFUND,
-                response.getSenderReceipt().getTransactionDate().atStartOfDay()
+                message
         );
     }
 }

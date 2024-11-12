@@ -1,11 +1,11 @@
 package com.dareuda.givetree.token.domain;
 
-import com.dareuda.givetree.account.domain.AccountValidator;
 import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.finance.domain.MemberFinanceValidator;
 import com.dareuda.givetree.history.controller.TransactionErrorCode;
-import com.dareuda.givetree.history.domain.*;
-import com.dareuda.givetree.history.infrastructure.TransactionLedgerRepository;
+import com.dareuda.givetree.history.domain.Transaction;
+import com.dareuda.givetree.history.domain.TransactionLedgerAppender;
+import com.dareuda.givetree.history.domain.TransactionReader;
 import com.dareuda.givetree.member.domain.MemberValidator;
 import com.dareuda.givetree.wallet.domain.member.MemberWallet;
 import com.dareuda.givetree.wallet.domain.member.MemberWalletReader;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class FoundationTokenExchanger {
+public class FoundationDonationTokenExchanger {
 
     private final TokenExchanger tokenExchanger;
     private final MemberFinanceValidator memberFinanceValidator;
@@ -25,12 +25,12 @@ public class FoundationTokenExchanger {
     private final MemberWalletReader memberWalletReader;
     private final TransactionLedgerAppender transactionLedgerAppender;
 
-    public void exchange(long foundationId, List<Long> transactionIds, String simplePassword) {
+    public void exchange(long foundationId, List<Long> transactionIds, String simplePassword, String message) {
         memberValidator.validateFoundation(foundationId);
         memberFinanceValidator.validateSimplePassword(foundationId, simplePassword);
 
         MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
-        List<Transaction> transactions = transactionReader.readUnreceivedTransactionByReceiverWalletIdAndTransactionIds(
+        List<Transaction> transactions = transactionReader.readUnreceivedFoundationDonationWithInTransactionIds(
                 foundationWallet.getId(),
                 transactionIds
         );
@@ -44,7 +44,7 @@ public class FoundationTokenExchanger {
             amount += transaction.getAmount();
         }
 
-        long ledgerId = tokenExchanger.exchange(foundationId, amount);
+        long ledgerId = tokenExchanger.exchange(foundationId, amount, message);
         transactionLedgerAppender.appendAll(transactionIds, ledgerId);
     }
 }
