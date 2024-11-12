@@ -22,13 +22,13 @@ public class SaleUpdater {
     public void update(long memberId, long saleId, SaleCommand command) {
         Sale sale = saleReader.read(saleId);
         saleValidator.validateOwner(memberId, sale);
+        saleValidator.validatePriceDoesNotExceedContribution(command.getPrice(), command.getContribution());
 
         Long foundationId = command.getFoundationId();
         if (foundationId != null && foundationReader.isExist(foundationId)) {
             sale.updateFoundationId(command.getFoundationId());
         }
-        sale.updatePrice(command.getPrice());
-        sale.updateDonationRate(command.getDonationRate());
+        sale.updatePriceAndContribution(command.getPrice(), command.getContribution());
         sale.updateTitle(command.getTitle());
         sale.updateDescription(command.getDescription());
         sale.updateStatus(command.getStatus());

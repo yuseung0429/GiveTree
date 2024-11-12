@@ -19,7 +19,7 @@ public class ReadSaleResponse {
 
     private long price;
 
-    private int donationRate;
+    private long contribution;
 
     private String title;
 
@@ -45,7 +45,7 @@ public class ReadSaleResponse {
                 .sellerId(saleDetail.getSellerId())
                 .foundationId(saleDetail.getFoundationId())
                 .price(saleDetail.getPrice())
-                .donationRate(saleDetail.getDonationRate())
+                .contribution(saleDetail.getContribution())
                 .title(saleDetail.getTitle())
                 .description(saleDetail.getDescription())
                 .imageUrls(saleDetail.getImageUrls())

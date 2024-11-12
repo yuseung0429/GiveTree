@@ -1,6 +1,8 @@
 package com.dareuda.givetree.sale.domain;
 
 import com.dareuda.givetree.common.domain.BaseEntity;
+import com.dareuda.givetree.common.errors.exception.RestApiException;
+import com.dareuda.givetree.sale.controller.SaleErrorCode;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -30,7 +32,7 @@ public class Sale extends BaseEntity {
 
     private long price;
 
-    private int donationRate;
+    private long contribution;
 
     @NotNull
     private String title;
@@ -59,13 +61,13 @@ public class Sale extends BaseEntity {
     private LocalDateTime updatedDateTime;
 
     @Builder
-    private Sale(int donationRate, Long sellerId, Long fundedFoundationId, Long purchaserId, Long transactionId, long price, String title, String description, SaleStatus status, ProductionCondition productionCondition, boolean isDirectSale, boolean isDeliverySale, LocalDateTime updatedDateTime) {
-        this.donationRate = donationRate;
+    private Sale(Long sellerId, Long fundedFoundationId, Long purchaserId, Long transactionId, long price, long contribution, String title, String description, SaleStatus status, ProductionCondition productionCondition, boolean isDirectSale, boolean isDeliverySale, LocalDateTime updatedDateTime) {
         this.sellerId = sellerId;
         this.fundedFoundationId = fundedFoundationId;
         this.purchaserId = purchaserId;
         this.transactionId = transactionId;
         this.price = price;
+        this.contribution = contribution;
         this.title = title;
         this.description = description;
         this.status = status;
@@ -89,25 +91,33 @@ public class Sale extends BaseEntity {
         this.fundedFoundationId = fundedFoundationId;
     }
 
+    public void updatePriceAndContribution(Long price, Long contribution) {
+        if (price != null && contribution != null && price > contribution) {
+            this.price = price;
+            this.contribution = contribution;
+        }
+        updatePrice(price);
+        updateContribution(contribution);
+    }
+
     public void updatePrice(Long price) {
         if (price == null) {
             return;
         }
-        if (price < 0) {
+        if (price < 0 || price < this.contribution) {
             return;
         }
         this.price = price;
     }
 
-    public void updateDonationRate(Integer donationRate) {
-        if (donationRate == null) {
+    public void updateContribution(Long contribution) {
+        if (contribution == null) {
             return;
         }
-        if (donationRate < 0 || donationRate > 100) {
+        if (contribution < 0 || contribution > this.price) {
             return;
         }
-
-        this.donationRate = donationRate;
+        this.contribution = contribution;
     }
 
     public void updateTitle(String title) {
