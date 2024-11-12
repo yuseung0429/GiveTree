@@ -1,11 +1,9 @@
-'use client';
-
 import colorPalette from '@/styles/tokens/colorPalette';
 
 import Box from '@/components/common/Box';
-import SearchCondition from '@/components/market/SearchCondition';
-import MarketItem from '@/components/market/MarketItem';
 import Flex from '@/components/common/Flex';
+import MarketItem from '@/components/market/MarketItem';
+import SearchCondition from '@/components/market/SearchCondition';
 import WriteButon from '@/components/market/WriteButton';
 
 export default function MarketPage() {
@@ -25,7 +23,7 @@ export default function MarketPage() {
         {new Array(10).fill(0).map((_, index) => (
           <MarketItem key={index} id={index} />
         ))}
-        <WriteButon onClick={() => alert('')} />
+        <WriteButon href="/market/write" />
       </Box>
     </Flex>
   );
