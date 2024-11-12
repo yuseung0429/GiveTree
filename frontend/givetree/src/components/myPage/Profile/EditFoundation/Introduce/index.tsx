@@ -7,11 +7,15 @@ import Box from '@/components/common/Box';
 import colorPalette from '@/styles/tokens/colorPalette';
 import Button from '@/components/common/Button';
 
-export default function FoundationIntroduce() {
-  const [introduction, setIntroduction] = useState<string>('');
+export default function FoundationIntroduce({
+  introduction,
+}: {
+  introduction: string;
+}) {
+  const [newIntroduction, setNewIntroduction] = useState<string>(introduction);
 
   const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setIntroduction(e.target.value);
+    setNewIntroduction(e.target.value);
   };
 
   return (
@@ -22,9 +26,9 @@ export default function FoundationIntroduce() {
         </Typography>
         <textarea
           id="textArea"
-          value={introduction}
+          value={newIntroduction}
           onChange={handleIntroduceChange}
-          placeholder="재단을 소개해주세요."
+          placeholder={introduction}
           className={s.introduceInput}
           rows={5}
           cols={30}

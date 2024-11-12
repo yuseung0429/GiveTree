@@ -4,15 +4,16 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import * as styles from './CampaignMoney.css';
 import Button from '@/components/common/Button';
 import TreeProgress from '@/components/campaign/CampaignMoney/TreeProgress';
+import Link from 'next/link';
 
 interface CampaignMoneyProps {
-  progress: number;
+  id: number;
   currentAmount: number;
   goalAmount: number;
 }
 
 const CampaignMoney = ({
-  progress,
+  id,
   currentAmount,
   goalAmount,
 }: CampaignMoneyProps) => {
@@ -27,15 +28,11 @@ const CampaignMoney = ({
         모금 현황
       </Typography>
 
-      <TreeProgress
-        currentAmount={currentAmount}
-        goalAmount={goalAmount}
-        progress={progress}
-      />
+      <TreeProgress currentAmount={currentAmount} goalAmount={goalAmount} />
 
-      <div className={styles.giveButton}>
+      <Link className={styles.giveButton} href={`/campaign/${id}/donation`}>
         <Button fullWidth>후원하기</Button>
-      </div>
+      </Link>
     </div>
   );
 };

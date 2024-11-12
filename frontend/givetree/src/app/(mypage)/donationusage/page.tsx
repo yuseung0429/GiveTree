@@ -19,7 +19,6 @@ const foundations = [
 export default function DonationUsage() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const sliderRef = useRef<HTMLDivElement>(null);
-  console.log(currentIndex);
 
   const handleScroll = () => {
     const slider = sliderRef.current;

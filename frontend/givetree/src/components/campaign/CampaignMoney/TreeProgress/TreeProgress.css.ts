@@ -50,5 +50,5 @@ export const progressText = style({
   position: 'absolute',
   width: '100%',
   textAlign: 'center',
-  marginTop: '0.75rem',
+  marginTop: '0.5rem',
 });

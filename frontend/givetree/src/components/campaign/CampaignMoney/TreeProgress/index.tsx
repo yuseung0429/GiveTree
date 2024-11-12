@@ -5,13 +5,11 @@ import Typography from '@/components/common/Typography';
 interface TreeProgressProps {
   currentAmount: number;
   goalAmount: number;
-  progress: number;
 }
 
 const TreeProgress: React.FC<TreeProgressProps> = ({
   currentAmount,
   goalAmount,
-  progress,
 }) => {
   return (
     <div className={styles.container}>
@@ -21,14 +19,14 @@ const TreeProgress: React.FC<TreeProgressProps> = ({
       <div className={styles.treeContainer}>
         <div
           className={styles.treeFill}
-          style={{ height: `${progress}%` }}
+          style={{ height: `${(currentAmount / goalAmount) * 100}%` }}
         ></div>
 
         <Typography
           as="h4"
           weight="semiBold"
           className={styles.amountText}
-          style={{ bottom: `${progress}%` }}
+          style={{ bottom: `${(currentAmount / goalAmount) * 100}%` }}
         >
           {currentAmount?.toLocaleString()}원
         </Typography>
@@ -38,9 +36,9 @@ const TreeProgress: React.FC<TreeProgressProps> = ({
           weight="bold"
           color="#fff"
           className={styles.progressText}
-          style={{ top: `${100 - progress}%` }}
+          style={{ top: `${100 - (currentAmount / goalAmount) * 100}%` }}
         >
-          {progress}%
+          {(currentAmount / goalAmount) * 100}%
         </Typography>
       </div>
     </div>

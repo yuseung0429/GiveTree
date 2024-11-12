@@ -23,5 +23,4 @@ export const mainContainer = style({
 export const sectionTitle = style({
   margin: '0.25rem 0.5rem 0rem 0.5rem',
   color: colorPalette.text[800],
-  fontWeight: 'bold',
 });

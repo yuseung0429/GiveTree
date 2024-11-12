@@ -26,7 +26,7 @@ const CampaignInfo = ({ introduction, introduceImage }: CampaignInfoProps) => {
             src={image}
             alt="introduce image"
             width={300}
-            height={420}
+            height={400}
           />
         ))}
       </div>

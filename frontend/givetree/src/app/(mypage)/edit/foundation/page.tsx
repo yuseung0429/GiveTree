@@ -1,22 +1,33 @@
 import colorPalette from '@/styles/tokens/colorPalette';
 import * as styles from '../../mypage/mypage.css';
-import Img from '@/assets/images/profile.png';
+import ProfileNull from '@/assets/images/profile.png';
 import React from 'react';
 import FoundationIntroduce from '@/components/myPage/Profile/EditFoundation/Introduce';
 import FoundationInfo from '@/components/myPage/Profile/EditFoundation/Information';
+import fetchWrapper from '@/lib/fetchWrapper';
 
-export default function FoundationEdit() {
-  const name = '굿네이버스';
-  const profileImageUrl = Img;
-  const corporateRegistrationNumber = '012-34-56789';
-  const phoneNumber = '010-1234-5678';
-  const address = '구미 진평동';
+export default async function FoundationEdit() {
+  const foundationResponse = await fetchWrapper('/foundations/session', {
+    method: 'GET',
+  });
+  const foundation = await foundationResponse.json();
+
+  const {
+    name,
+    introduction,
+    address,
+    phoneNumber,
+    corporateRegistrationNumber,
+    profileImageUrl,
+  } = foundation;
+
+  const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
 
   return (
     <div className={styles.Wrapper}>
       <div className={styles.mainContainer}>
         <FoundationInfo
-          image={profileImageUrl}
+          image={profileImage}
           name={name}
           corporateRegistrationNumber={corporateRegistrationNumber}
           phoneNumber={phoneNumber}
@@ -31,7 +42,7 @@ export default function FoundationEdit() {
           }}
         ></div>
 
-        <FoundationIntroduce />
+        <FoundationIntroduce introduction={introduction} />
       </div>
     </div>
   );

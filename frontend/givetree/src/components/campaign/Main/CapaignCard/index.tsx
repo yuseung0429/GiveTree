@@ -8,7 +8,6 @@ interface CampaignCardProps {
   id: number;
   title: string;
   foundation: string;
-  progress: number;
   currentFundraisingAmount: number;
   targetFundraisingAmount: number;
   titleImageUrl: string;
@@ -20,7 +19,6 @@ const CampaignCard = ({
   id,
   title,
   foundation,
-  progress,
   currentFundraisingAmount,
   targetFundraisingAmount,
   titleImageUrl,
@@ -62,7 +60,9 @@ const CampaignCard = ({
       </div>
 
       <div className={styles.progressContainer}>
-        <ProgressBar progress={progress} />
+        <ProgressBar
+          progress={(currentFundraisingAmount / targetFundraisingAmount) * 100}
+        />
         <div className={styles.amountContainer}>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
             {currentFundraisingAmount.toLocaleString()}원

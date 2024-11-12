@@ -1,9 +1,8 @@
 export interface CampaignData {
   id: number;
-  title: string;
+  name: string;
   foundationId: number;
-  foundation: string;
-  progress: number;
+  foundationName: string;
   currentFundraisingAmount: number;
   targetFundraisingAmount: number;
   titleImageUrl: string;

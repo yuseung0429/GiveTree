@@ -1,5 +1,5 @@
 import * as styles from './mypage.css';
-import profileImageUrl from '@/assets/images/profile.png';
+import ProfileNull from '@/assets/images/profile.png';
 import Typography from '@/components/common/Typography';
 import { IoLogOutOutline } from 'react-icons/io5';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
@@ -14,10 +14,17 @@ import { UserData } from '@/types/user/types';
 export default async function MyPage() {
   const response = await fetchWrapper('/members/session', { method: 'GET' });
   const user: UserData = await response.json();
-  const { role, name } = user;
-
+  const { role, name, profileImageUrl } = user;
+  const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
   const totalDonation = 35000;
-  const currentMoney = 1563000;
+
+  const foundationResponse = await fetchWrapper('/foundations/session', {
+    method: 'GET',
+  });
+  const foundation = await foundationResponse.json();
+
+  const currentMoney =
+    foundation.totalFundraisingAmount - foundation.executedAmount;
 
   return (
     <div className={styles.Wrapper}>
@@ -31,7 +38,7 @@ export default async function MyPage() {
           <Profile
             role={role}
             name={name}
-            image={profileImageUrl}
+            image={profileImage}
             totalDonation={totalDonation}
             currentMoney={currentMoney}
           />

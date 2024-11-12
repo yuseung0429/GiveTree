@@ -8,7 +8,7 @@ import Image, { StaticImageData } from 'next/image';
 interface ProfileProps {
   role: string;
   name: string;
-  image: StaticImageData;
+  image: StaticImageData | string;
   totalDonation: number;
   currentMoney: number;
 }
