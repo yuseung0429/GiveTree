@@ -1,21 +1,24 @@
 import Box from '@/components/common/Box';
 import colorPalette from '@/styles/tokens/colorPalette';
 import * as styles from '../../mypage/mypage.css';
-import Img from '@/assets/images/profile.png';
+import ProfileNull from '@/assets/images/profile.png';
 import Typography from '@/components/common/Typography';
 import React from 'react';
 import GiveFoot from '@/components/myPage/GiveFoot';
 import EditUser from '@/components/myPage/Profile/EditUser';
+import fetchWrapper from '@/lib/fetchWrapper';
+import { UserData } from '@/types/user/types';
 
-export default function UserEdit() {
-  const name = '눈사람';
-  const profileImageUrl = Img;
-  const email = 'ssafy123@naver.com';
+export default async function UserEdit() {
+  const response = await fetchWrapper('/members/session', { method: 'GET' });
+  const user: UserData = await response.json();
+  const { name, profileImageUrl, email } = user;
+  const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
 
   return (
     <div className={styles.Wrapper}>
       <div className={styles.mainContainer}>
-        <EditUser email={email} image={profileImageUrl} />
+        <EditUser name={name} email={email} image={profileImage} />
 
         <div
           style={{
