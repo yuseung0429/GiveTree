@@ -1,9 +1,11 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 
-import '@/styles/global.css';
+import SWRProvider from '@/context/SWRProvider';
 
 import { ModalProvider } from '@/hooks/useModal';
+
+import '@/styles/global.css';
 
 const pretendard = localFont({
   src: '../assets/fonts/PretendardVariable.woff2',
@@ -13,6 +15,13 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: 'GiveTree',
   description: 'GiveTree',
+};
+
+export const viewport: Viewport = {
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  minimumScale: 1.0,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -25,10 +34,12 @@ export default function RootLayout({
   return (
     <html lang="ko" className={pretendard.className}>
       <body>
-        <ModalProvider>
-          {children}
-          {modal}
-        </ModalProvider>
+        <SWRProvider>
+          <ModalProvider>
+            {children}
+            {modal}
+          </ModalProvider>
+        </SWRProvider>
       </body>
     </html>
   );

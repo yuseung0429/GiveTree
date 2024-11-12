@@ -22,8 +22,8 @@ export const checkboxChip = recipe({
 
     selectors: {
       [`${input}:checked + &`]: {
-        borderColor: '#171719',
-        backgroundColor: '#171719',
+        borderColor: '#005b52',
+        backgroundColor: '#005b52',
         color: colorPalette.grey[50],
       },
 

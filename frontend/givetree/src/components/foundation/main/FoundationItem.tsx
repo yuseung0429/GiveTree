@@ -1,18 +1,24 @@
-import Box from '@/components/common/Box';
-import * as style from './FoundationItemStyle.css';
-import Typography from '@/components/common/Typography';
 import { MdNavigateNext } from 'react-icons/md';
-import { memo } from 'react';
+
+import colorPalette from '@/styles/tokens/colorPalette';
+
+import Box from '@/components/common/Box';
+import Typography from '@/components/common/Typography';
+import ProfileImage from '@/components/common/ProfileImage';
+
+import * as style from './FoundationItemStyle.css';
 
 type FoundationItemProps = {
   foundation: {
     id: number;
+    introduction: string;
+    profileImageUrl: string;
     name: string;
   };
-  onClick: () => void;
+  onClick?: () => void;
 };
 
-export default memo(function FoundationItem({
+export default function FoundationItem({
   foundation,
   onClick,
 }: FoundationItemProps) {
@@ -24,13 +30,17 @@ export default memo(function FoundationItem({
       tabIndex={0}
     >
       <Box className={style.flexbox}>
-        <div className={style.foundationLogo}></div>
+        <ProfileImage
+          src={foundation.profileImageUrl}
+          borderColor={colorPalette.grey[400]}
+          size="md"
+        />
         <Box className={style.textbox}>
           <Typography as="h4" weight="medium">
             {foundation.name}
           </Typography>
           <Typography weight="light" className={style.descript}>
-            굿네이버스는 1991년 설립되어 국내, 북한
+            {foundation.introduction}
           </Typography>
         </Box>
       </Box>
@@ -41,4 +51,4 @@ export default memo(function FoundationItem({
       </Box>
     </Box>
   );
-});
+}

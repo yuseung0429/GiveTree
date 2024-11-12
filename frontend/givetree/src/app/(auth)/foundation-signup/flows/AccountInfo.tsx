@@ -2,11 +2,10 @@
 
 import { FormEvent } from 'react';
 
-import colorPalette from '@/styles/tokens/colorPalette';
-
 import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
+import FormField from '@/components/common/FormField';
 import ImageUploader from '@/components/common/ImageUploader';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
@@ -33,22 +32,16 @@ const AccountInfo = ({ formData, onSubmit }: AccountInfoProps) => {
       <Box marginTop="1.5rem">
         <form onSubmit={handleSubmit}>
           <Flex flexDirection="column" gap="1.5rem">
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                이메일 주소
-              </Typography>
+            <FormField label="이메일 주소">
               <TextField
                 name="email"
                 size="lg"
                 placeholder="example@givetree.co.kr"
                 defaultValue={formData.get('email') as string}
               />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                비밀번호
-              </Typography>
+            <FormField label="비밀번호">
               <TextField
                 type="password"
                 name="password"
@@ -56,37 +49,29 @@ const AccountInfo = ({ formData, onSubmit }: AccountInfoProps) => {
                 placeholder="(문자, 숫자 포함 6~20자)"
                 defaultValue={formData.get('password') as string}
               />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                비밀번호 확인
-              </Typography>
+            <FormField label="비밀번호 확인">
               <TextField
                 type="password"
                 name="password_check"
                 size="lg"
                 defaultValue={formData.get('password_check') as string}
               />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                재단 이름
-              </Typography>
+            <FormField label="재단 이름">
               <TextField
                 name="name"
                 size="lg"
                 defaultValue={formData.get('name') as string}
               />
-            </Flex>
+            </FormField>
 
-            <Flex flexDirection="column" gap="0.5rem">
-              <Typography color={colorPalette.primary[600]} weight="semiBold">
-                프로필 이미지
-              </Typography>
+            <FormField label="프로필 이미지">
               <ImageUploader name="profileImageUrl" maxFileCount={1} />
-            </Flex>
+            </FormField>
+
             <Button size="lg" fullWidth>
               다음
             </Button>

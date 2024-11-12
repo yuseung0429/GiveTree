@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import usePreventKeyboardInput from '../hooks/usePreventKeyboardInput';
+
 import * as s from './Alert.css';
 
 interface AlertProps {
@@ -8,6 +10,8 @@ interface AlertProps {
 }
 
 const Alert = ({ children, onClose }: AlertProps) => {
+  usePreventKeyboardInput();
+
   return (
     <div className={s.container}>
       <div className={s.message}>{children}</div>

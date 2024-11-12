@@ -1,4 +1,4 @@
-import * as s from './SearchItem.css';
+import * as s from './MarketItem.css';
 
 import Link from 'next/link';
 
@@ -9,11 +9,11 @@ import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 import Chip from '@/components/common/Chip';
 
-interface SearchItemProps {
+interface MarketItemProps {
   id: number;
 }
 
-const SearchItem = ({ id }: SearchItemProps) => {
+const MarketItem = ({ id }: MarketItemProps) => {
   return (
     <div className={s.wrapper}>
       <Link href={`/market/post/${id}`}>
@@ -55,4 +55,4 @@ const SearchItem = ({ id }: SearchItemProps) => {
   );
 };
 
-export default SearchItem;
+export default MarketItem;
