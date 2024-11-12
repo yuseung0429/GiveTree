@@ -13,7 +13,7 @@ public class SaleCommand {
 
     private Long price;
 
-    private Integer donationRate;
+    private Long contribution;
 
     private String title;
 

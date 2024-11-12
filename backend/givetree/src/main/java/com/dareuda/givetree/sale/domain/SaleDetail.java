@@ -18,7 +18,7 @@ public class SaleDetail {
 
     private long price;
 
-    private int donationRate;
+    private long contribution;
 
     private String title;
 
@@ -48,7 +48,7 @@ public class SaleDetail {
                 .sellerId(sale.getSellerId())
                 .foundationId(sale.getFundedFoundationId())
                 .price(sale.getPrice())
-                .donationRate(sale.getDonationRate())
+                .contribution(sale.getContribution())
                 .title(sale.getTitle())
                 .description(sale.getDescription())
                 .imageUrls(imageUrls)
@@ -56,7 +56,7 @@ public class SaleDetail {
                 .productionCondition(sale.getProductionCondition().getTitle())
                 .isDirectSale(sale.isDirectSale())
                 .isDeliverySale(sale.isDeliverySale())
-                .hits(builder().hits)
+                .hits(sale.getHits())
                 .createdDateTime(sale.getCreatedAt())
                 .build();
     }

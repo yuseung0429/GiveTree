@@ -1,5 +1,7 @@
 package com.dareuda.givetree.sale.controller.dto.request;
 
+import com.dareuda.givetree.common.errors.exception.RestApiException;
+import com.dareuda.givetree.sale.controller.SaleErrorCode;
 import com.dareuda.givetree.sale.domain.ProductionCondition;
 import com.dareuda.givetree.sale.domain.SaleCommand;
 import com.dareuda.givetree.sale.domain.SaleStatus;
@@ -7,7 +9,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import org.hibernate.validator.constraints.Range;
 
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class AppendSaleRequest {
     @Min(0)
     private Long price;
 
-    @Range(min = 0, max = 100)
-    private Integer donationRate;
+    @Min(0)
+    private Long contribution;
 
     @NotBlank
     private String title;
@@ -44,10 +45,14 @@ public class AppendSaleRequest {
     private Boolean isDeliverySale;
 
     public SaleCommand toCommand() {
+        if (price < contribution) {
+            throw new RestApiException(SaleErrorCode.PRICE_EXCEEDS_CONTRIBUTION);
+        }
+
         return SaleCommand.builder()
                 .foundationId(foundationId)
                 .price(price)
-                .donationRate(donationRate)
+                .contribution(contribution)
                 .title(title)
                 .description(description)
                 .imageUrls(imageUrls)
