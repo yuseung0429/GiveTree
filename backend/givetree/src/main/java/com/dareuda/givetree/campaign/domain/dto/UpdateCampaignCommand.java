@@ -20,4 +20,5 @@ public class UpdateCampaignCommand {
     private final List<String> newImageUrls;
     private final List<Integer> deleteImageOrders;
     private final Long targetFundraisingAmount;
+    private final String contractAddress;
 }

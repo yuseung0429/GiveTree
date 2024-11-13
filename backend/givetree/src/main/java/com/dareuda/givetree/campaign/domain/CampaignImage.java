@@ -25,13 +25,8 @@ public class CampaignImage {
     @NotNull
     private Image image;
 
-    @Column
-    @NotNull
-    private int imageOrder;
-
-    public CampaignImage(Campaign campaign, Image image, int imageOrder) {
+    public CampaignImage(Campaign campaign, Image image) {
         this.campaign = campaign;
         this.image = image;
-        this.imageOrder = imageOrder;
     }
 }

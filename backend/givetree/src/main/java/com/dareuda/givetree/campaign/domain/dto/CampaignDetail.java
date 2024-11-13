@@ -33,9 +33,6 @@ public class CampaignDetail {
     @NonNull
     private final Long targetFundraisingAmount;
 
-    @NonNull
-    private final Long currentFundraisingAmount;
-
     private final String titleImageUrl;
 
     private final List<String> imageUrls;

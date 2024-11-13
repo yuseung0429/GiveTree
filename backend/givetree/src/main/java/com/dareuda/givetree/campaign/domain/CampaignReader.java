@@ -17,4 +17,10 @@ public class CampaignReader {
         return campaignRepository.findById(campaignId)
                 .orElseThrow(() -> new RestApiException(CampaignErrorCode.CAMPAIGN_NOT_FOUND));
     }
+
+    @Transactional(readOnly = true)
+    public Campaign readReference(long campaignId) {
+        return campaignRepository.getReferenceById(campaignId)
+                .orElseThrow(() -> new RestApiException(CampaignErrorCode.CAMPAIGN_NOT_FOUND));
+    }
 }

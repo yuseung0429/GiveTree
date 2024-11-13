@@ -49,20 +49,12 @@ public class Campaign extends BaseEntity {
     @NotNull
     private long targetFundraisingAmount;
 
-    @Column
-    @NotNull
-    private long currentFundraisingAmount = 0L;
-
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "title_image_id")
     private Image titleImage;
 
     @OneToMany(mappedBy = "campaign", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<CampaignImage> images = new ArrayList<>();
-
-    @Column
-    @NotNull
-    private int nextImageOrderSequence = 1;
 
     public static Campaign createCampaign(Foundation foundation, String name, String introduction, LocalDate startDate, LocalDate endDate, long targetFundraisingAmount, Image titleImage, List<Image> images) {
         Campaign campaign = new Campaign();
@@ -97,12 +89,12 @@ public class Campaign extends BaseEntity {
     public void updateTargetFundraisingAmount(long targetFundraisingAmount) {
         this.targetFundraisingAmount = targetFundraisingAmount;
     }
-    public void updateCurrentFundraisingAmount(long currentFundraisingAmount) {
-        this.currentFundraisingAmount = currentFundraisingAmount;
+    public void updateContractAddress(String contractAddress) {
+        this.contractAddress = contractAddress;
     }
 
     public void addImage(Image image) {
-        CampaignImage campaignImage = new CampaignImage(this, image, nextImageOrderSequence++);
+        CampaignImage campaignImage = new CampaignImage(this, image);
         images.add(campaignImage);
     }
     public void deleteImages(List<Integer> removeImageOrders) {
