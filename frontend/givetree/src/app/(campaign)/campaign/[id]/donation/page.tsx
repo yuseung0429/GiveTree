@@ -4,6 +4,7 @@ import Button from '@/components/common/Button';
 import DonationCash from '@/components/foundation/donation/DonationCash';
 import * as styles from './donation.css';
 import fetchWrapper from '@/lib/fetchWrapper';
+import { getRegisteredAccount } from '@/api/account/getRegisteredAccount';
 
 export default async function DonationPage({
   params,
@@ -11,10 +12,16 @@ export default async function DonationPage({
   params: Promise<{ id: string }>;
 }) {
   const campaignId = (await params).id;
-  const response = await fetchWrapper(`/campaigns/${campaignId}`, {
-    method: 'GET',
-  });
-  const campaignData = await response.json();
+
+  const [campaignData, accountResponse] = await Promise.all([
+    fetchWrapper(`/campaigns/${campaignId}`, {
+      method: 'GET',
+    }).then((res) => res.json()),
+    getRegisteredAccount(),
+  ]);
+
+  const registeredAccount =
+    accountResponse.ok && accountResponse.data ? accountResponse.data : null;
 
   return (
     <div style={{ backgroundColor: '#F5F5F5' }}>
@@ -33,7 +40,7 @@ export default async function DonationPage({
         backgroundColor="white"
         padding="20px 15px"
       >
-        <Account />
+        <Account registeredAccount={registeredAccount} />
       </Box>
 
       <div className={styles.giveButton}>

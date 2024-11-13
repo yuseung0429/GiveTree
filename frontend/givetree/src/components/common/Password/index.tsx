@@ -13,6 +13,7 @@ interface PasswordProps {
   title?: string;
   subtitle?: string;
   onSubmit?: (password: string) => Promise<{ error?: string }>;
+  mode?: 'register' | 'confirm';
 }
 
 export default function Password({
@@ -22,6 +23,7 @@ export default function Password({
 }: PasswordProps) {
   const router = useRouter();
   const [password, setPassword] = useState('');
+  // const [numbers, setNumbers] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
   const [numbers, setNumbers] = useState([
     '1',
     '2',
@@ -34,11 +36,11 @@ export default function Password({
     '9',
     '0',
   ]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (password.length === 6) {
-      onSubmit?.(password).then((result) => {
+    if (password.length === 6 && onSubmit) {
+      onSubmit(password).then((result) => {
         if (result?.error) {
           setError(result.error);
           setPassword('');
