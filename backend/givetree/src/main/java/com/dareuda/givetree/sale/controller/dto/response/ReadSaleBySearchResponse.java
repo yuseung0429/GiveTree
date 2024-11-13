@@ -4,6 +4,8 @@ import com.dareuda.givetree.sale.domain.SaleDetail;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Builder
 @Getter
 public class ReadSaleBySearchResponse {
@@ -24,6 +26,8 @@ public class ReadSaleBySearchResponse {
 
     private Boolean isDeliverySale;
 
+    private LocalDateTime cratedDateTime;
+
     public static ReadSaleBySearchResponse from(SaleDetail saleDetail) {
         String imageUrl = null;
         if (!saleDetail.getImageUrls().isEmpty()) {
@@ -39,6 +43,7 @@ public class ReadSaleBySearchResponse {
                 .productionsCondition(saleDetail.getProductionCondition())
                 .isDirectSale(saleDetail.isDirectSale())
                 .isDeliverySale(saleDetail.isDeliverySale())
+                .cratedDateTime(saleDetail.getCreatedDateTime())
                 .build();
     }
 }
