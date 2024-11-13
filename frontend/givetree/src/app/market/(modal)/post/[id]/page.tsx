@@ -38,11 +38,7 @@ export default async function PostPage({
         ))}
       </ImageCarousel>
       <Box padding="1rem">
-        <SimpleProfile
-          name={`코딩하는 돌아이 (${id})`}
-          size="md"
-          profileImage="https://github.com/user-attachments/assets/14513e04-bf23-4d90-8f29-7f6295690ea5"
-        />
+        <SimpleProfile id={id} size="md" />
         <Box padding="1rem 0">
           <SalePostHeader
             id={id}
@@ -59,9 +55,11 @@ export default async function PostPage({
             createdAt={data.createdDateTime}
           />
         </Box>
-        <DonationNotification profileImage="https://github.com/user-attachments/assets/14513e04-bf23-4d90-8f29-7f6295690ea5">
-          결제 금액은 전액 {data.foundationId}에 후원됩니다.
-        </DonationNotification>
+        <DonationNotification
+          foundationId={data.foundationId}
+          contribution={data.contribution}
+          price={data.price}
+        />
         <Box padding="1rem 0">
           <Typography style={{ lineHeight: '1.5' }}>
             {data.description.split('\n').map((line, index) => (

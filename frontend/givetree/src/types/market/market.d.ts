@@ -18,6 +18,7 @@ export interface SalePostDetail
   hits: number;
   imageUrls: string[];
   saleStatus: string;
+  contribution: number;
   productionCondition: '거의 새 것' | '미개봉' | '사용감 있음';
 }
 
