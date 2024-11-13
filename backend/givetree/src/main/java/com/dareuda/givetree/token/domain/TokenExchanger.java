@@ -39,7 +39,7 @@ public class TokenExchanger {
                 burnReceipt
         );
         try {
-            withdrawalProcessor.process(wallet.getId(), amount);
+            withdrawalProcessor.process(memberId, amount);
             Ledger ledger = withdrawalProcessor.saveLedger(memberId, amount, message);
             transactionLedgerAppender.append(burnTransaction.getId(), ledger.getId());
             return ledger.getId();

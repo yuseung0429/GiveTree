@@ -36,7 +36,7 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
     private final FoundationService foundationService;
     private final MemberRepository memberRepository;
 
-    private static final long defaultMemberCount = 1;
+    private static final long defaultMemberCount = 2;
     private static final long defaultFoundationCount = 5;
 
     @Override
