@@ -5,8 +5,16 @@ import fetchWrapper from '@/lib/fetchWrapper';
 export async function registerPassword(formData: FormData) {
   const simplePassword = formData.get('simplePassword');
 
+  if (!simplePassword || typeof simplePassword !== 'string') {
+    throw new Error('비밀번호를 입력해주세요.');
+  }
+
+  if (!/^\d{6}$/.test(simplePassword)) {
+    throw new Error('비밀번호는 6자리 숫자여야 합니다.');
+  }
+
   try {
-    const response = await fetchWrapper(`/finance`, {
+    const response = await fetchWrapper('/finance', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

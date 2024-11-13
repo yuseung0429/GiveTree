@@ -4,12 +4,17 @@ import Layout from '@/components/common/Layout';
 import Account from '@/components/common/Account';
 import AppBar from '@/components/common/AppBar';
 import Button from '@/components/common/Button';
+import { getRegisteredAccount } from '@/api/account/getRegisteredAccount';
 
-export default function FoundationLayout({
+export default async function FoundationLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // 등록된 계좌 정보 조회
+  const response = await getRegisteredAccount();
+  const registeredAccount = response.ok && response.data ? response.data : null;
+
   return (
     <Layout>
       <header>
@@ -32,7 +37,7 @@ export default function FoundationLayout({
           backgroundColor="white"
           padding="20px 15px"
         >
-          <Account />
+          <Account registeredAccount={registeredAccount} />
         </Box>
 
         <Box as="section">{children}</Box>
