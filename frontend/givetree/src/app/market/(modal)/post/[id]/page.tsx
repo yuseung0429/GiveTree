@@ -1,5 +1,8 @@
 import React from 'react';
 
+import getSalePost from '@/api/market/getSalePost';
+import getSessionMember from '@/api/member/getSessionMember';
+
 import { formatTime } from '@/utils/time';
 
 import colorPalette from '@/styles/tokens/colorPalette';
@@ -12,7 +15,6 @@ import ImageCarousel from '@/components/common/ImageCarousel';
 import Typography from '@/components/common/Typography';
 import SimpleProfile from '@/components/common/SimpleProfile';
 import SalePostHeader from '@/components/market/SalePostHeader';
-import getSalePost from '@/api/market/getSalePost';
 
 export default async function PostPage({
   params,
@@ -21,6 +23,7 @@ export default async function PostPage({
 }) {
   const id = parseInt((await params).id);
   const data = await getSalePost(id);
+  const { id: memberId } = await getSessionMember();
 
   return (
     <>
@@ -48,6 +51,7 @@ export default async function PostPage({
                 data.isDeliverySale && '택배거래',
               ].filter(Boolean) as string[]
             }
+            isAuthor={memberId === data.sellerId}
             createdAt={data.createdDateTime}
           />
         </Box>

@@ -1,4 +1,8 @@
+'use client';
+
 import Link from 'next/link';
+
+import { HiChatBubbleOvalLeft, HiTrash } from 'react-icons/hi2';
 
 import { highlightedTags } from '@/constatns/tag';
 
@@ -6,18 +10,21 @@ import { getTimeDifference } from '@/utils/time';
 
 import typography from '@/styles/tokens/typography';
 
-import { HiChatBubbleOvalLeft } from 'react-icons/hi2';
+import deleteMarketPost from '@/actions/market/deleteMarketPost';
 
+import Button from '@/components/common/Button';
+import Chip from '@/components/common/Chip';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
-import Chip from '@/components/common/Chip';
-import Button from '@/components/common/Button';
+import useDialog from '@/hooks/useDialog';
+import { useRouter } from 'next/navigation';
 
 interface SalePostHeaderProps {
   id: number;
   title: string;
   price: number;
   tags: string[];
+  isAuthor: boolean;
   createdAt: string;
 }
 
@@ -26,8 +33,25 @@ const SalePostHeader = ({
   title,
   price,
   tags,
+  isAuthor,
   createdAt,
 }: SalePostHeaderProps) => {
+  const router = useRouter();
+  const { alert, confirm } = useDialog();
+
+  const handleDeleteClick = async () => {
+    if (!(await confirm('게시글을 삭제하시겠습니까?'))) {
+      return;
+    }
+
+    if (!(await deleteMarketPost(id))) {
+      alert('삭제를 실패하였습니다.');
+      return;
+    }
+
+    router.back();
+  };
+
   return (
     <Flex alignItems="flex-start" justifyContent="space-between">
       <Flex flexDirection="column" gap="1rem">
@@ -59,11 +83,25 @@ const SalePostHeader = ({
           {price.toLocaleString()}원
         </Typography>
         <div>
-          <Link href={`/market/chat/${id}`}>
-            <Button size="sm" icon={<HiChatBubbleOvalLeft size={'1.25rem'} />}>
-              채팅하기
+          {isAuthor ? (
+            <Button
+              color="danger"
+              size="sm"
+              icon={<HiTrash size={'1.25rem'} />}
+              onClick={handleDeleteClick}
+            >
+              삭제하기
             </Button>
-          </Link>
+          ) : (
+            <Link href={`/market/chat/${id}`}>
+              <Button
+                size="sm"
+                icon={<HiChatBubbleOvalLeft size={'1.25rem'} />}
+              >
+                채팅하기
+              </Button>
+            </Link>
+          )}
         </div>
       </Flex>
     </Flex>
