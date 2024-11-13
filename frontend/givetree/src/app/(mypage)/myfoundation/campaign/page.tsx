@@ -49,6 +49,7 @@ export default async function Page() {
             {foundationCampaigns.map((campaign: CampaignData) => (
               <>
                 <CampaignItem
+                  key={campaign.id}
                   id={campaign.id}
                   name={campaign.name}
                   startDate={campaign.startDate}
