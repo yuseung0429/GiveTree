@@ -1,8 +1,7 @@
 package com.dareuda.givetree.token.domain;
 
 import com.dareuda.givetree.campaign.domain.Campaign;
-import com.dareuda.givetree.campaign.domain.CampaignDeployer;
-import com.dareuda.givetree.campaign.domain.CampaignDonor;
+import com.dareuda.givetree.campaign.domain.CampaignContractDonor;
 import com.dareuda.givetree.campaign.domain.CampaignReader;
 import com.dareuda.givetree.finance.domain.MemberFinanceValidator;
 import com.dareuda.givetree.history.domain.TransactionType;
@@ -24,7 +23,7 @@ public class CampaignDonationTokenTransferrer {
     private final MemberFinanceValidator memberFinanceValidator;
     private final MemberWalletReader memberWalletReader;
     private final TokenCharger tokenCharger;
-    private final CampaignDonor campaignDonor;
+    private final CampaignContractDonor campaignContractDonor;
     private final CampaignWalletReader campaignWalletReader;
     private final CampaignReader campaignReader;
 
@@ -40,13 +39,13 @@ public class CampaignDonationTokenTransferrer {
 
         tokenCharger.charge(userId, amount, message);
 
-        TransactionReceipt receipt = campaignDonor.donate(
+        TransactionReceipt receipt = campaignContractDonor.donate(
                 WalletVO.from(userWallet),
                 WalletVO.from(campaignWallet),
                 campaign.getContractAddress(),
                 amount
         );
-        return campaignDonor.saveTransaction(
+        return campaignContractDonor.saveTransaction(
                 userWallet.getId(),
                 campaignWallet.getId(),
                 amount,

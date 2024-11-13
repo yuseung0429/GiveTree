@@ -16,13 +16,13 @@ import java.math.BigInteger;
 import java.util.Set;
 
 @Component
-public class CampaignDonor {
+public class CampaignContractDonor {
 
     private final EthereumTransactionManager transactionManager;
     private final EthereumCaller caller;
     private final TransactionAppender transactionAppender;
 
-    public CampaignDonor(
+    public CampaignContractDonor(
             EthereumTransactionManager transactionManager,
             CampaignContractExceptionHandler exceptionHandler,
             TransactionAppender transactionAppender) {
