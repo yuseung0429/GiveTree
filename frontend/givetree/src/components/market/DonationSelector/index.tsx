@@ -21,7 +21,7 @@ const DonationSelector = ({ price, onChange }: DonationSelectorProps) => {
 
   useEffect(() => {
     onChange(contribution, foundationIdRef.current);
-  }, [contribution]);
+  }, [contribution, onChange]);
 
   const handleFoundationChange = (id: number) => {
     foundationIdRef.current = id;

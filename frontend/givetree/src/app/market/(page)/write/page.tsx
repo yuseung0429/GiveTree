@@ -4,6 +4,7 @@ import {
   FormEvent,
   startTransition,
   useActionState,
+  useCallback,
   useEffect,
   useState,
 } from 'react';
@@ -51,10 +52,13 @@ export default function WritePage() {
     startTransition(() => action(signupFormData));
   };
 
-  const handleDonationChange = (contribution: number, foundationId: number) => {
-    setContribution(contribution);
-    setFoundationId(foundationId);
-  };
+  const handleDonationChange = useCallback(
+    (contribution: number, foundationId: number) => {
+      setContribution(contribution);
+      setFoundationId(foundationId);
+    },
+    []
+  );
 
   return (
     <Box padding="1rem">
