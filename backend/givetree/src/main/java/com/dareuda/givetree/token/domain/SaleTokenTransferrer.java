@@ -53,9 +53,9 @@ public class SaleTokenTransferrer {
         MemberWallet receiverWallet = memberWalletReader.readByMemberId(receiverId);
         MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
 
-        transferReceiver(senderWallet, receiverWallet, amount - donationAmount);
-        tokenExchanger.exchange(receiverId, amount - donationAmount, message);
+        transferReceiver(senderWallet, receiverWallet, amount);
         transferFoundation(receiverWallet, foundationWallet, donationAmount);
+        tokenExchanger.exchange(receiverId, amount - donationAmount, message);
     }
 
     private void transferReceiver(Wallet senderWallet, Wallet receiverWallet, long amount) {

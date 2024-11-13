@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,13 @@ public class LedgerController {
     public ResponseEntity<?> getMemberLedgerInfos(@AuthenticationPrincipal UserPrinciple user,
                                                   Pageable pageable) {
         Page<LedgerInfo> pages = ledgerService.getMemberLedgerInfos(user.getId(), pageable);
+        return ResponseEntity.ok().body(pages);
+    }
+
+    @GetMapping("/foundations/{foundationId}")
+    public ResponseEntity<?> getFoundationLedgerInfos(@PathVariable Long foundationId,
+                                                      Pageable pageable) {
+        Page<LedgerInfo> pages = ledgerService.getMemberLedgerInfos(foundationId, pageable);
         return ResponseEntity.ok().body(pages);
     }
 }
