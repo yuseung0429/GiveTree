@@ -37,7 +37,7 @@ public class SaleTokenTransferrer {
     }
 
     public void transfer(long senderId, long receiverId, long foundationId, long amount, long donationAmount, String simplePassword, String message) {
-        if(amount > donationAmount) {
+        if(amount < donationAmount) {
             throw new IllegalArgumentException("amount > donationAmount");
         }
 
