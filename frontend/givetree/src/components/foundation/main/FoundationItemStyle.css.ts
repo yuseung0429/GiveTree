@@ -34,6 +34,7 @@ export const textbox = style({
 });
 
 export const descript = style({
+  width: '100%',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
   marginTop: '4px',

@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import Flex from '@/components/common/Flex';
 import FoundationItem from './FoundationItem';
+import { Foundation } from '@/api/foundation/getFoundation';
 
 interface FoundationListProps {
-  foundations: Array<{ id: number; name: string }>;
+  foundations: Foundation[];
 }
 
 export default function FoundationList({ foundations }: FoundationListProps) {

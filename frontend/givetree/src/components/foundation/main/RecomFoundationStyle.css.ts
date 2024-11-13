@@ -16,7 +16,6 @@ export const imageBox = style({
   position: 'absolute',
   top: '0',
   left: '0',
-  backgroundImage: 'url("/temporary/campaignBg.png")', // 임시 이미지
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 });
@@ -34,5 +33,5 @@ export const imgTitle = style({
   position: 'absolute',
   top: '15%',
   left: '5%',
-  color: colorPalette.text[50],
+  color: colorPalette.primary[50],
 });

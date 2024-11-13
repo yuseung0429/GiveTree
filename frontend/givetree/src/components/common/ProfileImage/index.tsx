@@ -11,7 +11,7 @@ type ProfileImageVariants = NonNullable<RecipeVariants<typeof s.profileImage>>;
 interface ProfileImageProps
   extends ProfileImageVariants,
     Omit<React.ComponentProps<'div'>, keyof ProfileImageVariants> {
-  src: string;
+  src?: string;
   borderColor?: string;
 }
 

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import * as style from './foundation.css';
 import Link from 'next/link';
 import Searchbar from '@/components/foundation/search/searchbar';
@@ -6,23 +8,19 @@ import RecomFoundation from '../../../components/foundation/main/RecomFoundation
 import Box from '@/components/common/Box';
 import { Suspense } from 'react';
 import FoundationList from '@/components/foundation/main/FoundationList';
+import { searchFoundations } from '@/api/foundation/getFoundation';
 
-// 임시 데이터 타입
-type Foundation = {
-  id: number;
-  name: string;
-};
+export default async function Page() {
+  const foundationsData = await searchFoundations({ name: '', category: '' });
 
-// 임시 데이터
-const foundations: Foundation[] = [
-  { id: 1, name: '사회복지 법인 굿네이버스' },
-  { id: 2, name: '기아대책' },
-  { id: 3, name: '월드비전' },
-  { id: 4, name: '초록우산 어린이재단' },
-  { id: 5, name: '유니세프 한국위원회' },
-];
+  const firstFoundation = foundationsData.ok
+    ? foundationsData.data?.content[0]
+    : undefined;
 
-export default function Page() {
+  const topFoundations = foundationsData.ok
+    ? foundationsData.data?.content.slice(0, 5)
+    : [];
+
   return (
     <Box className={style.mainBg}>
       {/* 검색창 */}
@@ -37,7 +35,7 @@ export default function Page() {
         <Typography as="h3" weight="semiBold" className={style.title}>
           이 달의 추천재단
         </Typography>
-        <RecomFoundation />
+        <RecomFoundation foundation={firstFoundation} />
       </Box>
 
       {/* 재단 둘러보기 */}
@@ -51,7 +49,7 @@ export default function Page() {
           </Link>
         </Box>
 
-        <FoundationList foundations={foundations} />
+        <FoundationList foundations={topFoundations || []} />
       </Box>
     </Box>
   );

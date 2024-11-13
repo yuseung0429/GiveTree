@@ -1,6 +1,5 @@
+import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
-
-// import colorPalette from '@/styles/tokens/colorPalette';
 
 export const mainBg = style({
   backgroundColor: '#F5F5F5',
@@ -29,4 +28,10 @@ export const tabContainer = style({
     display: 'none',
   },
   backgroundColor: 'white',
+});
+
+export const noResult = style({
+  textAlign: 'center',
+  padding: '2rem',
+  color: colorPalette.grey[600],
 });
