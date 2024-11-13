@@ -2,8 +2,11 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
 
 export const container = style({
-  backgroundColor: '#fff',
+  // backgroundColor: '#f5f5f5',
+  border: `1px solid ${colorPalette.text[300]}`,
   padding: '1rem',
+  margin: '0 0.75rem',
+  borderRadius: '8px'
 });
 
 export const imgbox = style({
