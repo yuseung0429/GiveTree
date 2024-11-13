@@ -16,6 +16,8 @@ public class SaleService {
     private final SaleAppender saleAppender;
     private final SaleUpdater saleUpdater;
     private final SaleRemover saleRemover;
+    private final SaleReader saleReader;
+    private final SalePaymentProcessor salePaymentProcessor;
 
     public SaleDetail readSale(long saleId) {
         saleHitsUpdater.update(saleId);
@@ -39,5 +41,21 @@ public class SaleService {
 
     public void removeSale(long memberId, long saleId) {
         saleRemover.remove(memberId, saleId);
+    }
+
+    public void reserveSale(long sellerId, long purchaserId, long saleId) {
+        saleUpdater.reserve(sellerId, purchaserId, saleId);
+    }
+
+    public void cancelReservation(long memberId, long saleId) {
+        saleUpdater.cancelReservation(memberId, saleId);
+    }
+
+    public boolean isCurrentUserReserved(long memberId, long saleId) {
+        return saleReader.isCurrentUserReserved(memberId, saleId);
+    }
+
+    public void processPayment(long purchaserId, long saleId, String simplePassword) {
+        salePaymentProcessor.pay(purchaserId, saleId, simplePassword);
     }
 }

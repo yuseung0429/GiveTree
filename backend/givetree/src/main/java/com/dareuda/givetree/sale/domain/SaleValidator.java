@@ -19,4 +19,14 @@ public class SaleValidator {
             throw new RestApiException(SaleErrorCode.PRICE_EXCEEDS_CONTRIBUTION);
         }
     }
+
+    public void validateIsPurchasable(Sale sale, long purchaserId) {
+        if (!sale.isReserved()) {
+            throw new RestApiException(CommonErrorCode.FORBIDDEN);
+        }
+
+        if (sale.getPurchaserId() != purchaserId) {
+            throw new RestApiException(CommonErrorCode.FORBIDDEN);
+        }
+    }
 }
