@@ -1,5 +1,6 @@
-import type { UserData } from '@/types/user/types';
 import type { RequestInit } from 'next/dist/server/web/spec-extension/request';
+
+import type { UserData } from '@/types/user/types';
 
 import fetchWrapper from '@/lib/fetchWrapper';
 

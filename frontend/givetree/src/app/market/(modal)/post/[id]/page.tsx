@@ -1,9 +1,5 @@
 import React from 'react';
 
-import type { SalePostDetail } from '@/types/market/market';
-
-import fetchWrapper from '@/lib/fetchWrapper';
-
 import { formatTime } from '@/utils/time';
 
 import colorPalette from '@/styles/tokens/colorPalette';
@@ -16,6 +12,7 @@ import ImageCarousel from '@/components/common/ImageCarousel';
 import Typography from '@/components/common/Typography';
 import SimpleProfile from '@/components/common/SimpleProfile';
 import SalePostHeader from '@/components/market/SalePostHeader';
+import getSalePost from '@/api/market/getSalePost';
 
 export default async function PostPage({
   params,
@@ -23,9 +20,7 @@ export default async function PostPage({
   params: Promise<{ id: string }>;
 }) {
   const id = parseInt((await params).id);
-
-  const response = fetchWrapper(`/sales/${id}`);
-  const data: SalePostDetail = await (await response).json();
+  const data = await getSalePost(id);
 
   return (
     <>
