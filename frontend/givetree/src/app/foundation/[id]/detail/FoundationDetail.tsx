@@ -84,8 +84,12 @@ export default function FoundationDetailComponent({
             {selectedCategory === '소개' && (
               <IntroTab foundationData={foundationData} />
             )}
-            {selectedCategory === '모금함' && <DonationTab />}
-            {selectedCategory === '캠페인' && <CampaignTab />}
+            {selectedCategory === '모금함' && (
+              <DonationTab foundationData={foundationData} />
+            )}
+            {selectedCategory === '캠페인' && (
+              <CampaignTab foundationData={foundationData} />
+            )}
           </Box>
         </Flex>
       </main>

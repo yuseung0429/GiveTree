@@ -5,11 +5,13 @@ import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import Flex from '@/components/common/Flex';
 import ExpenseItem from '@/components/common/ExpenseItem';
+import { Foundation } from '@/api/foundation/getFoundationDetail';
 
-export default function DonationTab() {
-  const collectedAmount = 100000; // 모금 금액
-  const spentAmount = 75000; // 지출 금액
+interface DonationTabProps {
+  foundationData: Foundation;
+}
 
+export default function DonationTab({ foundationData }: DonationTabProps) {
   return (
     <Box as="article" className={style.TabContainer}>
       {/* 나눔현황 */}
@@ -25,11 +27,8 @@ export default function DonationTab() {
         </Typography>
 
         {/* 도넛차트 */}
-        <Box marginBottom='20px'>
-          <DonationChart
-            collectedAmount={collectedAmount}
-            spentAmount={spentAmount}
-          />
+        <Box marginBottom="20px">
+          <DonationChart foundationData={foundationData} />
         </Box>
 
         {/* 금액 보여주기 */}
@@ -51,7 +50,7 @@ export default function DonationTab() {
               color={colorPalette.grey[900]}
               size={20}
             >
-              {collectedAmount} 원
+              {foundationData.totalFundraisingAmount} 원
             </Typography>
           </Flex>
 
@@ -72,7 +71,7 @@ export default function DonationTab() {
               color={colorPalette.grey[900]}
               size={20}
             >
-              {spentAmount} 원
+              {foundationData.executedAmount} 원
             </Typography>
           </Flex>
         </Flex>

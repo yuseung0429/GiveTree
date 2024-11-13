@@ -5,26 +5,40 @@ import Box from '@/components/common/Box';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import Flex from '@/components/common/Flex';
+import { Foundation } from '@/api/foundation/getFoundationDetail';
+
+interface DonationChartProps {
+  foundationData: Foundation;
+}
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-type DonationChartProps = {
-  collectedAmount: number;
-  spentAmount: number;
-};
-
-export default function DonationChart({
-  collectedAmount,
-  spentAmount,
-}: DonationChartProps) {
-  const executionRate = Math.round((spentAmount / collectedAmount) * 100);
+export default function DonationChart({ foundationData }: DonationChartProps) {
+  const executionRate =
+    foundationData.totalFundraisingAmount === 0
+      ? 0
+      : Math.round(
+          (foundationData.executedAmount /
+            foundationData.totalFundraisingAmount) *
+            100
+        );
 
   const data = {
     labels: ['총 모금 금액', '지출 금액'],
     datasets: [
       {
-        data: [spentAmount, collectedAmount - spentAmount],
-        backgroundColor: [colorPalette.secondary[300], colorPalette.grey[300]],
+        data:
+          foundationData.totalFundraisingAmount === 0
+            ? [1]
+            : [
+                foundationData.executedAmount,
+                foundationData.totalFundraisingAmount -
+                  foundationData.executedAmount,
+              ],
+        backgroundColor:
+          foundationData.totalFundraisingAmount === 0
+            ? [colorPalette.grey[300]]
+            : [colorPalette.secondary[300], colorPalette.grey[300]],
         borderWidth: 0,
       },
     ],
