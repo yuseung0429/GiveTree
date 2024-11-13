@@ -1,3 +1,7 @@
+import Image from 'next/image';
+
+import type { SalePost } from '@/types/market/market';
+
 import * as s from './MarketItem.css';
 
 import Link from 'next/link';
@@ -9,26 +13,28 @@ import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 import Chip from '@/components/common/Chip';
 
-interface MarketItemProps {
-  id: number;
-}
+type MarketItemProps = SalePost;
 
-const MarketItem = ({ id }: MarketItemProps) => {
+const MarketItem = ({
+  id,
+  title,
+  imageUrl,
+  isDeliverySale,
+  isDirectSale,
+  price,
+  productionsCondition,
+  status,
+}: MarketItemProps) => {
   return (
     <div className={s.wrapper}>
       <Link href={`/market/post/${id}`}>
         <Flex gap="0.5rem" alignItems="center" className={s.container}>
-          <Box
-            padding="1rem"
-            borderRadius="0.75rem"
-            backgroundColor="#eee"
-            width="96px"
-            height="96px"
-            style={{ flex: '0 0 auto' }}
-          ></Box>
+          <div className={s.imageWrapper}>
+            <Image src={imageUrl} alt="상품 이미지" fill={true} />
+          </div>
           <Box style={{ flex: '1 1 auto', overflow: 'hidden' }}>
             <Typography weight="medium" ellipsis>
-              갤럭시s23울트라1tb 팬텀블랙 자급제
+              {title}
             </Typography>
             <Typography
               size={typography.size.sm}
@@ -42,11 +48,14 @@ const MarketItem = ({ id }: MarketItemProps) => {
               weight="semiBold"
               style={{ margin: '0.5rem 0' }}
             >
-              850,000원
+              {price.toLocaleString()}원
             </Typography>
-            <Flex gap="0.375rem">
-              <Chip size="sm">판매중</Chip>
-              <Chip size="sm">직거래</Chip>
+            <Flex gap="0.375rem" style={{ flexWrap: 'wrap' }}>
+              <Chip size="sm">{status}</Chip>
+
+              {isDirectSale && <Chip size="sm">직거래</Chip>}
+              {isDeliverySale && <Chip size="sm">택배거래</Chip>}
+              <Chip size="sm">{productionsCondition}</Chip>
             </Flex>
           </Box>
         </Flex>

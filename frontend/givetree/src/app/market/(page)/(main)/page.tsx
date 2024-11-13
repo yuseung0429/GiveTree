@@ -2,9 +2,9 @@ import colorPalette from '@/styles/tokens/colorPalette';
 
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
-import MarketItem from '@/components/market/MarketItem';
 import SearchCondition from '@/components/market/SearchCondition';
 import WriteButon from '@/components/market/WriteButton';
+import SearchItemList from '@/components/market/SearchItemList';
 
 export default function MarketPage() {
   return (
@@ -20,9 +20,7 @@ export default function MarketPage() {
         <SearchCondition />
       </Box>
       <Box style={{ flex: '1 1 auto', overflow: 'auto' }}>
-        {new Array(10).fill(0).map((_, index) => (
-          <MarketItem key={index} id={index} />
-        ))}
+        <SearchItemList page={0} />
         <WriteButon href="/market/write" />
       </Box>
     </Flex>
