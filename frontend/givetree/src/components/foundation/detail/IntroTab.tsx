@@ -3,11 +3,21 @@ import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
+import { Foundation } from '@/api/foundation/getFoundationDetail';
+import Image from 'next/image';
 
-const tempIntro =
-  '굿네이버스는 1991년 한국에서 설립되어 국내, 북한 및 해외에서 굶주림 없는 세상, 더불어 사는 세상을 만들기 위해 전문사회복지사업과 국제개발협력사업을활발히 수행하고 있는 글로벌 아동권리 전문 NGO입니다.';
+interface IntroTabProps {
+  foundationData: Foundation;
+}
 
-export default function IntroTab() {
+export default function IntroTab({ foundationData }: IntroTabProps) {
+  if (!foundationData) {
+    return (
+      <Box className={style.TabContainer}>
+        <Typography color={colorPalette.grey[600]}>로딩중...</Typography>
+      </Box>
+    );
+  }
   return (
     <Box className={style.TabContainer}>
       {/* 단체소개 */}
@@ -16,7 +26,9 @@ export default function IntroTab() {
           단체소개
         </Typography>
         <Box className={style.bottomBox}>
-          <Typography color={colorPalette.grey[700]}>{tempIntro}</Typography>
+          <Typography color={colorPalette.grey[700]}>
+            {foundationData.introduction}
+          </Typography>
         </Box>
       </Box>
 
@@ -26,10 +38,29 @@ export default function IntroTab() {
           단체사진
         </Typography>
         <Flex gap="10px" className={style.imageScrollContainer}>
-          <div className={style.imageBox}></div>
-          <div className={style.imageBox}></div>
-          <div className={style.imageBox}></div>
-          <div className={style.imageBox}></div>
+          {foundationData.imageUrls.map((imageUrl, index) => (
+            <div key={`${imageUrl}-${index}`} className={style.imageBox}>
+              <div
+                style={{ position: 'relative', width: '100%', height: '100%' }}
+              >
+                <Image
+                  src={imageUrl}
+                  alt={`${foundationData.name} 단체 사진 ${index + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 150px, 280px"
+                  style={{
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+          {foundationData.imageUrls.length === 0 && (
+            <Typography color={colorPalette.grey[500]}>
+              등록된 사진이 없습니다.
+            </Typography>
+          )}
         </Flex>
       </Box>
 
@@ -50,7 +81,7 @@ export default function IntroTab() {
             >
               공식단체명
             </Typography>
-            <Typography>사회복지법인 굿네이버스</Typography>
+            <Typography>{foundationData.name}</Typography>
           </Box>
 
           {/* 사업자등록번호 */}
@@ -64,7 +95,9 @@ export default function IntroTab() {
             >
               사업자등록번호/고유번호
             </Typography>
-            <Typography>123-45-67890/비영리법인</Typography>
+            <Typography>
+              {foundationData.corporateRegistrationNumber}
+            </Typography>
           </Box>
 
           {/* 주소 및 연락처 */}
@@ -79,9 +112,9 @@ export default function IntroTab() {
               주소 및 연락처
             </Typography>
             <Flex flexDirection="column" gap={5}>
-              <Typography>(07253) 서울 영등포구 버드나루로 13</Typography>
-              <Typography>02-6717-4000</Typography>
-              <Typography>sypark3@gnk.or.kr</Typography>
+              <Typography>{foundationData.address}</Typography>
+              <Typography>{foundationData.phoneNumber}</Typography>
+              <Typography>{foundationData.email}</Typography>
             </Flex>
           </Box>
         </Flex>

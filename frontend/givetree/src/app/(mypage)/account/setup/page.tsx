@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Flex from '@/components/common/Flex';
 import { getAllAccounts } from '@/api/account/getAllAcounts';
 import AccountList from '@/components/myPage/Myfoundation/Account/AccountList';

@@ -16,6 +16,8 @@ export const foundationBanner = style({
   maxHeight: '320px',
   aspectRatio: '16 / 9',
   backgroundColor: colorPalette.primary[50],
+  position: 'relative',
+  overflow: 'hidden',
 });
 
 // 탭 하위 컴포넌트 컨테이너 (스크롤 영역)
@@ -32,7 +34,7 @@ export const tabContentContainer = style({
 
 // article
 export const article = style({
-  marginBottom: '1.25rem',
+  marginBottom: '1.75rem',
 });
 
 // imageScrollContainer
@@ -50,6 +52,7 @@ export const imageScrollContainer = style({
 export const bottomBox = style({
   marginTop: '10px',
   textAlign: 'justify',
+  minHeight: '60px',
 });
 
 // TabContainer

@@ -11,7 +11,7 @@ type ProfileImageVariants = NonNullable<RecipeVariants<typeof s.profileImage>>;
 interface ProfileImageProps
   extends ProfileImageVariants,
     Omit<React.ComponentProps<'div'>, keyof ProfileImageVariants> {
-  src: string;
+  src?: string;
   borderColor?: string;
 }
 
@@ -29,7 +29,15 @@ const ProfileImage = ({
       style={{ boxShadow: `0 0 0 0.0625rem ${borderColor}`, ...style }}
       {...props}
     >
-      <Image src={src} alt="Profile" fill={true} sizes="4rem, 4rem" />
+      <Image
+        src={
+          src ||
+          'https://givetree-bucket.s3.amazonaws.com/2eb8f39f86202162c51ba233c9218cb7.png'
+        }
+        alt="Profile"
+        fill={true}
+        sizes="4rem, 4rem"
+      />
     </div>
   );
 };

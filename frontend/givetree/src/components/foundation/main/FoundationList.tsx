@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import Flex from '@/components/common/Flex';
 import FoundationItem from './FoundationItem';
+import { Foundation } from '@/api/foundation/getFoundation';
 
 interface FoundationListProps {
-  foundations: Array<{ id: number; name: string }>;
+  foundations: Foundation[];
 }
 
 export default function FoundationList({ foundations }: FoundationListProps) {
@@ -24,7 +25,12 @@ export default function FoundationList({ foundations }: FoundationListProps) {
       {foundations.map((foundation) => (
         <FoundationItem
           key={foundation.id}
-          foundation={foundation}
+          foundation={{
+            ...foundation,
+            introduction: '굿네이버스는 1991년 설립되어 국내, 북한',
+            profileImageUrl:
+              'https://givetree-bucket.s3.amazonaws.com/66a569685d20cf5a27c49f94e82fdb47.png',
+          }}
           onClick={() => handleItemClick(foundation.id)}
         />
       ))}
