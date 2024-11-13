@@ -5,8 +5,15 @@ import Flex from '@/components/common/Flex';
 import SearchCondition from '@/components/market/SearchCondition';
 import WriteButon from '@/components/market/WriteButton';
 import SearchItemList from '@/components/market/SearchItemList';
+import { SaleSearchParameter } from '@/types/market/market';
 
-export default function MarketPage() {
+export default async function MarketPage({
+  searchParams,
+}: {
+  searchParams: Promise<SaleSearchParameter>;
+}) {
+  const params = await searchParams;
+
   return (
     <Flex flexDirection="column" style={{ height: '100%' }}>
       <Box
@@ -20,7 +27,7 @@ export default function MarketPage() {
         <SearchCondition />
       </Box>
       <Box style={{ flex: '1 1 auto', overflow: 'auto' }}>
-        <SearchItemList page={0} />
+        <SearchItemList {...params} />
         <WriteButon href="/market/write" />
       </Box>
     </Flex>
