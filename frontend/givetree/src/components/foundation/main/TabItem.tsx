@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@/components/common/Box';
 import * as style from '@/app/foundation/(mixed)/all/all.css';
 import Flex from '@/components/common/Flex';
@@ -15,8 +15,15 @@ const categories = [
   '카테고리5',
 ];
 
-export default function TabItem() {
-  const [selectedCategory, setSelectedCategory] = useState('전체');
+interface TabItemProps {
+  selectedCategory: string;
+  onCategoryChange: (category: string) => void;
+}
+
+export default function TabItem({
+  selectedCategory,
+  onCategoryChange,
+}: TabItemProps) {
   const width = `calc(100% / ${categories.length})`;
 
   return (
@@ -27,7 +34,7 @@ export default function TabItem() {
             key={category}
             label={category}
             isSelected={selectedCategory === category}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => onCategoryChange(category)}
             width={width}
           />
         ))}

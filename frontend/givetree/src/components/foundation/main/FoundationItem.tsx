@@ -8,15 +8,15 @@ import ProfileImage from '@/components/common/ProfileImage';
 
 import * as style from './FoundationItemStyle.css';
 
-type FoundationItemProps = {
+interface FoundationItemProps {
   foundation: {
     id: number;
     introduction: string;
-    profileImageUrl: string;
+    profileImageUrl?: string ;
     name: string;
   };
   onClick?: () => void;
-};
+}
 
 export default function FoundationItem({
   foundation,
