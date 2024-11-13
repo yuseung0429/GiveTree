@@ -9,12 +9,19 @@ import {
 import { PiHandHeart, PiListHeart } from 'react-icons/pi';
 import * as styles from './MyTab.css';
 import Link from 'next/link';
+import fetchWrapper from '@/lib/fetchWrapper';
 
 interface MyTabProps {
   role: string;
 }
 
-const MyTab = ({ role }: MyTabProps) => {
+export default async function MyTab({ role }: MyTabProps) {
+  const foundationResponse = await fetchWrapper('/foundations/session', {
+    method: 'GET',
+  });
+  const foundation = await foundationResponse.json();
+  const foundationId = foundation.id;
+
   return (
     <>
       <Link
@@ -36,7 +43,7 @@ const MyTab = ({ role }: MyTabProps) => {
 
       <Link
         className={styles.tab}
-        href={role === 'USER' ? '' : `myfoundation/campaign/register`}
+        href={role === 'USER' ? '' : `myfoundation/campaign/register/${foundationId}`}
       >
         <div className={styles.IconBox}>
           {role === 'USER' ? (
@@ -83,6 +90,4 @@ const MyTab = ({ role }: MyTabProps) => {
       </Link>
     </>
   );
-};
-
-export default MyTab;
+}

@@ -25,8 +25,6 @@ export default async function Home() {
     return endDate >= today;
   });
 
-  console.log(progressCampaigns);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.mainContainer}>
@@ -34,7 +32,7 @@ export default async function Home() {
           진행 중인 캠페인
         </Typography>
         <div className={styles.slideContainer}>
-          {campaigns.map((campaign: CampaignData, index: number) => (
+          {progressCampaigns.map((campaign: CampaignData, index: number) => (
             <CampaignCard
               key={campaign.id}
               id={campaign.id}

@@ -1,9 +1,9 @@
 import Account from '@/components/common/Account';
 import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
-import DonationCash from '@/components/foundation/donation/DonationCash';
 import * as styles from './donation.css';
 import fetchWrapper from '@/lib/fetchWrapper';
+import Donation from '@/components/campaign/Donation';
 
 export default async function DonationPage({
   params,
@@ -24,7 +24,7 @@ export default async function DonationPage({
         backgroundColor="white"
         padding="25px 15px"
       >
-        <DonationCash name={campaignData.name} />
+        <Donation name={campaignData.name} />
       </Box>
 
       <Box

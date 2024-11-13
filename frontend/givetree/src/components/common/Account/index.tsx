@@ -8,6 +8,9 @@ import colorPalette from '@/styles/tokens/colorPalette';
 export default function Account() {
   return (
     <Box>
+      <Typography as="h3" weight="medium" style={{ marginLeft: '0.5rem' }}>
+        결제수단
+      </Typography>
       <Flex
         className={style.accountBox}
         justifyContent="center"
