@@ -1,6 +1,7 @@
 package com.dareuda.givetree.campaign.domain;
 
 import com.dareuda.givetree.common.domain.BaseEntity;
+import com.dareuda.givetree.common.utils.ByteArrayToHexStringConverter;
 import com.dareuda.givetree.foundation.domain.Foundation;
 import com.dareuda.givetree.media.domain.Image;
 import jakarta.persistence.*;
@@ -23,6 +24,10 @@ public class Campaign extends BaseEntity {
     @JoinColumn(name = "foundation_id")
     @NotNull
     private Foundation foundation;
+
+    @Column(name = "contract_address")
+    @Convert(converter = ByteArrayToHexStringConverter.class)
+    private String contractAddress;
 
     @Column
     @NotNull
