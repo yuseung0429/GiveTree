@@ -31,7 +31,7 @@ export default async function MyPage() {
       <div className={styles.mainContainer}>
         {role === 'USER' && (
           <Link className={styles.modifyButton} href={`/edit/user`}>
-            <HiOutlinePencilSquare size={24} />
+            <HiOutlinePencilSquare size={22} />
           </Link>
         )}
         <Box className={styles.profileConatainer}>

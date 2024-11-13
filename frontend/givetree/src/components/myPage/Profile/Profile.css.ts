@@ -4,7 +4,6 @@ export const profileImg = style({
   position: 'absolute',
   marginTop: 'auto',
   top: '-60px',
-  zIndex: '1',
   borderRadius: '50%',
 });
 

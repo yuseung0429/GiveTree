@@ -19,7 +19,7 @@ export const coverImgContainer = style({
   borderBottomRightRadius: '20px',
 
   '::before': {
-    content: '""',
+    content: '',
     position: 'absolute',
     top: 0,
     left: 0,

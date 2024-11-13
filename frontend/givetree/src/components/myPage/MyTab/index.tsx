@@ -28,7 +28,7 @@ const MyTab = ({ role }: MyTabProps) => {
             <HiOutlinePencilSquare size={22} />
           )}
           <Typography as="h3">
-            {role === 'USER' ? '기부금 사용 내역' : '재단 소개글 등록/수정'}
+            {role === 'USER' ? '기부금 사용 내역' : '재단 소개 수정'}
           </Typography>
         </div>
         <HiChevronRight size={20} />
