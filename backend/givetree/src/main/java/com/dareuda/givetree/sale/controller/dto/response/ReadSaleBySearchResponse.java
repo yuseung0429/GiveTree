@@ -26,7 +26,7 @@ public class ReadSaleBySearchResponse {
 
     private Boolean isDeliverySale;
 
-    private LocalDateTime cratedDateTime;
+    private LocalDateTime createdDateTime;
 
     public static ReadSaleBySearchResponse from(SaleDetail saleDetail) {
         String imageUrl = null;
@@ -43,7 +43,7 @@ public class ReadSaleBySearchResponse {
                 .productionsCondition(saleDetail.getProductionCondition())
                 .isDirectSale(saleDetail.isDirectSale())
                 .isDeliverySale(saleDetail.isDeliverySale())
-                .cratedDateTime(saleDetail.getCreatedDateTime())
+                .createdDateTime(saleDetail.getCreatedDateTime())
                 .build();
     }
 }
