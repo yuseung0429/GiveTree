@@ -14,7 +14,6 @@ import { mergeClasses } from '@/utils/mergeClasses';
 import AppBar from '@/components/common/AppBar';
 import FrozenRouter from '@/components/common/FrozenRouter';
 import Layout from '@/components/common/Layout';
-import NavigationBar from '@/components/common/NavigationBar';
 
 export default function MarketLayout({
   children,
@@ -64,9 +63,7 @@ export default function MarketLayout({
           </section>
         )}
       </main>
-      <footer>
-        <NavigationBar />
-      </footer>
+      <footer></footer>
     </Layout>
   );
 }
