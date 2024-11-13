@@ -20,11 +20,34 @@ public class FoundationDonationTokenTransferrer {
     private final MemberValidator memberValidator;
     private final TokenCharger tokenCharger;
 
-    public void transfer(long memberId, long foundationId, long amount, String simplePassword, String message) {
-        memberValidator.validateUser(memberId);
+    public long transfer(long userId, long foundationId, long amount, String simplePassword, String message) {
+        memberValidator.validateUser(userId);
         memberValidator.validateFoundation(foundationId);
 
-        memberFinanceValidator.validateSimplePassword(memberId, simplePassword);
+        memberFinanceValidator.validateSimplePassword(userId, simplePassword);
+
+        MemberWallet memberWallet = memberWalletReader.readByMemberId(userId);
+        MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
+
+        tokenCharger.charge(userId, amount, message);
+
+        TransactionReceipt receipt = tokenTransferrer.transfer(
+                WalletVO.from(memberWallet),
+                WalletVO.from(foundationWallet),
+                amount
+        );
+        return tokenTransferrer.saveTransaction(
+                memberWallet.getId(),
+                foundationWallet.getId(),
+                amount,
+                TransactionType.FOUNDATION_DONATION,
+                receipt
+        ).getId();
+    }
+
+    public long transfer(long memberId, long foundationId, long amount, String message) {
+        memberValidator.validateUser(memberId);
+        memberValidator.validateFoundation(foundationId);
 
         MemberWallet memberWallet = memberWalletReader.readByMemberId(memberId);
         MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
@@ -36,12 +59,12 @@ public class FoundationDonationTokenTransferrer {
                 WalletVO.from(foundationWallet),
                 amount
         );
-        tokenTransferrer.saveTransaction(
+        return tokenTransferrer.saveTransaction(
                 memberWallet.getId(),
                 foundationWallet.getId(),
                 amount,
                 TransactionType.FOUNDATION_DONATION,
                 receipt
-        );
+        ).getId();
     }
 }
