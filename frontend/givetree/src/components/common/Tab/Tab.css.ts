@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
 export const tabButton = style({
-  minWidth: '125px',
+  minWidth: '110px',
   height: '55px',
   backgroundColor: 'white',
   border: 'none',

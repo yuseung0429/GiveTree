@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import * as style from '@/components/common/Tab/Tab.css';
 import colorPalette from '@/styles/tokens/colorPalette';
@@ -11,7 +11,13 @@ type TabButtonProps = {
   onClick: () => void;
 };
 
-export default function TabButton({ width = '125px', height = '55px', label, isSelected, onClick }: TabButtonProps) {
+export default function TabButton({
+  width = '120px',
+  height = '55px',
+  label,
+  isSelected,
+  onClick,
+}: TabButtonProps) {
   return (
     <button
       className={style.tabButton}
@@ -23,7 +29,7 @@ export default function TabButton({ width = '125px', height = '55px', label, isS
         fontWeight: isSelected ? '600' : '500',
         borderBottom: `2px solid ${
           isSelected ? colorPalette.primary[600] : colorPalette.grey[400]
-        }` 
+        }`,
       }}
     >
       {label}

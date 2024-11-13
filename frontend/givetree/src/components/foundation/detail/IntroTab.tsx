@@ -22,7 +22,7 @@ export default function IntroTab({ foundationData }: IntroTabProps) {
     <Box className={style.TabContainer}>
       {/* 단체소개 */}
       <Box as="article" className={style.article}>
-        <Typography as="h3" weight="semiBold" color={colorPalette.primary[400]}>
+        <Typography as="h3" weight="semiBold" color={colorPalette.grey[800]}>
           단체소개
         </Typography>
         <Box className={style.bottomBox}>
@@ -34,7 +34,7 @@ export default function IntroTab({ foundationData }: IntroTabProps) {
 
       {/* 단체사진 */}
       <Box as="article" className={style.article}>
-        <Typography as="h3" weight="semiBold" color={colorPalette.primary[600]}>
+        <Typography as="h3" weight="semiBold" color={colorPalette.grey[800]}>
           단체사진
         </Typography>
         <Flex gap="10px" className={style.imageScrollContainer}>
@@ -66,32 +66,17 @@ export default function IntroTab({ foundationData }: IntroTabProps) {
 
       {/* 단체정보 */}
       <Box as="article" className={style.article}>
-        <Typography as="h3" weight="semiBold" color={colorPalette.primary[600]}>
+        <Typography as="h3" weight="semiBold" color={colorPalette.grey[800]}>
           단체정보
         </Typography>
-        <Flex gap="20px" flexDirection="column" className={style.bottomBox}>
-          {/* 공식단체명 */}
+        <Flex gap="1rem" flexDirection="column" className={style.bottomBox}>
           <Box>
             <Typography
               as="h5"
               weight="medium"
               size="16px"
-              color={colorPalette.grey[600]}
-              style={{ marginBottom: '10px' }}
-            >
-              공식단체명
-            </Typography>
-            <Typography>{foundationData.name}</Typography>
-          </Box>
-
-          {/* 사업자등록번호 */}
-          <Box>
-            <Typography
-              as="h5"
-              weight="medium"
-              size="16px"
-              color={colorPalette.grey[600]}
-              style={{ marginBottom: '10px' }}
+              color={colorPalette.primary[500]}
+              style={{ marginBottom: '0.25rem' }}
             >
               사업자등록번호/고유번호
             </Typography>
@@ -100,22 +85,46 @@ export default function IntroTab({ foundationData }: IntroTabProps) {
             </Typography>
           </Box>
 
-          {/* 주소 및 연락처 */}
           <Box>
             <Typography
               as="h5"
               weight="medium"
               size="16px"
-              color={colorPalette.grey[600]}
-              style={{ marginBottom: '10px' }}
+              color={colorPalette.primary[500]}
+              style={{ marginBottom: '0.25rem' }}
             >
-              주소 및 연락처
+              주소
             </Typography>
-            <Flex flexDirection="column" gap={5}>
-              <Typography>{foundationData.address}</Typography>
-              <Typography>{foundationData.phoneNumber}</Typography>
-              <Typography>{foundationData.email}</Typography>
-            </Flex>
+            <Typography>
+              {foundationData.corporateRegistrationNumber}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography
+              as="h5"
+              weight="medium"
+              size="16px"
+              color={colorPalette.primary[500]}
+              style={{ marginBottom: '0.25rem' }}
+            >
+              연락처
+            </Typography>
+            <Typography>
+              {foundationData.corporateRegistrationNumber}
+            </Typography>
+          </Box>
+
+          <Box>
+            <Typography
+              as="h5"
+              weight="medium"
+              size="16px"
+              color={colorPalette.primary[500]}
+              style={{ marginBottom: '0.25rem' }}
+            >
+              이메일
+            </Typography>
+            <Typography>{foundationData.email}</Typography>
           </Box>
         </Flex>
       </Box>
