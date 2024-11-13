@@ -4,6 +4,8 @@ import type { SalePostDetail } from '@/types/market/market';
 
 import fetchWrapper from '@/lib/fetchWrapper';
 
+import { formatTime } from '@/utils/time';
+
 import colorPalette from '@/styles/tokens/colorPalette';
 import typography from '@/styles/tokens/typography';
 
@@ -12,9 +14,8 @@ import DonationNotification from '@/components/common/DonationNotification';
 import Flex from '@/components/common/Flex';
 import ImageCarousel from '@/components/common/ImageCarousel';
 import Typography from '@/components/common/Typography';
+import SimpleProfile from '@/components/common/SimpleProfile';
 import SalePostHeader from '@/components/market/SalePostHeader';
-import SimpleProfile from '@/components/market/SimpleProfile';
-import { formatTime } from '@/utils/time';
 
 export default async function PostPage({
   params,
