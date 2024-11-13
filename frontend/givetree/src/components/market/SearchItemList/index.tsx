@@ -17,8 +17,6 @@ const SearchItemList = async ({ page, query }: SearchItemListProps) => {
   );
   const salePostList: SalePostList = await (await response).json();
 
-  console.log(salePostList);
-
   return (
     <>
       {salePostList.map((item) => (

@@ -34,7 +34,7 @@ export const imageWrapper = style({
   overflow: 'hidden',
   width: '6rem',
   height: '6rem',
-  padding: '1rem',
-  borderRadius: '0.75rem',
-  backgroundColor: '#eee',
+  border: `0.0625rem solid ${colorPalette.grey[400]}`,
+  borderRadius: '0.25rem',
+  backgroundColor: colorPalette.grey[200],
 });
