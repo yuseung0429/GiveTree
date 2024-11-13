@@ -2,8 +2,13 @@ import CampaignCard from '@/components/campaign/Main/CapaignCard';
 import * as style from '../../../app/foundation/[id]/detail/detail.css';
 import Box from '@/components/common/Box';
 import Typography from '@/components/common/Typography';
+import { Foundation } from '@/api/foundation/getFoundationDetail';
 
-export default function CampaignTab() {
+interface CampaignTabProps {
+  foundationData: Foundation;
+}
+
+export default function CampaignTab({ foundationData }: CampaignTabProps) {
   // 임시 확인용 데이터
   const campaignData = {
     id: 1,
@@ -19,8 +24,11 @@ export default function CampaignTab() {
       {/* 캠페인 */}
       <Box>
         <Typography as="h3" weight="medium">
-          현재 <span className={style.campaignCount}>1</span>개의 캠페인이
-          진행중입니다.
+          현재{' '}
+          <span className={style.campaignCount}>
+            {foundationData.holdingCampaignCount}
+          </span>
+          개의 캠페인이 진행중입니다.
         </Typography>
         <Box marginTop="1rem">
           <CampaignCard
