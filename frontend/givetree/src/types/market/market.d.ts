@@ -7,7 +7,18 @@ export interface SalePost {
   productionsCondition: '거의 새 것' | '미개봉' | '사용감 있음';
   isDirectSale: boolean;
   isDeliverySale: boolean;
-  cratedDateTime: string;
+  createdDateTime: string;
+}
+
+export interface SalePostDetail
+  extends Omit<SalePost, 'status' | 'imageUrl' | 'productionsCondition'> {
+  sellerId: number;
+  foundationId: number;
+  description: string;
+  hits: number;
+  imageUrls: string[];
+  saleStatus: string;
+  productionCondition: '거의 새 것' | '미개봉' | '사용감 있음';
 }
 
 export type SalePostList = SalePost[];

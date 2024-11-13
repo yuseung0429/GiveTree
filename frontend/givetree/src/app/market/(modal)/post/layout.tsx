@@ -15,7 +15,7 @@ export default function PostLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="거래" onBackClick={() => router.back()}></AppBar>
+        <AppBar title="거래글" onBackClick={() => router.back()}></AppBar>
       </header>
       <main>{children}</main>
     </Layout>
