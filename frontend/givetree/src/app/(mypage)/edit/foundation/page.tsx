@@ -1,8 +1,6 @@
-import colorPalette from '@/styles/tokens/colorPalette';
 import * as styles from '../../mypage/mypage.css';
 import ProfileNull from '@/assets/images/profile.png';
 import React from 'react';
-import FoundationIntroduce from '@/components/myPage/Profile/EditFoundation/Introduce';
 import FoundationInfo from '@/components/myPage/Profile/EditFoundation/Information';
 import fetchWrapper from '@/lib/fetchWrapper';
 
@@ -29,20 +27,11 @@ export default async function FoundationEdit() {
         <FoundationInfo
           image={profileImage}
           name={name}
+          introduction={introduction}
           corporateRegistrationNumber={corporateRegistrationNumber}
           phoneNumber={phoneNumber}
           address={address}
         />
-
-        <div
-          style={{
-            width: '100%',
-            height: '10px',
-            backgroundColor: colorPalette.primary[50],
-          }}
-        ></div>
-
-        <FoundationIntroduce introduction={introduction} />
       </div>
     </div>
   );

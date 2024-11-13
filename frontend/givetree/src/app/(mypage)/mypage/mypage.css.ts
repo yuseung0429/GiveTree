@@ -11,8 +11,8 @@ export const Wrapper = style({
 export const modifyButton = style({
   display: 'flex',
   position: 'absolute',
-  top: '15%',
-  left: '56%',
+  top: '11%',
+  left: '55%',
   marginLeft: 'auto',
   marginRight: '1rem',
   marginTop: '0.5rem',

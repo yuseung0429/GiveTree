@@ -25,6 +25,13 @@ export const changeImage = style({
   zIndex: 1000,
 });
 
+export const profileImg = style({
+  position: 'absolute',
+  marginTop: 'auto',
+  top: '-60px',
+  borderRadius: '50%',
+});
+
 export const inputBox = style({
   display: 'flex',
   justifyContent: 'center',

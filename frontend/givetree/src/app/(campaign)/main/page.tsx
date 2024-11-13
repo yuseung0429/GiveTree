@@ -51,24 +51,34 @@ export default async function Home() {
 
         <div style={{ height: '20px' }}></div>
 
-        <Typography as="h3" weight="semiBold" className={styles.sectionTitle}>
-          종료 임박 캠페인
-        </Typography>
-        <div className={styles.slideContainer}>
-          {endingSoonCampaigns.map((campaign: CampaignData, index: number) => (
-            <CampaignCard
-              key={index}
-              id={campaign.id}
-              title={campaign.name}
-              foundation={campaign.foundationName}
-              currentFundraisingAmount={campaign.currentFundraisingAmount}
-              targetFundraisingAmount={campaign.targetFundraisingAmount}
-              titleImageUrl={campaign.titleImageUrl}
-              totalCampaign={endingSoonCampaigns.length}
-              currentIndex={index}
-            />
-          ))}
-        </div>
+        {endingSoonCampaigns.length !== 0 && (
+          <>
+            <Typography
+              as="h3"
+              weight="semiBold"
+              className={styles.sectionTitle}
+            >
+              종료 임박 캠페인
+            </Typography>
+            <div className={styles.slideContainer}>
+              {endingSoonCampaigns.map(
+                (campaign: CampaignData, index: number) => (
+                  <CampaignCard
+                    key={index}
+                    id={campaign.id}
+                    title={campaign.name}
+                    foundation={campaign.foundationName}
+                    currentFundraisingAmount={campaign.currentFundraisingAmount}
+                    targetFundraisingAmount={campaign.targetFundraisingAmount}
+                    titleImageUrl={campaign.titleImageUrl}
+                    totalCampaign={endingSoonCampaigns.length}
+                    currentIndex={index}
+                  />
+                )
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
