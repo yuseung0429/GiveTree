@@ -1,20 +1,29 @@
-import { SalePostList, SaleSearchParameter } from '@/types/market/market';
+import type { SaleSearchParameter } from '@/types/market/market';
 
-import fetchWrapper from '@/lib/fetchWrapper';
+import { HiCloud } from 'react-icons/hi2';
 
-import convertParams from '@/utils/convertParams';
+import searchSalePosts from '@/api/market/searchSalePost';
 
+import colorPalette from '@/styles/tokens/colorPalette';
+
+import Typography from '@/components/common/Typography';
 import MarketItem from '@/components/market/MarketItem';
 
+import * as s from './SearchItemList.css';
+
 const SearchItemList = async (params: SaleSearchParameter) => {
-  const response = fetchWrapper(`/sales/search${convertParams({ ...params })}`);
-  const salePostList: SalePostList = await (await response).json();
+  const salePostList = await searchSalePosts(params);
 
   return (
     <>
-      {salePostList.map((item) => (
-        <MarketItem key={item.id} {...item} />
-      ))}
+      {salePostList.length ? (
+        salePostList.map((item) => <MarketItem key={item.id} {...item} />)
+      ) : (
+        <div className={s.noItem}>
+          <HiCloud color={colorPalette.primary[900]} size={'5rem'} />
+          <Typography>게시글이 존재하지 않습니다.</Typography>
+        </div>
+      )}
     </>
   );
 };

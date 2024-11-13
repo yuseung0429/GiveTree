@@ -1,8 +1,12 @@
 'use client';
 
-import { FormEvent, useEffect } from 'react';
+import { FormEvent } from 'react';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+
+import type { SaleSearchParameter } from '@/types/market/market';
+
+import convertParams from '@/utils/convertParams';
 
 import typography from '@/styles/tokens/typography';
 
@@ -12,24 +16,43 @@ import CheckboxChip from '@/components/common/CheckboxChip';
 import Flex from '@/components/common/Flex';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
-import convertParams from '@/utils/convertParams';
 
 export default function SearchPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const params: { [key: string]: string | string[] } = {};
-    new FormData(e.target as HTMLFormElement).forEach((value, key) => {
-      params[key as string] = value as string | string[];
-    });
+    const params: SaleSearchParameter = {};
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    params.query = formData.get('query') as string;
+    params.statuses = formData.getAll('statuses') as string[];
+    params.isDirectSale = formData.get('isDirectSale') === 'true';
+    params.isDeliverySale = formData.get('isDeliverySale') === 'true';
+    params.productionConditions = formData.getAll(
+      'productionConditions'
+    ) as string[];
+
+    for (const param in params) {
+      const key = param as keyof SaleSearchParameter;
+      if (
+        !params[key] ||
+        (Array.isArray(params[key]) && params[key].length === 0)
+      ) {
+        delete params[key];
+      }
+    }
 
     router.back();
 
     const handlePopState = () => {
-      router.push(`/market${convertParams(params)}`);
+      router.push(
+        `/market${convertParams(
+          params as Record<string, string | string[] | boolean>
+        )}`
+      );
+      window.removeEventListener('popstate', handlePopState);
     };
 
     window.addEventListener('popstate', handlePopState);

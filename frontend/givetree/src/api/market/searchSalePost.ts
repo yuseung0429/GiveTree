@@ -6,16 +6,21 @@ import type { SalePostList, SaleSearchParameter } from '@/types/market/market';
 
 import fetchWrapper from '@/lib/fetchWrapper';
 
-const getSalePost = async (
+const searchSalePosts = async (
   params: SaleSearchParameter,
   options?: RequestInit
 ) => {
-  const response = fetchWrapper(
-    `/sales/search${convertParams({ ...params })}`,
+  const response = await fetchWrapper(
+    `/sales/search${convertParams({ ...params, size: 100 })}`,
     options
   );
-  const data: SalePostList = await (await response).json();
+
+  if (response.status !== 200) {
+    return [];
+  }
+
+  const data: SalePostList = await response.json();
   return data;
 };
 
-export default getSalePost;
+export default searchSalePosts;

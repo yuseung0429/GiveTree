@@ -1,3 +1,5 @@
+import type { SaleSearchParameter } from '@/types/market/market';
+
 import colorPalette from '@/styles/tokens/colorPalette';
 
 import Box from '@/components/common/Box';
@@ -5,7 +7,6 @@ import Flex from '@/components/common/Flex';
 import SearchCondition from '@/components/market/SearchCondition';
 import WriteButon from '@/components/market/WriteButton';
 import SearchItemList from '@/components/market/SearchItemList';
-import { SaleSearchParameter } from '@/types/market/market';
 
 export default async function MarketPage({
   searchParams,
