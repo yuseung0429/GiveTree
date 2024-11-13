@@ -1,12 +1,10 @@
 'use client';
 
 import AppBar from '@/components/common/AppBar';
-import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Layout from '@/components/common/Layout';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FaTree } from 'react-icons/fa';
 
@@ -16,11 +14,14 @@ export default function ExchangeLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const handleBackClick = () => {
+    router.push('/mypage');
+  };
 
   return (
     <Layout>
       <header>
-        <AppBar title="간편계좌 설정" onBackClick={() => router.back()} />
+        <AppBar title="간편계좌 설정" onBackClick={handleBackClick} />
       </header>
       <main style={{ backgroundColor: '#F5F5F5', padding: '1rem' }}>
         <Flex
@@ -52,13 +53,6 @@ export default function ExchangeLayout({
         </Flex>
         {children}
       </main>
-      <footer style={{ padding: '10px', backgroundColor: '#F5F5F5' }}>
-        <Link href="/account/setup">
-          <Button size="xl" fullWidth>
-            등록하기
-          </Button>
-        </Link>
-      </footer>
     </Layout>
   );
 }

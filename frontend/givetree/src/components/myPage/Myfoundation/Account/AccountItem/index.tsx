@@ -21,6 +21,7 @@ export default function AccountItem({
   isSelected,
   onSelect,
 }: AccountItemProps) {
+  console.log('AccountItem props:', { id, name, accountNumber, balance, isSelected });
   return (
     <Flex
       justifyContent="space-between"
@@ -41,7 +42,11 @@ export default function AccountItem({
           borderRadius={30}
         />
         <Flex flexDirection="column" gap={6}>
-          <Typography size={18} weight="semiBold" color={colorPalette.grey[800]}>
+          <Typography
+            size={18}
+            weight="semiBold"
+            color={colorPalette.grey[800]}
+          >
             {name}
           </Typography>
           <Typography color={colorPalette.grey[600]}>
