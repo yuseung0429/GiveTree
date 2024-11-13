@@ -13,16 +13,38 @@ import colorPalette from '@/styles/tokens/colorPalette';
 type Foundation = {
   id: number;
   name: string;
+  introduction: string;
+  profileImageUrl: string;
 };
 
 const foundations: Foundation[] = [
-  { id: 1, name: '사회복지 법인 굿네이버스' },
-  { id: 2, name: '기아대책' },
-  { id: 3, name: '월드비전' },
-  { id: 4, name: '초록우산 어린이재단' },
-  { id: 5, name: '유니세프 한국위원회' },
-  { id: 6, name: '유니세프 법인 굿네이버스' },
-  { id: 7, name: '유니세프' },
+  {
+    id: 1,
+    name: '사회복지 법인 굿네이버스',
+    introduction: '설명1',
+    profileImageUrl: '',
+  },
+  { id: 2, name: '기아대책', introduction: '설명1', profileImageUrl: '' },
+  { id: 3, name: '월드비전', introduction: '설명2', profileImageUrl: '' },
+  {
+    id: 4,
+    name: '초록우산 어린이재단',
+    introduction: '설명3',
+    profileImageUrl: '',
+  },
+  {
+    id: 5,
+    name: '유니세프 한국위원회',
+    introduction: '설명4',
+    profileImageUrl: '',
+  },
+  {
+    id: 6,
+    name: '유니세프 법인 굿네이버스',
+    introduction: '설명5',
+    profileImageUrl: '',
+  },
+  { id: 7, name: '유니세프', introduction: '설명6', profileImageUrl: '' },
 ];
 
 export default function Page() {
