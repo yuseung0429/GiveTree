@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface TransactionRepository extends Repository<Transaction, Long> {
     Transaction save(Transaction transaction);
     Optional<Transaction> findById(Long transactionId);
+    Optional<Transaction> getReferenceById(long transactionId);
 
     @Query("""
            SELECT t

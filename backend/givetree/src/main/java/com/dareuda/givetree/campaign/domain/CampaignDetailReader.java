@@ -29,7 +29,6 @@ public class CampaignDetailReader {
                 .titleImageUrl(titleImageUrl)
                 .imageUrls(imageUrls)
                 .targetFundraisingAmount(campaign.getTargetFundraisingAmount())
-                .currentFundraisingAmount(campaign.getCurrentFundraisingAmount())
                 .build();
     }
 

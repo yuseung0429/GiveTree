@@ -76,4 +76,13 @@ public class CampaignController {
         return ResponseEntity.ok(campaignDetails);
     }
 
+    @PostMapping("/{campaignId}/close")
+    public ResponseEntity<Void> closeCampaign(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long campaignId
+    ) {
+        campaignService.closeCampaign(userPrinciple.getId(), campaignId);
+
+        return ResponseEntity.ok().build();
+    }
 }

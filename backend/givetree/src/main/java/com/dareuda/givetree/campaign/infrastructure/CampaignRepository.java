@@ -19,6 +19,8 @@ public interface CampaignRepository extends Repository<Campaign, Long> {
     """)
     Optional<Campaign> findById(long id);
 
+    Optional<Campaign> getReferenceById(long id);
+
     List<Long> findByFoundationId(long foundationId);
 
     int countByFoundationId(long foundationId);

@@ -18,8 +18,15 @@ public class MemberReader {
                 .orElseThrow(() -> new RestApiException(MemberErrorCode.MEMBER_NOT_FOUND));
     }
 
+    @Transactional(readOnly = true)
     public Member readByEmail(String email) {
         return memberRepository.findByEmail(email)
+                .orElseThrow(() -> new RestApiException(MemberErrorCode.MEMBER_NOT_FOUND));
+    }
+
+    @Transactional(readOnly = true)
+    public Member readReference(long memberId) {
+        return memberRepository.getReferenceById(memberId)
                 .orElseThrow(() -> new RestApiException(MemberErrorCode.MEMBER_NOT_FOUND));
     }
 }

@@ -42,5 +42,8 @@ public class CampaignUpdater {
         if (command.getTargetFundraisingAmount() != null) {
             campaign.updateTargetFundraisingAmount(command.getTargetFundraisingAmount());
         }
+        if (command.getContractAddress() != null) {
+            campaign.updateContractAddress(command.getContractAddress());
+        }
     }
 }
