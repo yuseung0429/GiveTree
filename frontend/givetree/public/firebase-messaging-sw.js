@@ -21,6 +21,7 @@ messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(payload.notification.title, {
     body: payload.notification.body,
     icon: '/favicon.svg',
+    badge: '/badge-128x128.png',
     vibrate: [200, 100, 200, 100],
     image: payload.notification.image,
   });
