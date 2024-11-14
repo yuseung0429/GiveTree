@@ -29,7 +29,7 @@ public class WithdrawalProcessor {
 
     @Transactional
     public Ledger saveLedger(long receiverId, long amount, String message) {
-        Account senderAccount = accountReader.read(receiverId);
+        Account senderAccount = accountReader.readActiveAccount(receiverId);
         return ledgerAppender.append(
                 senderAccount.getId(),
                 amount,
