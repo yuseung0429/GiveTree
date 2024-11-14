@@ -8,7 +8,7 @@ import Typography from '@/components/common/Typography';
 import Flex from '@/components/common/Flex';
 import Link from 'next/link';
 import colorPalette from '@/styles/tokens/colorPalette';
-import ExpenseItem from '@/components/common/ExpenseItem';
+// import ExpenseItem from '@/components/common/ExpenseItem';
 import { IoMdRefresh } from 'react-icons/io';
 import { FaTree } from 'react-icons/fa';
 import { MdNavigateNext } from 'react-icons/md';
@@ -69,10 +69,11 @@ export default function Page() {
           </Flex>
           {/* 리스트 */}
           <Flex flexDirection="column" gap="10px" style={{ padding: '15px 0' }}>
+            {/* <ExpenseItem />
             <ExpenseItem />
             <ExpenseItem />
-            <ExpenseItem />
-            <ExpenseItem />
+            <ExpenseItem /> */}
+            ㄹ
           </Flex>
         </Box>
       </main>

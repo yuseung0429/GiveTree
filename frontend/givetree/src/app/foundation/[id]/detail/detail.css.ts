@@ -37,6 +37,17 @@ export const article = style({
   marginBottom: '1.75rem',
 });
 
+export const LogoImg = style({
+  width: '70px',
+  height: '70px',
+  position: 'absolute',
+  bottom: '1.5rem',
+  left: '1.5rem',
+  backgroundColor: '#fff',
+  borderRadius: '100%',
+  border: `1px solid ${colorPalette.grey[300]}`,
+});
+
 // imageScrollContainer
 export const imageScrollContainer = style({
   overflowX: 'auto', // 가로 스크롤 허용
@@ -70,6 +81,7 @@ export const imageBox = style({
   maxWidth: '280px',
   aspectRatio: '4 / 3',
   overflow: 'hidden',
+  borderRadius: '5px',
   backgroundColor: colorPalette.primary[50],
 });
 
@@ -89,6 +101,5 @@ export const fixGiveBtn = style({
 export const campaignCount = style({
   color: colorPalette.primary[400],
   fontWeight: '600',
-  fontSize: '20px',
   marginRight: '3px',
 });
