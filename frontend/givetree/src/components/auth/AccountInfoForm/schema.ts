@@ -24,6 +24,6 @@ export const accountInfoSchema = z
       .max(20, '최대 20자리 이하이어야 합니다.'),
   })
   .refine((data) => data.password === data.confirm_password, {
-    message: "Passwords don't match",
+    message: '비밀번호가 일치하지 않습니다.',
     path: ['confirm_password'],
   });
