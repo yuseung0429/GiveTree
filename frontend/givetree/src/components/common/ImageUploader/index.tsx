@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { ComponentPropsWithRef, useEffect, useRef, useState } from 'react';
 
 import useImageUpload, { type ImageData } from '@/hooks/useImageUpload';
 
-import UploadButton from './UploadButton';
 import ImageItem from './ImageItem';
+import UploadButton from './UploadButton';
 
 import * as s from './ImageUploader.css';
 
-interface ImageUploaderProps {
+interface ImageUploaderProps
+  extends Omit<ComponentPropsWithRef<'input'>, 'name'> {
   name?: string;
   maxFileCount?: number;
   onUpload?: (images: string[]) => void;
@@ -19,6 +20,7 @@ const ImageUploader = ({
   name,
   maxFileCount = 5,
   onUpload,
+  ...props
 }: ImageUploaderProps) => {
   const fileRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -66,7 +68,7 @@ const ImageUploader = ({
 
       switch (status) {
         case 413:
-          alert('1MB를 초과하는 이미지는 업로드 할 수 없습니다.');
+          alert('10MB를 초과하는 이미지는 업로드 할 수 없습니다.');
           break;
         default:
           alert('알 수 없는 오류로 이미지를 업로드에 실패했습니다.');
@@ -84,6 +86,12 @@ const ImageUploader = ({
 
   return (
     <div className={s.container} ref={containerRef}>
+      <input
+        type="hidden"
+        value={images.filter((image) => image.done).length}
+        {...props}
+      />
+
       <input
         ref={fileRef}
         type="file"
