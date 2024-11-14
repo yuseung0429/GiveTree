@@ -8,31 +8,27 @@ import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@Table(name = "foundation_donate_subscription")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class DonationSubscription {
+public class FoundationDonateSubscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "donation_subscription")
+    @Column(name = "foundation_donate_subscription_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
     @NotNull
+    @JoinColumn(name = "member_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "foundation_id")
     @NotNull
+    @JoinColumn(name = "foundation_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Foundation foundation;
 
     @Column
     @NotNull
     private Long amount;
-
-    @Builder
-    public DonationSubscription(Member member, Foundation foundation, Long amount) {
-        this.member = member;
-        this.foundation = foundation;
-        this.amount = amount;
-    }
 }

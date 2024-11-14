@@ -12,8 +12,8 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "wallet")
 @DiscriminatorColumn(name = "type")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
