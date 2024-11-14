@@ -1,12 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { HiChatBubbleOvalLeft, HiTrash } from 'react-icons/hi2';
 
 import { highlightedTags } from '@/constatns/tag';
 
 import { getTimeDifference } from '@/utils/time';
+
+import useDialog from '@/hooks/useDialog';
 
 import typography from '@/styles/tokens/typography';
 
@@ -16,8 +19,6 @@ import Button from '@/components/common/Button';
 import Chip from '@/components/common/Chip';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
-import useDialog from '@/hooks/useDialog';
-import { useRouter } from 'next/navigation';
 
 interface SalePostHeaderProps {
   id: number;
