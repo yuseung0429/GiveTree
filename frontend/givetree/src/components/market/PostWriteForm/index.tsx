@@ -84,12 +84,18 @@ const PostWriteForm = ({
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex flexDirection="column" gap="0.75rem">
         <FormField label="제목" errorMessage={errors.title?.message}>
-          <TextField {...register('title')} size="lg" placeholder="제목" />
+          <TextField
+            {...register('title')}
+            color={errors.title ? 'danger' : 'primary'}
+            size="lg"
+            placeholder="제목"
+          />
         </FormField>
 
         <FormField label="내용" errorMessage={errors.description?.message}>
           <TextField
             {...register('description')}
+            color={errors.description ? 'danger' : 'primary'}
             size="lg"
             placeholder="최대 1000자 이내로 작성해 주세요."
             height="10rem"
@@ -144,6 +150,7 @@ const PostWriteForm = ({
         >
           <TextField
             {...register('price', { onChange: handlePriceChange })}
+            color={errors.price ? 'danger' : 'primary'}
             size="lg"
             placeholder="판매 가격"
           />

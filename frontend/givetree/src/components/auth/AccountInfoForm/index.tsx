@@ -48,7 +48,6 @@ const AccountInfoForm = ({
             {...register('email')}
             size="lg"
             color={errors.email ? 'danger' : 'primary'}
-            variant={errors.email ? 'contained' : 'outlined'}
             placeholder="example@givetree.co.kr"
             defaultValue={formData.get('email') as string}
           />
@@ -60,7 +59,6 @@ const AccountInfoForm = ({
             type="password"
             size="lg"
             color={errors.password ? 'danger' : 'primary'}
-            variant={errors.password ? 'contained' : 'outlined'}
             placeholder="(문자, 숫자 포함 6~20자)"
             defaultValue={formData.get('password') as string}
           />
@@ -75,7 +73,6 @@ const AccountInfoForm = ({
             type="password"
             size="lg"
             color={errors.confirm_password ? 'danger' : 'primary'}
-            variant={errors.confirm_password ? 'contained' : 'outlined'}
             defaultValue={formData.get('confirm_password') as string}
           />
         </FormField>
@@ -85,7 +82,6 @@ const AccountInfoForm = ({
             {...register('name')}
             size="lg"
             color={errors.name ? 'danger' : 'primary'}
-            variant={errors.name ? 'contained' : 'outlined'}
             defaultValue={formData.get('name') as string}
           />
         </FormField>
