@@ -19,5 +19,13 @@ public interface FoundationRepository extends Repository<Foundation, Long> {
     """)
     Optional<Foundation> findById(long id);
 
+    @Query("""
+        SELECT DISTINCT f
+        FROM Foundation f
+        join fetch f.member fm
+        WHERE fm.name = :name and fm.isDeleted = false
+    """)
+    Optional<Foundation> findByName(String name);
+
     boolean existsById(long id);
 }
