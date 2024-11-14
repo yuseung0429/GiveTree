@@ -56,8 +56,9 @@ const useNotification = () => {
         registration?.showNotification(title || '', {
           body,
           icon: '/favicon.svg',
-          badge: image,
-        });
+          badge: '/badge-128x128.png',
+          image,
+        } as NotificationOptions);
       });
     });
   }, []);
