@@ -75,17 +75,28 @@ export default function WalletContainer({
               />
             </button>
           </Flex>
+
           <Typography
-            size={20}
+            size={22}
             weight="bold"
             color={colorPalette.primary[600]}
             style={{ textAlign: 'center' }}
           >
             {initialBalance.data?.balance.toLocaleString() ?? '0'}원
           </Typography>
-          <Link href="wallet/exchange">
-            <Button fullWidth>출금하기</Button>
-          </Link>
+
+          {/* 출금버튼 */}
+          <Flex gap={10} style={{ width: '100%', marginTop: '30px' }}>
+            <Link href="wallet/exchange/foundation" style={{ flex: 1 }}>
+              {/* 재단 출금 */}
+              <Button fullWidth>재단 출금하기</Button>
+            </Link>
+
+            <Link href="wallet/exchange/campaign" style={{ flex: 1 }}>
+              {/* 캠페인 출금 */}
+              <Button fullWidth>캠페인 출금하기</Button>
+            </Link>
+          </Flex>
         </Flex>
       </Box>
 
