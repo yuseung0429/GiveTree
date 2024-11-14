@@ -1,9 +1,9 @@
 import React from 'react';
 
 import Flex from '@/components/common/Flex';
+import SimpleProfile from '@/components/common/SimpleProfile';
 import ChatMessage from '@/components/market/ChatMessage';
 import ChatTimeline from '@/components/market/ChatTimeline';
-import SimpleProfile from '@/components/market/SimpleProfile';
 
 const ChatMessageList = () => {
   return (
@@ -13,13 +13,7 @@ const ChatMessageList = () => {
           <ChatTimeline>2024-11-{index + 1}</ChatTimeline>
           <ChatMessage
             createdAt="2024-11-07T01:42:23.658Z"
-            profile={
-              <SimpleProfile
-                name="코딩하는 돌아이"
-                size="sm"
-                profileImage="https://github.com/user-attachments/assets/14513e04-bf23-4d90-8f29-7f6295690ea5"
-              />
-            }
+            profile={<SimpleProfile id={1} size="sm" />}
           >
             안녕하세요
           </ChatMessage>

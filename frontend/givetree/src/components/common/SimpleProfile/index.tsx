@@ -1,3 +1,5 @@
+import getMember from '@/api/member/getMember';
+
 import typography from '@/styles/tokens/typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 
@@ -6,8 +8,7 @@ import ProfileImage from '@/components/common/ProfileImage';
 import Typography from '@/components/common/Typography';
 
 interface SimpleProfileProps {
-  name: string;
-  profileImage: string;
+  id: number;
   size: 'sm' | 'md';
 }
 
@@ -31,12 +32,14 @@ const variants: Record<SimpleProfileProps['size'], Variant> = {
   },
 };
 
-const SimpleProfile = ({ name, profileImage, size }: SimpleProfileProps) => {
+const SimpleProfile = async ({ id, size }: SimpleProfileProps) => {
+  const data = await getMember(id, { next: { revalidate: 300 } });
+
   return (
     <Flex alignItems="center" gap={variants[size].gap}>
       <div style={{ flex: '0 0 auto' }}>
         <ProfileImage
-          src={profileImage}
+          src={data.profileImageUrl}
           borderColor={colorPalette.grey[600]}
           size={variants[size].profileImageSize}
         />
@@ -46,7 +49,7 @@ const SimpleProfile = ({ name, profileImage, size }: SimpleProfileProps) => {
           size={typography.size[variants[size].nameSize]}
           weight="semiBold"
         >
-          {name}
+          {data.name}
         </Typography>
       </Flex>
     </Flex>
