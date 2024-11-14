@@ -15,12 +15,12 @@ export default async function Home() {
   const twoWeeksLater = new Date(today);
   twoWeeksLater.setDate(today.getDate() + 14);
 
-  const endingSoonCampaigns = campaigns.filter((campaign: CampaignData) => {
+  const endingSoonCampaigns = campaigns?.filter((campaign: CampaignData) => {
     const endDate = new Date(campaign.endDate);
     return endDate <= twoWeeksLater && endDate >= today;
   });
 
-  const progressCampaigns = campaigns.filter((campaign: CampaignData) => {
+  const progressCampaigns = campaigns?.filter((campaign: CampaignData) => {
     const endDate = new Date(campaign.endDate);
     return endDate >= today;
   });
@@ -32,7 +32,7 @@ export default async function Home() {
           진행 중인 캠페인
         </Typography>
         <div className={styles.slideContainer}>
-          {progressCampaigns.map((campaign: CampaignData, index: number) => (
+          {progressCampaigns?.map((campaign: CampaignData, index: number) => (
             <CampaignCard
               key={campaign.id}
               id={campaign.id}
@@ -49,7 +49,7 @@ export default async function Home() {
 
         <div style={{ height: '20px' }}></div>
 
-        {endingSoonCampaigns.length !== 0 && (
+        {endingSoonCampaigns?.length !== 0 && (
           <>
             <Typography
               as="h3"
@@ -59,7 +59,7 @@ export default async function Home() {
               종료 임박 캠페인
             </Typography>
             <div className={styles.slideContainer}>
-              {endingSoonCampaigns.map(
+              {endingSoonCampaigns?.map(
                 (campaign: CampaignData, index: number) => (
                   <CampaignCard
                     key={index}
