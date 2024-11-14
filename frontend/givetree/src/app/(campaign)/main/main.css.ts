@@ -2,6 +2,7 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import { style } from '@vanilla-extract/css';
 
 export const wrapper = style({
+  height: '100%',
   backgroundColor: colorPalette.primary[300],
 });
 
@@ -9,7 +10,7 @@ export const mainContainer = style({
   borderTopLeftRadius: '20px',
   borderTopRightRadius: '20px',
   padding: '0.75rem',
-  minHeight: '100vh',
+  height: '100%',
   backgroundColor: 'white',
 });
 
