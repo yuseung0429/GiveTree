@@ -29,7 +29,7 @@ public class DepositProcessor {
 
     @Transactional
     public Ledger saveLedger(long senderId, long amount, String message) {
-        Account senderAccount = accountReader.read(senderId);
+        Account senderAccount = accountReader.readActiveAccount(senderId);
         return ledgerAppender.append(
                 senderAccount.getId(),
                 -amount,
