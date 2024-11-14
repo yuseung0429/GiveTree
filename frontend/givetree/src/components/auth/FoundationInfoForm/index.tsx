@@ -81,6 +81,7 @@ const FoundationInfoForm = ({
             {...register('corporateRegistrationNumber')}
             type="tel"
             size="lg"
+            color={errors.corporateRegistrationNumber ? 'danger' : 'primary'}
             placeholder="000-00-00000"
             defaultValue={formData.get('corporateRegistrationNumber') as string}
           />
@@ -91,6 +92,7 @@ const FoundationInfoForm = ({
             {...register('phoneNumber')}
             type="tel"
             size="lg"
+            color={errors.phoneNumber ? 'danger' : 'primary'}
             placeholder="010-0000-000"
             defaultValue={formData.get('phoneNumber') as string}
           />
@@ -100,6 +102,7 @@ const FoundationInfoForm = ({
           <TextField
             {...register('address')}
             size="lg"
+            color={errors.address ? 'danger' : 'primary'}
             defaultValue={formData.get('address') as string}
           />
         </FormField>
@@ -111,6 +114,7 @@ const FoundationInfoForm = ({
           <TextField
             {...register('introduction')}
             size="lg"
+            color={errors.introduction ? 'danger' : 'primary'}
             placeholder="최대 1000자까지 작성 가능합니다."
             height="10rem"
             multiline
@@ -162,6 +166,7 @@ const FoundationInfoForm = ({
         >
           <TextField
             {...register('categories')}
+            color={errors.categories ? 'danger' : 'primary'}
             size="lg"
             defaultValue={formData.get('categories') as string}
           />
