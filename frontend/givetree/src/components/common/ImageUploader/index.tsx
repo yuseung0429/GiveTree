@@ -3,6 +3,7 @@
 import { ComponentPropsWithRef, useEffect, useRef, useState } from 'react';
 
 import useImageUpload, { type ImageData } from '@/hooks/useImageUpload';
+import useDialog from '@/hooks/useDialog';
 
 import ImageItem from './ImageItem';
 import UploadButton from './UploadButton';
@@ -33,6 +34,8 @@ const ImageUploader = ({
     })
   );
 
+  const { alert } = useDialog();
+
   useEffect(() => {
     const container = containerRef.current;
 
@@ -50,9 +53,11 @@ const ImageUploader = ({
   const { select, upload } = useImageUpload(
     fileRef,
     {
-      onSelect: (fileList: FileList) => {
+      onSelect: async (fileList: FileList) => {
         if (fileList.length + images.length > maxFileCount) {
-          alert(`최대 ${maxFileCount}개의 이미지만 업로드 할 수 있습니다.`);
+          await alert(
+            `최대 ${maxFileCount}개의 이미지를 업로드 할 수 있습니다.`
+          );
           return;
         }
 
