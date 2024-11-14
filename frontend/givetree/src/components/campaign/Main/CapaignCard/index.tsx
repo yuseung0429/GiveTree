@@ -19,12 +19,17 @@ const CampaignCard = ({
   id,
   title,
   foundation,
-  currentFundraisingAmount,
-  targetFundraisingAmount,
+  currentFundraisingAmount = 0,
+  targetFundraisingAmount = 0,
   titleImageUrl,
   totalCampaign,
   currentIndex,
 }: CampaignCardProps) => {
+  // 숫자 포맷팅 헬퍼 함수
+  const formatAmount = (amount: number) => {
+    return amount?.toLocaleString() || '0';
+  };
+
   return (
     <Link
       href={`/campaign/${id}`}
@@ -65,10 +70,10 @@ const CampaignCard = ({
         />
         <div className={styles.amountContainer}>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {currentFundraisingAmount.toLocaleString()}원
+            {formatAmount(currentFundraisingAmount)}원
           </Typography>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {targetFundraisingAmount.toLocaleString()}원 목표
+            {formatAmount(targetFundraisingAmount)}원 목표
           </Typography>
         </div>
       </div>

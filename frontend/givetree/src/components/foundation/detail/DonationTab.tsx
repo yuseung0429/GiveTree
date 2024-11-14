@@ -6,12 +6,17 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import Flex from '@/components/common/Flex';
 import ExpenseItem from '@/components/common/ExpenseItem';
 import { Foundation } from '@/api/foundation/getFoundationDetail';
+import { PaginatedResponse, LedgerEntry } from '@/api/ledger/getLedger';
 
 interface DonationTabProps {
   foundationData: Foundation;
+  ledgerData: PaginatedResponse;
 }
 
-export default function DonationTab({ foundationData }: DonationTabProps) {
+export default function DonationTab({
+  foundationData,
+  ledgerData,
+}: DonationTabProps) {
   return (
     <Box as="article" className={style.TabContainer}>
       {/* 나눔현황 */}
@@ -90,26 +95,32 @@ export default function DonationTab({ foundationData }: DonationTabProps) {
         </Typography>
 
         <Flex flexDirection="column" gap={10}>
-          <ExpenseItem
-            borderColor={colorPalette.grey[300]}
-            amountColor={colorPalette.secondary[300]}
-          />
-          <ExpenseItem
-            borderColor={colorPalette.grey[300]}
-            amountColor={colorPalette.secondary[300]}
-          />
-          <ExpenseItem
-            borderColor={colorPalette.grey[300]}
-            amountColor={colorPalette.secondary[300]}
-          />
-          <ExpenseItem
-            borderColor={colorPalette.grey[300]}
-            amountColor={colorPalette.secondary[300]}
-          />
-          <ExpenseItem
-            borderColor={colorPalette.grey[300]}
-            amountColor={colorPalette.secondary[300]}
-          />
+          {ledgerData.content.length === 0 ? (
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              style={{
+                color: colorPalette.grey[500],
+                minHeight: '150px',
+                backgroundColor: colorPalette.secondary[50],
+                borderRadius: '10px',
+              }}
+            >
+              아직 지출내역이 없습니다.
+            </Flex>
+          ) : (
+            ledgerData.content.map((entry: LedgerEntry) => (
+              <ExpenseItem
+                key={`${entry.processedAt}-${entry.amount}`}
+                date={entry.processedAt}
+                message={entry.message}
+                amount={entry.amount}
+                type={entry.type}
+                borderColor={colorPalette.grey[300]}
+                amountColor={colorPalette.secondary[300]}
+              />
+            ))
+          )}
         </Flex>
       </Box>
     </Box>

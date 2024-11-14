@@ -11,3 +11,4 @@ export interface CampaignData {
   endDate: string;
   introduction: string;
 }
+

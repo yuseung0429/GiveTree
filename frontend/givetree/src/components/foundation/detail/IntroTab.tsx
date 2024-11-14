@@ -37,7 +37,7 @@ export default function IntroTab({ foundationData }: IntroTabProps) {
         <Typography as="h3" weight="semiBold" color={colorPalette.grey[800]}>
           단체사진
         </Typography>
-        <Flex gap="10px" className={style.imageScrollContainer}>
+        <Flex gap="0.75rem" className={style.imageScrollContainer}>
           {foundationData.imageUrls.map((imageUrl, index) => (
             <div key={`${imageUrl}-${index}`} className={style.imageBox}>
               <div
@@ -50,7 +50,6 @@ export default function IntroTab({ foundationData }: IntroTabProps) {
                   sizes="(max-width: 768px) 150px, 280px"
                   style={{
                     objectFit: 'cover',
-                    borderRadius: '8px',
                   }}
                 />
               </div>
@@ -69,7 +68,7 @@ export default function IntroTab({ foundationData }: IntroTabProps) {
         <Typography as="h3" weight="semiBold" color={colorPalette.grey[800]}>
           단체정보
         </Typography>
-        <Flex gap="1rem" flexDirection="column" className={style.bottomBox}>
+        <Flex gap="0.5rem" flexDirection="column" className={style.bottomBox}>
           <Box>
             <Typography
               as="h5"
