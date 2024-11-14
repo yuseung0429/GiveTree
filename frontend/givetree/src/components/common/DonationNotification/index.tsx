@@ -40,7 +40,7 @@ const DonationNotification = async ({
             ellipsis
           >
             결제 금액의 {Math.round((contribution / price) * 100)}%인{' '}
-            {contribution.toLocaleString()}원은
+            <strong>{contribution.toLocaleString()}원</strong>은
             <br />
             <span className={s.highlight}>{data.name}</span>에 후원됩니다.
           </Typography>

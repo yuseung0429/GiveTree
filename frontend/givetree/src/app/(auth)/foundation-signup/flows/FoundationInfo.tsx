@@ -1,18 +1,9 @@
 'use client';
 
-import { FormEvent, startTransition, useActionState, useEffect } from 'react';
-
-import useDialog from '@/hooks/useDialog';
-
-import signupFoundation from '@/actions/auth/signupFoundation';
-
+import FoundationInfoForm from '@/components/auth/FoundationInfoForm';
 import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
-import FormButton from '@/components/common/FormButton';
-import FormField from '@/components/common/FormField';
-import ImageUploader from '@/components/common/ImageUploader';
-import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
 
 interface FoundationInfoProps {
@@ -26,31 +17,6 @@ const FoundationInfo = ({
   onBackClick,
   onSubmit,
 }: FoundationInfoProps) => {
-  const { alert } = useDialog();
-
-  const [state, action, isPending] = useActionState(signupFoundation, {});
-
-  useEffect(() => {
-    if (state.success) {
-      onSubmit();
-    }
-
-    if (state.message) {
-      alert(state.message);
-    }
-  }, [alert, state, onSubmit]);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    const signupFormData = new FormData(e.target as HTMLFormElement);
-
-    formData?.forEach((value, key) => {
-      signupFormData.set(key, value);
-    });
-
-    startTransition(() => action(signupFormData));
-  };
   return (
     <Flex flexDirection="column">
       <Flex alignItems="center" justifyContent="space-between" gap="0.5rem">
@@ -73,63 +39,7 @@ const FoundationInfo = ({
       </Flex>
 
       <Box marginTop="1.5rem">
-        <form onSubmit={handleSubmit}>
-          <Flex flexDirection="column" gap="1.5rem">
-            <FormField label="사업자 등록번호">
-              <TextField
-                type="tel"
-                name="corporateRegistrationNumber"
-                size="lg"
-                placeholder="000-00-00000"
-              />
-            </FormField>
-
-            <FormField label="전화번호">
-              <TextField
-                type="tel"
-                name="phoneNumber"
-                size="lg"
-                placeholder="010-0000-000"
-              />
-            </FormField>
-
-            <FormField label="주소">
-              <TextField name="address" size="lg" />
-            </FormField>
-
-            <FormField label="재단 소개">
-              <TextField
-                name="introduction"
-                size="lg"
-                placeholder="최대 1000자까지 작성 가능합니다."
-                height="10rem"
-                multiline
-              />
-            </FormField>
-
-            <FormField label="대표 이미지">
-              <ImageUploader name="titleImageUrl" maxFileCount={1} />
-            </FormField>
-
-            <FormField
-              label="기타 이미지"
-              description="재단을 소개할 수 있는 이미지가 있으면 추가해 주세요."
-            >
-              <ImageUploader name="imageUrls" maxFileCount={5} />
-            </FormField>
-
-            <FormField
-              label="카테고리"
-              description="쉼표(,)로 구분하여 여러 개의 카테고리를 등록할 수 있습니다."
-            >
-              <TextField name="categories" size="lg" />
-            </FormField>
-
-            <FormButton size="lg" pending={isPending} fullWidth>
-              재단 계정 만들기
-            </FormButton>
-          </Flex>
-        </form>
+        <FoundationInfoForm formData={formData} onSubmit={onSubmit} />
       </Box>
     </Flex>
   );

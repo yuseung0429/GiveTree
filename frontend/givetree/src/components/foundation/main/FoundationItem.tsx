@@ -12,7 +12,7 @@ interface FoundationItemProps {
   foundation: {
     id: number;
     introduction: string;
-    profileImageUrl?: string ;
+    profileImageUrl?: string;
     name: string;
   };
   onClick?: () => void;
@@ -34,6 +34,7 @@ export default function FoundationItem({
           src={foundation.profileImageUrl}
           borderColor={colorPalette.grey[400]}
           size="md"
+          style={{ flex: '0 0 auto' }}
         />
         <Box className={style.textbox}>
           <Typography as="h4" weight="medium">

@@ -56,19 +56,6 @@ export default async function writeMarketPost(
       }),
     });
 
-    console.log({
-      foundationId,
-      price,
-      contribution,
-      title,
-      description,
-      imageUrls,
-      status,
-      productionCondition,
-      isDirectSale,
-      isDeliverySale,
-    });
-
     switch (response.status) {
       case 200:
         return { success: true };

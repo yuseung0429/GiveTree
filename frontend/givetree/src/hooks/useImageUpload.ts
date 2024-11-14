@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 export interface ImageData {
   key: number;
-  file: File;
+  file?: File;
   url?: string;
   done: boolean;
 }
@@ -15,9 +15,10 @@ interface ImageUploadEventHandler {
 
 const useImageUpload = (
   fileRef: React.RefObject<HTMLInputElement>,
-  eventHandler: ImageUploadEventHandler
+  eventHandler: ImageUploadEventHandler,
+  defaultKey: number = 0
 ) => {
-  const keyRef = useRef<number>(0);
+  const keyRef = useRef<number>(defaultKey);
 
   const select = useCallback(() => {
     fileRef.current?.click();
@@ -38,8 +39,12 @@ const useImageUpload = (
 
       handleUpload(imageItems);
 
-      imageItems.forEach((imageItem) =>
-        uploadImage(
+      imageItems.forEach((imageItem) => {
+        if (!imageItem.file) {
+          return;
+        }
+
+        return uploadImage(
           imageItem.file,
           (url) => {
             eventHandler.onUpload?.(imageItem.key, url);
@@ -47,8 +52,8 @@ const useImageUpload = (
           (status) => {
             eventHandler.onError?.(imageItem.key, status);
           }
-        )
-      );
+        );
+      });
     },
     [fileRef, eventHandler]
   );
