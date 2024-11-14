@@ -25,7 +25,7 @@ public class FoundationDonationTokenExchanger {
     private final MemberWalletReader memberWalletReader;
     private final TransactionLedgerAppender transactionLedgerAppender;
 
-    public void exchange(long foundationId, List<Long> transactionIds, String simplePassword, String message) {
+    public long exchange(long foundationId, List<Long> transactionIds, String simplePassword, String message) {
         memberValidator.validateFoundation(foundationId);
         memberFinanceValidator.validateSimplePassword(foundationId, simplePassword);
 
@@ -39,12 +39,14 @@ public class FoundationDonationTokenExchanger {
             throw new RestApiException(TransactionErrorCode.TRANSACTION_ALREADY_PROCESSED);
         }
 
-        long amount = 0;
+        long totalAmount = 0;
         for (Transaction transaction : transactions) {
-            amount += transaction.getAmount();
+            totalAmount += transaction.getAmount();
         }
 
-        long ledgerId = tokenExchanger.exchange(foundationId, amount, message);
+        long ledgerId = tokenExchanger.exchange(foundationId, totalAmount, message);
         transactionLedgerAppender.appendAll(transactionIds, ledgerId);
+
+        return totalAmount;
     }
 }
