@@ -1,14 +1,15 @@
 package com.dareuda.givetree.donation.domain;
 
-import com.dareuda.givetree.foundation.domain.Foundation;
 import com.dareuda.givetree.history.domain.Transaction;
 import com.dareuda.givetree.member.domain.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -16,24 +17,27 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
+@Table(name = "donation")
+@DiscriminatorColumn(name = "type")
 @EntityListeners(AuditingEntityListener.class)
-public class Donation {
+@Inheritance(strategy = InheritanceType.JOINED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public abstract class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "donation")
+    @Column(name = "donation_id")
     private Long id;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "donor_id")
-    @NotNull
     private Member donor;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transaction_id")
-    @NotNull
     private Transaction transaction;
 
     @Column
@@ -42,10 +46,4 @@ public class Donation {
 
     @CreatedDate
     private LocalDateTime createdAt;
-
-    protected Donation(Member donor, Transaction transaction, Long amount) {
-        this.donor = donor;
-        this.transaction = transaction;
-        this.amount = amount;
-    }
 }

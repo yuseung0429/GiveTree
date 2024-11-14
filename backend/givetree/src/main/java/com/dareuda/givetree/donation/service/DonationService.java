@@ -1,31 +1,37 @@
 package com.dareuda.givetree.donation.service;
 
-import com.dareuda.givetree.common.errors.errorcode.CommonErrorCode;
-import com.dareuda.givetree.common.errors.exception.RestApiException;
-import com.dareuda.givetree.donation.domain.CampaignDonor;
-import com.dareuda.givetree.donation.domain.DonationOption;
-import com.dareuda.givetree.donation.domain.FoundationRegularDonor;
-import com.dareuda.givetree.donation.domain.FoundationOneTimeDonor;
-import com.dareuda.givetree.donation.domain.dto.DonateToFoundationCommand;
+import com.dareuda.givetree.donation.domain.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class DonationService {
-    private final FoundationOneTimeDonor foundationOneTimeDonor;
-    private final FoundationRegularDonor foundationRegularDonor;
     private final CampaignDonor campaignDonor;
+    private final FoundationDonor foundationDonor;
+    private final FoundationDonateSubscriptionRegistrar foundationDonateSubscriptionRegistrar;
+    private final FoundationDonateSubscriptionInfoReader foundationDonateSubscriptionInfoReader;
+    private final FoundationDonateSubscriptionRemover foundationDonateSubscriptionRemover;
 
-    public void donateToFoundation(DonateToFoundationCommand command, DonationOption option) {
-        switch (option) {
-            case ONE_TIME_DONATION -> foundationOneTimeDonor.donate(command);
-            case REGULAR_DONATION -> foundationRegularDonor.donate(command);
-            default -> throw new RestApiException(CommonErrorCode.BAD_REQUEST, "기부 옵션을 찾을 수 없습니다.");
-        }
+    public void donateFoundation(long userId, long foundationId, long amount, String simplePassword) {
+        foundationDonor.donate(userId, foundationId, amount, simplePassword);
     }
 
-    public void donateToCampaign(long memberId, long campaignId, long amount, String message, String simplePassword) {
-        campaignDonor.donate(memberId, campaignId, amount, message, simplePassword);
+    public void registerFoundationDonateSubscription(long userId, long foundationId, long amount, String simplePassword) {
+        foundationDonateSubscriptionRegistrar.register(userId, foundationId, amount, simplePassword);
+    }
+
+    public void donateCampaign(long userId, long campaignId, long amount, String message, String simplePassword) {
+        campaignDonor.donate(userId, campaignId, amount, message, simplePassword);
+    }
+
+    public Slice<FoundationDonateSubscriptionInfo> readFoundationDonationRegular(long userId, Pageable pageable) {
+        return foundationDonateSubscriptionInfoReader.readByMemberIdFetchFoundation(userId, pageable);
+    }
+
+    public void removeFoundationDonateSubscription(long userid, long foundationId) {
+        foundationDonateSubscriptionRemover.remove(userid, foundationId);
     }
 }
