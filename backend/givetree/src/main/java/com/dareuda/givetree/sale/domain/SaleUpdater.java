@@ -83,4 +83,10 @@ public class SaleUpdater {
         sale.updateStatus(SaleStatus.ON_SALE);
         sale.updatePurchaserId(null);
     }
+
+    @Transactional
+    public void completeSale(long saleId) {
+        Sale sale = saleReader.read(saleId);
+        sale.updateStatus(SaleStatus.SOLD);
+    }
 }
