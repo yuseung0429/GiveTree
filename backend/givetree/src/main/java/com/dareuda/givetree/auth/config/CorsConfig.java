@@ -17,6 +17,7 @@ public class CorsConfig {
 
         configuration.setAllowCredentials(true);
         configuration.addAllowedOrigin("https://givetree.co.kr");
+        configuration.addAllowedOrigin("http://localhost3000:");
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("*"));
