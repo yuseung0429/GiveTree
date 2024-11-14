@@ -1,7 +1,7 @@
-import { BaseSyntheticEvent, FormEvent, useRef } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { BaseSyntheticEvent, FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 import { accountInfoSchema } from './schema';
 
@@ -22,8 +22,6 @@ const AccountInfoForm = ({
   formData,
   onSubmit: propOnSubmit,
 }: AccountInfoFormProps) => {
-  const formRef = useRef<HTMLFormElement>(null);
-
   const {
     register,
     handleSubmit,
@@ -43,7 +41,7 @@ const AccountInfoForm = ({
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Flex flexDirection="column" gap="1.5rem">
         <FormField label="이메일 주소" errorMessage={errors.email?.message}>
           <TextField
@@ -101,6 +99,11 @@ const AccountInfoForm = ({
             {...register('profileImage')}
             onUpload={(images) =>
               setValue('profileImage', images.length.toString())
+            }
+            defaultValue={
+              formData.get('profileImage')
+                ? [formData.get('profileImage')?.toString() || '']
+                : []
             }
           />
         </FormField>
