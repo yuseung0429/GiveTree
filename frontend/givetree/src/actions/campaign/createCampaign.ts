@@ -50,6 +50,18 @@ export default async function createCampaign(
         imageUrls,
       }),
     });
+
+    // console.log(
+    //   foundationId,
+    //   name,
+    //   introduction,
+    //   startDate,
+    //   endDate,
+    //   targetFundraisingAmount,
+    //   titleImageUrl,
+    //   imageUrls
+    // );
+
     switch (response.status) {
       case 201:
         return {

@@ -65,7 +65,7 @@ const CampaignCard = ({
         />
         <div className={styles.amountContainer}>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {currentFundraisingAmount.toLocaleString()}원
+            {currentFundraisingAmount?.toLocaleString()}원
           </Typography>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
             {targetFundraisingAmount.toLocaleString()}원 목표

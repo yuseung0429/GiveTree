@@ -8,6 +8,9 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import { HiOutlineTrash } from 'react-icons/hi2';
 import Image from 'next/image';
 import Link from 'next/link';
+import DeleteCampaign from '@/actions/campaign/deleteCampaign';
+import { useRouter } from 'next/navigation';
+import useDialog from '@/hooks/useDialog';
 
 interface CampaignItemProps {
   id: number;
@@ -28,6 +31,21 @@ export default function CampaignItem({
   currentFundraisingAmount,
   titleImageUrl,
 }: CampaignItemProps) {
+  const router = useRouter();
+  const { alert, confirm } = useDialog();
+
+  const handleDeleteClick = async () => {
+    if (!(await confirm('캠페인을 삭제하시겠습니까?'))) {
+      return;
+    }
+
+    if (!(await DeleteCampaign(id.toString()))) {
+      alert('삭제를 실패하였습니다.');
+      return;
+    }
+
+    router.refresh();
+  };
   const today = new Date();
   const endDateTime = new Date(endDate);
 
@@ -47,13 +65,14 @@ export default function CampaignItem({
 
   // 금액 포맷팅 함수
   const formatAmount = (amount: number) => {
-    return amount.toLocaleString('ko-KR') + '원';
+    return amount?.toLocaleString('ko-KR') + '원';
   };
+
   return (
-    <Link href={`/campaign/${id}`}>
-      <Flex gap="1rem" className={style.container}>
-        {/* 사진 */}
-        <Box className={style.imgbox}>
+    <Flex gap="1rem" className={style.container}>
+      {/* 사진 */}
+      <Box className={style.imgbox}>
+        <Link href={`/campaign/${id}`}>
           <Image
             src={titleImageUrl}
             alt="캠페인사진"
@@ -61,58 +80,63 @@ export default function CampaignItem({
             style={{ objectFit: 'cover' }}
             sizes="125px"
           />
-        </Box>
+        </Link>
+      </Box>
 
-        {/* 설명 */}
-        <Flex flexDirection="column" justifyContent="space-between">
-          {/* 캠페인명 */}
-          <Typography size={18} weight="semiBold">
-            {name}
-          </Typography>
+      {/* 설명 */}
+      <Flex flexDirection="column" justifyContent="space-between">
+        {/* 캠페인명 */}
+        <Typography size={18} weight="semiBold">
+          {name}
+        </Typography>
 
-          {/* 날짜 */}
-          <Typography color={colorPalette.grey[800]} size={14}>
-            {startDate} ~ {endDate}
-          </Typography>
+        {/* 날짜 */}
+        <Typography color={colorPalette.grey[800]} size={14}>
+          {startDate} ~ {endDate}
+        </Typography>
 
-          {/* 목표금액 */}
-          <Typography weight="medium" color={colorPalette.grey[800]}>
-            목표 금액 :{' '}
-            <span className={style.money2}>
-              {formatAmount(targetFundraisingAmount)}
-            </span>
-          </Typography>
+        {/* 목표금액 */}
+        <Typography weight="medium" color={colorPalette.grey[800]}>
+          목표 금액 :{' '}
+          <span className={style.money2}>
+            {formatAmount(targetFundraisingAmount)}
+          </span>
+        </Typography>
 
-          {/* 모금금액 */}
-          <Typography weight="medium" color={colorPalette.grey[800]}>
-            모금 금액 :{' '}
-            <span className={style.money}>
-              {formatAmount(currentFundraisingAmount)}
-            </span>
-          </Typography>
+        {/* 모금금액 */}
+        <Typography weight="medium" color={colorPalette.grey[800]}>
+          모금 금액 :{' '}
+          <span className={style.money}>
+            {formatAmount(currentFundraisingAmount)}
+          </span>
+        </Typography>
 
-          {/* 태그 */}
-          <Flex gap={8} style={{ marginTop: '4px', alignItems: 'center' }}>
-            <Box
-              padding="5px 10px"
-              backgroundColor={campaignStatusColor}
-              className={style.tag}
-            >
-              {campaignStatus}
-            </Box>
-            <Box
-              padding="5px 10px"
-              backgroundColor={achievementStatusColor}
-              className={style.tag}
-            >
-              {achievementStatus}
-            </Box>
-            <Box>
-              <HiOutlineTrash size={20} color={colorPalette.grey[800]} />
-            </Box>
-          </Flex>
+        {/* 태그 */}
+        <Flex gap={8} style={{ marginTop: '4px', alignItems: 'center' }}>
+          <Box
+            padding="5px 10px"
+            backgroundColor={campaignStatusColor}
+            className={style.tag}
+          >
+            {campaignStatus}
+          </Box>
+          <Box
+            padding="5px 10px"
+            backgroundColor={achievementStatusColor}
+            className={style.tag}
+          >
+            {achievementStatus}
+          </Box>
+          {/* 삭제 */}
+          <Box>
+            <HiOutlineTrash
+              size={20}
+              color={colorPalette.grey[800]}
+              onClick={handleDeleteClick}
+            />
+          </Box>
         </Flex>
       </Flex>
-    </Link>
+    </Flex>
   );
 }
