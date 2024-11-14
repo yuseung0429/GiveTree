@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/common/Button';
-import * as style from './exchange.css';
+import * as style from '../exchange.css';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';

@@ -8,9 +8,9 @@ const spin = keyframes({
 
 export const grabox = style({
   background: `linear-gradient(to bottom, ${colorPalette.primary[300]} 0%, #F5F5F5 100%)`,
-  height: '220px',
+  height: '240px',
   width: '100%',
-  padding: '20px',
+  padding: '1.25rem',
 });
 
 export const walletcontainer = style({
