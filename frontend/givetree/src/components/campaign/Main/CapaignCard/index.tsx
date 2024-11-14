@@ -39,7 +39,6 @@ const CampaignCard = ({
         <Typography
           as="h2"
           weight="semiBold"
-          color={colorPalette.text[900]}
           className={styles.campaignTitle}
         >
           {title}
@@ -50,9 +49,8 @@ const CampaignCard = ({
           </Typography>
         </div>
         <Typography
-          as="h4"
+          as="h3"
           weight="semiBold"
-          color={colorPalette.text[700]}
           className={styles.campaignSubtitle}
         >
           {foundation}

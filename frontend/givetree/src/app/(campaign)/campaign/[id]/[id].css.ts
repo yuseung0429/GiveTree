@@ -15,6 +15,8 @@ export const coverImgContainer = style({
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   position: 'relative',
+  width: '100%',
+  height: '250px',
   borderBottomLeftRadius: '20px',
   borderBottomRightRadius: '20px',
 

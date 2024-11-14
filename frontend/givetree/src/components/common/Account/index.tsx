@@ -4,8 +4,9 @@ import Flex from '@/components/common/Flex';
 import { BiPlus } from 'react-icons/bi';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
+import Link from 'next/link';
 
-interface AccountInfo {
+export interface AccountInfo {
   accountNumber: string;
   accountName: string;
   bankName: string;
@@ -20,10 +21,7 @@ interface AccountProps {
 
 export default function Account({ registeredAccount }: AccountProps) {
   return (
-    <Box>
-      <Typography as="h3" weight="medium" style={{ marginLeft: '0.5rem' }}>
-        결제수단
-      </Typography>
+    <Box paddingBottom="1.75rem">
       <Flex
         className={style.accountBox}
         justifyContent="center"
@@ -46,13 +44,16 @@ export default function Account({ registeredAccount }: AccountProps) {
             </Typography>
           ) : (
             <>
-              <Flex
-                className={style.plus}
-                justifyContent="center"
-                alignItems="center"
-              >
-                <BiPlus size={20} color={colorPalette.grey[700]} />
-              </Flex>
+              <Link href={'/account'}>
+                <Flex
+                  className={style.plus}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <BiPlus size={20} color={colorPalette.grey[700]} />
+                </Flex>
+              </Link>
+
               <Typography
                 size={12}
                 weight="medium"

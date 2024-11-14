@@ -1,10 +1,10 @@
 import Account from '@/components/common/Account';
 import Box from '@/components/common/Box';
-import Button from '@/components/common/Button';
-import * as styles from './donation.css';
 import fetchWrapper from '@/lib/fetchWrapper';
 import Donation from '@/components/campaign/Donation';
 import { getRegisteredAccount } from '@/api/account/getRegisteredAccount';
+import Typography from '@/components/common/Typography';
+import Flex from '@/components/common/Flex';
 
 export default async function DonationPage({
   params,
@@ -25,27 +25,21 @@ export default async function DonationPage({
 
   return (
     <div style={{ backgroundColor: '#F5F5F5' }}>
-      <Box
-        as="section"
-        marginBottom="15px"
-        backgroundColor="white"
-        padding="25px 15px"
-      >
-        <Donation name={campaignData.name} />
-      </Box>
+      <Donation name={campaignData.name} image={campaignData.titleImageUrl} id={campaignData.id} isAccount={registeredAccount}/>
 
       <Box
         as="section"
         marginBottom="15px"
         backgroundColor="white"
-        padding="20px 15px"
+        padding="1.5rem 1rem"
       >
-        <Account registeredAccount={registeredAccount} />
+        <Typography as="h3" weight="medium" style={{ marginLeft: '0.5rem' }}>
+          결제수단
+        </Typography>
+        <Flex justifyContent="center">
+          <Account registeredAccount={registeredAccount} />
+        </Flex>
       </Box>
-
-      <div className={styles.giveButton}>
-        <Button fullWidth>후원하기</Button>
-      </div>
     </div>
   );
 }

@@ -9,18 +9,18 @@ import { CampaignData } from '@/types/campaign/types';
 export default async function Home() {
   const response = await fetchWrapper('/campaigns', { method: 'GET' });
   const campaignList = await response.json();
-  const campaigns = campaignList.content;
+  const campaigns = campaignList?.content;
 
   const today = new Date();
   const twoWeeksLater = new Date(today);
   twoWeeksLater.setDate(today.getDate() + 14);
 
-  const endingSoonCampaigns = campaigns.filter((campaign: CampaignData) => {
+  const endingSoonCampaigns = campaigns?.filter((campaign: CampaignData) => {
     const endDate = new Date(campaign.endDate);
     return endDate <= twoWeeksLater && endDate >= today;
   });
 
-  const progressCampaigns = campaigns.filter((campaign: CampaignData) => {
+  const progressCampaigns = campaigns?.filter((campaign: CampaignData) => {
     const endDate = new Date(campaign.endDate);
     return endDate >= today;
   });
@@ -28,7 +28,7 @@ export default async function Home() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.mainContainer}>
-        {progressCampaigns.length !== 0 && (
+        {progressCampaigns && progressCampaigns.length !== 0 && (
           <>
             <Typography
               as="h3"
@@ -59,7 +59,7 @@ export default async function Home() {
 
         <div style={{ height: '20px' }}></div>
 
-        {endingSoonCampaigns.length !== 0 && (
+        {endingSoonCampaigns && endingSoonCampaigns.length !== 0 && (
           <>
             <Typography
               as="h3"
