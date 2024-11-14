@@ -22,6 +22,8 @@ public class TokenService {
     private final TokenBalanceLoader tokenBalanceLoader;
     private final CampaignDonationTokenExchanger campaignDonationTokenExchanger;
     private final TransactionInfoReader transactionInfoReader;
+    private final FoundationDonationTokenExchangeMessageSender foundationDonationTokenExchangeMessageSender;
+    private final CampaignDonationTokenExchangeMessageSender campaignDonationTokenExchangeMessageSender;
 
     public long loadTokenMemberBalance(long memberId) {
         Wallet wallet = memberWalletReader.readByMemberId(memberId);
@@ -29,11 +31,13 @@ public class TokenService {
     }
 
     public void exchangeFoundationDonationToken(long foundationId, List<Long> transactionIds, String simplePassword, String message) {
-        foundationDonationTokenExchanger.exchange(foundationId, transactionIds, simplePassword, message);
+        long amount = foundationDonationTokenExchanger.exchange(foundationId, transactionIds, simplePassword, message);
+        foundationDonationTokenExchangeMessageSender.send(foundationId, amount);
     }
 
     public void exchangeCampaignDonationToken(long foundationId, List<Long> transactionIds, String simplePassword) {
-        campaignDonationTokenExchanger.exchange(foundationId, transactionIds, simplePassword);
+        long amount = campaignDonationTokenExchanger.exchange(foundationId, transactionIds, simplePassword);
+        campaignDonationTokenExchangeMessageSender.send(foundationId, amount);
     }
 
     public Slice<TransactionInfo> getFoundationDonationTransactionInfos(long foundationId, Pageable pageable) {
