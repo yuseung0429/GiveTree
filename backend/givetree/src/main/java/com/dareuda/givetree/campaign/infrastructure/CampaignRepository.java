@@ -1,6 +1,7 @@
 package com.dareuda.givetree.campaign.infrastructure;
 
 import com.dareuda.givetree.campaign.domain.Campaign;
+import com.dareuda.givetree.foundation.domain.Foundation;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
@@ -19,9 +20,16 @@ public interface CampaignRepository extends Repository<Campaign, Long> {
     """)
     Optional<Campaign> findById(long id);
 
+    @Query("""
+        SELECT DISTINCT c
+        FROM Campaign c
+        WHERE c.name = :name and c.isDeleted = false
+    """)
+    Optional<Foundation> findByName(String name);
+
     Optional<Campaign> getReferenceById(long id);
 
-    List<Long> findByFoundationId(long foundationId);
+    List<Campaign> findByFoundationId(long foundationId);
 
     int countByFoundationId(long foundationId);
 }
