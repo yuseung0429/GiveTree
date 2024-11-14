@@ -11,6 +11,7 @@ import Flex from '@/components/common/Flex';
 import ProfileImage from '@/components/common/ProfileImage';
 import Typography from '@/components/common/Typography';
 import PurchaseButton from '@/components/market/PurchaseButton';
+import ReservationButton from '@/components/market/ReservationButton';
 
 interface ChatHeaderProps {
   id: number;
@@ -52,8 +53,8 @@ const ChatHeader = async ({ id }: ChatHeaderProps) => {
           </Link>
         </div>
         <div style={{ flex: '0 0 auto' }}>
-          {data.sellerId === member.id ? (
-            '내 상품임'
+          {data.sellerId !== member.id ? (
+            <ReservationButton saleId={id} />
           ) : (
             <PurchaseButton saleId={id} />
           )}
