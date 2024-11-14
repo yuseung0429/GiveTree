@@ -306,7 +306,7 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
                     .forEach(e -> imageUrls.add(e.getAsString()));
 
             if (campaignRepository.findByName(name).isPresent()) {
-                throw new RestApiException(CommonErrorCode.RESOURCE_CONFLICT, "해당 이름의 캠페인이 이미 존재합니다.");
+                continue;
             }
             Foundation foundation = foundationRepository.findByName(foundationName)
                     .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND, "해당 이름의 재단을 찾을 수 없습니다"));
