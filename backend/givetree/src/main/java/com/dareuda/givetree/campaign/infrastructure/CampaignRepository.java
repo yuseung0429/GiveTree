@@ -25,7 +25,7 @@ public interface CampaignRepository extends Repository<Campaign, Long> {
         FROM Campaign c
         WHERE c.name = :name and c.isDeleted = false
     """)
-    Optional<Foundation> findByName(String name);
+    Optional<Campaign> findByName(String name);
 
     Optional<Campaign> getReferenceById(long id);
 
