@@ -9,6 +9,8 @@ import {
   useState,
 } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import useDialog from '@/hooks/useDialog';
 
 import writeMarketPost from '@/actions/market/writeMarketPost';
@@ -25,6 +27,8 @@ import TextField from '@/components/common/TextField';
 import DonationSelector from '@/components/market/DonationSelector';
 
 export default function WritePage() {
+  const router = useRouter();
+
   const { alert } = useDialog();
 
   const [price, handlePriceChange] = useNumericInput();
@@ -36,13 +40,16 @@ export default function WritePage() {
 
   useEffect(() => {
     if (state.success) {
-      alert('게시글 작성 완료');
+      (async () => {
+        await alert('판매 게시글이 등록되었습니다.');
+        router.push('/market');
+      })();
     }
 
     if (state.message) {
       alert(state.message);
     }
-  }, [alert, state]);
+  }, [alert, state, router]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

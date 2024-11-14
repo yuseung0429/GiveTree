@@ -27,3 +27,14 @@ export const container = style({
     },
   },
 });
+
+export const imageWrapper = style({
+  flex: '0 0 auto',
+  position: 'relative',
+  overflow: 'hidden',
+  width: '6rem',
+  height: '6rem',
+  border: `0.0625rem solid ${colorPalette.grey[400]}`,
+  borderRadius: '0.25rem',
+  backgroundColor: colorPalette.grey[200],
+});

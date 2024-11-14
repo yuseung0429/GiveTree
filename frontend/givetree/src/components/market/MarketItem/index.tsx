@@ -1,6 +1,11 @@
-import * as s from './MarketItem.css';
-
 import Link from 'next/link';
+import Image from 'next/image';
+
+import { highlightedTags } from '@/constatns/tag';
+
+import type { SalePost } from '@/types/market/market';
+
+import { getTimeDifference } from '@/utils/time';
 
 import typography from '@/styles/tokens/typography';
 
@@ -9,44 +14,54 @@ import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 import Chip from '@/components/common/Chip';
 
-interface MarketItemProps {
-  id: number;
-}
+import * as s from './MarketItem.css';
 
-const MarketItem = ({ id }: MarketItemProps) => {
+type MarketItemProps = SalePost;
+
+const MarketItem = ({
+  id,
+  title,
+  imageUrl,
+  isDeliverySale,
+  isDirectSale,
+  price,
+  productionsCondition,
+  status,
+  createdDateTime,
+}: MarketItemProps) => {
   return (
     <div className={s.wrapper}>
       <Link href={`/market/post/${id}`}>
-        <Flex gap="0.5rem" alignItems="center" className={s.container}>
-          <Box
-            padding="1rem"
-            borderRadius="0.75rem"
-            backgroundColor="#eee"
-            width="96px"
-            height="96px"
-            style={{ flex: '0 0 auto' }}
-          ></Box>
+        <Flex gap="0.5rem" alignItems="flex-start" className={s.container}>
+          <div className={s.imageWrapper}>
+            <Image src={imageUrl} alt="상품 이미지" width={96} height={96} />
+          </div>
           <Box style={{ flex: '1 1 auto', overflow: 'hidden' }}>
             <Typography weight="medium" ellipsis>
-              갤럭시s23울트라1tb 팬텀블랙 자급제
+              {title}
             </Typography>
             <Typography
               size={typography.size.sm}
               weight="regular"
               style={{ margin: '0.25rem 0' }}
             >
-              3시간 전
+              {getTimeDifference(createdDateTime)}
             </Typography>
             <Typography
               size={typography.size.lg}
               weight="semiBold"
               style={{ margin: '0.5rem 0' }}
             >
-              850,000원
+              {price.toLocaleString()}원
             </Typography>
-            <Flex gap="0.375rem">
-              <Chip size="sm">판매중</Chip>
-              <Chip size="sm">직거래</Chip>
+            <Flex gap="0.375rem" style={{ flexWrap: 'wrap' }}>
+              <Chip size="sm" color={highlightedTags[status] || 'grey'}>
+                {status}
+              </Chip>
+
+              {isDirectSale && <Chip size="sm">직거래</Chip>}
+              {isDeliverySale && <Chip size="sm">택배거래</Chip>}
+              <Chip size="sm">{productionsCondition}</Chip>
             </Flex>
           </Box>
         </Flex>
