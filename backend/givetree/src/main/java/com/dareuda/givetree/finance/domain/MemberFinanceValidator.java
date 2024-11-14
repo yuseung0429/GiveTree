@@ -29,4 +29,11 @@ public class MemberFinanceValidator {
             throw new RestApiException(MemberFinanceErrorCode.MEMBER_FINANCE_SIMPLE_PASSWORD_MISMATCH);
         }
     }
+
+    public boolean validateSimplePasswordReturnBoolean(long memberId, String inputPassword) {
+        MemberFinance memberFinance = memberFinanceReader.read(memberId);
+
+        String simplePassword = sha256Utils.generate(inputPassword + memberFinance.getSalt());
+        return Objects.equals(memberFinance.getSimplePassword(), simplePassword);
+    }
 }
