@@ -1,5 +1,6 @@
 package com.dareuda.givetree.donation.domain;
 
+import com.dareuda.givetree.donation.domain.dto.DonateToFoundationCommand;
 import com.dareuda.givetree.token.domain.FoundationDonationTokenTransferrer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,13 @@ import org.springframework.stereotype.Component;
 public class FoundationOneTimeDonor {
     private final FoundationDonationTokenTransferrer foundationDonationTokenTransferrer;
 
-    public void donate(long memberId, long foundationId, long amount, String simplePassword) {
-        foundationDonationTokenTransferrer.transfer(memberId, foundationId, amount, simplePassword, "");
+    public void donate(DonateToFoundationCommand command) {
+        foundationDonationTokenTransferrer.transfer(
+                command.getMemberId(),
+                command.getFoundationId(),
+                command.getAmount(),
+                command.getSimplePassword(),
+                command.getMessage()
+        );
     }
 }

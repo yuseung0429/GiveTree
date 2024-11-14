@@ -12,11 +12,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CampaignDetailReader {
     private final CampaignReader campaignReader;
+    private final CampaignTotalAmountLoader campaignTotalAmountLoader;
 
     @Transactional(readOnly = true)
     public CampaignDetail read(Campaign campaign) {
         String titleImageUrl = campaign.getTitleImage() != null ? campaign.getTitleImage().getUrl() : null;
         List<String> imageUrls = campaign.getImages().stream().map(CampaignImage::getImage).map(Media::getUrl).toList();
+        long currentAmount = campaignTotalAmountLoader.load(campaign.getId());
 
         return CampaignDetail.builder()
                 .id(campaign.getId())
@@ -29,6 +31,7 @@ public class CampaignDetailReader {
                 .titleImageUrl(titleImageUrl)
                 .imageUrls(imageUrls)
                 .targetFundraisingAmount(campaign.getTargetFundraisingAmount())
+                .currentFundraisingAmount(currentAmount)
                 .build();
     }
 

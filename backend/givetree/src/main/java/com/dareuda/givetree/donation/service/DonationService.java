@@ -6,6 +6,7 @@ import com.dareuda.givetree.donation.domain.CampaignDonor;
 import com.dareuda.givetree.donation.domain.DonationOption;
 import com.dareuda.givetree.donation.domain.FoundationRegularDonor;
 import com.dareuda.givetree.donation.domain.FoundationOneTimeDonor;
+import com.dareuda.givetree.donation.domain.dto.DonateToFoundationCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,10 @@ public class DonationService {
     private final FoundationRegularDonor foundationRegularDonor;
     private final CampaignDonor campaignDonor;
 
-    public void donateToFoundation(long memberId, long foundationId, long amount, String simplePassword, DonationOption option) {
+    public void donateToFoundation(DonateToFoundationCommand command, DonationOption option) {
         switch (option) {
-            case ONE_TIME_DONATION -> foundationOneTimeDonor.donate(memberId, foundationId, amount, simplePassword);
-            case REGULAR_DONATION -> foundationRegularDonor.donate(memberId, foundationId, amount, simplePassword);
+            case ONE_TIME_DONATION -> foundationOneTimeDonor.donate(command);
+            case REGULAR_DONATION -> foundationRegularDonor.donate(command);
             default -> throw new RestApiException(CommonErrorCode.BAD_REQUEST, "기부 옵션을 찾을 수 없습니다.");
         }
     }
