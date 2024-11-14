@@ -47,7 +47,11 @@ const useNotification = () => {
 
       onMessage(messaging, (payload) => {
         const { title, body, image } = payload.notification!;
-        new Notification(title || '', { body, icon: image });
+        new Notification(title || '', {
+          body,
+          icon: '/favicon.svg',
+          badge: image,
+        });
       });
     });
   }, []);
