@@ -11,5 +11,7 @@ public class DonateToFoundationRequest {
     @Min(0)
     private final long amount;
     @NotNull
+    private final String message;
+    @NotNull
     private final String simplePassword;
 }

@@ -1,5 +1,6 @@
 package com.dareuda.givetree.donation.domain;
 
+import com.dareuda.givetree.donation.domain.dto.DonateToFoundationCommand;
 import com.dareuda.givetree.finance.domain.MemberFinanceValidator;
 import com.dareuda.givetree.foundation.domain.Foundation;
 import com.dareuda.givetree.foundation.domain.FoundationReader;
@@ -19,17 +20,17 @@ public class FoundationRegularDonor {
     private final MemberFinanceValidator memberFinanceValidator;
 
     @Transactional
-    public void donate(long memberId, long foundationId, long amount, String simplePassword) {
-        memberFinanceValidator.validateSimplePassword(memberId, simplePassword);
+    public void donate(DonateToFoundationCommand command) {
+        memberFinanceValidator.validateSimplePassword(command.getMemberId(), command.getSimplePassword());
 
-        Member member = memberReader.read(memberId);
-        Foundation foundation = foundationReader.read(foundationId);
+        Member member = memberReader.read(command.getMemberId());
+        Foundation foundation = foundationReader.read(command.getFoundationId());
 
         regularDonationRepository.save(
                 DonationSubscription.builder()
                         .member(member)
                         .foundation(foundation)
-                        .amount(amount)
+                        .amount(command.getAmount())
                         .build()
         );
     }

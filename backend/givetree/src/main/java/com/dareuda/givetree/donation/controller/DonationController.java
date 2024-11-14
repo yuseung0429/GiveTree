@@ -2,6 +2,7 @@ package com.dareuda.givetree.donation.controller;
 
 import com.dareuda.givetree.auth.domain.UserPrinciple;
 import com.dareuda.givetree.donation.controller.dto.DonateToCampaignRequest;
+import com.dareuda.givetree.donation.domain.dto.DonateToFoundationCommand;
 import com.dareuda.givetree.donation.service.DonationService;
 import com.dareuda.givetree.donation.controller.dto.DonateToFoundationRequest;
 import com.dareuda.givetree.donation.domain.DonationOption;
@@ -24,10 +25,13 @@ public class DonationController {
             @RequestBody DonateToFoundationRequest request
     ) {
         donationService.donateToFoundation(
-                userPrinciple.getId(),
-                foundationId,
-                request.getAmount(),
-                request.getSimplePassword(),
+                DonateToFoundationCommand.builder()
+                        .memberId(userPrinciple.getId())
+                        .foundationId(foundationId)
+                        .amount(request.getAmount())
+                        .message(request.getMessage())
+                        .simplePassword(request.getSimplePassword())
+                        .build(),
                 DonationOption.fromToken(option)
         );
 
