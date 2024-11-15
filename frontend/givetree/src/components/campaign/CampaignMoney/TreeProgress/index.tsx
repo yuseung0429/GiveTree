@@ -1,6 +1,7 @@
 import React from 'react';
 import * as styles from './TreeProgress.css';
 import Typography from '@/components/common/Typography';
+import colorPalette from '@/styles/tokens/colorPalette';
 
 interface TreeProgressProps {
   currentAmount: number;
@@ -49,7 +50,7 @@ const TreeProgress: React.FC<TreeProgressProps> = ({
           <Typography
             as="h3"
             weight="bold"
-            color="red"
+            color={colorPalette.secondary[500]}
             className={styles.progressTextBelow}
           >
             {progress}%

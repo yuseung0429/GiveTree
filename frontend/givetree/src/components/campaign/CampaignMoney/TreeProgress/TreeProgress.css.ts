@@ -55,7 +55,7 @@ export const progressText = style({
 
 export const progressTextBelow = style({
   position: 'relative',
-  color: 'red',
+  color: colorPalette.secondary[500],
   marginTop: '100%',
   textAlign: 'center',
 });

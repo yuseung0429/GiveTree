@@ -1,26 +1,32 @@
 [
   {
+    "foundationId": 3,
+    "foundationImage": "https://cdn.pixabay.com/photo/2024/08/25/12/33/seagull-8996395_1280.jpg",
+    "foundationName": "사랑의 열매",
+    "campaignId": 1,
     "campaignName": "희망 나눔 캠페인",
-    "foundation": "사랑의 열매",
-    "donationDate": "2024-10-15",
-    "donationAmount": 30000
+    "amount": 200000,
+    "message": null,
+    "createdAt": "2024-11-15T10:17:31.618395"
   },
   {
-    "campaignName": "자립청소년 지원 캠페인",
-    "foundation": "초록우산 어린이재단",
-    "donationDate": "2024-09-10",
-    "donationAmount": 20000
+    "foundationId": 3,
+    "foundationImage": "https://cdn.pixabay.com/photo/2024/08/25/12/33/seagull-8996395_1280.jpg",
+    "foundationName": "사랑의 열매",
+    "campaignId": 1,
+    "campaignName": "희망 나눔 캠페인",
+    "amount": 200000,
+    "message": null,
+    "createdAt": "2024-11-15T10:17:31.618395"
   },
   {
-    "campaignName": "아나바다 캠페인",
-    "foundation": "대한적십자사",
-    "donationDate": "2024-08-21",
-    "donationAmount": 10000
-  },
-  {
-    "campaignName": "소외계층 지원 캠페인",
-    "foundation": "굿네이버스",
-    "donationDate": "2024-07-17",
-    "donationAmount": 20000
+    "foundationId": 3,
+    "foundationImage": "https://cdn.pixabay.com/photo/2024/08/25/12/33/seagull-8996395_1280.jpg",
+    "foundationName": "사랑의 열매",
+    "campaignId": 1,
+    "campaignName": "희망 나눔 캠페인",
+    "amount": 200000,
+    "message": null,
+    "createdAt": "2024-11-15T10:17:31.618395"
   }
 ]
