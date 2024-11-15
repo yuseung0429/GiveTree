@@ -1,26 +1,21 @@
 export const dynamic = 'force-dynamic';
 
-import { getTokenBalance } from '@/api/token/getTokenBalance';
-import { getUserLedger } from '@/api/ledger/getLedger';
-import WalletContainer from './WalletContainer';
-import { revalidatePath } from 'next/cache';
+import { Suspense } from 'react';
+import Wallet from './wallet';
+import * as s from './wallet.css';
+import Loading from '@/components/common/Loading';
+
+import Ledger from '@/app/wallet/(main)/ledger';
 
 export default async function Page() {
-  const [balanceResult, ledgerResult] = await Promise.all([
-    getTokenBalance(),
-    getUserLedger(0, 5),
-  ]);
-
-  async function refresh() {
-    'use server';
-    revalidatePath('/wallet');
-  }
-
   return (
-    <WalletContainer
-      initialBalance={balanceResult}
-      ledgerData={ledgerResult}
-      refreshAction={refresh}
-    />
+    <>
+      <div className={s.background}>
+        <Suspense fallback={<Loading />}>
+          <Wallet />
+        </Suspense>
+      </div>
+      <Ledger />
+    </>
   );
 }
