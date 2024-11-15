@@ -22,7 +22,6 @@ import Typography from '@/components/common/Typography';
 
 interface SalePostHeaderProps {
   id: number;
-  memberId: number;
   title: string;
   price: number;
   tags: string[];
@@ -32,7 +31,6 @@ interface SalePostHeaderProps {
 
 const SalePostHeader = ({
   id,
-  memberId,
   title,
   price,
   tags,
@@ -96,7 +94,7 @@ const SalePostHeader = ({
               삭제하기
             </Button>
           ) : (
-            <Link href={`/market/chat/${id}/${memberId}`}>
+            <Link href={`/market/chat/${id}/0`}>
               <Button
                 size="sm"
                 icon={<HiChatBubbleOvalLeft size={'1.25rem'} />}

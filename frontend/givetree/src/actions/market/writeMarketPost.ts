@@ -11,7 +11,6 @@ type WriteMarketPostState = FormState<
   | 'title'
   | 'description'
   | 'imageUrls'
-  | 'status'
   | 'productionCondition'
   | 'isDirectSale'
   | 'isDeliverySale'
@@ -51,6 +50,7 @@ export default async function writeMarketPost(
         productionCondition,
         isDirectSale,
         isDeliverySale,
+        status: '판매중',
       }),
     });
 

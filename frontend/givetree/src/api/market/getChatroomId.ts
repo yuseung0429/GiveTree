@@ -1,16 +1,15 @@
-import type { RequestInit } from 'next/dist/server/web/spec-extension/request';
+import { axiosInstance } from '@/api/axiosInstance';
 
-const getChatroomId = async (saleId: number, options?: RequestInit) => {
-  const response = await fetch(
-    `http://192.168.100.77:8080/api/sale/${saleId}/chatrooms/connect`,
-    options
-  );
+const getChatroomId = async (saleId: number) => {
+  console.log('saleId: ', saleId);
+  const response = await axiosInstance.post(`/chatrooms/connect`, { saleId });
 
   if (response.status !== 200) {
     throw new Error('존재하지 않는 채팅방입니다.');
   }
+  console.log(response);
 
-  const data: { chatroomId: number } = await response.json();
+  const data: { chatroomId: number } = response.data;
   return data.chatroomId;
 };
 

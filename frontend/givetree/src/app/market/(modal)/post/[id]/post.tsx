@@ -40,7 +40,6 @@ const Post = async ({ id }: PostProps) => {
         <Box padding="1rem 0">
           <SalePostHeader
             id={id}
-            memberId={memberId}
             title={data.title}
             price={data.price}
             tags={

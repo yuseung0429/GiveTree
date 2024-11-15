@@ -15,7 +15,7 @@ const Chat = async ({ saleId, chatroomId }: ChatProps) => {
   return (
     <Flex flexDirection="column" height="100%">
       <div style={{ flex: '0 0 auto' }}>
-        <ChatHeader id={senderId} />
+        <ChatHeader id={saleId} />
       </div>
       <div style={{ flex: '1 1 auto', overflowY: 'scroll' }}>
         <ChatRoom senderId={senderId} saleId={saleId} chatroomId={chatroomId} />
