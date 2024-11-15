@@ -53,3 +53,11 @@ export const amountContainer = style({
   display: 'flex',
   justifyContent: 'space-between',
 });
+
+export const progressTextOutside = style({
+  position: 'absolute',
+  left: 'calc(100% + 5px)',
+  fontSize: '0.75rem',
+  fontWeight: 'bold',
+  color: 'red',
+});

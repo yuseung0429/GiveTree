@@ -5,6 +5,7 @@ import Donation from '@/components/campaign/Donation';
 import { getRegisteredAccount } from '@/api/account/getRegisteredAccount';
 import Typography from '@/components/common/Typography';
 import Flex from '@/components/common/Flex';
+import getSessionMember from '@/api/member/getSessionMember';
 
 export default async function DonationPage({
   params,
@@ -12,6 +13,7 @@ export default async function DonationPage({
   params: Promise<{ id: string }>;
 }) {
   const campaignId = (await params).id;
+  const { role } = await getSessionMember();
 
   const [campaignData, accountResponse] = await Promise.all([
     fetchWrapper(`/campaigns/${campaignId}`, {
@@ -25,7 +27,13 @@ export default async function DonationPage({
 
   return (
     <div style={{ backgroundColor: '#F5F5F5' }}>
-      <Donation name={campaignData.name} image={campaignData.titleImageUrl} id={campaignData.id} isAccount={registeredAccount}/>
+      <Donation
+        name={campaignData.name}
+        image={campaignData.titleImageUrl}
+        id={campaignData.id}
+        isAccount={registeredAccount}
+        role={role}
+      />
 
       <Box
         as="section"

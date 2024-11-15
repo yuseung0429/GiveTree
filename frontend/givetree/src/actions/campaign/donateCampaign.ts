@@ -15,10 +15,10 @@ export default async function donateCampaign(
   const amount = formData.get('amount'),
     message = formData.get('message'),
     simplePassword = formData.get('simplePassword'),
-    campaignId = formData.get('campaignId');
-  console.log(simplePassword, message, amount);
+    campaignsId = formData.get('campaignId');
+
   try {
-    const response = await fetchWrapper(`/campaigns/${campaignId}/donate`, {
+    const response = await fetchWrapper(`/donations/campaigns/${campaignsId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,16 +30,14 @@ export default async function donateCampaign(
       }),
     });
 
-    switch (response.status) {
-      case 201:
-        return {
-          success: true,
-        };
-      default:
-        return {
-          message: '알 수 없는 오류가 발생하였습니다.',
-        };
+    console.log(simplePassword, message, amount);
+    console.log(response);
+
+    if (response.ok) {
+      return { success: true };
     }
+
+    return { message: '알 수 없는 오류가 발생하였습니다.' };
   } catch {
     return { message: '알 수 없는 오류가 발생하였습니다.' };
   }

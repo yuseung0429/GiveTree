@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  // FormEvent,
-  startTransition,
-  useActionState,
-  useEffect,
-  useState,
-} from 'react';
+import { startTransition, useActionState, useEffect, useState } from 'react';
 import * as style from './Donation.css';
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
@@ -19,7 +13,7 @@ import Image from 'next/image';
 import ConfirmPassword from '@/components/common/PasswordConfirm';
 import useModal from '@/hooks/useModal';
 import useDialog from '@/hooks/useDialog';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import donateCampaign from '@/actions/campaign/donateCampaign';
 import { AccountInfo } from '@/components/common/Account';
 
@@ -28,17 +22,19 @@ export default function Donation({
   name,
   image,
   isAccount,
+  role,
 }: {
   id: string;
   name: string;
   image: string;
   isAccount: AccountInfo | null;
+  role: string;
 }) {
   const [amount, setAmount] = useState<number>(0);
   const [message, setMessage] = useState<string>('');
   const { push, pop } = useModal();
   const { alert } = useDialog();
-  // const router = useRouter();
+  const router = useRouter();
 
   const [state, action, isPending] = useActionState(donateCampaign, {});
 
@@ -46,13 +42,14 @@ export default function Donation({
     if (state.success) {
       (async () => {
         await alert('캠페인 후원이 완료되었습니다.');
+        router.push(`/campaign/${id}`);
       })();
     }
 
     if (state.message) {
       alert(state.message);
     }
-  }, [alert, state]);
+  }, [alert, state, router, id]);
 
   // 캠페인 후원 액션 호출하는 함수
   const handleSubmit = (password: string) => {
@@ -164,6 +161,7 @@ export default function Donation({
         <DonationCash amount={amount} />
       </Box>
 
+      {/* 메세지 입력 */}
       <Box
         as="section"
         marginBottom="15px"
@@ -186,11 +184,14 @@ export default function Donation({
         />
       </Box>
 
-      <div className={style.giveButton}>
-        <Button onClick={handlePasswordOpen} fullWidth disabled={isPending}>
-          후원하기
-        </Button>
-      </div>
+      {/* 후원하기 버튼 */}
+      {role === 'USER' && (
+        <div className={style.giveButton}>
+          <Button onClick={handlePasswordOpen} fullWidth disabled={isPending}>
+            후원하기
+          </Button>
+        </div>
+      )}
     </Box>
   );
 }

@@ -70,7 +70,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     <Box className={styles.background}>
       <Box className={styles.teamText}>
         <Typography as="h3" weight="medium" color={colorPalette.text[50]}>
-          {campaignData?.foundation}
+          {campaignData?.foundationName}
         </Typography>
         <Box className={styles.messageText}>
           <div
@@ -81,7 +81,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
               weight="semiBold"
               color={colorPalette.secondary[100]}
             >
-              {campaignData?.title}
+              {campaignData?.name}
             </Typography>
             <Typography
               as="h3"

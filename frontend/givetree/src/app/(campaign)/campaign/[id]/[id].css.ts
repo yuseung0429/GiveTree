@@ -16,7 +16,7 @@ export const coverImgContainer = style({
   backgroundSize: 'cover',
   position: 'relative',
   width: '100%',
-  height: '250px',
+  height: '280px',
   borderBottomLeftRadius: '20px',
   borderBottomRightRadius: '20px',
 
@@ -36,7 +36,6 @@ export const coverImgContainer = style({
 
 export const coverImg = style({
   zIndex: 1,
-  maxHeight: '350px',
   height: '100%',
   borderRadius: '20px',
 });

@@ -12,7 +12,7 @@ export default function EditLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="프로필 수정">
+        <AppBar title="회원 정보 수정">
           <Link href={'/notification'}>
             <AppBar.Menu>
               <HiOutlineBell />

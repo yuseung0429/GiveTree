@@ -6,13 +6,10 @@ import Typography from '@/components/common/Typography';
 import React from 'react';
 import GiveFoot from '@/components/myPage/GiveFoot';
 import EditUser from '@/components/myPage/Profile/EditUser';
-import fetchWrapper from '@/lib/fetchWrapper';
-import { UserData } from '@/types/user/types';
+import getSessionMember from '@/api/member/getSessionMember';
 
 export default async function UserEdit() {
-  const response = await fetchWrapper('/members/session', { method: 'GET' });
-  const user: UserData = await response.json();
-  const { name, profileImageUrl, email } = user;
+  const { name, profileImageUrl, email } = await getSessionMember();
   const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
 
   return (

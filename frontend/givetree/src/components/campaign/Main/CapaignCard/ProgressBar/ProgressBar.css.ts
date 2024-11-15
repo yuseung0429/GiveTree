@@ -25,3 +25,11 @@ export const progressText = style({
   fontWeight: 'bold',
   color: 'white',
 });
+
+export const progressTextOutside = style({
+  position: 'absolute',
+  left: 'calc(100% + 5px)',
+  fontSize: '0.75rem',
+  fontWeight: 'bold',
+  color: 'red',
+});

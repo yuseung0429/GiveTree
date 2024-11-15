@@ -6,13 +6,10 @@ import NavigationBar from '@/components/common/NavigationBar';
 import fetchWrapper from '@/lib/fetchWrapper';
 import { CampaignData } from '@/types/campaign/types';
 import Typography from '@/components/common/Typography';
+import getSessionFoundation from '@/api/member/getSessionFoundation';
 
 export default async function Page() {
-  const foundationResponse = await fetchWrapper('/foundations/session', {
-    method: 'GET',
-  });
-  const foundation = await foundationResponse.json();
-  const foundationId = foundation.id;
+  const { id: foundationId } = await getSessionFoundation();
 
   const response = await fetchWrapper('/campaigns', { method: 'GET' });
   const campaignList = await response.json();

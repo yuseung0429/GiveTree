@@ -26,7 +26,7 @@ export default function ConfirmPassword({
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100vw' }}>
       <Password
         title="결제 비밀번호 입력"
         subtitle="6자리 숫자를 입력해주세요"
