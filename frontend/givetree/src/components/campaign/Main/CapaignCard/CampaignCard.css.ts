@@ -20,6 +20,8 @@ export const campaignCard = style({
 export const campaignTitle = style({
   marginLeft: '0.25rem',
   marginBottom: '0.25rem',
+  color: colorPalette.grey[500],
+  mixBlendMode: 'difference',
 });
 
 export const cardIndex = style({
@@ -36,6 +38,8 @@ export const cardIndex = style({
 
 export const campaignSubtitle = style({
   marginLeft: '0.25rem',
+  color: 'grey',
+  mixBlendMode: 'difference'
 });
 
 export const progressContainer = style({
@@ -48,4 +52,12 @@ export const progressContainer = style({
 export const amountContainer = style({
   display: 'flex',
   justifyContent: 'space-between',
+});
+
+export const progressTextOutside = style({
+  position: 'absolute',
+  left: 'calc(100% + 5px)',
+  fontSize: '0.75rem',
+  fontWeight: 'bold',
+  color: 'red',
 });

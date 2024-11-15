@@ -8,6 +8,7 @@ import Button from '@/components/common/Button';
 import { useRouter } from 'next/navigation';
 import { deleteAccount } from '@/actions/account/deleteAccount';
 import Link from 'next/link';
+import useDialog from '@/hooks/useDialog';
 
 interface AccountClientProps {
   initialAccount: RegisteredAccount | null;
@@ -18,6 +19,7 @@ export default function AccountClient({
   initialAccount,
   hasPassword = false,
 }: AccountClientProps) {
+  const { alert, confirm } = useDialog();
   const [registeredAccount, setRegisteredAccount] =
     useState<RegisteredAccount | null>(initialAccount);
   const router = useRouter();
@@ -40,7 +42,7 @@ export default function AccountClient({
   const handleDeleteAccount = async () => {
     if (!registeredAccount) return;
 
-    if (confirm('계좌를 삭제하시겠습니까?')) {
+    if (await confirm('계좌를 삭제하시겠습니까?')) {
       try {
         const result = await deleteAccount();
         if (result.success) {

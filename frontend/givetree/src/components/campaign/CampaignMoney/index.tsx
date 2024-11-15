@@ -1,4 +1,3 @@
-// import ProgressBar from '@/components/campaign/Main/CapaignCard/ProgressBar';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import * as styles from './CampaignMoney.css';
@@ -8,12 +7,14 @@ import Link from 'next/link';
 
 interface CampaignMoneyProps {
   id: number;
+  role: string;
   currentAmount: number;
   goalAmount: number;
 }
 
 const CampaignMoney = ({
   id,
+  role,
   currentAmount,
   goalAmount,
 }: CampaignMoneyProps) => {
@@ -28,11 +29,23 @@ const CampaignMoney = ({
         모금 현황
       </Typography>
 
-      <TreeProgress currentAmount={currentAmount} goalAmount={goalAmount} />
+      <TreeProgress
+        currentAmount={currentAmount}
+        goalAmount={goalAmount}
+        progress={
+          (currentAmount / goalAmount) * 100 === 0
+            ? '0'
+            : (currentAmount / goalAmount) * 100 > 1
+            ? Math.floor((currentAmount / goalAmount) * 100).toString()
+            : ((currentAmount / goalAmount) * 100).toFixed(2)
+        }
+      />
 
-      <Link className={styles.giveButton} href={`/campaign/${id}/donation`}>
-        <Button fullWidth>후원하기</Button>
-      </Link>
+      {role === 'USER' && (
+        <Link className={styles.giveButton} href={`/campaign/${id}/donation`}>
+          <Button fullWidth>후원하기</Button>
+        </Link>
+      )}
     </div>
   );
 };

@@ -29,7 +29,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
 
   const [state, action, isPending] = useActionState(createCampaign, {});
-  console.log(state);
 
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
@@ -51,9 +50,9 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const signupFormData = new FormData(e.target as HTMLFormElement);
+    const createCampaignFormData = new FormData(e.target as HTMLFormElement);
 
-    startTransition(() => action(signupFormData));
+    startTransition(() => action(createCampaignFormData));
   };
 
   const today = new Date().toISOString().split('T')[0];

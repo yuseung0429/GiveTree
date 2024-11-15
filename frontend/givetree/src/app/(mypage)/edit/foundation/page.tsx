@@ -2,14 +2,9 @@ import * as styles from '../../mypage/mypage.css';
 import ProfileNull from '@/assets/images/profile.png';
 import React from 'react';
 import FoundationInfo from '@/components/myPage/Profile/EditFoundation/Information';
-import fetchWrapper from '@/lib/fetchWrapper';
+import getSessionFoundation from '@/api/member/getSessionFoundation';
 
 export default async function FoundationEdit() {
-  const foundationResponse = await fetchWrapper('/foundations/session', {
-    method: 'GET',
-  });
-  const foundation = await foundationResponse.json();
-
   const {
     name,
     introduction,
@@ -17,7 +12,7 @@ export default async function FoundationEdit() {
     phoneNumber,
     corporateRegistrationNumber,
     profileImageUrl,
-  } = foundation;
+  } = await getSessionFoundation();
 
   const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
 

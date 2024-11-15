@@ -1,16 +1,20 @@
 import * as styles from './ProgressBar.css';
 
 interface ProgressBarProps {
-  progress: number;
+  progress: string;
 }
 
 const ProgressBar = ({ progress }: ProgressBarProps) => {
+  const progressValue = parseFloat(progress);
+
   return (
     <div className={styles.progressBarContainer}>
       <div className={styles.progressBar} style={{ width: `${progress}%` }}>
-        <div className={styles.progressText}>
-          {progress ? `${progress}%` : ''}
-        </div>
+        {progressValue >= 14 ? (
+          <div className={styles.progressText}>{`${progress}%`}</div>
+        ) : (
+          <div className={styles.progressTextOutside}>{`${progress}%`}</div>
+        )}
       </div>
     </div>
   );

@@ -8,23 +8,18 @@ import Box from '@/components/common/Box';
 import Profile from '@/components/myPage/Profile';
 import MyTab from '@/components/myPage/MyTab';
 import Link from 'next/link';
-import fetchWrapper from '@/lib/fetchWrapper';
-import { UserData } from '@/types/user/types';
+import getSessionMember from '@/api/member/getSessionMember';
+import getSessionFoundation from '@/api/member/getSessionFoundation';
 
 export default async function MyPage() {
-  const response = await fetchWrapper('/members/session', { method: 'GET' });
-  const user: UserData = await response.json();
-  const { role, name, profileImageUrl } = user;
+  const { role, name, profileImageUrl } = await getSessionMember();
   const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
   const totalDonation = 35000;
 
-  const foundationResponse = await fetchWrapper('/foundations/session', {
-    method: 'GET',
-  });
-  const foundation = await foundationResponse.json();
+  const { totalFundraisingAmount, executedAmount } =
+    await getSessionFoundation();
 
-  const currentMoney =
-    foundation.totalFundraisingAmount - foundation.executedAmount;
+  const currentMoney = totalFundraisingAmount - executedAmount;
 
   return (
     <div className={styles.Wrapper}>

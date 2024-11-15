@@ -9,6 +9,7 @@ const categories = ['소개', '모금함'];
 
 interface CampaignDetailProps {
   id: number;
+  role: string;
   introduction: string;
   imageUrls: string[];
   currentFundraisingAmount: number;
@@ -17,6 +18,7 @@ interface CampaignDetailProps {
 
 export default function CampaignDetail({
   id,
+  role,
   introduction,
   imageUrls,
   currentFundraisingAmount,
@@ -43,6 +45,7 @@ export default function CampaignDetail({
       {selectedCategory === '모금함' && (
         <CampaignMoney
           id={id}
+          role={role}
           currentAmount={currentFundraisingAmount}
           goalAmount={targetFundraisingAmount}
         />

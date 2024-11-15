@@ -15,7 +15,7 @@ export default function ExchangeLayout({
 }) {
   const router = useRouter();
   const handleBackClick = () => {
-    router.push('/mypage');
+    router.back();
   };
 
   return (

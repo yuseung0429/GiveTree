@@ -2,10 +2,9 @@ import Image from 'next/image';
 import * as styles from './[id].css';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
-
-// import campaigns from '@/mock/campaigns.json';
 import CampaignDetail from '@/components/campaign/CampaignDetail';
 import fetchWrapper from '@/lib/fetchWrapper';
+import getSessionMember from '@/api/member/getSessionMember';
 
 export default async function Page({
   params,
@@ -13,6 +12,7 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const campaignId = (await params).id;
+  const { role } = await getSessionMember();
   const response = await fetchWrapper(`/campaigns/${campaignId}`, {
     method: 'GET',
   });
@@ -82,6 +82,7 @@ export default async function Page({
 
         <CampaignDetail
           id={id}
+          role={role}
           introduction={introduction}
           imageUrls={imageUrls}
           currentFundraisingAmount={currentFundraisingAmount}

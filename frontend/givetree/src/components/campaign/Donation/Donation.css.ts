@@ -4,10 +4,11 @@ import colorPalette from '@/styles/tokens/colorPalette';
 // 최상위 부모
 export const cashbox = style({
   width: '100%',
+  backgroundColor: '#f5f5f5'
 });
 
 // 기업로고
-export const foundationLogo = style({
+export const campaignImage = style({
   width: '65px',
   height: '65px',
   borderRadius: '35px',
@@ -60,4 +61,16 @@ export const moneybox = style({
   backgroundColor: colorPalette.primary[50],
   padding: '20px 15px',
   borderRadius: '5px',
+});
+
+// 후원하기 버튼
+export const giveButton = style({
+  position: 'fixed',
+  bottom: '50px',
+  left: '0',
+  width: '100%',
+  padding: '1rem',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 });
