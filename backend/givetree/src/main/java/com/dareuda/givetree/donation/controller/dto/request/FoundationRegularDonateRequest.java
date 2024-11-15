@@ -1,4 +1,4 @@
-package com.dareuda.givetree.donation.controller.dto;
+package com.dareuda.givetree.donation.controller.dto.request;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
