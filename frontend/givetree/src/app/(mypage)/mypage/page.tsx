@@ -64,6 +64,7 @@ export default async function MyPage() {
           <div className={styles.tab}>
             <div className={styles.IconBox}>
               <IoLogOutOutline size={20} color={colorPalette.grey[700]} />
+              {/* signout 이라는 action 추가했습니다. */}
               <Typography as="h4">로그아웃</Typography>
             </div>
           </div>

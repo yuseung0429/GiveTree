@@ -14,15 +14,18 @@ import Layout from '@/components/common/Layout';
 import Button from '@/components/common/Button';
 import DonationModal from '@/components/foundation/detail/DonationModal';
 import Image from 'next/image';
+import { PaginatedResponse } from '@/api/ledger/getLedger';
 
 const categories = ['소개', '모금함', '캠페인'];
 
 interface FoundationDetailProps {
   foundationData: Foundation;
+  ledgerData: PaginatedResponse;
 }
 
 export default function FoundationDetailComponent({
   foundationData,
+  ledgerData,
 }: FoundationDetailProps) {
   const [selectedCategory, setSelectedCategory] = useState('소개');
   const [isModalOpen, setModalOpen] = useState(false);
@@ -63,6 +66,34 @@ export default function FoundationDetailComponent({
                   단체 대표사진
                 </Flex>
               )}
+
+              <Box className={style.LogoImg}>
+                {foundationData.profileImageUrl ? (
+                  <Image
+                    src={foundationData.profileImageUrl}
+                    alt="재단 로고"
+                    fill
+                    sizes="70px"
+                    style={{
+                      objectFit: 'cover',
+                      borderRadius: '100%',
+                    }}
+                    priority
+                  />
+                ) : (
+                  <Flex
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '100%',
+                    }}
+                  >
+                    로고
+                  </Flex>
+                )}
+              </Box>
             </Box>
 
             <Box>
@@ -85,7 +116,10 @@ export default function FoundationDetailComponent({
               <IntroTab foundationData={foundationData} />
             )}
             {selectedCategory === '모금함' && (
-              <DonationTab foundationData={foundationData} />
+              <DonationTab
+                foundationData={foundationData}
+                ledgerData={ledgerData}
+              />
             )}
             {selectedCategory === '캠페인' && (
               <CampaignTab foundationData={foundationData} />

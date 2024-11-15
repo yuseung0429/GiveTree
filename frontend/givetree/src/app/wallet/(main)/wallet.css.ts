@@ -1,11 +1,16 @@
 import colorPalette from '@/styles/tokens/colorPalette';
-import { style } from '@vanilla-extract/css';
+import { style, keyframes } from '@vanilla-extract/css';
+
+const spin = keyframes({
+  '0%': { transform: 'rotate(0deg)' },
+  '100%': { transform: 'rotate(360deg)' },
+});
 
 export const grabox = style({
   background: `linear-gradient(to bottom, ${colorPalette.primary[300]} 0%, #F5F5F5 100%)`,
-  height: '220px',
+  height: '240px',
   width: '100%',
-  padding: '20px',
+  padding: '1.25rem',
 });
 
 export const walletcontainer = style({
@@ -24,4 +29,8 @@ export const allbtn = style({
   display: 'flex',
   alignItems: 'center',
   color: colorPalette.grey[800],
+});
+
+export const spinningRefresh = style({
+  animation: `${spin} 1s linear infinite`,
 });

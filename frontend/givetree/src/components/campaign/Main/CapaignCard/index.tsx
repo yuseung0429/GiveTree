@@ -19,8 +19,8 @@ const CampaignCard = ({
   id,
   title,
   foundation,
-  currentFundraisingAmount,
-  targetFundraisingAmount,
+  currentFundraisingAmount = 0,
+  targetFundraisingAmount = 0,
   titleImageUrl,
   totalCampaign,
   currentIndex,
@@ -73,7 +73,7 @@ const CampaignCard = ({
             {currentFundraisingAmount?.toLocaleString()}원
           </Typography>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {targetFundraisingAmount.toLocaleString()}원 목표
+            {targetFundraisingAmount?.toLocaleString()}원 목표
           </Typography>
         </div>
       </div>

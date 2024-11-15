@@ -10,9 +10,15 @@ interface FormFieldProps {
   children: ReactNode;
   label: string;
   description?: string;
+  errorMessage?: string;
 }
 
-const FormField = ({ children, label, description }: FormFieldProps) => {
+const FormField = ({
+  children,
+  label,
+  description,
+  errorMessage,
+}: FormFieldProps) => {
   return (
     <Flex flexDirection="column" gap="0.5rem">
       <Typography color={colorPalette.primary[600]} weight="semiBold">
@@ -22,6 +28,11 @@ const FormField = ({ children, label, description }: FormFieldProps) => {
         <Typography size={typography.size.sm}>{description}</Typography>
       )}
       {children}
+      {errorMessage && (
+        <Typography color={colorPalette.danger[600]} size={typography.size.sm}>
+          {errorMessage}
+        </Typography>
+      )}
     </Flex>
   );
 };

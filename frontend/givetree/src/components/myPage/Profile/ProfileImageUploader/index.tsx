@@ -1,12 +1,14 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import * as styles from '../EditUser/EditUser.css';
-
-import useImageUpload, { type ImageData } from '@/hooks/useImageUpload';
+import Image, { StaticImageData } from 'next/image';
 
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
-import Image, { StaticImageData } from 'next/image';
+
+import useImageUpload, { type ImageData } from '@/hooks/useImageUpload';
+import useDialog from '@/hooks/useDialog';
+
+import * as styles from '../EditUser/EditUser.css';
 
 interface ProfileImageUploaderProps {
   name?: string;
@@ -18,13 +20,14 @@ const ProfileImageUploader = ({
   defaultValue,
 }: ProfileImageUploaderProps) => {
   const fileRef = useRef<HTMLInputElement>(null);
-
   const [image, setImage] = useState<ImageData>();
 
+  const { alert } = useDialog();
+
   const { select, upload } = useImageUpload(fileRef, {
-    onSelect: (fileList: FileList) => {
+    onSelect: async (fileList: FileList) => {
       if (fileList.length > 1) {
-        alert(`최대 1개의 이미지만 업로드 할 수 있습니다.`);
+        await alert(`최대 1개의 이미지만 업로드 할 수 있습니다.`);
         return;
       }
 

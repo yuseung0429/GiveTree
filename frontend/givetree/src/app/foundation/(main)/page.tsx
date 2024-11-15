@@ -35,7 +35,11 @@ export default async function Page() {
         <Typography as="h3" weight="semiBold" className={style.title}>
           이 달의 추천재단
         </Typography>
-        <RecomFoundation foundation={firstFoundation} />
+        {firstFoundation && (
+          <Link href={`/foundation/${firstFoundation.id}/detail`}>
+            <RecomFoundation foundation={firstFoundation} />
+          </Link>
+        )}
       </Box>
 
       {/* 재단 둘러보기 */}

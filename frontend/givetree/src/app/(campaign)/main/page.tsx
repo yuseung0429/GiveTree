@@ -69,7 +69,7 @@ export default async function Home() {
               종료 임박 캠페인
             </Typography>
             <div className={styles.slideContainer}>
-              {endingSoonCampaigns.map(
+              {endingSoonCampaigns?.map(
                 (campaign: CampaignData, index: number) => (
                   <CampaignCard
                     key={index}
