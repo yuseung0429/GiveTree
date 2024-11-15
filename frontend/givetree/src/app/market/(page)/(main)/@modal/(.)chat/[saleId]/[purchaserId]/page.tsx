@@ -4,7 +4,7 @@ import ChatPage from '@/app/market/(modal)/chat/[saleId]/[chatroomId]/page';
 export default function ChatModal({
   params,
 }: {
-  params: Promise<{ saleId: string; purchaserId: string }>;
+  params: Promise<{ saleId: string; chatroomId: string }>;
 }) {
   return (
     <ChatLayout>
