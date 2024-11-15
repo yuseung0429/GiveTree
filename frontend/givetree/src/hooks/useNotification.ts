@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import saveFCMToken from '@/actions/notification/saveFCMToken';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAZr-m0xCeUHEcVIxeYd3g3DPmOqsWs0q4',
@@ -39,8 +40,9 @@ const useNotification = () => {
       getToken(messaging, {
         vapidKey: firebaseConfig.vapidKey,
       })
-        .then((result) => {
+        .then(async (result) => {
           setToken(result);
+          await saveFCMToken(result);
         })
         .catch((error) => {
           console.error(error);
