@@ -11,12 +11,11 @@ import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
 import ChatMessageInput from '@/components/market/ChatMessageInput';
 import ChatMessageList from '@/components/market/ChatMessageList';
-import getChatroomId from '@/api/market/getChatroomId';
 
 interface ChatRoomProps {
   senderId: number;
   saleId: number;
-  chatroomId?: number;
+  chatroomId: number;
 }
 
 const ChatRoom = ({ senderId, saleId, chatroomId }: ChatRoomProps) => {
@@ -36,22 +35,11 @@ const ChatRoom = ({ senderId, saleId, chatroomId }: ChatRoomProps) => {
 
   useEffect(() => {
     (async () => {
-      let chatroom = 0;
-      try {
-        if (!chatroomId) {
-          chatroom = await getChatroomId(saleId);
-        }
-      } catch {
-        alert('채팅방 정보를 가져오지 못했습니다.');
-      }
-
-      console.log(chatroomId, chatroom);
-
       connect({
-        chatroomId: chatroomId || chatroom,
+        chatroomId: chatroomId,
 
         onOpen() {
-          console.log('채팅 연결됨');
+          console.log('Chat connected');
         },
 
         onMessage(message) {
@@ -60,8 +48,7 @@ const ChatRoom = ({ senderId, saleId, chatroomId }: ChatRoomProps) => {
         },
 
         async onError() {
-          setMessages((prev) => [...prev, { content: '이유승', senderId: 2 }]);
-          // await alert('채팅 서버에 오류가 발생하였습니다.');
+          await alert('채팅 서버에 오류가 발생하였습니다.');
         },
 
         async onClose() {
@@ -72,7 +59,11 @@ const ChatRoom = ({ senderId, saleId, chatroomId }: ChatRoomProps) => {
   }, [chatroomId, saleId, connect, send, alert]);
 
   const handleMessageSubmit = (message: string) => {
-    send(message);
+    if (!message.trim()) {
+      return;
+    }
+
+    send(message.trim());
   };
 
   return (

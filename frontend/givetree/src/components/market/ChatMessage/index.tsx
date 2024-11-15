@@ -14,6 +14,7 @@ interface ChatMessageProps {
   profile?: ReactNode;
   isMine?: boolean;
   createdAt: string;
+  showProfile?: boolean;
 }
 
 const ChatMessage = ({
@@ -21,19 +22,20 @@ const ChatMessage = ({
   profile,
   isMine = false,
   createdAt,
+  showProfile = true,
 }: ChatMessageProps) => {
   return (
     <Flex
       flexDirection="column"
+      alignItems={isMine ? 'flex-end' : 'flex-start'}
       gap="0.75rem"
-      style={{ padding: '0.75rem 0.25rem' }}
+      style={{ padding: '0.5rem 0.25rem' }}
     >
-      {profile}
+      {showProfile && profile}
       <Flex
         flexDirection={isMine ? 'row' : 'row-reverse'}
         alignItems="flex-end"
         gap="0.25rem"
-        style={{ alignSelf: isMine ? 'flex-end' : 'flex-start' }}
       >
         <Box padding="0.25rem 0">
           <Typography color={colorPalette.text[400]} size={typography.size.xs}>

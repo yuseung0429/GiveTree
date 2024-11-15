@@ -5,6 +5,7 @@ import SockJS from 'sockjs-client';
 export interface ChatMessage {
   senderId: number;
   content: string;
+  createdAt: string;
 }
 
 interface ConnectProps {
@@ -15,9 +16,7 @@ interface ConnectProps {
   onMessage: (message: ChatMessage) => void;
 }
 
-const useChat = (
-  server: string = 'https://i11d106.p.ssafy.io/chat/stomp/chat'
-) => {
+const useChat = (server: string = `${process.env.NEXT_PUBLIC_API_URL}/ws`) => {
   const socketRef = useRef<Client>();
   const destinationRef = useRef<string>('');
 
