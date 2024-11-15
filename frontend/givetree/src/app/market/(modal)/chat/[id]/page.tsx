@@ -1,7 +1,9 @@
 import { Suspense } from 'react';
+import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
 
 import Chat from './chat';
 import Loading from '@/components/common/Loading';
+import MarketError from '@/app/market/error';
 
 export default async function ChatPage({
   params,
@@ -11,8 +13,10 @@ export default async function ChatPage({
   const id = parseInt((await params).id);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <Chat id={id} />
-    </Suspense>
+    <ErrorBoundary errorComponent={MarketError}>
+      <Suspense fallback={<Loading />}>
+        <Chat id={id} />
+      </Suspense>
+    </ErrorBoundary>
   );
 }
