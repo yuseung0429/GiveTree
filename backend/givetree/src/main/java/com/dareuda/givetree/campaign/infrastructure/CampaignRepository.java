@@ -27,6 +27,14 @@ public interface CampaignRepository extends Repository<Campaign, Long> {
     """)
     Optional<Campaign> findByName(String name);
 
+
+    @Query("""
+        SELECT DISTINCT c
+        FROM Campaign c
+        WHere c.isDeleted = false
+    """)
+    List<Campaign> findAll();
+
     Optional<Campaign> getReferenceById(long id);
 
     List<Campaign> findByFoundationId(long foundationId);

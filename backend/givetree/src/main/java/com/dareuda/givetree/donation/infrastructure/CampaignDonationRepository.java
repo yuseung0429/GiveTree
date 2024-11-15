@@ -1,5 +1,6 @@
 package com.dareuda.givetree.donation.infrastructure;
 
+import com.dareuda.givetree.campaign.domain.Campaign;
 import com.dareuda.givetree.donation.domain.CampaignDonation;
 import com.dareuda.givetree.donation.domain.CampaignDonationInfo;
 import org.springframework.data.domain.Pageable;
@@ -30,4 +31,5 @@ public interface CampaignDonationRepository extends BaseDonationRepository<Campa
            """)
     Slice<CampaignDonationInfo> findCampaignDonationInfoByMemberId(long memberId, Pageable pageable);
 
+    long countByCampaign(Campaign campaign);
 }

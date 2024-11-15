@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.dareuda.givetree.campaign.domain.QCampaign.campaign;
+import static com.dareuda.givetree.donation.domain.QCampaignDonation.campaignDonation;
 
 @Repository
 public class CampaignQueryRepository {
@@ -55,6 +56,17 @@ public class CampaignQueryRepository {
         }
 
         return PageableExecutionUtils.getPage(foundations, pageable, () -> resultCount);
+    }
+
+    public List<Campaign> findDonatedCampaignsByMemberId(long donorId) {
+        return query
+                .select(campaign)
+                .from(campaign)
+                .join(campaignDonation).on(campaignDonation.campaign.eq(campaign))
+                .where(campaignDonation.donor.id.eq(donorId),
+                        campaign.isDeleted.isFalse())
+                .groupBy(campaign)
+                .fetch();
     }
 
     public BooleanExpression likeName(String name) {
