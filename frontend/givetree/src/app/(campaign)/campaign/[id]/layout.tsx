@@ -4,6 +4,7 @@ import fetchWrapper from '@/lib/fetchWrapper';
 import AppBar from '@/components/common/AppBar';
 import Link from 'next/link';
 import { HiOutlineBell } from 'react-icons/hi2';
+import AppBarMenu from '@/components/common/AppBarMenu';
 
 export default async function AuthLayout({
   children,
@@ -23,9 +24,9 @@ export default async function AuthLayout({
       <header>
         <AppBar title={campaign.name}>
           <Link href={'/notification'}>
-            <AppBar.Menu>
+            <AppBarMenu>
               <HiOutlineBell />
-            </AppBar.Menu>
+            </AppBarMenu>
           </Link>
         </AppBar>
       </header>

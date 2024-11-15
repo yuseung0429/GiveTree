@@ -1,4 +1,5 @@
 import AppBar from '@/components/common/AppBar';
+import AppBarMenu from '@/components/common/AppBarMenu';
 import Layout from '@/components/common/Layout';
 import NavigationBar from '@/components/common/NavigationBar';
 import Link from 'next/link';
@@ -15,9 +16,9 @@ export default function DonationLayout({
       <header>
         <AppBar title="후원 내역">
           <Link href={'/notification'}>
-            <AppBar.Menu>
+            <AppBarMenu>
               <HiOutlineBell />
-            </AppBar.Menu>
+            </AppBarMenu>
           </Link>
         </AppBar>
       </header>

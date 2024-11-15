@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import AppBar from '.';
 
 import { HiMagnifyingGlass, HiOutlineBell } from 'react-icons/hi2';
+import AppBarMenu from '@/components/common/AppBarMenu';
 
 const meta = {
   title: 'UI/AppBar',
@@ -36,9 +37,9 @@ const meta = {
       type: 'boolean',
     },
 
-    onBackClick: {
-      description: '뒤로가기 버튼 클릭 이벤트',
-      control: false,
+    showBackButton: {
+      description: '뒤로가기 버튼 표시 여부',
+      type: 'boolean',
     },
   },
 } satisfies Meta<typeof AppBar>;
@@ -51,12 +52,12 @@ export const Primary: Story = {
   args: {
     children: (
       <>
-        <AppBar.Menu>
+        <AppBarMenu>
           <HiMagnifyingGlass />
-        </AppBar.Menu>
-        <AppBar.Menu>
+        </AppBarMenu>
+        <AppBarMenu>
           <HiOutlineBell />
-        </AppBar.Menu>
+        </AppBarMenu>
       </>
     ),
     title: 'AppBar',
