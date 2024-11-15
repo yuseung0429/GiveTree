@@ -21,7 +21,6 @@ export default function AccountItem({
   isSelected,
   onSelect,
 }: AccountItemProps) {
-  console.log('AccountItem props:', { id, name, accountNumber, balance, isSelected });
   return (
     <Flex
       justifyContent="space-between"

@@ -25,7 +25,6 @@ export async function registerPassword(formData: FormData) {
     });
 
     const data = await response.text();
-    console.log('Response data:', data);
 
     if (response.ok) {
       return { success: true };

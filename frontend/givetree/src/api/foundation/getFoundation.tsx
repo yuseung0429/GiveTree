@@ -95,7 +95,6 @@ export async function searchFoundations(
     }
 
     const data = await response.json();
-    console.log('API Response:', data);
 
     return {
       ok: true,

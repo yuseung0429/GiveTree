@@ -22,13 +22,10 @@ export default function AccountList({ accounts }: AccountListProps) {
   );
 
   const handleSelect = (accountNumber: string) => {
-    console.log('AccountList - Selecting account:', accountNumber);
     const newSelectedId =
       accountNumber === selectedAccountId ? null : accountNumber;
     setSelectedAccountId(newSelectedId);
   };
-
-  console.log('Accounts data:', accounts);
 
   const handleRegister = async () => {
     if (!selectedAccountId) {

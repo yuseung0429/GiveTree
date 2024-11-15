@@ -43,7 +43,6 @@ export async function getFoundationById(id: string): Promise<{
     }
 
     const data = await response.json();
-    console.log('Foundation Detail API Response:', data);
 
     return {
       ok: true,

@@ -75,7 +75,6 @@ export async function getFoundationLedger(
     }
 
     const data = await response.json();
-    console.log('Foundation Ledger API Response:', data);
 
     return {
       ok: true,
@@ -118,7 +117,6 @@ export async function getUserLedger(
     }
 
     const data = await response.json();
-    console.log('User Ledger API Response:', data);
 
     return {
       ok: true,

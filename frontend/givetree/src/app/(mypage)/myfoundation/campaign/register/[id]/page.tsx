@@ -29,7 +29,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
 
   const [state, action, isPending] = useActionState(createCampaign, {});
-  console.log(state);
 
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
