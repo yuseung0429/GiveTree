@@ -87,6 +87,7 @@ export default async function Page({
           imageUrls={imageUrls}
           currentFundraisingAmount={currentFundraisingAmount}
           targetFundraisingAmount={targetFundraisingAmount}
+          endDate={endDate}
         />
       </div>
     </div>

@@ -5,30 +5,31 @@ import fetchWrapper from '@/lib/fetchWrapper';
 import { FormState } from '@/types/formState';
 
 type DonateCampaignState = FormState<
-  'amount' | 'message' | 'simplePassword' | 'campaignId'
+  'amount' | 'simplePassword' | 'foundationId'
 >;
 
-export default async function donateCampaign(
+export default async function donateRegularFoundation(
   _: DonateCampaignState,
   formData: FormData
 ): Promise<DonateCampaignState> {
   const amount = formData.get('amount'),
-    message = formData.get('message'),
     simplePassword = formData.get('simplePassword'),
-    campaignsId = formData.get('campaignId');
+    foundationId = formData.get('foundationId');
 
   try {
-    const response = await fetchWrapper(`/donations/campaigns/${campaignsId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        amount: Number(amount?.toString().replaceAll(',', '')),
-        message,
-        simplePassword,
-      }),
-    });
+    const response = await fetchWrapper(
+      `/donations/foundations/${foundationId}/regular`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: Number(amount?.toString().replaceAll(',', '')),
+          simplePassword,
+        }),
+      }
+    );
 
     if (response.ok) {
       return { success: true };
