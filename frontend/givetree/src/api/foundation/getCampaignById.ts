@@ -42,7 +42,6 @@ export async function getCampaignById(campaignId: string): Promise<{
     }
 
     const data = await response.json();
-    console.log('Campaign Detail API Response:', data);
 
     return {
       ok: true,

@@ -2,7 +2,7 @@ import Layout from '@/components/common/Layout';
 import AppBar from '@/components/common/AppBar';
 import NavigationBar from '@/components/common/NavigationBar';
 
-export default async function FoundationLayout({
+export default async function FoundationDetailLayout({
   children,
 }: {
   children: React.ReactNode;

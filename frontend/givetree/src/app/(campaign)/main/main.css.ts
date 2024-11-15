@@ -10,7 +10,7 @@ export const mainContainer = style({
   borderTopLeftRadius: '20px',
   borderTopRightRadius: '20px',
   padding: '0.75rem',
-  height: '100%',
+  minHeight: '100%',
   backgroundColor: 'white',
 });
 

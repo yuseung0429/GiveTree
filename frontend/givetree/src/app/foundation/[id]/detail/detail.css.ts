@@ -72,6 +72,7 @@ export const TabContainer = style({
   flexGrow: 1,
   overflowY: 'auto',
   padding: '0.25rem',
+  paddingBottom: '1.75rem'
 });
 
 // imageBox
@@ -102,4 +103,15 @@ export const campaignCount = style({
   color: colorPalette.primary[400],
   fontWeight: '600',
   marginRight: '3px',
+});
+
+export const giveButton = style({
+  position: 'fixed',
+  bottom: '50px',
+  left: '0',
+  width: '100%',
+  padding: '1rem',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 });

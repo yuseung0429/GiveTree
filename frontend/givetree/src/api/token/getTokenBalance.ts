@@ -30,7 +30,6 @@ export async function getTokenBalance(): Promise<{
     }
 
     const data = await response.json();
-    console.log('Token Balance API Response:', data);
 
     return {
       ok: true,

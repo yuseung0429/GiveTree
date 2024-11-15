@@ -6,6 +6,7 @@ import Typography from '@/components/common/Typography';
 import { HiChevronRight } from 'react-icons/hi2';
 import colorPalette from '@/styles/tokens/colorPalette';
 import typography from '@/styles/tokens/typography';
+import Link from 'next/link';
 
 interface RegularGiveProps {
   donation: FoundationRegularDonation;
@@ -50,7 +51,9 @@ export default function RegularGive({ donation }: RegularGiveProps) {
             {donation.foundationName}
           </Typography>
         </div>
-        <HiChevronRight size={22} />
+        <Link href={`/givefoot/regular/${donation.foundationId}`}>
+          <HiChevronRight size={22} />
+        </Link>
       </div>
 
       <Typography
