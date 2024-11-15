@@ -4,7 +4,9 @@ import com.dareuda.givetree.auth.domain.UserPrinciple;
 import com.dareuda.givetree.donation.controller.dto.CampaignDonateRequest;
 import com.dareuda.givetree.donation.controller.dto.FoundationDonateRequest;
 import com.dareuda.givetree.donation.controller.dto.FoundationRegularDonateRequest;
+import com.dareuda.givetree.donation.domain.CampaignDonationInfo;
 import com.dareuda.givetree.donation.domain.FoundationDonateSubscriptionInfo;
+import com.dareuda.givetree.donation.domain.FoundationDonationInfo;
 import com.dareuda.givetree.donation.service.DonationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class DonationController {
     private final DonationService donationService;
+
+    @GetMapping("/foundations")
+    public ResponseEntity<?> readFoundationDonation(
+            @AuthenticationPrincipal UserPrinciple user,
+            Pageable pageable
+    ) {
+        Slice<FoundationDonationInfo> infos = donationService.readFoundationDonation(user.getId(), pageable);
+        return ResponseEntity.ok().body(infos);
+    }
+
 
     @GetMapping("/foundations/regular")
     public ResponseEntity<?> readFoundationDonationRegular(
@@ -71,8 +83,17 @@ public class DonationController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/campaigns")
+    public ResponseEntity<?> readCampaignDonation(
+            @AuthenticationPrincipal UserPrinciple user,
+            Pageable pageable
+    ) {
+        Slice<CampaignDonationInfo> infos = donationService.readCampaignDonation(user.getId(), pageable);
+        return ResponseEntity.ok().body(infos);
+    }
+
     @PostMapping("/campaigns/{campaignId}")
-    public ResponseEntity<?> donateToCampaign(
+    public ResponseEntity<?> donateCampaign(
             @AuthenticationPrincipal UserPrinciple user,
             @PathVariable long campaignId,
             @RequestBody CampaignDonateRequest request

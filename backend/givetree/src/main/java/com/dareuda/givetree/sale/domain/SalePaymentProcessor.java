@@ -1,9 +1,7 @@
 package com.dareuda.givetree.sale.domain;
 
-import com.dareuda.givetree.token.domain.SaleTokenTransferrer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Component
@@ -11,14 +9,14 @@ public class SalePaymentProcessor {
 
     private final SaleReader saleReader;
     private final SaleValidator saleValidator;
-    private final SaleTokenTransferrer saleTokenTransferrer;
+    private final SaleTransferrer saleTransferrer;
     private final SaleUpdater saleUpdater;
 
     public void pay(long purchaserId, long saleId, String simplePassword) {
         Sale sale = saleReader.read(saleId);
         saleValidator.validateIsPurchasable(sale, purchaserId);
 
-        saleTokenTransferrer.transfer(
+        saleTransferrer.transfer(
                 purchaserId,
                 sale.getSellerId(),
                 sale.getFundedFoundationId(),
