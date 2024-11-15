@@ -12,24 +12,28 @@ import Box from '@/components/common/Box';
 interface ChatMessageProps {
   children: ReactNode;
   profile?: ReactNode;
-  me?: boolean;
+  isMine?: boolean;
   createdAt: string;
 }
 
 const ChatMessage = ({
   children,
   profile,
-  me = false,
+  isMine = false,
   createdAt,
 }: ChatMessageProps) => {
   return (
-    <>
+    <Flex
+      flexDirection="column"
+      gap="0.75rem"
+      style={{ padding: '0.75rem 0.25rem' }}
+    >
       {profile}
       <Flex
-        flexDirection={me ? 'row' : 'row-reverse'}
+        flexDirection={isMine ? 'row' : 'row-reverse'}
         alignItems="flex-end"
         gap="0.25rem"
-        style={{ alignSelf: me ? 'flex-end' : 'flex-start' }}
+        style={{ alignSelf: isMine ? 'flex-end' : 'flex-start' }}
       >
         <Box padding="0.25rem 0">
           <Typography color={colorPalette.text[400]} size={typography.size.xs}>
@@ -39,9 +43,9 @@ const ChatMessage = ({
             })}
           </Typography>
         </Box>
-        <div className={s.balloon({ me })}>{children}</div>
+        <div className={s.balloon({ isMine })}>{children}</div>
       </Flex>
-    </>
+    </Flex>
   );
 };
 

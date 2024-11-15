@@ -8,14 +8,15 @@ import MarketError from '@/app/market/error';
 export default async function ChatPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ saleId: string; chatroomId: string }>;
 }) {
-  const id = parseInt((await params).id);
+  const saleId = parseInt((await params).saleId);
+  const chatroomId = parseInt((await params).chatroomId);
 
   return (
     <ErrorBoundary errorComponent={MarketError}>
       <Suspense fallback={<Loading />}>
-        <Chat id={id} />
+        <Chat saleId={saleId} chatroomId={chatroomId} />
       </Suspense>
     </ErrorBoundary>
   );

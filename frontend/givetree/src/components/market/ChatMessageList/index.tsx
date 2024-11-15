@@ -1,28 +1,32 @@
-import React from 'react';
+import type { ChatMessage as ChatMessageType } from '@/hooks/useChat';
 
-import Flex from '@/components/common/Flex';
 import SimpleProfile from '@/components/common/SimpleProfile';
 import ChatMessage from '@/components/market/ChatMessage';
-import ChatTimeline from '@/components/market/ChatTimeline';
+import Box from '@/components/common/Box';
 
-const ChatMessageList = () => {
+interface ChatMessageListProps {
+  senderId: number;
+  messages: ChatMessageType[];
+}
+
+const ChatMessageList = ({ senderId, messages }: ChatMessageListProps) => {
+  {
+    /* <ChatTimeline>2024-11-{index + 1}</ChatTimeline> */
+  }
+
   return (
-    <Flex flexDirection="column" gap="0.75rem">
-      {new Array(20).fill(0).map((value, index) => (
-        <React.Fragment key={index}>
-          <ChatTimeline>2024-11-{index + 1}</ChatTimeline>
-          <ChatMessage
-            createdAt="2024-11-07T01:42:23.658Z"
-            profile={<SimpleProfile id={1} size="sm" />}
-          >
-            안녕하세요
-          </ChatMessage>
-          <ChatMessage createdAt="2024-11-07T01:42:23.658Z" me>
-            안녕하세요
-          </ChatMessage>
-        </React.Fragment>
+    <Box>
+      {messages.map((message, index) => (
+        <ChatMessage
+          key={index}
+          createdAt="2024-11-07T01:42:23.658Z"
+          profile={<SimpleProfile id={message.senderId} size="sm" />}
+          isMine={senderId === message.senderId}
+        >
+          {message.content}
+        </ChatMessage>
       ))}
-    </Flex>
+    </Box>
   );
 };
 
