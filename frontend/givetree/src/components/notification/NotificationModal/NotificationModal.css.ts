@@ -27,6 +27,7 @@ export const popup = keyframes({
 export const backdrop = style({
   position: 'fixed',
   inset: '0',
+  zIndex: '10',
   backgroundColor: '#00000054',
   animation: `${fadeIn} 0.2s ease 0s 1`,
 });
