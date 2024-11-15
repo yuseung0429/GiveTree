@@ -16,16 +16,16 @@ public interface FoundationDonationRepository extends BaseDonationRepository<Fou
                       fd.donationType,
                       fd.amount,
                       l.message,
-                      t.createdAt
+                      fd.createdAt
                       )
            FROM FoundationDonation fd
            JOIN fd.foundation f
            JOIN f.member m
            LEFT JOIN m.profileImage p
            LEFT JOIN TransactionLedger tl ON fd.transaction = tl.transaction
-           LEFT JOIN tl.transaction t
            LEFT JOIN tl.ledger l
            WHERE fd.donor.id = :memberId
+           ORDER BY fd.createdAt DESC
            """)
     Slice<FoundationDonationInfo> findFoundationDonationInfoByMemberId(long memberId, Pageable pageable);
 }
