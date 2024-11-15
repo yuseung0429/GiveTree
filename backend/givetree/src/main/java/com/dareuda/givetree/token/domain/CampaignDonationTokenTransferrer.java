@@ -3,7 +3,8 @@ package com.dareuda.givetree.token.domain;
 import com.dareuda.givetree.campaign.domain.Campaign;
 import com.dareuda.givetree.campaign.domain.CampaignContractDonor;
 import com.dareuda.givetree.campaign.domain.CampaignReader;
-import com.dareuda.givetree.finance.domain.MemberFinanceValidator;
+import com.dareuda.givetree.donation.domain.CampaignDonationAppender;
+import com.dareuda.givetree.history.domain.Transaction;
 import com.dareuda.givetree.history.domain.TransactionType;
 import com.dareuda.givetree.member.domain.MemberValidator;
 import com.dareuda.givetree.wallet.domain.WalletVO;
@@ -20,24 +21,19 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 public class CampaignDonationTokenTransferrer {
 
     private final MemberValidator memberValidator;
-    private final MemberFinanceValidator memberFinanceValidator;
     private final MemberWalletReader memberWalletReader;
-    private final TokenCharger tokenCharger;
     private final CampaignContractDonor campaignContractDonor;
     private final CampaignWalletReader campaignWalletReader;
     private final CampaignReader campaignReader;
+    private final CampaignDonationAppender campaignDonationAppender;
 
-    public long transfer(long userId, long campaignId, long amount, String simplePassword, String message) {
+    public void transfer(long userId, long campaignId, long amount, String shareMessage) {
         memberValidator.validateUser(userId);
-
-        memberFinanceValidator.validateSimplePassword(userId, simplePassword);
 
         Campaign campaign = campaignReader.read(campaignId);
 
         MemberWallet userWallet = memberWalletReader.readByMemberId(userId);
         CampaignWallet campaignWallet = campaignWalletReader.readByCampaignId(campaignId);
-
-        tokenCharger.charge(userId, amount, message);
 
         TransactionReceipt receipt = campaignContractDonor.donate(
                 WalletVO.from(userWallet),
@@ -45,12 +41,21 @@ public class CampaignDonationTokenTransferrer {
                 campaign.getContractAddress(),
                 amount
         );
-        return campaignContractDonor.saveTransaction(
+
+        Transaction transaction = campaignContractDonor.saveTransaction(
                 userWallet.getId(),
                 campaignWallet.getId(),
                 amount,
                 TransactionType.CAMPAIGN_DONATION,
                 receipt
-        ).getId();
+        );
+
+        campaignDonationAppender.append(
+                userId,
+                campaignId,
+                amount,
+                transaction.getId(),
+                shareMessage
+        );
     }
 }

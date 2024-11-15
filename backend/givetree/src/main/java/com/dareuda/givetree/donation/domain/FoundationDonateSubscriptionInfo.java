@@ -7,13 +7,15 @@ import lombok.Getter;
 @Builder
 public class FoundationDonateSubscriptionInfo {
     private Long foundationId;
-    private String name;
+    private String image;
+    private String foundationName;
     private Long amount;
 
     public static FoundationDonateSubscriptionInfo from(FoundationDonateSubscription subscription) {
         return FoundationDonateSubscriptionInfo.builder()
                 .foundationId(subscription.getFoundation().getId())
-                .name(subscription.getFoundation().getMember().getName())
+                .image(subscription.getFoundation().getMember().getProfileImage().getUrl())
+                .foundationName(subscription.getFoundation().getMember().getName())
                 .amount(subscription.getAmount())
                 .build();
     }

@@ -1,6 +1,5 @@
 package com.dareuda.givetree.donation.domain;
 
-import com.dareuda.givetree.history.domain.LedgerInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;

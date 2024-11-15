@@ -1,6 +1,9 @@
 package com.dareuda.givetree.token.domain;
 
+import com.dareuda.givetree.donation.domain.FoundationDonationAppender;
+import com.dareuda.givetree.donation.domain.FoundationDonationType;
 import com.dareuda.givetree.finance.domain.MemberFinanceValidator;
+import com.dareuda.givetree.history.domain.Transaction;
 import com.dareuda.givetree.history.domain.TransactionType;
 import com.dareuda.givetree.member.domain.MemberValidator;
 import com.dareuda.givetree.wallet.domain.WalletVO;
@@ -16,55 +19,36 @@ public class FoundationDonationTokenTransferrer {
 
     private final TokenTransferrer tokenTransferrer;
     private final MemberWalletReader memberWalletReader;
-    private final MemberFinanceValidator memberFinanceValidator;
     private final MemberValidator memberValidator;
-    private final TokenCharger tokenCharger;
+    private final FoundationDonationAppender foundationDonationAppender;
 
-    public long transfer(long userId, long foundationId, long amount, String simplePassword, String message) {
+    public void transfer(long userId, long foundationId, long amount, FoundationDonationType donationType) {
         memberValidator.validateUser(userId);
         memberValidator.validateFoundation(foundationId);
-
-        memberFinanceValidator.validateSimplePassword(userId, simplePassword);
 
         MemberWallet memberWallet = memberWalletReader.readByMemberId(userId);
         MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
 
-        tokenCharger.charge(userId, amount, message);
-
         TransactionReceipt receipt = tokenTransferrer.transfer(
                 WalletVO.from(memberWallet),
                 WalletVO.from(foundationWallet),
                 amount
         );
-        return tokenTransferrer.saveTransaction(
+
+        Transaction transaction = tokenTransferrer.saveTransaction(
                 memberWallet.getId(),
                 foundationWallet.getId(),
                 amount,
                 TransactionType.FOUNDATION_DONATION,
                 receipt
-        ).getId();
-    }
-
-    public long transfer(long memberId, long foundationId, long amount, String message) {
-        memberValidator.validateUser(memberId);
-        memberValidator.validateFoundation(foundationId);
-
-        MemberWallet memberWallet = memberWalletReader.readByMemberId(memberId);
-        MemberWallet foundationWallet = memberWalletReader.readByMemberId(foundationId);
-
-        tokenCharger.charge(memberId, amount, message);
-
-        TransactionReceipt receipt = tokenTransferrer.transfer(
-                WalletVO.from(memberWallet),
-                WalletVO.from(foundationWallet),
-                amount
         );
-        return tokenTransferrer.saveTransaction(
-                memberWallet.getId(),
-                foundationWallet.getId(),
+
+        foundationDonationAppender.append(
+                userId,
+                foundationId,
                 amount,
-                TransactionType.FOUNDATION_DONATION,
-                receipt
-        ).getId();
+                transaction.getId(),
+                donationType
+        );
     }
 }

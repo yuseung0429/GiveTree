@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public interface FoundationDonateSubscriptionRepository extends Repository<FoundationDonateSubscription, Long> {
     FoundationDonateSubscription save(FoundationDonateSubscription foundationDonateSubscription);
-    List<FoundationDonateSubscription> findAllByMemberId(long memberId);
 
     boolean existsByMemberIdAndFoundationId(long memberId, long foundationId);
 
@@ -20,6 +19,7 @@ public interface FoundationDonateSubscriptionRepository extends Repository<Found
            FROM FoundationDonateSubscription fds
            JOIN FETCH fds.foundation
            JOIN FETCH fds.foundation.member
+           LEFT JOIN FETCH fds.foundation.member.profileImage
            WHERE fds.member.id=:memberId
            """)
     Slice<FoundationDonateSubscription> findByMemberIdFetchFoundation(long memberId, Pageable pageable);

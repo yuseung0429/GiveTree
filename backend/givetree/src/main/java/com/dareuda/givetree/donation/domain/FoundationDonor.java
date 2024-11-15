@@ -1,5 +1,6 @@
 package com.dareuda.givetree.donation.domain;
 
+import com.dareuda.givetree.finance.domain.MemberFinanceValidator;
 import com.dareuda.givetree.member.domain.Member;
 import com.dareuda.givetree.member.domain.MemberReader;
 import com.dareuda.givetree.token.domain.FoundationDonationTokenTransferrer;
@@ -12,31 +13,31 @@ public class FoundationDonor {
     private final static String MESSAGE = "%s 재단 후원";
 
     private final MemberReader memberReader;
-    private final FoundationDonationTokenTransferrer foundationDonationTokenTransferrer;
-    private final FoundationDonationAppender foundationDonationAppender;
+    private final FoundationDonationTransferrer foundationDonationTransferrer;
+    private final MemberFinanceValidator memberFinanceValidator;
 
-    public void donate(long userId, long foundationId, long amount, String simplePassword) {
+    public void donateOneTime(long userId, long foundationId, long amount, String simplePassword) {
         Member foundation = memberReader.read(foundationId);
         String message = String.format(MESSAGE, foundation.getName());
-        long transactionId = foundationDonationTokenTransferrer.transfer(
+        memberFinanceValidator.validateSimplePassword(userId, simplePassword);
+        foundationDonationTransferrer.transfer(
                 userId,
                 foundationId,
                 amount,
-                simplePassword,
-                message
+                message,
+                FoundationDonationType.ONE_TIME
         );
-        foundationDonationAppender.append(userId, foundationId, amount, transactionId, FoundationDonationType.ONE_TIME);
     }
 
-    public void donate(long userId, long foundationId, long amount) {
+    public void donateRegular(long userId, long foundationId, long amount) {
         Member foundation = memberReader.read(foundationId);
         String message = String.format(MESSAGE, foundation.getName());
-        long transactionId = foundationDonationTokenTransferrer.transfer(
+        foundationDonationTransferrer.transfer(
                 userId,
                 foundationId,
                 amount,
-                message
+                message,
+                FoundationDonationType.REGULAR
         );
-        foundationDonationAppender.append(userId, foundationId, amount, transactionId, FoundationDonationType.REGULAR);
     }
 }
