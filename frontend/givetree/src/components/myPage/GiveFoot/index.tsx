@@ -1,14 +1,25 @@
 import Typography from '@/components/common/Typography';
 import { IoFootsteps } from 'react-icons/io5';
 import * as s from './GiveFoot.css';
-import CampaignDonation from '@/mock/CampaignDonation.json';
-import FoundationDonation from '@/mock/FoundationDonation.json';
+import {
+  FoundationOneTimeDonation,
+  FoundationRegularDonation,
+} from '@/types/donation/foundation/types';
+import { CampaignDonation } from '@/types/donation/campaign/types';
 
 interface GiveFootProps {
   name: string;
+  CampaignDonation: CampaignDonation[];
+  FoundationRegularDonation: FoundationRegularDonation[];
+  FoundationOneTimeDonation: FoundationOneTimeDonation[];
 }
 
-export default function GiveFoot({ name }: GiveFootProps) {
+export default function GiveFoot({
+  name,
+  CampaignDonation,
+  FoundationRegularDonation,
+  FoundationOneTimeDonation,
+}: GiveFootProps) {
   return (
     <div className={s.footBox}>
       <div className={s.titleBox}>
@@ -22,7 +33,7 @@ export default function GiveFoot({ name }: GiveFootProps) {
           정기 후원
         </Typography>
         <Typography as="h4" weight="semiBold">
-          {FoundationDonation.regularDonations.length}개
+          {FoundationRegularDonation.length}개
         </Typography>
       </div>
 
@@ -31,8 +42,7 @@ export default function GiveFoot({ name }: GiveFootProps) {
           일시 후원
         </Typography>
         <Typography as="h4" weight="semiBold">
-          {FoundationDonation.oneTimeDonations.length + CampaignDonation.length}
-          회
+          {FoundationOneTimeDonation.length + CampaignDonation.length}회
         </Typography>
       </div>
 

@@ -39,7 +39,7 @@ export const cardIndex = style({
 export const campaignSubtitle = style({
   marginLeft: '0.25rem',
   color: 'grey',
-  mixBlendMode: 'difference'
+  mixBlendMode: 'difference',
 });
 
 export const progressContainer = style({
@@ -59,5 +59,5 @@ export const progressTextOutside = style({
   left: 'calc(100% + 5px)',
   fontSize: '0.75rem',
   fontWeight: 'bold',
-  color: 'red',
+  color: colorPalette.secondary[500],
 });

@@ -31,5 +31,5 @@ export const progressTextOutside = style({
   left: 'calc(100% + 5px)',
   fontSize: '0.75rem',
   fontWeight: 'bold',
-  color: 'red',
+  color: colorPalette.secondary[500],
 });
