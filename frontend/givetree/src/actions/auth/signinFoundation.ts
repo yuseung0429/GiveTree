@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
-import { setSession } from '@/lib/session';
+import { deleteSession, setSession } from '@/lib/session';
 import fetchWrapper from '@/lib/fetchWrapper';
 
 import { FormState } from '@/types/formState';
@@ -17,6 +17,8 @@ export default async function signinFoundation(
     password = formData.get('password');
 
   try {
+    await deleteSession();
+
     const response = await fetchWrapper(`/login`, {
       method: 'POST',
       headers: {
