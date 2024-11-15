@@ -3,6 +3,7 @@ package com.dareuda.givetree.sale.controller;
 import com.dareuda.givetree.auth.domain.UserPrinciple;
 import com.dareuda.givetree.sale.controller.dto.SaleDtoConverter;
 import com.dareuda.givetree.sale.controller.dto.request.*;
+import com.dareuda.givetree.sale.controller.dto.response.ReadBookerResponse;
 import com.dareuda.givetree.sale.controller.dto.response.ReadSaleBySearchResponse;
 import com.dareuda.givetree.sale.controller.dto.response.ReadSaleResponse;
 import com.dareuda.givetree.sale.domain.SaleDetail;
@@ -91,6 +92,14 @@ public class SaleController {
             @PathVariable long saleId
     ) {
         return ResponseEntity.ok().body(saleService.isCurrentUserReserved(userPrinciple.getId(), saleId));
+    }
+
+    @GetMapping("/{saleId}/booker")
+    public ResponseEntity<ReadBookerResponse> readBooker(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long saleId
+    ) {
+        return ResponseEntity.ok().body(ReadBookerResponse.of(saleService.readBooker(userPrinciple.getId(), saleId)));
     }
 
     @PostMapping("/{saleId}/pay")

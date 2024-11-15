@@ -12,9 +12,9 @@ public class SaleRemover {
     private final SaleValidator saleValidator;
 
     @Transactional
-    public void remove(long memberId, long saleId) {
+    public void remove(long sellerId, long saleId) {
         Sale sale = saleReader.read(saleId);
-        saleValidator.validateOwner(memberId, sale);
+        saleValidator.validateOwner(sellerId, sale);
         sale.remove();
     }
 }

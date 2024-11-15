@@ -4,7 +4,6 @@ import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.sale.controller.SaleErrorCode;
 import com.dareuda.givetree.sale.domain.ProductionCondition;
 import com.dareuda.givetree.sale.domain.SaleCommand;
-import com.dareuda.givetree.sale.domain.SaleStatus;
 import lombok.Getter;
 
 import java.util.List;
@@ -24,8 +23,6 @@ public class UpdateSaleRequest {
 
     private List<String> imageUrls;
 
-    private String status;
-
     private String productionCondition;
 
     private Boolean isDirectSale;
@@ -44,7 +41,6 @@ public class UpdateSaleRequest {
                 .title(title)
                 .description(description)
                 .imageUrls(imageUrls)
-                .status(SaleStatus.of(status))
                 .productionCondition(ProductionCondition.of(productionCondition))
                 .isDirectSale(isDirectSale)
                 .isDeliverySale(isDeliverySale)
