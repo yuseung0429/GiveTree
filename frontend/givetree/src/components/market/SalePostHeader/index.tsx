@@ -1,9 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { HiChatBubbleOvalLeft, HiTrash } from 'react-icons/hi2';
+
+import getChatroomId from '@/api/market/getChatroomId';
 
 import { highlightedTags } from '@/constatns/tag';
 
@@ -53,6 +54,15 @@ const SalePostHeader = ({
     router.back();
   };
 
+  const handleChatClick = async () => {
+    try {
+      const chatroomId = await getChatroomId(id);
+      router.push(`/market/chat/${id}/${chatroomId}`);
+    } catch {
+      alert('채팅방 생성을 실패했습니다.');
+    }
+  };
+
   return (
     <Flex alignItems="flex-start" justifyContent="space-between">
       <Flex flexDirection="column" gap="1rem">
@@ -94,14 +104,13 @@ const SalePostHeader = ({
               삭제하기
             </Button>
           ) : (
-            <Link href={`/market/chat/${id}/0`}>
-              <Button
-                size="sm"
-                icon={<HiChatBubbleOvalLeft size={'1.25rem'} />}
-              >
-                채팅하기
-              </Button>
-            </Link>
+            <Button
+              size="sm"
+              icon={<HiChatBubbleOvalLeft size={'1.25rem'} />}
+              onClick={handleChatClick}
+            >
+              채팅하기
+            </Button>
           )}
         </div>
       </Flex>
