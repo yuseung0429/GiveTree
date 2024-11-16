@@ -43,7 +43,6 @@ public interface CampaignDonationRepository extends BaseDonationRepository<Campa
            WHERE cd.campaign.id = :campaignId
            """)
     CampaignDonationStatisticInfo calculateCampaignDonationStatisticInfo(long campaignId);
-    Slice<CampaignDonationInfo> findCampaignDonationInfoByMemberId(long memberId, Pageable pageable);
 
     long countByCampaign(Campaign campaign);
 }

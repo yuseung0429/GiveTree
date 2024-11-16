@@ -1,6 +1,7 @@
 package com.dareuda.givetree.donation.infrastructure;
 
 import com.dareuda.givetree.donation.domain.CampaignDonationUserInfo;
+import com.dareuda.givetree.donation.domain.DonationMessage;
 import com.dareuda.givetree.donation.domain.QCampaignDonation;
 import com.dareuda.givetree.history.domain.QTransactionLedger;
 import com.querydsl.core.types.Projections;
@@ -12,6 +13,9 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 
 import java.util.List;
+
+import static com.dareuda.givetree.donation.domain.QCampaignDonation.campaignDonation;
+import static com.dareuda.givetree.member.domain.QMember.member;
 
 public class CampaignDonationCustomRepositoryImpl implements CampaignDonationCustomRepository {
 
@@ -60,5 +64,20 @@ public class CampaignDonationCustomRepositoryImpl implements CampaignDonationCus
         }
 
         return new SliceImpl<>(content, pageable, hasNext);
+    }
+
+    @Override
+    public List<DonationMessage> findDonationMessagesByCampaignId(long campaignId, Pageable pageable) {
+        return queryFactory
+                .select(Projections.constructor(DonationMessage.class,
+                        member.name,
+                        campaignDonation.message))
+                .from(campaignDonation)
+                .join(member).on(member.eq(campaignDonation.donor))
+                .where(campaignDonation.campaign.id.eq(campaignId))
+                .orderBy(campaignDonation.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
     }
 }
