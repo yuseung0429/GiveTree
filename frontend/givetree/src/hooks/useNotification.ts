@@ -49,7 +49,7 @@ const useNotification = () => {
         });
 
       onMessage(messaging, async (payload) => {
-        const { title, body, image } = payload.notification!;
+        const { title, body, image } = payload.data!;
 
         const registration = await navigator.serviceWorker.getRegistration(
           serviceWorkerScope

@@ -18,11 +18,11 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
-  self.registration.showNotification(payload.notification.title, {
-    body: payload.notification.body,
+  self.registration.showNotification(payload.data.title, {
+    body: payload.data.body,
     icon: '/favicon.svg',
     badge: '/badge-128x128.png',
     vibrate: [200, 100, 200, 100],
-    image: payload.notification.image,
+    image: payload.data.image,
   });
 });
