@@ -4,7 +4,7 @@ import fetchWrapper from '@/lib/fetchWrapper';
 
 export default async function saveFCMToken(token: string) {
   try {
-    const response = await fetchWrapper('/sales/notifications/token', {
+    const response = await fetchWrapper('/notifications/token', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
