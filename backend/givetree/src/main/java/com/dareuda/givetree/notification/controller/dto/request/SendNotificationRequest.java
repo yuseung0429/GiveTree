@@ -1,6 +1,6 @@
 package com.dareuda.givetree.notification.controller.dto.request;
 
-import com.dareuda.givetree.notification.domain.Notification;
+import com.dareuda.givetree.notification.domain.FcmMessageData;
 import lombok.Getter;
 
 @Getter
@@ -12,7 +12,7 @@ public class SendNotificationRequest {
 
     private String body;
 
-    public Notification toNotification() {
-        return Notification.of(title, body);
+    public FcmMessageData toNotification() {
+        return FcmMessageData.of(title, body);
     }
 }
