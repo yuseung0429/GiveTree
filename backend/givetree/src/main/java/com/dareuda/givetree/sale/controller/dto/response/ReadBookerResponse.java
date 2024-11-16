@@ -10,7 +10,7 @@ public class ReadBookerResponse {
 
     public Long bookerId;
 
-    public static ReadBookerResponse of(long bookerId) {
+    public static ReadBookerResponse of(Long bookerId) {
         return new ReadBookerResponse(bookerId);
     }
 }

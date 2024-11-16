@@ -25,6 +25,9 @@ public class SaleReader {
 
     public boolean isCurrentUserReserved(long memberId, long saleId) {
         Sale sale = read(saleId);
+        if (sale.getPurchaserId() == null) {
+            return false;
+        }
         return sale.getPurchaserId() == memberId;
     }
 
