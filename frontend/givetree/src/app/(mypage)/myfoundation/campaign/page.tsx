@@ -6,19 +6,16 @@ import NavigationBar from '@/components/common/NavigationBar';
 import fetchWrapper from '@/lib/fetchWrapper';
 import { CampaignData } from '@/types/campaign/types';
 import Typography from '@/components/common/Typography';
+import getSessionFoundation from '@/api/member/getSessionFoundation';
 
 export default async function Page() {
-  const foundationResponse = await fetchWrapper('/foundations/session', {
-    method: 'GET',
-  });
-  const foundation = await foundationResponse.json();
-  const foundationId = foundation.id;
+  const { id: foundationId } = await getSessionFoundation();
 
   const response = await fetchWrapper('/campaigns', { method: 'GET' });
   const campaignList = await response.json();
-  const campaigns = campaignList.content;
+  const campaigns = campaignList?.content;
 
-  const foundationCampaigns = campaigns.filter((campaign: CampaignData) => {
+  const foundationCampaigns = campaigns?.filter((campaign: CampaignData) => {
     return campaign.foundationId === foundationId;
   });
 
@@ -28,7 +25,7 @@ export default async function Page() {
         <AppBar title="캠페인 내역 확인" />
       </header>
       <main style={{ backgroundColor: '#fff', padding: '1rem 0' }}>
-        {foundationCampaigns.length === 0 ? (
+        {foundationCampaigns?.length === 0 ? (
           <div
             style={{
               display: 'flex',
@@ -44,21 +41,19 @@ export default async function Page() {
         ) : (
           <Flex flexDirection="column" gap="1rem">
             <Typography as="h3" weight="medium" style={{ margin: '0 1rem' }}>
-              <b>{foundationCampaigns.length}개</b>의 캠페인을 진행 중입니다.
+              <b>{foundationCampaigns?.length}개</b>의 캠페인을 진행 중입니다.
             </Typography>
-            {foundationCampaigns.map((campaign: CampaignData) => (
-              <>
-                <CampaignItem
-                  key={campaign.id}
-                  id={campaign.id}
-                  name={campaign.name}
-                  startDate={campaign.startDate}
-                  endDate={campaign.endDate}
-                  targetFundraisingAmount={campaign.targetFundraisingAmount}
-                  currentFundraisingAmount={campaign.currentFundraisingAmount}
-                  titleImageUrl={campaign.titleImageUrl}
-                />
-              </>
+            {foundationCampaigns?.map((campaign: CampaignData) => (
+              <CampaignItem
+                key={campaign.id}
+                id={campaign.id}
+                name={campaign.name}
+                startDate={campaign.startDate}
+                endDate={campaign.endDate}
+                targetFundraisingAmount={campaign.targetFundraisingAmount}
+                currentFundraisingAmount={campaign.currentFundraisingAmount}
+                titleImageUrl={campaign.titleImageUrl}
+              />
             ))}
           </Flex>
         )}

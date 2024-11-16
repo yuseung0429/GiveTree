@@ -16,7 +16,7 @@ export default function GiveCampaign({ donation }: GiveCampaignProps) {
       <Typography as="h3" weight="semiBold">
         {donation.campaignName}
       </Typography>
-      <Typography>{donation.foundation}</Typography>
+      <Typography>{donation.foundationName}</Typography>
       <Typography
         as="h3"
         weight="semiBold"
@@ -24,13 +24,13 @@ export default function GiveCampaign({ donation }: GiveCampaignProps) {
         color={colorPalette.secondary[600]}
         style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
       >
-        {donation.donationAmount.toLocaleString()}원
+        {donation.amount.toLocaleString()}원
       </Typography>
       <Typography
         color={colorPalette.grey[800]}
         style={{ marginLeft: 'auto', marginRight: '0.25rem' }}
       >
-        {donation.donationDate}
+        {donation.createdAt.slice(0, 10)}
       </Typography>
     </Box>
   );

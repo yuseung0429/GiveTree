@@ -21,6 +21,7 @@ const useNotification = () => {
 
   useEffect(() => {
     Notification.requestPermission().then((permission) => {
+      const serviceWorkerScope = '/firebase-cloud-messaging-push-scope';
       setPermission(permission);
 
       if (permission !== 'granted') {
@@ -32,7 +33,7 @@ const useNotification = () => {
       const messaging = getMessaging();
 
       navigator.serviceWorker.register('/firebase-messaging-sw.js', {
-        scope: '/firebase-cloud-messaging-push-scope',
+        scope: serviceWorkerScope,
       });
 
       getToken(messaging, {
@@ -45,9 +46,19 @@ const useNotification = () => {
           console.error(error);
         });
 
-      onMessage(messaging, (payload) => {
+      onMessage(messaging, async (payload) => {
         const { title, body, image } = payload.notification!;
-        new Notification(title || '', { body, icon: image });
+
+        const registration = await navigator.serviceWorker.getRegistration(
+          serviceWorkerScope
+        );
+
+        registration?.showNotification(title || '', {
+          body,
+          icon: '/favicon.svg',
+          badge: '/badge-128x128.png',
+          image,
+        } as NotificationOptions);
       });
     });
   }, []);

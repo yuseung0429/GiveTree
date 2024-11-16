@@ -1,6 +1,6 @@
 import Typography from '@/components/common/Typography';
 import * as styles from './CampaignInfo.css';
-import Image from 'next/image';
+// import Image from 'next/image';
 import colorPalette from '@/styles/tokens/colorPalette';
 
 interface CampaignInfoProps {
@@ -8,6 +8,7 @@ interface CampaignInfoProps {
   introduceImage: string[];
 }
 
+/* eslint-disable @next/next/no-img-element */
 const CampaignInfo = ({ introduction, introduceImage }: CampaignInfoProps) => {
   return (
     <div>
@@ -21,12 +22,11 @@ const CampaignInfo = ({ introduction, introduceImage }: CampaignInfoProps) => {
       </Typography>
       <div className={styles.introduceImage}>
         {introduceImage.map((image, index) => (
-          <Image
-            key={index}
+          <img
             src={image}
             alt="introduce image"
-            width={300}
-            height={400}
+            key={index}
+            style={{ width: '90%' }}
           />
         ))}
       </div>
