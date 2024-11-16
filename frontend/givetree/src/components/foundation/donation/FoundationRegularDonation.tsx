@@ -107,7 +107,10 @@ export default function FoundationRegularDonation({
             alt="campaign image"
             width={65}
             height={65}
-            style={{ borderRadius: '50%' }}
+            style={{
+              borderRadius: '50%',
+              border: `1px solid ${colorPalette.grey[500]}`,
+            }}
           />
           <Flex flexDirection="column" gap="3px">
             <Typography
@@ -163,7 +166,7 @@ export default function FoundationRegularDonation({
       {role === 'USER' && (
         <div className={style.giveButton}>
           <Button
-            size="xl"
+            size="lg"
             onClick={handlePasswordOpen}
             fullWidth
             disabled={isPending}

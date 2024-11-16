@@ -23,7 +23,7 @@ export default function RegularDelete({
       return;
     }
 
-    router.back();
+    router.push('/givefoot');
   };
   return (
     <>

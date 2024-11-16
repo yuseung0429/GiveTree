@@ -4,14 +4,12 @@ import Button from '@/components/common/Button';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import * as s from './EditUser.css';
-// import * as styles from '@/components/myPage/Profile/Profile.css';
 import { useActionState, useEffect, useState } from 'react';
 import { StaticImageData } from 'next/image';
-// import Box from '@/components/common/Box';
-// import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import ProfileImageUploader from '@/components/myPage/Profile/ProfileImageUploader';
 import modifyMember from '@/actions/member/modifyMember';
 import useDialog from '@/hooks/useDialog';
+import { useRouter } from 'next/navigation';
 
 interface EditUserNameProps {
   name: string;
@@ -22,19 +20,22 @@ interface EditUserNameProps {
 export default function EditUser({ name, email, image }: EditUserNameProps) {
   const [newName, setNewName] = useState<string>(name);
   const { alert } = useDialog();
+  const router = useRouter();
 
   const [state, formAction] = useActionState(modifyMember, {});
 
   useEffect(() => {
     if (state.success) {
-      alert('회원 정보를 수정했습니다.');
-      return;
+      (async () => {
+        await alert('회원 정보를 수정했습니다.');
+        router.push(`/mypage`);
+      })();
     }
 
     if (state.errors) {
       alert(state.message);
     }
-  }, [state, alert]);
+  }, [state, alert, router]);
 
   return (
     <>
