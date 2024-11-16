@@ -1,17 +1,11 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-
 import AppBar from '@/components/common/AppBar';
 import Layout from '@/components/common/Layout';
 
 export default function PayLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-
   return (
     <Layout>
       <header>
-        <AppBar title="상품 결제" onBackClick={() => router.back()}></AppBar>
+        <AppBar title="상품 결제" showBackButton></AppBar>
       </header>
       <main>{children}</main>
     </Layout>
