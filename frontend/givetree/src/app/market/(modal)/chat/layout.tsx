@@ -1,7 +1,3 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-
 import AppBar from '@/components/common/AppBar';
 import Layout from '@/components/common/Layout';
 
@@ -10,12 +6,10 @@ export default function ChatLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
-
   return (
     <Layout>
       <header>
-        <AppBar title="채팅" onBackClick={() => router.back()}></AppBar>
+        <AppBar title="채팅" showBackButton></AppBar>
       </header>
       <main>{children}</main>
     </Layout>

@@ -14,9 +14,6 @@ export async function registerAccount(accountNumber: string) {
       }),
     });
 
-    const data = await response.text();
-    console.log('Account registration response:', data);
-
     if (response.ok) {
       return { success: true };
     }

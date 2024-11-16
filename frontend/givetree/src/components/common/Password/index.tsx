@@ -7,7 +7,6 @@ import AppBar from '@/components/common/AppBar';
 import Typography from '@/components/common/Typography';
 import Flex from '@/components/common/Flex';
 import colorPalette from '@/styles/tokens/colorPalette';
-import { useRouter } from 'next/navigation';
 
 interface PasswordProps {
   title?: string;
@@ -21,7 +20,6 @@ export default function Password({
   subtitle = '비밀번호를 입력해주세요.',
   onSubmit,
 }: PasswordProps) {
-  const router = useRouter();
   const [password, setPassword] = useState('');
   // const [numbers, setNumbers] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
   const [numbers, setNumbers] = useState([
@@ -79,7 +77,7 @@ export default function Password({
   return (
     <Layout>
       <header style={{ backgroundColor: '#F5F5F5' }}>
-        <AppBar title="" transparent onBackClick={() => router.back()} />
+        <AppBar title="" transparent showBackButton />
       </header>
 
       <main style={{ backgroundColor: '#F5F5F5' }}>

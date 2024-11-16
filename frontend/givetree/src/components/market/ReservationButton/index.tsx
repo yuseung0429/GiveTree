@@ -1,6 +1,8 @@
 'use client';
 
-import useIsReservedPurchaser from '@/api/market/useIsReservedPurchaser';
+import { mutate } from 'swr';
+
+import useGetReservedPurchaser from '@/api/market/useGetReservedPurchaser';
 
 import reserveSale from '@/actions/market/reserveSale';
 import cancelReserve from '@/actions/market/cancelReserve';
@@ -16,13 +18,18 @@ interface ReservationButtonProps {
 
 const ReservationButton = ({ saleId, purchaserId }: ReservationButtonProps) => {
   const { alert, confirm } = useDialog();
-  const isReserved = useIsReservedPurchaser(saleId, purchaserId);
+  const bookerId = useGetReservedPurchaser(saleId);
+  const isReserved = purchaserId === bookerId;
 
   const handleReserveClick = async () => {
     if (await confirm('상대방에게 상품 판매를 예약하시겠습니까?')) {
       if (await reserveSale(saleId, purchaserId)) {
+        mutate(`/sales/${saleId}/booker`);
         alert('예약되었습니다.');
+        return;
       }
+
+      alert('예약을 실패했습니다.');
     }
   };
 

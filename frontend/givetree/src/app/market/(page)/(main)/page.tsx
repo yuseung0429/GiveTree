@@ -4,9 +4,10 @@ import colorPalette from '@/styles/tokens/colorPalette';
 
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
+import ChatButon from '@/components/market/ChatButton';
 import SearchCondition from '@/components/market/SearchCondition';
-import WriteButon from '@/components/market/WriteButton';
 import SearchItemList from '@/components/market/SearchItemList';
+import WriteButon from '@/components/market/WriteButton';
 
 export default async function MarketPage({
   searchParams,
@@ -29,6 +30,7 @@ export default async function MarketPage({
       </Box>
       <Box style={{ flex: '1 1 auto', overflow: 'auto' }}>
         <SearchItemList {...params} />
+        <ChatButon href="/market/chatlist" />
         <WriteButon href="/market/write" />
       </Box>
     </Flex>

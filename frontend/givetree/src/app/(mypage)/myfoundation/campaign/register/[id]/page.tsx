@@ -75,7 +75,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   return (
     <Layout>
       <header>
-        <AppBar title="캠페인 신청" onBackClick={() => router.back()} />
+        <AppBar title="캠페인 신청" showBackButton />
       </header>
       <main style={{ backgroundColor: '#F5F5F5', padding: '1rem' }}>
         <form onSubmit={handleSubmit}>
