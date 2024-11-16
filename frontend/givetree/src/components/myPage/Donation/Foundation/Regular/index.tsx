@@ -1,15 +1,15 @@
 import Box from '@/components/common/Box';
 import * as s from '../../Donation.css';
 import Image from 'next/image';
-import { RegularDonations } from '@/types/donation/foundation/types';
+import { FoundationRegularDonation } from '@/types/donation/foundation/types';
 import Typography from '@/components/common/Typography';
-import FoundationImg from '@/assets/images/foundation.png';
 import { HiChevronRight } from 'react-icons/hi2';
 import colorPalette from '@/styles/tokens/colorPalette';
 import typography from '@/styles/tokens/typography';
+import Link from 'next/link';
 
 interface RegularGiveProps {
-  donation: RegularDonations;
+  donation: FoundationRegularDonation;
 }
 
 export default function RegularGive({ donation }: RegularGiveProps) {
@@ -18,7 +18,7 @@ export default function RegularGive({ donation }: RegularGiveProps) {
     const currentMonth = today.getMonth() + 1;
     const currentDate = today.getDate();
 
-    if (currentDate > donation.paymentDate) {
+    if (currentDate > 26) {
       if (currentMonth + 1 > 12) {
         return 1;
       } else {
@@ -41,7 +41,7 @@ export default function RegularGive({ donation }: RegularGiveProps) {
       >
         <div className={s.title}>
           <Image
-            src={FoundationImg}
+            src={donation.image}
             alt="foundation image"
             width={40}
             height={40}
@@ -51,7 +51,9 @@ export default function RegularGive({ donation }: RegularGiveProps) {
             {donation.foundationName}
           </Typography>
         </div>
-        <HiChevronRight size={22} />
+        <Link href={`/givefoot/regular/${donation.foundationId}`}>
+          <HiChevronRight size={22} />
+        </Link>
       </div>
 
       <Typography
@@ -61,7 +63,7 @@ export default function RegularGive({ donation }: RegularGiveProps) {
         color={colorPalette.secondary[600]}
         style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
       >
-        월 {donation.monthlyDonationAmount.toLocaleString()}원
+        월 {donation.amount.toLocaleString()}원
       </Typography>
 
       <Typography
@@ -71,8 +73,7 @@ export default function RegularGive({ donation }: RegularGiveProps) {
         color={colorPalette.text[900]}
         style={{ marginLeft: 'auto', marginRight: '0.25rem' }}
       >
-        매월 {donation.paymentDate}일 (다음 결제일: {calculateMonth()}월{' '}
-        {donation.paymentDate}일)
+        매월 26일 (다음 결제일: {calculateMonth()}월 26일)
       </Typography>
     </Box>
   );

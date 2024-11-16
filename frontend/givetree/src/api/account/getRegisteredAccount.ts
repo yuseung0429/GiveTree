@@ -34,7 +34,6 @@ export async function getRegisteredAccount(): Promise<{
     }
 
     const data = await response.json();
-    console.log('Registered Account API Response:', data);
 
     return {
       ok: true,

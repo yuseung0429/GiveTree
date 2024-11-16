@@ -12,7 +12,7 @@ import useDialog from '@/hooks/useDialog';
 import modifyFoundation from '@/actions/member/modifyFoundation';
 
 interface FoundationInfoProps {
-  image: StaticImageData;
+  image: StaticImageData | string;
   name: string;
   introduction: string;
   corporateRegistrationNumber: string;

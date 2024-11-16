@@ -6,13 +6,22 @@ import Typography from '@/components/common/Typography';
 import React from 'react';
 import GiveFoot from '@/components/myPage/GiveFoot';
 import EditUser from '@/components/myPage/Profile/EditUser';
-import fetchWrapper from '@/lib/fetchWrapper';
-import { UserData } from '@/types/user/types';
+import getSessionMember from '@/api/member/getSessionMember';
+import getCampaignDonation from '@/api/donation/getCampaignDonation';
+import getFoundationRegularDonation from '@/api/donation/getFoundationRegularDonation';
+import getFoundationOneTimeDonation from '@/api/donation/getFoundationOneTimeDonation';
+import { FoundationOneTimeDonation } from '@/types/donation/foundation/types';
 
 export default async function UserEdit() {
-  const response = await fetchWrapper('/members/session', { method: 'GET' });
-  const user: UserData = await response.json();
-  const { name, profileImageUrl, email } = user;
+  const { name, profileImageUrl, email } = await getSessionMember();
+  const campaignDonation = await getCampaignDonation();
+  const foundationRegularDonation = await getFoundationRegularDonation();
+  const foundationDonationAll = await getFoundationOneTimeDonation();
+  const foundationOneTimeDonation = foundationDonationAll.filter(
+    (donation: FoundationOneTimeDonation) => {
+      return donation.donationType === 'ONE_TIME';
+    }
+  );
   const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
 
   return (
@@ -29,7 +38,12 @@ export default async function UserEdit() {
         ></div>
 
         <Box className={styles.introduceBox}>
-          <GiveFoot name={name} />
+          <GiveFoot
+            name={name}
+            CampaignDonation={campaignDonation}
+            FoundationRegularDonation={foundationRegularDonation}
+            FoundationOneTimeDonation={foundationOneTimeDonation}
+          />
         </Box>
 
         <div

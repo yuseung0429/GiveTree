@@ -29,11 +29,11 @@ export default function CampaignTab({ foundationData }: CampaignTabProps) {
         <Typography as="h4" size={18} weight="medium">
           현재{' '}
           <span className={style.campaignCount}>
-            {foundationData.holdingCampaignCount}
+            {foundationData.holdingCampaignCount}개
           </span>
-          개의 캠페인이 진행중입니다.
+          의 캠페인이 진행중입니다.
         </Typography>
-        <Box marginTop="1rem">
+        <Box marginTop="0.5rem" paddingBottom="1.5rem">
           {campaigns.map((campaign, index) => (
             <CampaignCard
               key={campaign.id}

@@ -2,12 +2,10 @@ import NavigationBarItem from '@/components/common/NavigationBar/NavigationBarIt
 import * as styles from './NavigationBar.css';
 
 import Image from 'next/image';
-import fetchWrapper from '@/lib/fetchWrapper';
+import getSessionMember from '@/api/member/getSessionMember';
 
 export default async function NavigationBar() {
-  const response = await fetchWrapper('/members/session', { method: 'GET' });
-  const user = await response.json();
-  const { role } = user;
+  const { role } = await getSessionMember();
 
   return (
     <div className={styles.container}>

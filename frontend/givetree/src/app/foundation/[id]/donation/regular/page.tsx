@@ -2,56 +2,88 @@ import Box from '@/components/common/Box';
 import * as style from '../donation.css';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
+import getSessionMember from '@/api/member/getSessionMember';
+import { getRegisteredAccount } from '@/api/account/getRegisteredAccount';
+import getFoundation from '@/api/member/getFoundation';
+import Flex from '@/components/common/Flex';
+import Account from '@/components/common/Account';
+import FoundationRegularDonation from '@/components/foundation/donation/FoundationRegularDonation';
 
-export default function Page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const foundationId = (await params).id;
+  const { role } = await getSessionMember();
+  const response = await getRegisteredAccount();
+  const registeredAccount = response.ok && response.data ? response.data : null;
+  const { name, profileImageUrl } = await getFoundation(foundationId);
+
+  const calculateMonth = () => {
+    const today = new Date();
+    const currentMonth = today.getMonth() + 1;
+    const currentDate = today.getDate();
+
+    if (currentDate > 26) {
+      if (currentMonth + 1 > 12) {
+        return 1;
+      } else {
+        return currentMonth + 1;
+      }
+    } else {
+      return currentMonth;
+    }
+  };
+
   return (
-    <Box>
-      <Box marginBottom="15px" backgroundColor="white" padding="20px 15px">
+    <div style={{ backgroundColor: '#F5F5F5' }}>
+      <FoundationRegularDonation
+        name={name}
+        image={profileImageUrl}
+        id={foundationId}
+        isAccount={registeredAccount}
+        role={role}
+      />
+
+      <Box
+        as="section"
+        marginBottom="15px"
+        backgroundColor="white"
+        padding="1.5rem 1rem"
+      >
         <Typography
           as="h3"
           weight="medium"
-          size={20}
-          color={colorPalette.grey[600]}
-          className={style.accountInfo}
+          style={{ marginLeft: '0.5rem', marginBottom: '0.5rem' }}
         >
-          결제 일
+          결제일
         </Typography>
-        <Box padding="10px 5px">
+        <Box padding="0.5rem" style={{ textAlign: 'center' }}>
           <Typography className={style.accountInfo} weight="semiBold" size={18}>
-            매월 26일 (다음 결제일 : 11월 26일)
+            매월 26일 (다음 결제일 : {calculateMonth()}월 26일)
           </Typography>
-          <Typography
-            className={style.accountInfo}
-            color={colorPalette.primary[400]}
-            weight="medium"
-          >
-            정기결제 신청 즉시 이번 달 결제가 진행됩니다. <br />
-            다음 달부터 매월 26일 휴일 없이 결제됩니다.
-          </Typography>
-          <Typography>
-            결제실패(잔고부족, 분실카드 등)시 28일 추가 결제 됩니다.
+          <Typography color={colorPalette.primary[400]} weight="medium">
+            이번 달 정기후원 결제일이 지나지 않았다면
+            <br />
+            이번 달부터 결제가 진행됩니다.
           </Typography>
         </Box>
       </Box>
 
-      <Box backgroundColor="white" padding="20px 15px">
-        <Box
-          backgroundColor={colorPalette.primary[50]}
-          padding="20px"
-          className={style.accountBox}
-        >
-          <Typography className={style.marginBottom5} weight="medium">
-            지금 <span className={style.money}>20,000원</span> 결제되며
-          </Typography>
-          <Typography className={style.marginBottom20} weight="medium">
-            다음 달부터 매월 26일 정기결제 됩니다.
-          </Typography>
-          <Typography className={style.marginBottom5} weight="medium">
-            다음 결제일 : 11월 26일
-          </Typography>
-          <Typography weight="medium">결제 수단 : 하나은행 456 </Typography>
-        </Box>
+      <Box
+        as="section"
+        marginBottom="15px"
+        backgroundColor="white"
+        padding="1.5rem 1rem"
+      >
+        <Typography as="h3" weight="medium" style={{ marginLeft: '0.5rem' }}>
+          결제수단
+        </Typography>
+        <Flex justifyContent="center" style={{ marginBottom: '0.5rem' }}>
+          <Account registeredAccount={registeredAccount} />
+        </Flex>
       </Box>
-    </Box>
+    </div>
   );
 }

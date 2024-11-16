@@ -1,28 +1,63 @@
 import React from 'react';
 
-import Flex from '@/components/common/Flex';
+import { formatDate } from '@/utils/time';
+
+import type { ChatMessage as ChatMessageType } from '@/hooks/useChat';
+
+import typography from '@/styles/tokens/typography';
+
+import Box from '@/components/common/Box';
 import SimpleProfile from '@/components/common/SimpleProfile';
 import ChatMessage from '@/components/market/ChatMessage';
 import ChatTimeline from '@/components/market/ChatTimeline';
+import Typography from '@/components/common/Typography';
 
-const ChatMessageList = () => {
+interface ChatMessageListProps {
+  senderId: number;
+  messages: ChatMessageType[];
+}
+
+const ChatMessageList = ({ senderId, messages }: ChatMessageListProps) => {
   return (
-    <Flex flexDirection="column" gap="0.75rem">
-      {new Array(20).fill(0).map((value, index) => (
+    <Box>
+      {messages.map((message, index) => (
         <React.Fragment key={index}>
-          <ChatTimeline>2024-11-{index + 1}</ChatTimeline>
-          <ChatMessage
-            createdAt="2024-11-07T01:42:23.658Z"
-            profile={<SimpleProfile id={1} size="sm" />}
-          >
-            안녕하세요
-          </ChatMessage>
-          <ChatMessage createdAt="2024-11-07T01:42:23.658Z" me>
-            안녕하세요
-          </ChatMessage>
+          {!index ||
+            (new Date(messages.at(index - 1)!.createdAt).toDateString() !==
+              new Date(message.createdAt).toDateString() && (
+              <ChatTimeline>{formatDate(message.createdAt)}</ChatTimeline>
+            ))}
+          {message.senderId === 0 ? (
+            <Typography
+              size={typography.size.sm}
+              style={{
+                padding: '0.5rem',
+                lineHeight: '1.5',
+                textAlign: 'center',
+              }}
+            >
+              {message.content.split('\n').map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))}
+            </Typography>
+          ) : (
+            <ChatMessage
+              createdAt={message.createdAt}
+              profile={<SimpleProfile id={message.senderId} size="sm" />}
+              isMine={senderId === message.senderId}
+              showProfile={
+                !index || messages.at(index - 1)?.senderId !== message.senderId
+              }
+            >
+              {message.content}
+            </ChatMessage>
+          )}
         </React.Fragment>
       ))}
-    </Flex>
+    </Box>
   );
 };
 

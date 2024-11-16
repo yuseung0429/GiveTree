@@ -7,9 +7,14 @@ import { useRouter } from 'next/navigation';
 interface DonationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  foundationId: number;
 }
 
-export default function DonationModal({ isOpen, onClose }: DonationModalProps) {
+export default function DonationModal({
+  isOpen,
+  onClose,
+  foundationId,
+}: DonationModalProps) {
   const router = useRouter();
   if (!isOpen) return null;
 
@@ -20,11 +25,11 @@ export default function DonationModal({ isOpen, onClose }: DonationModalProps) {
   };
 
   const handleOneTimeDonation = () => {
-    router.push(`/foundation/1/donation`);
+    router.push(`/foundation/${foundationId}/donation`);
   };
 
   const handleRegularDonation = () => {
-    router.push(`/foundation/1/donation/regular`);
+    router.push(`/foundation/${foundationId}/donation/regular`);
   };
 
   return (

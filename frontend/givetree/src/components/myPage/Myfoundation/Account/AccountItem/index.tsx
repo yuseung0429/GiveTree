@@ -21,7 +21,6 @@ export default function AccountItem({
   isSelected,
   onSelect,
 }: AccountItemProps) {
-  console.log('AccountItem props:', { id, name, accountNumber, balance, isSelected });
   return (
     <Flex
       justifyContent="space-between"
@@ -52,15 +51,19 @@ export default function AccountItem({
           <Typography color={colorPalette.grey[600]}>
             {accountNumber}
           </Typography>
-          <Typography weight="medium" color={colorPalette.grey[600]}>
-            잔액 {balance} 원
-          </Typography>
+          <Flex justifyContent="space-between">
+            <Typography weight="medium" color={colorPalette.grey[600]}>
+              잔액 {balance} 원
+            </Typography>
+            <FaRegCircleCheck
+              size={22}
+              color={
+                isSelected ? colorPalette.primary[400] : colorPalette.grey[400]
+              }
+            />
+          </Flex>
         </Flex>
       </Flex>
-      <FaRegCircleCheck
-        size={22}
-        color={isSelected ? colorPalette.primary[400] : colorPalette.grey[400]}
-      />
     </Flex>
   );
 }

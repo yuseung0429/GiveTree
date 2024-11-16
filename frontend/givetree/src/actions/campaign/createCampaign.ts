@@ -50,6 +50,7 @@ export default async function createCampaign(
         imageUrls,
       }),
     });
+    
     switch (response.status) {
       case 201:
         return {

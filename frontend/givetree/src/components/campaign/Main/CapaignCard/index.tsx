@@ -25,11 +25,6 @@ const CampaignCard = ({
   totalCampaign,
   currentIndex,
 }: CampaignCardProps) => {
-  // 숫자 포맷팅 헬퍼 함수
-  const formatAmount = (amount: number) => {
-    return amount?.toLocaleString() || '0';
-  };
-
   return (
     <Link
       href={`/campaign/${id}`}
@@ -41,12 +36,7 @@ const CampaignCard = ({
       }}
     >
       <div>
-        <Typography
-          as="h2"
-          weight="semiBold"
-          color={colorPalette.text[900]}
-          className={styles.campaignTitle}
-        >
+        <Typography as="h2" weight="semiBold" className={styles.campaignTitle}>
           {title}
         </Typography>
         <div className={styles.cardIndex}>
@@ -55,9 +45,8 @@ const CampaignCard = ({
           </Typography>
         </div>
         <Typography
-          as="h4"
+          as="h3"
           weight="semiBold"
-          color={colorPalette.text[700]}
           className={styles.campaignSubtitle}
         >
           {foundation}
@@ -66,14 +55,25 @@ const CampaignCard = ({
 
       <div className={styles.progressContainer}>
         <ProgressBar
-          progress={(currentFundraisingAmount / targetFundraisingAmount) * 100}
+          progress={
+            (currentFundraisingAmount / targetFundraisingAmount) * 100 === 0
+              ? '0'
+              : (currentFundraisingAmount / targetFundraisingAmount) * 100 > 1
+              ? Math.floor(
+                  (currentFundraisingAmount / targetFundraisingAmount) * 100
+                ).toString()
+              : (
+                  (currentFundraisingAmount / targetFundraisingAmount) *
+                  100
+                ).toFixed(2)
+          }
         />
         <div className={styles.amountContainer}>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {formatAmount(currentFundraisingAmount)}원
+            {currentFundraisingAmount?.toLocaleString()}원
           </Typography>
           <Typography as="h5" weight="semiBold" color={colorPalette.text[900]}>
-            {formatAmount(targetFundraisingAmount)}원 목표
+            {targetFundraisingAmount?.toLocaleString()}원 목표
           </Typography>
         </div>
       </div>

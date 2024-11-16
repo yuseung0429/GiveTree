@@ -5,7 +5,6 @@ import Flex from '@/components/common/Flex';
 import Layout from '@/components/common/Layout';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
-import { useRouter } from 'next/navigation';
 import { FaTree } from 'react-icons/fa';
 
 export default function ExchangeLayout({
@@ -13,15 +12,10 @@ export default function ExchangeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
-  const handleBackClick = () => {
-    router.push('/mypage');
-  };
-
   return (
     <Layout>
       <header>
-        <AppBar title="간편계좌 설정" onBackClick={handleBackClick} />
+        <AppBar title="간편계좌 설정" showBackButton />
       </header>
       <main style={{ backgroundColor: '#F5F5F5', padding: '1rem' }}>
         <Flex

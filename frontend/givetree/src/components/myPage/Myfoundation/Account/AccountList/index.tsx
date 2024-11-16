@@ -10,25 +10,24 @@ import Typography from '@/components/common/Typography';
 import { FaTree } from 'react-icons/fa';
 import { registerAccount } from '@/actions/account/registerAccount';
 import { useRouter } from 'next/navigation';
+import useDialog from '@/hooks/useDialog';
 
 interface AccountListProps {
   accounts: Account[];
 }
 
 export default function AccountList({ accounts }: AccountListProps) {
+  const { alert } = useDialog();
   const router = useRouter();
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
 
   const handleSelect = (accountNumber: string) => {
-    console.log('AccountList - Selecting account:', accountNumber);
     const newSelectedId =
       accountNumber === selectedAccountId ? null : accountNumber;
     setSelectedAccountId(newSelectedId);
   };
-
-  console.log('Accounts data:', accounts);
 
   const handleRegister = async () => {
     if (!selectedAccountId) {
@@ -80,7 +79,7 @@ export default function AccountList({ accounts }: AccountListProps) {
             해주세요
           </Typography>
         </Flex>
-        <Flex>
+        <Flex justifyContent="center">
           {accounts.map((account) => (
             <AccountItem
               key={account.accountNumber}

@@ -17,7 +17,12 @@ const nextConfig: NextConfig = {
 
   experimental: {
     serverActions: {
-      allowedOrigins: ['givetree.co.kr', 'localhost:3000'],
+      allowedOrigins: [
+        'givetree.co.kr',
+        'localhost:3000',
+        '192.168.100.77:8080',
+        '192.168.100.80:3000',
+      ],
     },
   },
 
