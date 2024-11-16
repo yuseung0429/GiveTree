@@ -11,7 +11,6 @@ type WriteMarketPostState = FormState<
   | 'title'
   | 'description'
   | 'imageUrls'
-  | 'status'
   | 'productionCondition'
   | 'isDirectSale'
   | 'isDeliverySale'
@@ -31,7 +30,6 @@ export default async function writeMarketPost(
     title = formData.get('title'),
     description = formData.get('description'),
     imageUrls = formData.getAll('imageUrls'),
-    status = '판매중',
     productionCondition = formData.get('productionCondition'),
     isDirectSale = formData.get('isDirectSale') === 'on',
     isDeliverySale = formData.get('isDeliverySale') === 'on';
@@ -49,10 +47,10 @@ export default async function writeMarketPost(
         title,
         description,
         imageUrls,
-        status,
         productionCondition,
         isDirectSale,
         isDeliverySale,
+        status: '판매중',
       }),
     });
 

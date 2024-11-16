@@ -1,4 +1,5 @@
 import AppBar from '@/components/common/AppBar';
+import AppBarMenu from '@/components/common/AppBarMenu';
 import Layout from '@/components/common/Layout';
 import NavigationBar from '@/components/common/NavigationBar';
 import Link from 'next/link';
@@ -11,9 +12,9 @@ export default function TaxLayout({ children }: { children: React.ReactNode }) {
       <header>
         <AppBar title="세액 공제">
           <Link href={'/notification'}>
-            <AppBar.Menu>
+            <AppBarMenu>
               <HiOutlineBell />
-            </AppBar.Menu>
+            </AppBarMenu>
           </Link>
         </AppBar>
       </header>

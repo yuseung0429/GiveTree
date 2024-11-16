@@ -35,3 +35,16 @@ export const formatTime = (time: string) => {
 
   return `${year}. ${formattedMonth}. ${formattedDate} ${formattedHours}:${formattedMinutes}`;
 };
+
+export const formatDate = (time: string) => {
+  const date = new Date(time);
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  const formattedMonth = month < 10 ? '0' + month : month;
+  const formattedDate = day < 10 ? '0' + day : day;
+
+  return `${year}-${formattedMonth}-${formattedDate}`;
+};

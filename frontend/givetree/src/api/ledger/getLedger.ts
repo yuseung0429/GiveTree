@@ -48,7 +48,6 @@ export async function getFoundationLedger(
     }
 
     const data = await response.json();
-    console.log('Foundation Ledger API Response:', data);
 
     return {
       ok: true,

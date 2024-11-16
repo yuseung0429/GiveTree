@@ -30,9 +30,6 @@ export default async function donateCampaign(
       }),
     });
 
-    console.log(simplePassword, message, amount);
-    console.log(response);
-
     if (response.ok) {
       return { success: true };
     }

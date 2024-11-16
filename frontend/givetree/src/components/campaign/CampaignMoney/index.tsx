@@ -10,6 +10,7 @@ interface CampaignMoneyProps {
   role: string;
   currentAmount: number;
   goalAmount: number;
+  endDate: string;
 }
 
 const CampaignMoney = ({
@@ -17,7 +18,11 @@ const CampaignMoney = ({
   role,
   currentAmount,
   goalAmount,
+  endDate,
 }: CampaignMoneyProps) => {
+  const today = new Date();
+  const end = new Date(endDate);
+
   return (
     <div>
       <Typography
@@ -41,7 +46,7 @@ const CampaignMoney = ({
         }
       />
 
-      {role === 'USER' && (
+      {role === 'USER' && end >= today && (
         <Link className={styles.giveButton} href={`/campaign/${id}/donation`}>
           <Button fullWidth>후원하기</Button>
         </Link>

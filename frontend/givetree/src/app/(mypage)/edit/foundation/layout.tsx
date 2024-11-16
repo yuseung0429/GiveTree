@@ -1,4 +1,5 @@
 import AppBar from '@/components/common/AppBar';
+import AppBarMenu from '@/components/common/AppBarMenu';
 import Layout from '@/components/common/Layout';
 import NavigationBar from '@/components/common/NavigationBar';
 import Link from 'next/link';
@@ -14,9 +15,9 @@ export default function EditLayout({
       <header>
         <AppBar title="재단 소개 수정">
           <Link href={'/notification'}>
-            <AppBar.Menu>
+            <AppBarMenu>
               <HiOutlineBell />
-            </AppBar.Menu>
+            </AppBarMenu>
           </Link>
         </AppBar>
       </header>

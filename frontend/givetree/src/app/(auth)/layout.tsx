@@ -1,12 +1,12 @@
 'use client';
 
-import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
+import AppBar from '@/components/common/AppBar';
 import FrozenRouter from '@/components/common/FrozenRouter';
 import Layout from '@/components/common/Layout';
-import AppBar from '@/components/common/AppBar';
 
 import * as s from './Auth.css';
 
@@ -15,13 +15,12 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
   const segment = useSelectedLayoutSegment();
 
   return (
     <Layout>
       <header>
-        <AppBar title="Give Tree" onBackClick={() => router.back()} />
+        <AppBar title="Give Tree" showBackButton />
       </header>
 
       <main>

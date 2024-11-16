@@ -4,7 +4,7 @@ import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
 
 import Loading from '@/components/common/Loading';
 import Post from './post';
-import PostError from './error';
+import MarketError from '@/app/market/error';
 
 export default async function PostPage({
   params,
@@ -13,7 +13,7 @@ export default async function PostPage({
 }) {
   const id = parseInt((await params).id);
   return (
-    <ErrorBoundary errorComponent={PostError}>
+    <ErrorBoundary errorComponent={MarketError}>
       <Suspense fallback={<Loading />}>
         <Post id={id} />
       </Suspense>

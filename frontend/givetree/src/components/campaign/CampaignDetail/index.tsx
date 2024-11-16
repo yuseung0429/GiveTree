@@ -14,6 +14,7 @@ interface CampaignDetailProps {
   imageUrls: string[];
   currentFundraisingAmount: number;
   targetFundraisingAmount: number;
+  endDate: string;
 }
 
 export default function CampaignDetail({
@@ -23,6 +24,7 @@ export default function CampaignDetail({
   imageUrls,
   currentFundraisingAmount,
   targetFundraisingAmount,
+  endDate,
 }: CampaignDetailProps) {
   const [selectedCategory, setSelectedCategory] = useState('소개');
   const width = `calc(100% / ${categories.length})`;
@@ -48,6 +50,7 @@ export default function CampaignDetail({
           role={role}
           currentAmount={currentFundraisingAmount}
           goalAmount={targetFundraisingAmount}
+          endDate={endDate}
         />
       )}
     </>

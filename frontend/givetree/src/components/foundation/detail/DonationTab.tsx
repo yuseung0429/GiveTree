@@ -94,7 +94,7 @@ export default function DonationTab({
           지출 보고내역
         </Typography>
 
-        <Flex flexDirection="column" gap={10}>
+        <Flex flexDirection="column" gap={10} style={{paddingBottom: '1.75rem'}}>
           {ledgerData.content.length === 0 ? (
             <Flex
               justifyContent="center"

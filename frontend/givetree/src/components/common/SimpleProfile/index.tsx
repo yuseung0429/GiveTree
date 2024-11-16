@@ -1,4 +1,6 @@
-import getMember from '@/api/member/getMember';
+'use client';
+
+import useGetMember from '@/api/member/useGetMember';
 
 import typography from '@/styles/tokens/typography';
 import colorPalette from '@/styles/tokens/colorPalette';
@@ -32,14 +34,14 @@ const variants: Record<SimpleProfileProps['size'], Variant> = {
   },
 };
 
-const SimpleProfile = async ({ id, size }: SimpleProfileProps) => {
-  const data = await getMember(id, { next: { revalidate: 300 } });
+const SimpleProfile = ({ id, size }: SimpleProfileProps) => {
+  const data = useGetMember(id);
 
   return (
     <Flex alignItems="center" gap={variants[size].gap}>
       <div style={{ flex: '0 0 auto' }}>
         <ProfileImage
-          src={data.profileImageUrl}
+          src={data?.profileImageUrl}
           borderColor={colorPalette.grey[600]}
           size={variants[size].profileImageSize}
         />
@@ -49,7 +51,7 @@ const SimpleProfile = async ({ id, size }: SimpleProfileProps) => {
           size={typography.size[variants[size].nameSize]}
           weight="semiBold"
         >
-          {data.name}
+          {data?.name}
         </Typography>
       </Flex>
     </Flex>
