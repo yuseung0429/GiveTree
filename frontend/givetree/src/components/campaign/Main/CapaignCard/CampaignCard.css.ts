@@ -20,7 +20,7 @@ export const campaignCard = style({
 export const campaignTitle = style({
   marginLeft: '0.25rem',
   marginBottom: '0.25rem',
-  color: colorPalette.grey[500],
+  color: 'grey',
   mixBlendMode: 'difference',
 });
 

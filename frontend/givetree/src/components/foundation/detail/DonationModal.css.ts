@@ -14,5 +14,5 @@ export const overlay = style({
 
 export const modalContent = style({
   width: '100%',
-  marginBottom: '60px',
+  marginBottom: '100px',
 });

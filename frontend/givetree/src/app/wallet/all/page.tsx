@@ -45,7 +45,7 @@ export default async function Page() {
   return (
     <Layout>
       <header>
-        <AppBar title="지갑 출금내역" />
+        <AppBar title="지갑 출금내역" showBackButton/>
       </header>
       <main style={{ backgroundColor: '#F5F5F5', padding: '20px' }}>
         <Flex flexDirection="column" gap="10px">

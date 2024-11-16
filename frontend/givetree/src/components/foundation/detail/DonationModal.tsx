@@ -34,11 +34,11 @@ export default function DonationModal({
 
   return (
     <Flex className={style.overlay} onClick={handleOverlayClick}>
-      <Flex gap="15px" flexDirection="column" className={style.modalContent}>
-        <Button size="xl" fullWidth onClick={handleOneTimeDonation}>
+      <Flex gap="0.75rem" flexDirection="column" className={style.modalContent}>
+        <Button size='lg' fullWidth onClick={handleOneTimeDonation}>
           일시 후원
         </Button>
-        <Button size="xl" fullWidth onClick={handleRegularDonation}>
+        <Button size='lg' fullWidth onClick={handleRegularDonation}>
           정기 후원
         </Button>
       </Flex>

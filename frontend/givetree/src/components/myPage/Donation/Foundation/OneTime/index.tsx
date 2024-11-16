@@ -19,7 +19,10 @@ export default function OneTimeGive({ donation }: OneTimeGiveProps) {
           alt="foundation image"
           width={40}
           height={40}
-          style={{ borderRadius: '50%' }}
+          style={{
+            borderRadius: '50%',
+            border: `1px solid ${colorPalette.grey[500]}`,
+          }}
         />
         <Typography as="h3" weight="semiBold">
           {donation.foundationName}

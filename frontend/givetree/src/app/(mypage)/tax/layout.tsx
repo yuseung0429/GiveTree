@@ -10,7 +10,7 @@ export default function TaxLayout({ children }: { children: React.ReactNode }) {
   return (
     <Layout>
       <header>
-        <AppBar title="세액 공제">
+        <AppBar title="세액 공제" showBackButton>
           <Link href={'/notification'}>
             <AppBarMenu>
               <HiOutlineBell />

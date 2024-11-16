@@ -13,7 +13,7 @@ export default function UsageLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="기부금 사용내역">
+        <AppBar title="기부금 사용내역" showBackButton>
           <Link href={'/notification'}>
             <AppBarMenu>
               <HiOutlineBell />

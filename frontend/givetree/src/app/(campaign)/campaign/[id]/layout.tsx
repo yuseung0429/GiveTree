@@ -22,7 +22,7 @@ export default async function AuthLayout({
   return (
     <Layout>
       <header>
-        <AppBar title={campaign.name}>
+        <AppBar title={campaign.name} showBackButton>
           <Link href={'/notification'}>
             <AppBarMenu>
               <HiOutlineBell />

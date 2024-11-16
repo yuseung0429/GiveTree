@@ -187,7 +187,7 @@ export default function Donation({
       {/* 후원하기 버튼 */}
       {role === 'USER' && (
         <div className={style.giveButton}>
-          <Button onClick={handlePasswordOpen} fullWidth disabled={isPending}>
+          <Button size='lg' onClick={handlePasswordOpen} fullWidth disabled={isPending}>
             후원하기
           </Button>
         </div>

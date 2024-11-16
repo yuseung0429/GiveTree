@@ -11,7 +11,7 @@ export default function ExchangeLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="간편계좌 설정" />
+        <AppBar title="간편계좌 설정" showBackButton/>
       </header>
       <main style={{ backgroundColor: '#F5F5F5' }}>{children}</main>
       <footer style={{ padding: '10px', backgroundColor: '#F5F5F5' }}>

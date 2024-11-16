@@ -72,7 +72,7 @@ export const TabContainer = style({
   flexGrow: 1,
   overflowY: 'auto',
   padding: '0.25rem',
-  paddingBottom: '1.75rem'
+  paddingBottom: '1.25rem'
 });
 
 // imageBox

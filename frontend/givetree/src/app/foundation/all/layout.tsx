@@ -10,7 +10,7 @@ export default function FoundationLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="재단 전체보기" />
+        <AppBar title="재단 전체보기" showBackButton/>
       </header>
       <main>{children}</main>
       <footer>

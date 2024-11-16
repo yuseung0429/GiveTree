@@ -4,6 +4,7 @@ import FoundationDetail from './FoundationDetail';
 import Typography from '@/components/common/Typography';
 import Box from '@/components/common/Box';
 import colorPalette from '@/styles/tokens/colorPalette';
+import getSessionMember from '@/api/member/getSessionMember';
 
 interface PageProps {
   params: Promise<{
@@ -13,6 +14,7 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
+  const { role } = await getSessionMember();
   const [foundationResult, ledgerResult] = await Promise.all([
     getFoundationById(id),
     getFoundationLedger(id, 0, 5),
@@ -42,6 +44,7 @@ export default async function Page({ params }: PageProps) {
     <FoundationDetail
       foundationData={foundationResult.data}
       ledgerData={ledgerResult.data}
+      role={role}
     />
   );
 }

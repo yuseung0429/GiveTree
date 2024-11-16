@@ -48,7 +48,7 @@ const CampaignMoney = ({
 
       {role === 'USER' && end >= today && (
         <Link className={styles.giveButton} href={`/campaign/${id}/donation`}>
-          <Button fullWidth>후원하기</Button>
+          <Button size='lg' fullWidth>후원하기</Button>
         </Link>
       )}
     </div>

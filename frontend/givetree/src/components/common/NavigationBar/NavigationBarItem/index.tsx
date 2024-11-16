@@ -41,8 +41,8 @@ export default function NavigationBarItem({ role }: { role: string }) {
       </Link>
 
       <Link
-        href="/tree/1"
-        className={`${styles.item} ${isActive('/tree/1') ? 'active' : ''}`}
+        href="/tree/0/0"
+        className={`${styles.item} ${isActive('/tree/0/0') ? 'active' : ''}`}
       >
         <div
           className={styles.treeIconWrapper}

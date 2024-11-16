@@ -11,7 +11,7 @@ export default function ExchangeLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="캠페인트리 환전하기" />
+        <AppBar title="캠페인트리 환전하기" showBackButton />
       </header>
       <main style={{ backgroundColor: '#F5F5F5' }}>{children}</main>
       <footer style={{ padding: '10px', backgroundColor: '#F5F5F5' }}>

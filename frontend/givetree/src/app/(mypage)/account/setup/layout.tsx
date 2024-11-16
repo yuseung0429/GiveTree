@@ -9,7 +9,7 @@ export default function SetupLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="간편계좌 설정" />
+        <AppBar title="간편계좌 설정" showBackButton/>
       </header>
       {children}
     </Layout>
