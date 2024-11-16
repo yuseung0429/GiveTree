@@ -7,18 +7,16 @@ interface ExpenseItemProps {
   date: string;
   message: string;
   amount: number;
-  type: string;
   borderColor?: string;
-  amountColor?: string;
+  type: string;
 }
 
 export default function ExpenseItem({
   date,
   message,
   amount,
-  type,
   borderColor = colorPalette.grey[400],
-  amountColor = colorPalette.primary[600],
+  type,
 }: ExpenseItemProps) {
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -26,7 +24,7 @@ export default function ExpenseItem({
     day: '2-digit',
   });
 
-  const formattedAmount = amount.toLocaleString();
+  const formattedAmount = Math.abs(amount).toLocaleString();
 
   return (
     <Flex
@@ -40,7 +38,11 @@ export default function ExpenseItem({
       <Typography
         size={18}
         weight="semiBold"
-        color={amountColor}
+        color={
+          type === 'EXCHANGE'
+            ? colorPalette.primary[600]
+            : colorPalette.secondary[300]
+        }
         className={style.money}
       >
         {type === 'EXCHANGE' ? '출금' : '입금'} {formattedAmount}원

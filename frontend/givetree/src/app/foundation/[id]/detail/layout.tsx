@@ -10,7 +10,7 @@ export default async function FoundationDetailLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="후원하기" />
+        <AppBar title="후원하기" showBackButton />
       </header>
 
       <main>{children}</main>

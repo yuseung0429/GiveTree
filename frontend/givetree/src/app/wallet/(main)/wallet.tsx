@@ -26,7 +26,9 @@ export default async function Wallet() {
               굿네이버스 월렛
             </Typography>
           </Flex>
-          <IoMdRefresh size={22} color={colorPalette.grey[800]} />
+          <Link href="/wallet">
+            <IoMdRefresh size={22} color={colorPalette.grey[800]} />
+          </Link>
         </Flex>
 
         <Typography

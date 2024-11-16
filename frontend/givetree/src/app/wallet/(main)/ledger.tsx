@@ -19,7 +19,7 @@ export default async function Ledger() {
           size={20}
           color={colorPalette.primary[500]}
         >
-          지갑 출금내역
+          지갑 입출금내역
         </Typography>
         <Link href="/wallet/all" className={style.allbtn}>
           <Typography>전체보기</Typography>
@@ -51,11 +51,6 @@ export default async function Ledger() {
               amount={entry.amount}
               type={entry.type}
               borderColor={colorPalette.grey[300]}
-              amountColor={
-                entry.type === 'EXCHANGE'
-                  ? colorPalette.secondary[300]
-                  : colorPalette.primary[600]
-              }
             />
           ))
         )}

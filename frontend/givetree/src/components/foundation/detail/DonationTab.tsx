@@ -6,11 +6,11 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import Flex from '@/components/common/Flex';
 import ExpenseItem from '@/components/common/ExpenseItem';
 import { Foundation } from '@/api/foundation/getFoundationDetail';
-import { PaginatedResponse, LedgerEntry } from '@/api/ledger/getLedger';
+import { LedgerResponse, LedgerEntry } from '@/api/ledger/getLedger';
 
 interface DonationTabProps {
   foundationData: Foundation;
-  ledgerData: PaginatedResponse;
+  ledgerData: LedgerResponse;
 }
 
 export default function DonationTab({
@@ -94,7 +94,11 @@ export default function DonationTab({
           지출 보고내역
         </Typography>
 
-        <Flex flexDirection="column" gap={10} style={{paddingBottom: '1.75rem'}}>
+        <Flex
+          flexDirection="column"
+          gap={10}
+          style={{ paddingBottom: '1.75rem' }}
+        >
           {ledgerData.content.length === 0 ? (
             <Flex
               justifyContent="center"
@@ -117,7 +121,6 @@ export default function DonationTab({
                 amount={entry.amount}
                 type={entry.type}
                 borderColor={colorPalette.grey[300]}
-                amountColor={colorPalette.secondary[300]}
               />
             ))
           )}

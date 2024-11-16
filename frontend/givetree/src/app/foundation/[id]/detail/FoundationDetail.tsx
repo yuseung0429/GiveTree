@@ -1,24 +1,24 @@
 'use client';
 
-import { useState } from 'react';
-import TabButton from '@/components/common/Tab';
-import * as style from './detail.css';
-import Box from '@/components/common/Box';
-import Flex from '@/components/common/Flex';
-import IntroTab from '@/components/foundation/detail/IntroTab';
-import DonationTab from '@/components/foundation/detail/DonationTab';
-import CampaignTab from '@/components/foundation/detail/CampaignTab';
 import { Foundation } from '@/api/foundation/getFoundationDetail';
+import { LedgerResponse } from '@/api/ledger/getLedger';
+import Box from '@/components/common/Box';
 import Button from '@/components/common/Button';
+import Flex from '@/components/common/Flex';
+import TabButton from '@/components/common/Tab';
+import CampaignTab from '@/components/foundation/detail/CampaignTab';
 import DonationModal from '@/components/foundation/detail/DonationModal';
+import DonationTab from '@/components/foundation/detail/DonationTab';
+import IntroTab from '@/components/foundation/detail/IntroTab';
 import Image from 'next/image';
-import { PaginatedResponse } from '@/api/ledger/getLedger';
+import { useState } from 'react';
+import * as style from './detail.css';
 
 const categories = ['소개', '모금함', '캠페인'];
 
 interface FoundationDetailProps {
   foundationData: Foundation;
-  ledgerData: PaginatedResponse;
+  ledgerData: LedgerResponse;
 }
 
 export default function FoundationDetailComponent({
