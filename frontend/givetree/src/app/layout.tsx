@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from 'next';
+
 import localFont from 'next/font/local';
 
 import SWRProvider from '@/context/SWRProvider';
 
 import { ModalProvider } from '@/hooks/useModal';
+
+import Notification from '@/components/common/Notification';
 
 import '@/styles/global.css';
 
@@ -36,6 +39,7 @@ export default function RootLayout({
       <body>
         <SWRProvider>
           <ModalProvider>
+            <Notification />
             {children}
             {modal}
           </ModalProvider>
