@@ -12,7 +12,23 @@ public class CampaignDonationInfoReader {
 
     private final CampaignDonationRepository campaignDonationRepository;
 
-    public Slice<CampaignDonationInfo> readByMemberId(long memberId, Pageable pageable) {
-        return campaignDonationRepository.findCampaignDonationInfoByMemberId(memberId, pageable);
+    public Slice<CampaignDonationFoundationInfo> readCampaignDonationFoundationInfoByUserId(
+            long userId,
+            Pageable pageable
+    ) {
+        return campaignDonationRepository.findCampaignDonationFoundationInfoByUserId(userId, pageable);
+    }
+
+    public Slice<CampaignDonationUserInfo> readCampaignDonationUserInfo(
+            long userId,
+            long campaignId,
+            boolean own,
+            Pageable pageable
+    ) {
+        return campaignDonationRepository.findCampaignDonationUserInfo(userId, campaignId, own, pageable);
+    }
+
+    public CampaignDonationStatisticInfo readCampaignDonationStatisticInfo(long campaignId) {
+        return campaignDonationRepository.calculateCampaignDonationStatisticInfo(campaignId);
     }
 }

@@ -26,4 +26,12 @@ public class FoundationDonateSubscriptionReader {
         return foundationDonateSubscriptionRepository.findByMemberIdAndFoundationId(userId, foundationId)
                 .orElseThrow(() -> new RestApiException(DonationErrorCode.FOUNDATION_DONATION_SUBSCRIPTION_NOT_FOUND));
     }
+
+    public long countByMemberId(long memberId) {
+        return foundationDonateSubscriptionRepository.countByMemberId(memberId);
+    }
+
+    public long countByFoundationId(long foundationId) {
+        return foundationDonateSubscriptionRepository.countByFoundationId(foundationId);
+    }
 }

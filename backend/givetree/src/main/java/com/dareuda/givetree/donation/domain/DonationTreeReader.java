@@ -19,12 +19,11 @@ public class DonationTreeReader {
 
     private final CampaignReader campaignReader;
     private final CampaignDonationRepository campaignDonationRepository;
-    private final DonationCustomRepository donationCustomRepository;
 
     public DonationTree read(long campaignId, Pageable pageable) {
         Campaign campaign = campaignReader.read(campaignId);
         long totalCount = campaignDonationRepository.countByCampaign(campaign);
-        List<DonationMessage> messages = donationCustomRepository.findDonationMessagesByCampaignId(campaignId, pageable);
+        List<DonationMessage> messages = campaignDonationRepository.findDonationMessagesByCampaignId(campaignId, pageable);
 
         return DonationTree.builder()
                 .campaignId(campaignId)

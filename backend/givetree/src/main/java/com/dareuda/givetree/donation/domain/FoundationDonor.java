@@ -3,7 +3,6 @@ package com.dareuda.givetree.donation.domain;
 import com.dareuda.givetree.finance.domain.MemberFinanceValidator;
 import com.dareuda.givetree.member.domain.Member;
 import com.dareuda.givetree.member.domain.MemberReader;
-import com.dareuda.givetree.token.domain.FoundationDonationTokenTransferrer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
