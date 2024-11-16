@@ -6,7 +6,7 @@ import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 
-export default function PostError() {
+export default function MarketError() {
   const router = useRouter();
 
   const handleClick = () => {
@@ -22,7 +22,7 @@ export default function PostError() {
       height="100%"
     >
       <Typography style={{ textAlign: 'center' }}>
-        삭제된 게시글입니다.
+        거래글이 삭제되었습니다.
       </Typography>
       <Button color="secondary" onClick={handleClick}>
         뒤로가기

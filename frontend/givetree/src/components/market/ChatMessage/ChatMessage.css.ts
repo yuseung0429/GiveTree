@@ -14,7 +14,7 @@ export const balloon = recipe({
   },
 
   variants: {
-    me: {
+    isMine: {
       false: {
         backgroundColor: '#fff',
         color: colorPalette.text[900],
