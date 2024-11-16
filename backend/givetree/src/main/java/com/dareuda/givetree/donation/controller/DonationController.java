@@ -44,8 +44,8 @@ public class DonationController {
             @AuthenticationPrincipal UserPrinciple user,
             @PathVariable long foundationId,
             @RequestParam(defaultValue = "false") boolean own,
-            @RequestParam(required = false) LocalDate startDate,
-            @RequestParam(required = false) LocalDate endDate,
+            @RequestParam(name = "start-date", required = false) LocalDate startDate,
+            @RequestParam(name = "end-date", required = false) LocalDate endDate,
             Pageable pageable
     ) {
         Slice<FoundationDonationUserInfo> info = donationService.readFoundationDonationUserInfo(
@@ -87,8 +87,8 @@ public class DonationController {
     @GetMapping("/foundations/{foundationId}/statistic")
     public ResponseEntity<?> readFoundationDonationStatistic(
             @PathVariable long foundationId,
-            @RequestParam(required = false) LocalDate startDate,
-            @RequestParam(required = false) LocalDate endDate
+            @RequestParam(name = "start-date", required = false) LocalDate startDate,
+            @RequestParam(name = "end-date", required = false) LocalDate endDate
     ) {
         FoundationDonationStatisticInfo info = donationService.readFoundationDonationStatisticInfo(
                 foundationId,
@@ -209,8 +209,8 @@ public class DonationController {
     @GetMapping("/amount")
     public ResponseEntity<?> readAmount(
             @AuthenticationPrincipal UserPrinciple user,
-            @RequestParam(required = false) LocalDate startDate,
-            @RequestParam(required = false) LocalDate endDate
+            @RequestParam(name = "start-date", required = false) LocalDate startDate,
+            @RequestParam(name = "end-date", required = false) LocalDate endDate
     ) {
         long amount = donationService.readAmount(user.getId(), startDate, endDate);
         return ResponseEntity.ok().body(Map.of("amount", amount));
