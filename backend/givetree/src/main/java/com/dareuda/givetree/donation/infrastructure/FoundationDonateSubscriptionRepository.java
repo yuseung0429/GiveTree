@@ -6,7 +6,6 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface FoundationDonateSubscriptionRepository extends Repository<FoundationDonateSubscription, Long> {
@@ -26,5 +25,9 @@ public interface FoundationDonateSubscriptionRepository extends Repository<Found
 
     Optional<FoundationDonateSubscription> findByMemberIdAndFoundationId(long userId, long foundationId);
 
+    long countByMemberId(long memberId);
+
     void delete(FoundationDonateSubscription foundationDonateSubscription);
+
+    long countByFoundationId(long foundationId);
 }

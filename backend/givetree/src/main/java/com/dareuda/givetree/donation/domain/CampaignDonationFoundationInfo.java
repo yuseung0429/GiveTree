@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @RequiredArgsConstructor
-public class CampaignDonationInfo {
+public class CampaignDonationFoundationInfo {
     private final Long foundationId;
     private final String foundationImage;
     private final String foundationName;

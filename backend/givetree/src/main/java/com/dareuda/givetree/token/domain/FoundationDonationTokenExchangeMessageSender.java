@@ -2,8 +2,10 @@ package com.dareuda.givetree.token.domain;
 
 import com.dareuda.givetree.notification.domain.FcmMessageSender;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+@Async
 @Component
 @RequiredArgsConstructor
 public class FoundationDonationTokenExchangeMessageSender {
