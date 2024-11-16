@@ -15,6 +15,6 @@ public class FcmMessage {
     @Getter
     public static class Message {
         private String token;
-        private Notification data;
+        private FcmMessageData data;
     }
 }

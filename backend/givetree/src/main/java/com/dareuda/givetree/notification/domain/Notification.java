@@ -1,25 +1,40 @@
 package com.dareuda.givetree.notification.domain;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Getter
-@Builder(access = AccessLevel.PRIVATE)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 public class Notification {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "notification_id")
+    private Long id;
+
+    @NotNull
+    private Long memberId;
+
+    @NotNull
     private String title;
 
+    @NotNull
     private String body;
 
-    private String image;
+    @NotNull
+    private LocalDateTime createdDateTIme;
 
-    public static Notification of(String title, String body) {
-        return Notification.builder()
-                .title(title)
-                .body(body)
-                .build();
+    @Builder
+    private Notification(long memberId, String title, String body, LocalDateTime createdDateTIme) {
+        this.memberId = memberId;
+        this.title = title;
+        this.body = body;
+        this.createdDateTIme = createdDateTIme;
     }
 }

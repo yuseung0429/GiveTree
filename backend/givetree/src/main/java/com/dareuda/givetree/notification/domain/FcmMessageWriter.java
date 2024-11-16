@@ -9,8 +9,8 @@ public class FcmMessageWriter {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static String write(String fcmToken, Notification notification) {
-        FcmMessage.Message message = new FcmMessage.Message(fcmToken, notification);
+    public static String write(String fcmToken, FcmMessageData fcmMessageData) {
+        FcmMessage.Message message = new FcmMessage.Message(fcmToken, fcmMessageData);
         FcmMessage fcmMessage = new FcmMessage(false, message);
 
         try {
