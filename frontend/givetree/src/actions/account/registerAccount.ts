@@ -14,8 +14,6 @@ export async function registerAccount(accountNumber: string) {
       }),
     });
 
-    const data = await response.text();
-
     if (response.ok) {
       return { success: true };
     }
