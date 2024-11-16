@@ -1,12 +1,12 @@
+import { getUserLedger } from '@/api/ledger/getLedger';
 import Box from '@/components/common/Box';
-import * as style from './ledger.css';
+import ExpenseItem from '@/components/common/ExpenseItem';
 import Flex from '@/components/common/Flex';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
-import { MdNavigateNext } from 'react-icons/md';
 import Link from 'next/link';
-import ExpenseItem from '@/components/common/ExpenseItem';
-import { getUserLedger } from '@/api/ledger/getLedger';
+import { MdNavigateNext } from 'react-icons/md';
+import * as style from './ledger.css';
 
 export default async function Ledger() {
   const ledger = await getUserLedger(0, 5);
