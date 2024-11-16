@@ -18,6 +18,7 @@ public class SaleService {
     private final SaleRemover saleRemover;
     private final SaleReader saleReader;
     private final SalePaymentProcessor salePaymentProcessor;
+    private final SaleNotificationSender saleNotificationSender;
 
     public SaleDetail readSale(long saleId) {
         saleHitsUpdater.update(saleId);
@@ -35,27 +36,35 @@ public class SaleService {
         saleAppender.append(memberId, command);
     }
 
-    public void updateSale(long memberId, long saleId, SaleCommand command) {
-        saleUpdater.update(memberId, saleId, command);
+    public void updateSale(long sellerId, long saleId, SaleCommand command) {
+        saleUpdater.update(sellerId, saleId, command);
     }
 
-    public void removeSale(long memberId, long saleId) {
-        saleRemover.remove(memberId, saleId);
+    public void removeSale(long sellerId, long saleId) {
+        saleRemover.remove(sellerId, saleId);
+        saleNotificationSender.sendRemoveSaleNotification(saleId);
     }
 
     public void reserveSale(long sellerId, long purchaserId, long saleId) {
         saleUpdater.reserve(sellerId, purchaserId, saleId);
+        saleNotificationSender.sendReservationNotification(purchaserId, saleId);
     }
 
-    public void cancelReservation(long memberId, long saleId) {
-        saleUpdater.cancelReservation(memberId, saleId);
+    public void cancelReservation(long sellerId, long saleId) {
+        saleUpdater.cancelReservation(sellerId, saleId);
+        saleNotificationSender.sendReservationCancelNotification(sellerId, saleId);
     }
 
     public boolean isCurrentUserReserved(long memberId, long saleId) {
         return saleReader.isCurrentUserReserved(memberId, saleId);
     }
 
+    public Long readBooker(long sellerId, long saleId) {
+        return saleReader.readBooker(sellerId, saleId);
+    }
+
     public void processPayment(long purchaserId, long saleId, String simplePassword) {
         salePaymentProcessor.pay(purchaserId, saleId, simplePassword);
+        saleNotificationSender.sendPaymentNotification(saleId);
     }
 }

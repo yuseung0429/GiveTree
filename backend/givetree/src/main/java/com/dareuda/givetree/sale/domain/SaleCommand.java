@@ -21,8 +21,6 @@ public class SaleCommand {
 
     private List<String> imageUrls;
 
-    private SaleStatus status;
-
     private ProductionCondition productionCondition;
 
     private Boolean isDirectSale;

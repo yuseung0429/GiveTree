@@ -24,9 +24,9 @@ public class SaleUpdater {
     private final MemberReader memberReader;
 
     @Transactional
-    public void update(long memberId, long saleId, SaleCommand command) {
+    public void update(long sellerId, long saleId, SaleCommand command) {
         Sale sale = saleReader.read(saleId);
-        saleValidator.validateOwner(memberId, sale);
+        saleValidator.validateOwner(sellerId, sale);
         saleValidator.validatePriceDoesNotExceedContribution(command.getPrice(), command.getContribution());
 
         Long foundationId = command.getFoundationId();
@@ -36,13 +36,12 @@ public class SaleUpdater {
         sale.updatePriceAndContribution(command.getPrice(), command.getContribution());
         sale.updateTitle(command.getTitle());
         sale.updateDescription(command.getDescription());
-        sale.updateStatus(command.getStatus());
         sale.updateProductionCondition(command.getProductionCondition());
         sale.updateIsDirectSale(command.getIsDirectSale());
         sale.updateIsDeliverySale(command.getIsDeliverySale());
 
         List<String> imageUrls = command.getImageUrls();
-        if (imageUrls != null) {
+        if (imageUrls != null && !imageUrls.isEmpty()) {
             List<SaleImage> newImages= imageUrls.stream()
                     .map(imageAppender::append)
                     .map(image -> new SaleImage(sale, image))
@@ -72,9 +71,9 @@ public class SaleUpdater {
     }
 
     @Transactional
-    public void cancelReservation(long memberId, long saleId) {
+    public void cancelReservation(long sellerId, long saleId) {
         Sale sale = saleReader.read(saleId);
-        saleValidator.validateOwner(memberId, sale);
+        saleValidator.validateOwner(sellerId, sale);
 
         if (!sale.isReserved()) {
             throw new RestApiException(CommonErrorCode.FORBIDDEN);

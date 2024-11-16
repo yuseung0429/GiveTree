@@ -28,6 +28,7 @@ public class DonationService {
     public Slice<FoundationDonationUserInfo> readFoundationDonationUserInfo(long userId, long foundationId, boolean own, LocalDate startDate, LocalDate endDate, Pageable pageable) {
         return foundationDonationInfoReader.readFoundationDonationUserInfo(userId, foundationId, own, startDate, endDate, pageable);
     }
+    private final DonationTreeReader donationTreeReader;
 
     public Slice<CampaignDonationFoundationInfo> readCampaignDonationFoundationInfo(long userId, Pageable pageable) {
         return campaignDonationInfoReader.readCampaignDonationFoundationInfoByUserId(userId, pageable);
@@ -55,6 +56,14 @@ public class DonationService {
 
     public void removeFoundationDonateSubscription(long userid, long foundationId) {
         foundationDonateSubscriptionRemover.remove(userid, foundationId);
+    }
+
+    public DonationTree readFirstDonationTree(long memberId, Long campaignId) {
+        return donationTreeReader.readFirstTree(memberId, campaignId);
+    }
+
+    public DonationTree readDonationTree(long campaignId, Pageable pageable) {
+        return donationTreeReader.read(campaignId, pageable);
     }
 
     public long readAmount(long userId, LocalDate startDate, LocalDate endDate) {

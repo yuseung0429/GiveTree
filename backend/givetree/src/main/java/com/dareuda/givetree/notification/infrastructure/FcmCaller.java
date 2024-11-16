@@ -25,9 +25,10 @@ public class FcmCaller {
     @Value("${firebase.google-uri}")
     private String GOOGLE_API_URI;
 
+    // TODO: 예외 발생에 따른 정책 추가하고 수정
     public void call(String jsonFcmMessage) {
         RestClient restClient = RestClient.create();
-        RestClient.ResponseSpec result = restClient.post()
+        restClient.post()
                 .uri(FIREBASE_API_URI)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(jsonFcmMessage)
@@ -40,8 +41,6 @@ public class FcmCaller {
                 .onStatus(HttpStatusCode::is5xxServerError, (fcmRequest, fcmResponse) -> {
                     throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR);
                 });
-
-        result.toBodilessEntity();
     }
 
     private String getAccessToken() {

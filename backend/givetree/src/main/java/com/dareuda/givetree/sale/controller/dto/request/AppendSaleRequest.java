@@ -4,10 +4,10 @@ import com.dareuda.givetree.common.errors.exception.RestApiException;
 import com.dareuda.givetree.sale.controller.SaleErrorCode;
 import com.dareuda.givetree.sale.domain.ProductionCondition;
 import com.dareuda.givetree.sale.domain.SaleCommand;
-import com.dareuda.givetree.sale.domain.SaleStatus;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 import java.util.List;
@@ -30,10 +30,8 @@ public class AppendSaleRequest {
     @NotBlank
     private String description;
 
+    @Size(min = 1)
     private List<String> imageUrls;
-
-    @NotBlank
-    private String status;
 
     @NotBlank
     private String productionCondition;
@@ -56,7 +54,6 @@ public class AppendSaleRequest {
                 .title(title)
                 .description(description)
                 .imageUrls(imageUrls)
-                .status(SaleStatus.of(status))
                 .productionCondition(ProductionCondition.of(productionCondition))
                 .isDirectSale(isDirectSale)
                 .isDeliverySale(isDeliverySale)

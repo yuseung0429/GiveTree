@@ -1,5 +1,6 @@
 package com.dareuda.givetree.donation.infrastructure;
 
+import com.dareuda.givetree.campaign.domain.Campaign;
 import com.dareuda.givetree.donation.domain.CampaignDonation;
 import com.dareuda.givetree.donation.domain.CampaignDonationFoundationInfo;
 import com.dareuda.givetree.donation.domain.CampaignDonationStatisticInfo;
@@ -42,4 +43,7 @@ public interface CampaignDonationRepository extends BaseDonationRepository<Campa
            WHERE cd.campaign.id = :campaignId
            """)
     CampaignDonationStatisticInfo calculateCampaignDonationStatisticInfo(long campaignId);
+    Slice<CampaignDonationInfo> findCampaignDonationInfoByMemberId(long memberId, Pageable pageable);
+
+    long countByCampaign(Campaign campaign);
 }

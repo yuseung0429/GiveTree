@@ -28,7 +28,7 @@ public class SaleAppender {
                 .contribution(command.getContribution())
                 .title(command.getTitle())
                 .description(command.getDescription())
-                .status(command.getStatus())
+                .status(SaleStatus.ON_SALE)
                 .productionCondition(command.getProductionCondition())
                 .isDirectSale(command.getIsDirectSale())
                 .isDeliverySale(command.getIsDeliverySale())
