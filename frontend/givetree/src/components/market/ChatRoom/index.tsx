@@ -20,7 +20,7 @@ interface ChatRoomProps {
 
 const ChatRoom = ({ senderId, saleId, chatroomId }: ChatRoomProps) => {
   const { alert } = useDialog();
-  const { connect, send } = useChat();
+  const { connect, send } = useChat(chatroomId);
   const chatRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
 
@@ -36,8 +36,6 @@ const ChatRoom = ({ senderId, saleId, chatroomId }: ChatRoomProps) => {
   useEffect(() => {
     (async () => {
       connect({
-        chatroomId: chatroomId,
-
         onOpen() {
           console.log('Chat connected');
         },
@@ -63,7 +61,7 @@ const ChatRoom = ({ senderId, saleId, chatroomId }: ChatRoomProps) => {
       return;
     }
 
-    send(message.trim());
+    send(senderId, message.trim());
   };
 
   return (
