@@ -1,39 +1,16 @@
-'use client';
-
-import useNotification from '@/hooks/useNotification';
-
-import colorPalette from '@/styles/tokens/colorPalette';
+import getNotifications from '@/api/notification/getNotifications';
 
 import Box from '@/components/common/Box';
-import Typography from '@/components/common/Typography';
-import Flex from '@/components/common/Flex';
+import NotificationItem from '@/components/notification/NotificationItem';
 
-export default function Notification() {
-  const { token, permission } = useNotification();
+export default async function Notification() {
+  const data = await getNotifications();
 
   return (
-    <Box padding="1rem">
-      <Flex flexDirection="column" gap="0.5rem">
-        <Typography>token</Typography>
-        <Box
-          backgroundColor={colorPalette.primary[50]}
-          padding="1rem"
-          borderRadius="0.5rem"
-          style={{ wordBreak: 'break-all' }}
-        >
-          {token}
-        </Box>
-
-        <Typography>permission</Typography>
-        <Box
-          backgroundColor={colorPalette.primary[50]}
-          padding="1rem"
-          borderRadius="0.5rem"
-          style={{ wordBreak: 'break-all' }}
-        >
-          {permission}
-        </Box>
-      </Flex>
+    <Box height="100%" padding="0.5rem" style={{ overflow: 'scroll' }}>
+      {data.map((item, index) => (
+        <NotificationItem key={index} {...item} />
+      ))}
     </Box>
   );
 }

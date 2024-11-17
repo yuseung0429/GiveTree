@@ -10,6 +10,7 @@ import { useActionState, useEffect, useState } from 'react';
 import Button from '@/components/common/Button';
 import useDialog from '@/hooks/useDialog';
 import modifyFoundation from '@/actions/member/modifyFoundation';
+import { useRouter } from 'next/navigation';
 
 interface FoundationInfoProps {
   image: StaticImageData | string;
@@ -31,19 +32,22 @@ export default function FoundationInfo({
   const [newName, setNewName] = useState<string>(name);
   const [newIntroduction, setNewIntroduction] = useState<string>(introduction);
   const { alert } = useDialog();
+  const router = useRouter();
 
   const [state, formAction] = useActionState(modifyFoundation, {});
 
   useEffect(() => {
     if (state.success) {
-      alert('재단 정보를 수정했습니다.');
-      return;
+      (async () => {
+        await alert('재단 정보를 수정했습니다.');
+        router.push(`/mypage`);
+      })();
     }
 
     if (state.errors) {
       alert(state.message);
     }
-  }, [state, alert]);
+  }, [state, alert, router]);
 
   return (
     <form action={formAction}>

@@ -14,7 +14,7 @@ export default function DonationLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="후원 내역">
+        <AppBar title="후원 내역" showBackButton>
           <Link href={'/notification'}>
             <AppBarMenu>
               <HiOutlineBell />

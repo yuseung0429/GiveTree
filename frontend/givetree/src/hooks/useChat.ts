@@ -9,16 +9,17 @@ export interface ChatMessage {
 }
 
 interface ConnectProps {
-  chatroomId: number;
   onOpen: () => void;
   onError: () => void;
   onClose: () => void;
   onMessage: (message: ChatMessage) => void;
 }
 
-const useChat = (server: string = `${process.env.NEXT_PUBLIC_API_URL}/ws`) => {
+const useChat = (
+  chatroomId: number,
+  server: string = `${process.env.NEXT_PUBLIC_API_URL}/ws`
+) => {
   const socketRef = useRef<Client>();
-  const destinationRef = useRef<string>('');
 
   useEffect(() => {
     return () => {
@@ -28,7 +29,7 @@ const useChat = (server: string = `${process.env.NEXT_PUBLIC_API_URL}/ws`) => {
   }, []);
 
   const connect = useCallback(
-    ({ chatroomId, onOpen, onError, onClose, onMessage }: ConnectProps) => {
+    ({ onOpen, onError, onClose, onMessage }: ConnectProps) => {
       socketRef.current = new Client({
         webSocketFactory: () =>
           new SockJS(server, null, {
@@ -39,8 +40,6 @@ const useChat = (server: string = `${process.env.NEXT_PUBLIC_API_URL}/ws`) => {
         heartbeatOutgoing: 4000,
       });
 
-      destinationRef.current = `/topic/chatroom/${chatroomId}`;
-
       const socket = socketRef.current;
 
       if (!socket) {
@@ -49,7 +48,7 @@ const useChat = (server: string = `${process.env.NEXT_PUBLIC_API_URL}/ws`) => {
 
       socket.onConnect = () => {
         onOpen();
-        socket.subscribe(destinationRef.current, (message) => {
+        socket.subscribe(`/topic/chatroom/${chatroomId}`, (message) => {
           const data: ChatMessage = JSON.parse(message.body);
           onMessage(data);
         });
@@ -66,25 +65,28 @@ const useChat = (server: string = `${process.env.NEXT_PUBLIC_API_URL}/ws`) => {
 
       socket.activate();
     },
-    [server]
+    [server, chatroomId]
   );
 
-  const send = useCallback((message: string) => {
-    const socket = socketRef.current;
+  const send = useCallback(
+    (senderId: number, message: string) => {
+      const socket = socketRef.current;
 
-    if (!socket) {
-      return;
-    }
+      if (!socket) {
+        return;
+      }
 
-    try {
-      socket.publish({
-        destination: destinationRef.current,
-        body: JSON.stringify({ content: message }),
-      });
-    } catch {
-      socket.onWebSocketError('');
-    }
-  }, []);
+      try {
+        socket.publish({
+          destination: `/pub/chatroom/${chatroomId}`,
+          body: JSON.stringify({ senderId, content: message }),
+        });
+      } catch {
+        socket.onWebSocketError('');
+      }
+    },
+    [chatroomId]
+  );
 
   return { connect, send };
 };

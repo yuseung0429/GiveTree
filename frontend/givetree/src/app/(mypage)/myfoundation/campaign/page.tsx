@@ -22,7 +22,7 @@ export default async function Page() {
   return (
     <Layout>
       <header>
-        <AppBar title="캠페인 내역 확인" />
+        <AppBar title="캠페인 내역 확인" showBackButton/>
       </header>
       <main style={{ backgroundColor: '#fff', padding: '1rem 0' }}>
         {foundationCampaigns?.length === 0 ? (

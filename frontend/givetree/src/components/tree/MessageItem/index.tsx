@@ -1,19 +1,19 @@
 import React from 'react';
 import Image from 'next/image';
-import * as styles from './message.css';
+import * as styles from './messageItem.css';
 import Button from '@/components/common/Button';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import Box from '@/components/common/Box';
-import { MessageContent } from '@/components/tree/TreeSlider';
+import { Message } from '@/types/tree/types';
 
 type MessageProps = {
-  message: MessageContent;
+  message: Message;
   decoration: string;
   onClose: () => void;
 };
 
-const Message = ({ message, decoration, onClose }: MessageProps) => {
+const MessageItem = ({ message, decoration, onClose }: MessageProps) => {
   return (
     <>
       <div className={styles.overlay} onClick={onClose}></div>
@@ -35,7 +35,7 @@ const Message = ({ message, decoration, onClose }: MessageProps) => {
             color={colorPalette.secondary[400]}
             weight="semiBold"
           >
-            from. {message.from}
+            from. {message.name}
           </Typography>
         </Box>
 
@@ -47,4 +47,4 @@ const Message = ({ message, decoration, onClose }: MessageProps) => {
   );
 };
 
-export default Message;
+export default MessageItem;

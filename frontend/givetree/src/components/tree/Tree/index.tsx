@@ -4,13 +4,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import TreeImg from '@/assets/images/tree/tree.png';
 import * as styles from './tree.css';
-import Message from '@/components/tree/Message';
-import { MessageContent } from '@/components/tree/TreeSlider';
-
-// const dataFetch = () =>
-//   new Promise((resolve) => {
-//     setTimeout(() => resolve('a'), 1000);
-//   });
+import { Message } from '@/types/tree/types';
+import MessageItem from '@/components/tree/MessageItem';
 
 const decorations = Array(7)
   .fill(null)
@@ -30,21 +25,16 @@ const decorationPositions = [
 ];
 
 type TreeSliderProps = {
-  messages: MessageContent[];
+  messages: Message[];
   isFlipping: boolean;
   showDecorations: boolean;
 };
 
 const Tree = ({ messages, isFlipping, showDecorations }: TreeSliderProps) => {
-  const [selectedMessage, setSelectedMessage] = useState<MessageContent | null>(
-    null
-  );
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
   const [selectDecoration, setSelectDecoration] = useState<string>('');
 
-  const handleDecorationClick = (
-    message: MessageContent,
-    decoration: string
-  ) => {
+  const handleDecorationClick = (message: Message, decoration: string) => {
     setSelectedMessage(message);
     setSelectDecoration(decoration);
   };
@@ -78,7 +68,7 @@ const Tree = ({ messages, isFlipping, showDecorations }: TreeSliderProps) => {
         ))}
 
       {selectedMessage && (
-        <Message
+        <MessageItem
           message={selectedMessage}
           decoration={selectDecoration}
           onClose={handleCloseModal}

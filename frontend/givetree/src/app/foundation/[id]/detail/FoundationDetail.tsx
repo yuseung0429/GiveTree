@@ -19,11 +19,13 @@ const categories = ['소개', '모금함', '캠페인'];
 interface FoundationDetailProps {
   foundationData: Foundation;
   ledgerData: LedgerResponse;
+  role: string;
 }
 
 export default function FoundationDetailComponent({
   foundationData,
   ledgerData,
+  role,
 }: FoundationDetailProps) {
   const [selectedCategory, setSelectedCategory] = useState('소개');
   const [isModalOpen, setModalOpen] = useState(false);
@@ -119,11 +121,14 @@ export default function FoundationDetailComponent({
           )}
         </Box>
       </Flex>
-      <div className={style.giveButton}>
-        <Button size="xl" fullWidth onClick={openModal}>
-          후원하기
-        </Button>
-      </div>
+      {role === 'USER' && (
+        <div className={style.giveButton}>
+          <Button size="lg" fullWidth onClick={openModal}>
+            후원하기
+          </Button>
+        </div>
+      )}
+
       <DonationModal
         isOpen={isModalOpen}
         onClose={closeModal}

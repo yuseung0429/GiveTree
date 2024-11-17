@@ -64,9 +64,9 @@ export default async function Page({
             매월 26일 (다음 결제일 : {calculateMonth()}월 26일)
           </Typography>
           <Typography color={colorPalette.primary[400]} weight="medium">
-            이번 달 정기후원 결제일이 지나지 않았다면
+            이번 달 정기후원 결제일이 지났다면
             <br />
-            이번 달부터 결제가 진행됩니다.
+            다음 달부터 결제가 진행됩니다.
           </Typography>
         </Box>
       </Box>

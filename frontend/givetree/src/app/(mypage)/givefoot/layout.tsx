@@ -13,7 +13,7 @@ export default function GiveFootLayout({
   return (
     <Layout>
       <header>
-        <AppBar title="기부 발자국">
+        <AppBar title="기부 발자국" showBackButton>
           <Link href={'/notification'}>
             <AppBarMenu>
               <HiOutlineBell />
