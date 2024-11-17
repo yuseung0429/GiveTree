@@ -21,7 +21,7 @@ interface AccountProps {
 
 export default function Account({ registeredAccount }: AccountProps) {
   return (
-    <Box>
+    <Box width="100vw" padding="0 1rem">
       <Flex
         className={style.accountBox}
         justifyContent="center"
