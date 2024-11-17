@@ -55,16 +55,19 @@ export default function ExchangeClient({
     router.back();
 
     setIsPending(true);
-    await exchangeFoundationToken(
+    const response = await exchangeFoundationToken(
       selectedIdsRef.current,
       password,
       messageRef.current?.value || ''
     );
     setIsPending(false);
 
-    await alert('환전을 완료했습니다.');
-
-    router.back();
+    if (response.result) {
+      await alert('환전을 완료했습니다.');
+      router.back();
+    } else {
+      await alert(response.error);
+    }
   };
 
   const handleSubmit = () => {
