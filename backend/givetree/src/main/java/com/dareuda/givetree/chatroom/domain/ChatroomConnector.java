@@ -20,15 +20,17 @@ public class ChatroomConnector {
 
     @Transactional
     public long connect(long memberId, long saleId) {
-        Member member = memberReader.read(memberId);
+        Member purchaser = memberReader.read(memberId);
         Sale sale = saleReader.read(saleId);
 
         ChatroomConnection chatroomConnection = chatroomConnectionRepository.findByMemberIdAndChatroomSaleId(memberId, saleId)
                 .orElseGet(() -> {
                     Chatroom chatroom = chatroomRepository.save(new Chatroom(sale));
-                    return chatroomConnectionRepository.save(new ChatroomConnection(chatroom, member));
+                    Member seller = memberReader.readReference(sale.getSellerId());
+                    chatroomConnectionRepository.save(new ChatroomConnection(chatroom, seller));
+                    return chatroomConnectionRepository.save(new ChatroomConnection(chatroom, purchaser));
                 });
 
-        return chatroomConnection.getId();
+        return chatroomConnection.getChatroom().getId();
     }
 }

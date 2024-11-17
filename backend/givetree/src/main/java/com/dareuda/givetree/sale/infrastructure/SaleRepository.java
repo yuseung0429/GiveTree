@@ -16,6 +16,7 @@ public interface SaleRepository extends Repository<Sale, Long> {
     WHERE s.id = :saleId AND s.isDeleted = false
     """)
     Optional<Sale> findRemovedSaleById(long saleId);
+    boolean existsByTitle(String title);
 
     Sale save(Sale sale);
 }
