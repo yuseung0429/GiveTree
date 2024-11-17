@@ -38,3 +38,44 @@
     transform: scale(0.9);
   }
 }
+
+.bottom-base {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: fixed;
+  inset: 0 0 0 0;
+  overflow-y: scroll;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+
+  & > div {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+.bottom-enter {
+  transition: all 0.3s ease;
+  opacity: 1;
+
+  & > div {
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bottom-exit {
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+
+  & > div {
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
