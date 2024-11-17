@@ -68,6 +68,16 @@ export default function ExchangeClient({
   };
 
   const handleSubmit = () => {
+    if (selectedIdsRef.current.length === 0) {
+      alert('출금할 금액을 설정해 주세요.');
+      return;
+    }
+
+    if (!messageRef.current?.value) {
+      alert('출금 목적을 작성해 주세요.');
+      return;
+    }
+
     push({ children: <ConfirmPassword popAction={handlePasswordInput} /> });
   };
 
@@ -124,7 +134,7 @@ export default function ExchangeClient({
               >
                 출금 목적은 GIVE 후원자들에게 공개됩니다.
                 <br />
-                정확한 사용내역을 작성해주세요.
+                정확한 사용 내역을 작성해 주세요.
               </Typography>
               <TextField placeholder="예. 영양제 구입 100개" ref={messageRef} />
             </Box>
