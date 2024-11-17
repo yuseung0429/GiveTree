@@ -64,7 +64,12 @@ export default function AmountSelect({
 
   return (
     <div className={style.container}>
-      <Flex flexDirection="column">
+      <Flex
+        flexDirection="column"
+        gap="0.5rem"
+        height="100%"
+        style={{ overflow: 'scroll' }}
+      >
         <Box className={style.topLine} />
 
         {/* 금액선택 */}
@@ -132,8 +137,8 @@ export default function AmountSelect({
           </Flex>
         </Flex>
         <Button
-          size="lg"
-          className={style.btn}
+          size="xl"
+          fullWidth
           onClick={handleApply}
           disabled={!(selectedIds.size > 0 || isAllSelected)}
         >

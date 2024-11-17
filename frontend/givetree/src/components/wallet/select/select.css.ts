@@ -23,7 +23,7 @@ export const topLine = style({
 
 export const selectbox = style({
   overflowY: 'scroll',
-  height: 'calc(100% - 75px)',
+  height: '100%',
   padding: '20px 30px',
   '::-webkit-scrollbar': {
     width: '4px',
@@ -35,14 +35,6 @@ export const selectbox = style({
     background: colorPalette.grey[400],
     borderRadius: '4px',
   },
-});
-
-export const btn = style({
-  position: 'absolute',
-  bottom: '10px',
-  width: 'calc(100% - 20px)',
-  flexShrink: '0',
-  fontWeight: '500',
 });
 
 export const itemContainer = style({
