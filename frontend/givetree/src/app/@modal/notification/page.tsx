@@ -14,3 +14,5 @@ export default async function Notification() {
     </Box>
   );
 }
+
+export const dynamic = 'force-dynamic';
