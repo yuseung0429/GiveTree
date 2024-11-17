@@ -17,25 +17,27 @@ export default function FoundationDonation({
   return (
     <>
       {donationDetail.length !== 0 ? (
-        donationDetail.map((detail) => {
-          <Box className={s.usageBox}>
-            <Typography color={colorPalette.grey[800]}>
-              {detail.createdAt.slice(0, 10)}
-            </Typography>
-            <Typography as="h3" weight="semiBold">
-              {detail.userName}
-            </Typography>
-            <Typography
-              as="h3"
-              weight="semiBold"
-              size={typography.size.lg}
-              color={colorPalette.secondary[600]}
-              style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
-            >
-              {detail.amount.toLocaleString()}원
-            </Typography>
-          </Box>;
-        })
+        donationDetail.map((detail, index) => (
+          <div key={index} style={{ margin: '0 0.25rem 0.75rem' }}>
+            <Box className={s.usageBox}>
+              <Typography color={colorPalette.grey[800]}>
+                {detail.createdAt.slice(0, 10)}
+              </Typography>
+              <Typography as="h3" weight="semiBold">
+                {detail.userName}
+              </Typography>
+              <Typography
+                as="h3"
+                weight="semiBold"
+                size={typography.size.lg}
+                color={colorPalette.secondary[600]}
+                style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
+              >
+                {detail.amount.toLocaleString()}원
+              </Typography>
+            </Box>
+          </div>
+        ))
       ) : (
         <Box className={s.noneUsageBox}>
           <Typography as="h4">이달에 후원받은 내역이 없습니다.</Typography>
