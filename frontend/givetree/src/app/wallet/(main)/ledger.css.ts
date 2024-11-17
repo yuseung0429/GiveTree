@@ -7,7 +7,6 @@ const spin = keyframes({
 });
 
 export const background = style({
-  flex: '0 0 auto',
   background: `linear-gradient(to bottom, ${colorPalette.primary[300]} 0%, #F5F5F5 100%)`,
   height: '240px',
   width: '100%',

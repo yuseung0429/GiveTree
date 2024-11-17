@@ -1,6 +1,8 @@
 export const getTimeDifference = (time: string) => {
   const date = new Date(time).getTime();
-  const now = new Date().getTime();
+  const now = new Date(
+    new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+  ).getTime();
 
   const difference = (now - date) / 1000;
 

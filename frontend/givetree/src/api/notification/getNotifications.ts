@@ -1,3 +1,5 @@
+'use server';
+
 import fetchWrapper from '@/lib/fetchWrapper';
 
 export interface NotificationItem {
@@ -7,12 +9,16 @@ export interface NotificationItem {
 }
 
 const getNotifications = async (): Promise<NotificationItem[]> => {
-  const response = await fetchWrapper(`/notifications`, {
-    method: 'GET',
-  });
+  try {
+    const response = await fetchWrapper(`/notifications`, {
+      method: 'GET',
+    });
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
+  } catch {
+    return [];
+  }
 };
 
 export default getNotifications;

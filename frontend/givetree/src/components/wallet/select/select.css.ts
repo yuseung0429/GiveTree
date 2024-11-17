@@ -2,26 +2,13 @@ import colorPalette from '@/styles/tokens/colorPalette';
 import { keyframes, style } from '@vanilla-extract/css';
 
 export const container = style({
-  width: '100%',
-  height: '100vh',
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  zIndex: 1000,
-});
+  width: '100vw',
+  height: '65vh',
+  minHeight: '300px',
 
-export const fixedContainer = style({
-  position: 'absolute',
-  width: '100%',
-  height: '65%',
-  maxHeight: '580px',
-  backgroundColor: '#F5F5F5',
-  bottom: '0',
   borderRadius: '20px 20px 0 0',
   padding: '10px',
+  backgroundColor: '#F5F5F5',
 });
 
 export const topLine = style({
@@ -36,7 +23,7 @@ export const topLine = style({
 
 export const selectbox = style({
   overflowY: 'scroll',
-  height: 'calc(100% - 75px)',
+  height: '100%',
   padding: '20px 30px',
   '::-webkit-scrollbar': {
     width: '4px',
@@ -48,14 +35,6 @@ export const selectbox = style({
     background: colorPalette.grey[400],
     borderRadius: '4px',
   },
-});
-
-export const btn = style({
-  position: 'absolute',
-  bottom: '10px',
-  width: 'calc(100% - 20px)',
-  flexShrink: '0',
-  fontWeight: '500',
 });
 
 export const itemContainer = style({
