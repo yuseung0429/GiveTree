@@ -1,5 +1,6 @@
 package com.dareuda.givetree.donation.infrastructure;
 
+import com.dareuda.givetree.donation.domain.DonationFoundationNameInfo;
 import com.dareuda.givetree.donation.domain.FoundationDonation;
 import com.dareuda.givetree.donation.domain.FoundationDonationFoundationInfo;
 import org.springframework.data.domain.Pageable;
@@ -28,4 +29,16 @@ public interface FoundationDonationRepository extends BaseDonationRepository<Fou
            ORDER BY fd.createdAt DESC
            """)
     Slice<FoundationDonationFoundationInfo> findFoundationDonationFoundationInfoByUserId(long userId, Pageable pageable);
+
+    @Query("""
+           SELECT DISTINCT new com.dareuda.givetree.donation.domain.DonationFoundationNameInfo(
+                      f.id,
+                      f.member.name
+                      )
+           FROM FoundationDonation fd
+           JOIN fd.foundation f
+           JOIN fd.foundation.member m
+           WHERE fd.donor.id = :userId
+           """)
+    Slice<DonationFoundationNameInfo> findDonationFoundationNameInfoByUserId(long userId, Pageable pageable);
 }

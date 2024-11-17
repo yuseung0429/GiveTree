@@ -85,4 +85,8 @@ public class DonationService {
     public CampaignDonationStatisticInfo readCampaignDonationStatisticInfo(long campaignId) {
         return campaignDonationInfoReader.readCampaignDonationStatisticInfo(campaignId);
     }
+
+    public Slice<DonationFoundationNameInfo> readDonationFoundationNameInfo(long userId, Pageable pageable) {
+        return foundationDonationInfoReader.readDonationFoundationNameInfo(userId, pageable);
+    }
 }

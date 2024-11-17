@@ -15,7 +15,6 @@ public class FoundationDonationInfoReader {
     private final FoundationDonateSubscriptionReader foundationDonateSubscriptionReader;
     private final FoundationDonationRepository foundationDonationRepository;
 
-
     public Slice<FoundationDonationFoundationInfo> readFoundationDonationFoundationByUserId(
             long userId,
             Pageable pageable
@@ -32,4 +31,9 @@ public class FoundationDonationInfoReader {
         info.setRegularSubscriptionCount(foundationDonateSubscriptionReader.countByFoundationId(foundationId));
         return info;
     }
+
+    public Slice<DonationFoundationNameInfo> readDonationFoundationNameInfo(long userId, Pageable pageable) {
+        return foundationDonationRepository.findDonationFoundationNameInfoByUserId(userId, pageable);
+    }
+
 }
