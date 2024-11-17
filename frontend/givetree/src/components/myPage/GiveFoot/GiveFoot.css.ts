@@ -9,6 +9,7 @@ export const footBox = style({
   padding: '1rem 1.25rem',
   display: 'flex',
   flexDirection: 'column',
+  flexShrink: '0',
   gap: '1.25rem',
 });
 

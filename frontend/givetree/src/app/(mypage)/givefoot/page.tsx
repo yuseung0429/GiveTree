@@ -6,9 +6,11 @@ import getCampaignDonation from '@/api/donation/getCampaignDonation';
 import getFoundationRegularDonation from '@/api/donation/getFoundationRegularDonation';
 import getFoundationOneTimeDonation from '@/api/donation/getFoundationOneTimeDonation';
 import { FoundationOneTimeDonation } from '@/types/donation/foundation/types';
+import getTotalDonation from '@/api/donation/getTotalDonation';
 
 export default async function GiveFootPage() {
   const { name } = await getSessionMember();
+  const totalDonation = await getTotalDonation();
   const campaignDonation = await getCampaignDonation();
   const foundationRegularDonation = await getFoundationRegularDonation();
   const foundationDonationAll = await getFoundationOneTimeDonation();
@@ -18,10 +20,12 @@ export default async function GiveFootPage() {
     }
   );
 
+
   return (
     <Box padding="1rem">
       <GiveFoot
         name={name}
+        totalDonation={totalDonation}
         CampaignDonation={campaignDonation}
         FoundationRegularDonation={foundationRegularDonation}
         FoundationOneTimeDonation={foundationOneTimeDonation}

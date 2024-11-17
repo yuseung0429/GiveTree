@@ -3,9 +3,22 @@ import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import typography from '@/styles/tokens/typography';
 import TaxCredit from '@/components/myPage/TaxCredit';
+import getTotalDonation from '@/api/donation/getTotalDonation';
 
-export default function TaxPage() {
-  const totalDonation = 20000000;
+//검색 시작 날짜, 종료 날짜 구하는 함수
+function getYearStartAndEndDates(): { startDate: string; endDate: string } {
+  const currentYear = new Date().getFullYear();
+  const startDate = `${currentYear}-01-01`;
+  const endDate = `${currentYear}-12-31`;
+  return { startDate, endDate };
+}
+
+export default async function TaxPage() {
+  const { startDate, endDate } = getYearStartAndEndDates();
+  const totalDonation = await getTotalDonation({
+    'start-date': startDate,
+    'end-date': endDate,
+  });
 
   return (
     <Box

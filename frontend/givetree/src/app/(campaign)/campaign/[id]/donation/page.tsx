@@ -40,11 +40,12 @@ export default async function DonationPage({
         marginBottom="15px"
         backgroundColor="white"
         padding="1.5rem 1rem"
+        paddingBottom="3.5rem"
       >
         <Typography as="h3" weight="medium" style={{ marginLeft: '0.5rem' }}>
           결제수단
         </Typography>
-        <Flex justifyContent="center">
+        <Flex justifyContent='center' style={{marginTop: '0.5rem'}}>
           <Account registeredAccount={registeredAccount} />
         </Flex>
       </Box>

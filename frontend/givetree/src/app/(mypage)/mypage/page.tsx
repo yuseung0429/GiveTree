@@ -9,11 +9,13 @@ import Link from 'next/link';
 import getSessionMember from '@/api/member/getSessionMember';
 import getSessionFoundation from '@/api/member/getSessionFoundation';
 import Logout from '@/components/myPage/Logout';
+import fetchWrapper from '@/lib/fetchWrapper';
 
 export default async function MyPage() {
   const { role, name, profileImageUrl } = await getSessionMember();
   const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
-  const totalDonation = 35000;
+  const response = await fetchWrapper(`/donations/amount`, { method: 'GET' });
+  const { amount: totalDonation } = await response.json();
 
   const { totalFundraisingAmount, executedAmount } =
     await getSessionFoundation();

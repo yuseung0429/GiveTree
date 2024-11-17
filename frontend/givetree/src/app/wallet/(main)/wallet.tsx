@@ -45,7 +45,7 @@ export default async function Wallet() {
         </Typography>
 
         {/* 출금버튼 */}
-        <Flex gap={10} style={{ width: '100%', marginTop: '30px' }}>
+        <Flex gap={10} style={{ width: '100%' }}>
           <Link href="wallet/exchange/foundation" style={{ flex: 1 }}>
             {/* 재단 출금 */}
             <Button fullWidth>재단 출금하기</Button>
