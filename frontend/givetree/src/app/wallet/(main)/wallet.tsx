@@ -7,9 +7,13 @@ import Link from 'next/link';
 import { FaTree } from 'react-icons/fa';
 import { IoMdRefresh } from 'react-icons/io';
 import * as style from './wallet.css';
+import getSessionMember from '@/api/member/getSessionMember';
 
 export default async function Wallet() {
-  const { balance } = await getTokenBalance();
+  const [{ balance }, { name }] = await Promise.all([
+    await getTokenBalance(),
+    await getSessionMember(),
+  ]);
 
   return (
     <>
@@ -23,7 +27,7 @@ export default async function Wallet() {
           <Flex alignItems="center" gap="4px">
             <FaTree size={16} color={colorPalette.primary[600]} />
             <Typography weight="semiBold" size={18}>
-              굿네이버스 월렛
+              {name} 월렛
             </Typography>
           </Flex>
           <Link href="/wallet">
