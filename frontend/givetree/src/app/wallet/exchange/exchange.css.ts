@@ -12,8 +12,7 @@ export const moneybox = style({
 });
 
 export const bottom = style({
-  position: 'sticky',
-  bottom: '0',
+  flex: '0 0 auto',
   padding: '1rem',
   borderTop: `0.0625rem solid ${colorPalette.grey[300]}`,
   backgroundColor: colorPalette.grey[50],

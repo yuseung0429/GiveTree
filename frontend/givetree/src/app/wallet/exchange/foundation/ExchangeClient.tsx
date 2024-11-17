@@ -85,8 +85,8 @@ export default function ExchangeClient({
   };
 
   return (
-    <>
-      <Box padding="1rem">
+    <Flex flexDirection="column" height="100%">
+      <Box padding="1rem" style={{ flex: '1 1 auto', overflow: 'scroll' }}>
         <Flex flexDirection="column" gap="2rem">
           {/* 출금 금액 설정 */}
           <Flex flexDirection="column" gap="1.5rem" alignItems="center">
@@ -178,6 +178,6 @@ export default function ExchangeClient({
           출금 신청
         </FormButton>
       </Flex>
-    </>
+    </Flex>
   );
 }
