@@ -37,7 +37,7 @@ export const container = style({
   top: '0',
   right: '0',
   left: '0',
-  height: '50%',
+  height: '40%',
   borderBottomLeftRadius: '0.375rem',
   borderBottomRightRadius: '0.375rem',
   boxShadow: '0 0 0.5rem 0 #999',

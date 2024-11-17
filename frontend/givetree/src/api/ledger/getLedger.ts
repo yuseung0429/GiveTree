@@ -8,7 +8,7 @@ export interface LedgerEntry {
   bankName: string;
   message: string;
   amount: number;
-  type: string;
+  type: 'EXCHANGE' | 'CHARGE' | 'REFUND';
   processedAt: string;
 }
 

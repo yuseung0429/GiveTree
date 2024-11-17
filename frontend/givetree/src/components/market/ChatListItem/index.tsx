@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { ChatroomItem } from '@/types/chat/chat';
+
 import { getTimeDifference } from '@/utils/time';
 
 import colorPalette from '@/styles/tokens/colorPalette';
@@ -11,42 +13,32 @@ import Typography from '@/components/common/Typography';
 
 import * as s from './ChatListItem.css';
 
-interface ChatListItemProps {
-  saleId: number;
-  title: string;
-  profileImageUrl: string;
-  nickname: string;
-  lastContent: string;
-  updatedAt: string;
-  chatroomId: number;
-}
-
 const ChatListItem = ({
+  id,
   saleId,
-  title,
-  profileImageUrl,
-  nickname,
-  lastContent,
-  updatedAt,
-  chatroomId,
-}: ChatListItemProps) => {
+  saleTitle,
+  counterpartName,
+  counterpartProfileImageUrl,
+  lastMessage,
+  lastMessageCreatedAt,
+}: ChatroomItem) => {
   return (
     <div className={s.container}>
-      <Link href={`/market/chat/${saleId}/${chatroomId}`}>
+      <Link href={`/market/chat/${saleId}/${id}`}>
         <Flex alignItems="center" gap="0.5rem">
           <div style={{ flex: '0 0 auto' }}>
-            <ProfileImage src={profileImageUrl} />
+            <ProfileImage src={counterpartProfileImageUrl || ''} />
           </div>
           <div style={{ flex: '1 1 auto' }}>
             <Flex justifyContent="space-between">
               <Typography size={typography.size.sm} weight="regular">
-                {title}
+                {saleTitle}
               </Typography>
               <Typography
                 size={typography.size.sm}
                 color={colorPalette.grey[700]}
               >
-                {getTimeDifference(updatedAt)}
+                {getTimeDifference(lastMessageCreatedAt)}
               </Typography>
             </Flex>
             <Typography
@@ -54,9 +46,9 @@ const ChatListItem = ({
               weight="semiBold"
               style={{ margin: '0.25rem 0 0.5rem' }}
             >
-              {nickname}
+              {counterpartName}
             </Typography>
-            <Typography>{lastContent}</Typography>
+            <Typography>{lastMessage}</Typography>
           </div>
         </Flex>
       </Link>

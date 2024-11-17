@@ -7,11 +7,13 @@ import Link from 'next/link';
 import { FaTree } from 'react-icons/fa';
 import { IoMdRefresh } from 'react-icons/io';
 import * as style from './wallet.css';
-import getSessionFoundation from '@/api/member/getSessionFoundation';
+import getSessionMember from '@/api/member/getSessionMember';
 
 export default async function Wallet() {
-  const { balance } = await getTokenBalance();
-  const { name } = await getSessionFoundation();
+  const [{ balance }, { name }] = await Promise.all([
+    await getTokenBalance(),
+    await getSessionMember(),
+  ]);
 
   return (
     <>
