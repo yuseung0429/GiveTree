@@ -2,3 +2,7 @@
 	path = backend/givetree/src/main/resources/properties
 	url = https://lab.ssafy.com/dydwls9703/d210-be-private-yml
 	branch = master
+[submodule "backend/givetree/backend/givetree/src/main/resources/properties"]
+	path = backend/givetree/backend/givetree/src/main/resources/properties
+	url = https://lab.ssafy.com/dydwls9703/d210-be-private-yml
+	branch = master

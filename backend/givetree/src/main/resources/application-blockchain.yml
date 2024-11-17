@@ -8,4 +8,4 @@ blockchain:
     recharge-amount-gwei: 5000000000
   contract:
     token:
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+      address: "0x5e51c79C8367e98deE2E35334864ecDb26C66513"
