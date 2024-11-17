@@ -15,7 +15,7 @@ interface AmountSelectProps {
   initialSelectedIds: number[];
 }
 
-export default function AmountSelect({
+export default function FoundationAmountSelect({
   onSelect,
   initialSelectedIds,
 }: AmountSelectProps) {

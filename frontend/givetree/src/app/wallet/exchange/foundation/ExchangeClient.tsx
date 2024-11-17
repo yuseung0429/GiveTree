@@ -10,7 +10,7 @@ import FormButton from '@/components/common/FormButton';
 import ConfirmPassword from '@/components/common/PasswordConfirm';
 import TextField from '@/components/common/TextField';
 import Typography from '@/components/common/Typography';
-import AmountSelect from '@/components/wallet/select';
+import FoundationAmountSelect from '@/components/wallet/select/FoundationAmountSelect';
 import useDialog from '@/hooks/useDialog';
 import useModal from '@/hooks/useModal';
 import colorPalette from '@/styles/tokens/colorPalette';
@@ -42,7 +42,7 @@ export default function ExchangeClient({
   const handleAmountClick = () => {
     push({
       children: (
-        <AmountSelect
+        <FoundationAmountSelect
           onSelect={handleAmountSelect}
           initialSelectedIds={selectedIdsRef.current}
         />
