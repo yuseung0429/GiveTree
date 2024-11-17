@@ -13,25 +13,27 @@ export default function Usage({
   return (
     <>
       {expenses.length !== 0 ? (
-        expenses.map((detail) => {
-          <Box className={s.usageBox}>
-            <Typography color={colorPalette.grey[800]}>
-              {detail.createdAt.slice(0, 10)}
-            </Typography>
-            <Typography as="h3" weight="semiBold">
-              {detail.message}
-            </Typography>
-            <Typography
-              as="h3"
-              weight="semiBold"
-              size={typography.size.lg}
-              color={colorPalette.secondary[600]}
-              style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
-            >
-              {detail.amount.toLocaleString()}원
-            </Typography>
-          </Box>;
-        })
+        expenses.map((detail, index) => (
+          <div key={index} style={{ margin: '0 0.25rem 0.75rem' }}>
+            <Box className={s.usageBox}>
+              <Typography color={colorPalette.grey[800]}>
+                {detail.createdAt.slice(0, 10)}
+              </Typography>
+              <Typography as="h3" weight="semiBold">
+                {detail.message}
+              </Typography>
+              <Typography
+                as="h3"
+                weight="semiBold"
+                size={typography.size.lg}
+                color={colorPalette.secondary[600]}
+                style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
+              >
+                {detail.amount.toLocaleString()}원
+              </Typography>
+            </Box>
+          </div>
+        ))
       ) : (
         <Box className={s.noneUsageBox}>
           <Typography as="h4">재단에서 출금한 내역이 없습니다.</Typography>
