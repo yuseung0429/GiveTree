@@ -7,6 +7,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -86,7 +87,7 @@ public class DonationService {
         return campaignDonationInfoReader.readCampaignDonationStatisticInfo(campaignId);
     }
 
-    public Slice<DonationFoundationNameInfo> readDonationFoundationNameInfo(long userId, Pageable pageable) {
-        return foundationDonationInfoReader.readDonationFoundationNameInfo(userId, pageable);
+    public List<DonationFoundationNameInfo> readDonationFoundationNameInfo(long userId) {
+        return foundationDonationInfoReader.readDonationFoundationNameInfo(userId);
     }
 }

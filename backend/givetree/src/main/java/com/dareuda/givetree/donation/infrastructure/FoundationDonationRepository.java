@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface FoundationDonationRepository extends BaseDonationRepository<FoundationDonation>, FoundationDonationCustomRepository{
 
     @Query("""
@@ -31,14 +33,16 @@ public interface FoundationDonationRepository extends BaseDonationRepository<Fou
     Slice<FoundationDonationFoundationInfo> findFoundationDonationFoundationInfoByUserId(long userId, Pageable pageable);
 
     @Query("""
-           SELECT DISTINCT new com.dareuda.givetree.donation.domain.DonationFoundationNameInfo(
+           SELECT new com.dareuda.givetree.donation.domain.DonationFoundationNameInfo(
                       f.id,
-                      f.member.name
+                      f.member.name,
+                      SUM(fd.amount)
                       )
            FROM FoundationDonation fd
            JOIN fd.foundation f
            JOIN fd.foundation.member m
            WHERE fd.donor.id = :userId
+           GROUP BY f
            """)
-    Slice<DonationFoundationNameInfo> findDonationFoundationNameInfoByUserId(long userId, Pageable pageable);
+    List<DonationFoundationNameInfo> findDonationFoundationNameInfoByUserId(long userId);
 }

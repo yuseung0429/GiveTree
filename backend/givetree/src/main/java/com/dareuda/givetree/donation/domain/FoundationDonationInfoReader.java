@@ -7,6 +7,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -32,8 +33,8 @@ public class FoundationDonationInfoReader {
         return info;
     }
 
-    public Slice<DonationFoundationNameInfo> readDonationFoundationNameInfo(long userId, Pageable pageable) {
-        return foundationDonationRepository.findDonationFoundationNameInfoByUserId(userId, pageable);
+    public List<DonationFoundationNameInfo> readDonationFoundationNameInfo(long userId) {
+        return foundationDonationRepository.findDonationFoundationNameInfoByUserId(userId);
     }
 
 }
