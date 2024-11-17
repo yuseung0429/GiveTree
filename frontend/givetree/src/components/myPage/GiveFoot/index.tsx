@@ -9,6 +9,7 @@ import { CampaignDonation } from '@/types/donation/campaign/types';
 
 interface GiveFootProps {
   name: string;
+  totalDonation: number;
   CampaignDonation: CampaignDonation[];
   FoundationRegularDonation: FoundationRegularDonation[];
   FoundationOneTimeDonation: FoundationOneTimeDonation[];
@@ -16,6 +17,7 @@ interface GiveFootProps {
 
 export default function GiveFoot({
   name,
+  totalDonation,
   CampaignDonation,
   FoundationRegularDonation,
   FoundationOneTimeDonation,
@@ -51,7 +53,7 @@ export default function GiveFoot({
           총 후원 금액
         </Typography>
         <Typography as="h4" weight="semiBold">
-          233,000원
+          {totalDonation.toLocaleString()}원
         </Typography>
       </div>
     </div>

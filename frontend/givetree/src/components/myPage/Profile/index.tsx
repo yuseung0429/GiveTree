@@ -45,8 +45,8 @@ const Profile = ({
         </Typography>
         <Typography as="h3" weight="semiBold">
           {role === 'USER'
-            ? `${totalDonation.toLocaleString()}트리`
-            : `${currentMoney.toLocaleString()}트리`}
+            ? `${totalDonation.toLocaleString()} 트리`
+            : `${currentMoney.toLocaleString()} 트리`}
         </Typography>
       </div>
 
