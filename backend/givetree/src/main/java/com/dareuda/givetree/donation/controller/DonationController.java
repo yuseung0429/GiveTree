@@ -19,6 +19,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -41,13 +42,9 @@ public class DonationController {
 
     @GetMapping("/foundations/names")
     public ResponseEntity<?> readDonationFoundations(
-            @AuthenticationPrincipal UserPrinciple user,
-            Pageable pageable
+            @AuthenticationPrincipal UserPrinciple user
     ) {
-        Slice<DonationFoundationNameInfo> infos = donationService.readDonationFoundationNameInfo(
-                user.getId(),
-                pageable
-        );
+        List<DonationFoundationNameInfo> infos = donationService.readDonationFoundationNameInfo(user.getId());
         return ResponseEntity.ok().body(infos);
     }
 
