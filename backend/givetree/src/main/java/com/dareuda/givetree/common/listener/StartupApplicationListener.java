@@ -18,8 +18,11 @@ import com.dareuda.givetree.member.domain.Role;
 import com.dareuda.givetree.member.domain.dto.CreateMemberCommand;
 import com.dareuda.givetree.member.infrastructure.MemberRepository;
 import com.dareuda.givetree.member.service.MemberService;
+import com.dareuda.givetree.sale.domain.ProductionCondition;
+import com.dareuda.givetree.sale.domain.SaleCommand;
+import com.dareuda.givetree.sale.infrastructure.SaleRepository;
+import com.dareuda.givetree.sale.service.SaleService;
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import com.ssafy.finance.response.bank.BankCodeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
@@ -183,10 +186,31 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
               }
             ]
             """;
+    private static final String SALE_DUMMY_JSON_ARRAY = """
+            [
+              {
+                "sellerId": 1,
+                "foundationId": 1,
+                "price": 1000,
+                "contribution": 100,
+                "title": "좋은 물건 팝니다",
+                "description": "좋은 물건입니다~",
+                "imageUrls": [
+                  "https://cdn.pixabay.com/photo/2023/11/05/08/41/hot-air-balloon-8366532_1280.jpg",
+                  "https://cdn.pixabay.com/photo/2017/08/01/23/32/colorful-2568654_1280.jpg"
+                ],
+                "productionCondition": "미개봉",
+                "isDirectSale": true,
+                "isDeliverySale": false
+              }
+            ]
+            """;
 
     private final CampaignService campaignService;
     private final CampaignRepository campaignRepository;
     private final FoundationRepository foundationRepository;
+    private final SaleService saleService;
+    private final SaleRepository saleRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -195,6 +219,7 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
         createTestMembers();
         createFoundations();
         createCampaigns();
+        createSales();
     }
 
     private void initializeBankCode() {
@@ -322,6 +347,46 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
                     .build();
 
             campaignService.createCampaign(foundation.getId(), command);
+        }
+    }
+
+    private void createSales() {
+        JsonArray jsonArray = JsonParser.parseString(SALE_DUMMY_JSON_ARRAY).getAsJsonArray();
+        for (int i=0; i< jsonArray.size(); i++) {
+            JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+
+            long sellerId = jsonObject.get("sellerId").getAsLong();
+            long foundationId = jsonObject.get("foundationId").getAsLong();
+            long price = jsonObject.get("price").getAsLong();
+            long contribution = jsonObject.get("contribution").getAsLong();
+            String title = jsonObject.get("title").getAsString();
+            String description = jsonObject.get("description").getAsString();
+            String productionCondition = jsonObject.get("productionCondition").getAsString();
+            boolean isDirectSale = jsonObject.get("isDirectSale").getAsBoolean();
+            boolean isDeliverySale = jsonObject.get("isDeliverySale").getAsBoolean();
+
+            List<String> imageUrls = new ArrayList<>();
+            jsonObject.get("imageUrls")
+                    .getAsJsonArray()
+                    .forEach(e -> imageUrls.add(e.getAsString()));
+
+            if (saleRepository.existsByTitle(title)) {
+                continue;
+            }
+
+            SaleCommand command = SaleCommand.builder()
+                    .foundationId(foundationId)
+                    .price(price)
+                    .contribution(contribution)
+                    .title(title)
+                    .description(description)
+                    .imageUrls(imageUrls)
+                    .productionCondition(ProductionCondition.of(productionCondition))
+                    .isDirectSale(isDirectSale)
+                    .isDeliverySale(isDeliverySale)
+                    .build();
+
+            saleService.appendSale(sellerId, command);
         }
     }
 }
