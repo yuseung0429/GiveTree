@@ -39,6 +39,18 @@ public class DonationController {
         return ResponseEntity.ok().body(infos);
     }
 
+    @GetMapping("/foundations/names")
+    public ResponseEntity<?> readDonationFoundations(
+            @AuthenticationPrincipal UserPrinciple user,
+            Pageable pageable
+    ) {
+        Slice<DonationFoundationNameInfo> infos = donationService.readDonationFoundationNameInfo(
+                user.getId(),
+                pageable
+        );
+        return ResponseEntity.ok().body(infos);
+    }
+
     @GetMapping("/foundations/{foundationId}")
     public ResponseEntity<?> readFoundationDonationUserInfo(
             @AuthenticationPrincipal UserPrinciple user,
