@@ -8,7 +8,7 @@ interface ExpenseItemProps {
   message: string;
   amount: number;
   borderColor?: string;
-  type: string;
+  type: 'EXCHANGE' | 'CHARGE';
 }
 
 export default function ExpenseItem({

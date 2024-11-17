@@ -1,15 +1,15 @@
+import getSessionFoundation from '@/api/member/getSessionFoundation';
 import Typography from '@/components/common/Typography';
+import Link from 'next/link';
 import {
   HiChevronRight,
+  HiOutlineClipboardDocumentList,
   HiOutlineNewspaper,
-  HiOutlineShoppingBag,
-  HiOutlineWallet,
   HiOutlinePencilSquare,
+  HiOutlineWallet,
 } from 'react-icons/hi2';
 import { PiHandHeart, PiListHeart } from 'react-icons/pi';
 import * as styles from './MyTab.css';
-import Link from 'next/link';
-import getSessionFoundation from '@/api/member/getSessionFoundation';
 
 interface MyTabProps {
   role: string;
@@ -41,18 +41,18 @@ export default async function MyTab({ role }: MyTabProps) {
         className={styles.tab}
         href={
           role === 'USER'
-            ? ''
+            ? '/mytransaction/0'
             : `myfoundation/campaign/register/${foundationId}`
         }
       >
         <div className={styles.IconBox}>
           {role === 'USER' ? (
-            <HiOutlineShoppingBag size={22} />
+            <HiOutlineClipboardDocumentList size={22} />
           ) : (
             <PiHandHeart size={22} />
           )}
           <Typography as="h3">
-            {role === 'USER' ? '장터 거래 내역' : '캠페인 신청'}
+            {role === 'USER' ? '입출금 내역' : '캠페인 신청'}
           </Typography>
         </div>
         <HiChevronRight size={20} />
