@@ -21,14 +21,14 @@ interface AccountProps {
 
 export default function Account({ registeredAccount }: AccountProps) {
   return (
-    <Box paddingBottom="1.75rem">
+    <Box>
       <Flex
         className={style.accountBox}
         justifyContent="center"
         alignItems="center"
         style={{
           backgroundColor: registeredAccount
-            ? colorPalette.primary[100]
+            ? colorPalette.primary[50]
             : colorPalette.grey[200],
           border: registeredAccount
             ? 'none'
@@ -37,11 +37,16 @@ export default function Account({ registeredAccount }: AccountProps) {
       >
         <Flex alignItems="center" flexDirection="column" gap={10}>
           {registeredAccount ? (
-            <Typography weight="medium" color={colorPalette.grey[700]}>
-              {`${
-                registeredAccount.bankName
-              } ${registeredAccount.accountNumber.slice(-5)}`}
-            </Typography>
+            <>
+              <Typography weight="semiBold" color={colorPalette.grey[700]}>
+                {registeredAccount.bankName}
+              </Typography>
+              <Typography weight="light" color={colorPalette.grey[700]}>
+                {`${registeredAccount.accountNumber.slice(0, -6)}${'*'.repeat(
+                  6
+                )}`}
+              </Typography>
+            </>
           ) : (
             <>
               <Link href={'/account'}>

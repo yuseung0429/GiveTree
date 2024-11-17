@@ -2,10 +2,9 @@ import { style } from '@vanilla-extract/css';
 import colorPalette from '@/styles/tokens/colorPalette';
 
 export const accountBox = style({
-  width: '280px',
-  height: '175px',
+  width: '100%',
+  aspectRatio: '8 / 5',
   borderRadius: '5px',
-  marginTop: '15px',
 });
 
 export const plus = style({
