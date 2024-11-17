@@ -5,7 +5,6 @@ export const accountBox = style({
   width: '100%',
   aspectRatio: '8 / 5',
   borderRadius: '5px',
-  marginTop: '15px',
 });
 
 export const plus = style({

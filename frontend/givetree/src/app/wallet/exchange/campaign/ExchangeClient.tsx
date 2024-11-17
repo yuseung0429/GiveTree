@@ -36,7 +36,7 @@ export default function ExchangeClient({
   };
 
   return (
-    <Flex flexDirection="column" gap={40} className={style.padding20}>
+    <Flex flexDirection="column" gap={40}>
       {/* 출금 금액 설정 */}
       <Flex flexDirection="column" gap={20} alignItems="center">
         <Typography
