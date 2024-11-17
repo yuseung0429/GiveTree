@@ -26,8 +26,6 @@ export default function DonationUsage({
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  console.log(donationExpenses);
-
   const handleScroll = () => {
     const slider = sliderRef.current;
     if (!slider) {
@@ -64,7 +62,7 @@ export default function DonationUsage({
               size={20}
               weight="bold"
               color={colorPalette.primary[600]}
-              style={{ textAlign: 'center', marginTop: '1rem' }}
+              style={{ textAlign: 'center', margin: '0.5rem 0' }}
             >
               {foundation.totalDonationAmount.toLocaleString()}원
             </Typography>
@@ -90,13 +88,14 @@ export default function DonationUsage({
         <Typography
           as="h3"
           weight="semiBold"
+          size={18}
           color={colorPalette.text[900]}
-          style={{ margin: '0 0.5rem 1rem' }}
+          style={{ margin: '0.25rem 0.5rem 1rem' }}
         >
-          출금 사용내역
+          재단 출금 사용내역
         </Typography>
 
-        <Usage />
+        <Usage expenses={donationExpenses[currentIndex] || []} />
       </Box>
     </>
   );

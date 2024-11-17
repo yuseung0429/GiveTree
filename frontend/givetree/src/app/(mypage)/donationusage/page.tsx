@@ -8,7 +8,6 @@ import NoneDonation from '@/components/myPage/DonationUsage/NoneDonation';
 
 export default async function DonationUsagePage() {
   const foundations = await getFoundationDonation();
-  console.log(foundations);
 
   const donationExpenses = await Promise.all(
     foundations.map(async (foundation) => {
@@ -17,8 +16,6 @@ export default async function DonationUsagePage() {
       return expenses;
     })
   );
-
-  console.log(donationExpenses);
 
   return (
     <>

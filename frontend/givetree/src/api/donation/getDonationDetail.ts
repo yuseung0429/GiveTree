@@ -4,7 +4,7 @@ import convertParams from '@/utils/convertParams';
 
 import fetchWrapper from '@/lib/fetchWrapper';
 
-export interface GetDonationExpenseParams {
+export interface GetDonationDetailParams {
   'start-date'?: string;
   'end-date'?: string;
   page?: string;
@@ -12,7 +12,7 @@ export interface GetDonationExpenseParams {
   own?: boolean;
 }
 
-export interface DonationExpenseItem {
+export interface DonationDetailItem {
   userId: number;
   userImage: string | null;
   userName: string;
@@ -22,12 +22,12 @@ export interface DonationExpenseItem {
   createdAt: string;
 }
 
-export interface DonationExpense {
-  content: DonationExpenseItem[];
+export interface DonationDetail {
+  content: DonationDetailItem[];
 }
 
-const getDonationExpense = async (
-  params: GetDonationExpenseParams = {},
+const getDonationDetail = async (
+  params: GetDonationDetailParams = {},
   foundationId: number
 ) => {
   const response = await fetchWrapper(
@@ -39,11 +39,9 @@ const getDonationExpense = async (
     throw new Error('에러가 발생했습니다');
   }
 
-  const data: DonationExpense = await response.json();
+  const data: DonationDetail = await response.json();
 
-  const filteredContent = data.content.filter((item) => item.message !== null);
-
-  return filteredContent;
+  return data.content;
 };
 
-export default getDonationExpense;
+export default getDonationDetail;

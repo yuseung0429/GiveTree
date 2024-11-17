@@ -7,9 +7,11 @@ import Link from 'next/link';
 import { FaTree } from 'react-icons/fa';
 import { IoMdRefresh } from 'react-icons/io';
 import * as style from './wallet.css';
+import getSessionFoundation from '@/api/member/getSessionFoundation';
 
 export default async function Wallet() {
   const { balance } = await getTokenBalance();
+  const { name } = await getSessionFoundation();
 
   return (
     <>
@@ -23,7 +25,7 @@ export default async function Wallet() {
           <Flex alignItems="center" gap="4px">
             <FaTree size={16} color={colorPalette.primary[600]} />
             <Typography weight="semiBold" size={18}>
-              굿네이버스 월렛
+              {name} 월렛
             </Typography>
           </Flex>
           <Link href="/wallet">
@@ -41,7 +43,7 @@ export default async function Wallet() {
         </Typography>
 
         {/* 출금버튼 */}
-        <Flex gap={10} style={{ width: '100%', marginTop: '30px' }}>
+        <Flex gap={10} style={{ width: '100%' }}>
           <Link href="wallet/exchange/foundation" style={{ flex: 1 }}>
             {/* 재단 출금 */}
             <Button fullWidth>재단 출금하기</Button>

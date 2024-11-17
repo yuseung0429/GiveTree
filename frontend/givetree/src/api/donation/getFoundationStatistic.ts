@@ -4,19 +4,19 @@ import convertParams from '@/utils/convertParams';
 
 import fetchWrapper from '@/lib/fetchWrapper';
 
-export interface GetFoundationStatistic {
-  startDate?: string;
-  endDate?: string;
+export interface GetFoundationStatisticParams {
+  'start-date'?: string;
+  'end-date'?: string;
 }
 
 export interface FoundationStatistic {
-  donationCount: number;
-  donationAmount: number;
-  regularSubscriptionCount: number;
+  donationCount: number | null;
+  donationAmount: number | null;
+  regularSubscriptionCount: number | 0;
 }
 
 const getFoundationStatistic = async (
-  params: GetFoundationStatistic = {},
+  params: GetFoundationStatisticParams,
   foundationId: number
 ) => {
   const response = await fetchWrapper(

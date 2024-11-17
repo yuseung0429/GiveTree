@@ -11,9 +11,11 @@ import getCampaignDonation from '@/api/donation/getCampaignDonation';
 import getFoundationRegularDonation from '@/api/donation/getFoundationRegularDonation';
 import getFoundationOneTimeDonation from '@/api/donation/getFoundationOneTimeDonation';
 import { FoundationOneTimeDonation } from '@/types/donation/foundation/types';
+import getTotalDonation from '@/api/donation/getTotalDonation';
 
 export default async function UserEdit() {
   const { name, profileImageUrl, email } = await getSessionMember();
+  const totalDonation = await getTotalDonation();
   const campaignDonation = await getCampaignDonation();
   const foundationRegularDonation = await getFoundationRegularDonation();
   const foundationDonationAll = await getFoundationOneTimeDonation();
@@ -39,6 +41,7 @@ export default async function UserEdit() {
 
         <Box className={styles.introduceBox}>
           <GiveFoot
+            totalDonation={totalDonation}
             name={name}
             CampaignDonation={campaignDonation}
             FoundationRegularDonation={foundationRegularDonation}

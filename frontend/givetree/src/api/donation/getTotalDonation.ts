@@ -5,8 +5,8 @@ import convertParams from '@/utils/convertParams';
 import fetchWrapper from '@/lib/fetchWrapper';
 
 export interface GetTotalDonationParams {
-  startDate?: string;
-  endDate?: string;
+  'start-date'?: string;
+  'end-date'?: string;
 }
 
 export interface TotalDonation {
@@ -23,7 +23,7 @@ const getTotalDonation = async (params: GetTotalDonationParams = {}) => {
     throw new Error('에러가 발생했습니다');
   }
 
-  const data : TotalDonation = await response.json();
+  const data: TotalDonation = await response.json();
   return data.amount;
 };
 

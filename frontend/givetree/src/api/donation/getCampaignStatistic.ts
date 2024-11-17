@@ -2,10 +2,10 @@
 
 import fetchWrapper from '@/lib/fetchWrapper';
 
-export interface FoundationStatistic {
-  donationCount: number;
-  donationAmount: number;
-  goalAmount: number;
+export interface CampaignStatistic {
+  donationCount: number | 0;
+  donationAmount: number | null;
+  goalAmount: number | null;
 }
 
 const getCampaignStatistic = async (campaignId: number) => {
@@ -18,7 +18,7 @@ const getCampaignStatistic = async (campaignId: number) => {
     throw new Error('에러가 발생했습니다');
   }
 
-  const data: FoundationStatistic = await response.json();
+  const data: CampaignStatistic = await response.json();
   return data;
 };
 

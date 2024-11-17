@@ -11,7 +11,7 @@ export const walletcontainer = style({
   boxShadow: '3px 3px 6px rgba(0, 0, 0, 0.25)',
   scrollSnapAlign: 'start',
   flexShrink: '0',
-  margin: '0.75rem 0.5rem 0.5rem 0',
+  margin: '0.5rem 0.5rem 0.5rem 0',
 });
 
 export const noneContainer = style({

@@ -15,7 +15,10 @@ function getYearStartAndEndDates(): { startDate: string; endDate: string } {
 
 export default async function TaxPage() {
   const { startDate, endDate } = getYearStartAndEndDates();
-  const totalDonation = await getTotalDonation({ startDate, endDate });
+  const totalDonation = await getTotalDonation({
+    'start-date': startDate,
+    'end-date': endDate,
+  });
 
   return (
     <Box

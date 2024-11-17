@@ -1,8 +1,17 @@
+import { FoundationStatistic } from '@/api/donation/getFoundationStatistic';
 import Typography from '@/components/common/Typography';
 import * as s from '@/components/myPage/GiveFoot/GiveFoot.css';
 import { IoFootsteps } from 'react-icons/io5';
 
-export default function FoundationFoot({ month }: { month: number }) {
+export default function FoundationFoot({
+  month,
+  statistics,
+}: {
+  month: number;
+  statistics: Array<FoundationStatistic[]>;
+}) {
+  const statistic = statistics[month - 1][0];
+
   return (
     <div className={s.footBox}>
       <div className={s.titleBox}>
@@ -16,7 +25,7 @@ export default function FoundationFoot({ month }: { month: number }) {
           정기 후원
         </Typography>
         <Typography as="h4" weight="semiBold">
-          100명
+          {statistic.regularSubscriptionCount || 0}명
         </Typography>
       </div>
 
@@ -25,7 +34,7 @@ export default function FoundationFoot({ month }: { month: number }) {
           일시 후원
         </Typography>
         <Typography as="h4" weight="semiBold">
-          50명
+          {statistic.donationCount || 0}회
         </Typography>
       </div>
 
@@ -34,7 +43,7 @@ export default function FoundationFoot({ month }: { month: number }) {
           총 후원 금액
         </Typography>
         <Typography as="h4" weight="semiBold">
-          3,000,000원
+          {statistic.donationAmount?.toLocaleString() || 0}원
         </Typography>
       </div>
     </div>
