@@ -21,10 +21,16 @@ public class ChatroomDetailReader {
         ChatroomHistory lastHistory = chatroomHistoryReader.readLastHistoryByChatroom(chatroomId);
         ChatroomConnection connection = chatroomConnectionReader.readCounterpartConnection(memberId, chatroomId);
 
+        String profileImageUrl = connection.getMember().getProfileImage() != null
+                ? connection.getMember().getProfileImage().getUrl() : null;
+
         return ChatroomDetail.builder()
                 .id(chatroom.getId())
                 .saleId(chatroom.getSale().getId())
+                .saleTitle(chatroom.getSale().getTitle())
                 .counterpartId(connection.getMember().getId())
+                .counterpartName(connection.getMember().getName())
+                .counterpartProfileImageUrl(profileImageUrl)
                 .lastMessage(lastHistory != null ? lastHistory.getMessage() : null)
                 .lastMessageCreatedAt(lastHistory != null ? lastHistory.getCreatedAt() : null)
                 .build();
