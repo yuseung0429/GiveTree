@@ -8,7 +8,6 @@ globalStyle('*', {
   boxSizing: 'border-box',
   fontFamily: 'inherit',
   WebkitTapHighlightColor: 'transparent',
-  overscrollBehavior: 'none',
 });
 
 globalStyle('*::-webkit-scrollbar', {
