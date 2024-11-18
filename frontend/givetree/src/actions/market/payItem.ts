@@ -17,9 +17,15 @@ export default async function payItem(
       }),
     });
 
+    if (response.status === 200) {
+      return {
+        result: true,
+      };
+    }
+
     return {
-      result: response.status === 200,
-      message: '알 수 없는 오류가 발생하였습니다.',
+      result: false,
+      message: (await response.json()).message,
     };
   } catch (error) {
     console.log(error);
