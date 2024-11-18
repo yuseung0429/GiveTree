@@ -15,9 +15,10 @@ import ReservationButton from '@/components/market/ReservationButton';
 interface ChatHeaderProps {
   saleId: number;
   memberId: number;
+  purchaserId: number;
 }
 
-const ChatHeader = ({ saleId, memberId }: ChatHeaderProps) => {
+const ChatHeader = ({ saleId, memberId, purchaserId }: ChatHeaderProps) => {
   const data = useGetSalePost(saleId);
 
   if (!data) {
@@ -53,7 +54,7 @@ const ChatHeader = ({ saleId, memberId }: ChatHeaderProps) => {
       </div>
       <div style={{ flex: '0 0 auto' }}>
         {data.sellerId === memberId ? (
-          <ReservationButton saleId={saleId} purchaserId={memberId} />
+          <ReservationButton saleId={saleId} purchaserId={purchaserId} />
         ) : (
           <PurchaseButton saleId={saleId} />
         )}
