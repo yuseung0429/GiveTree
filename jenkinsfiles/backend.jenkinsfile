@@ -1,0 +1,100 @@
+pipeline {
+    agent any
+    tools {
+        gradle 'gradle'
+    }
+    stages {
+        stage('GitLab Clone') {
+            steps {           
+                echo '클론을 시작할게요!'
+                checkout scmGit(
+                    branches: [[name: 'be']], 
+                    extensions: [
+                        submodule(parentCredentials: true, 
+                        recursiveSubmodules: true, reference: '', trackingSubmodules: true)
+                    ], 
+                    userRemoteConfigs: [
+                        [credentialsId: 'GiveTree', 
+                        url: 'https://lab.ssafy.com/s11-final/S11P31D210']
+                    ]
+                )
+                echo '클론을 완료했어요!'
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('backend/givetree') {
+                    echo '빌드를 시작할게요!'
+                    sh '''
+                    chmod +x ./gradlew
+                    ./gradlew clean bootJar
+                    '''
+                    echo '빌드를 완료했어요!'
+                }
+            }
+        }
+        stage('Make Image') {
+            steps {
+            	dir('backend/givetree') {
+            	    echo '이미지를 만들게요!'
+                    sh '''
+                    docker stop givetree-spring || true 
+                    docker rm givetree-spring || true
+                    docker rmi backend || true
+                    docker build -t backend . 
+                    '''
+                    echo '이미지를 만들었어요!'
+            	}
+            }
+        }
+        stage('Run Container') {
+            steps {
+                dir('backend/givetree') {
+                    sh '''         
+                    docker-compose up -d
+                    '''
+                }
+            }
+        }
+    }
+    post {
+        success {
+            sendSuccessMessage()
+        }
+        failure {
+            sendFailureMessage()
+        }
+    }
+}
+
+def sendSuccessMessage() {
+    def commitId = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+    def commitMsg = sh(script: "git show -s --format=%B ${commitId}", returnStdout: true).trim()
+    def authorId = sh(script: "git show -s --pretty=%an ${commitId}", returnStdout: true).trim()
+    def authorName = sh(script: "git show -s --pretty=%ae ${commitId}", returnStdout: true).trim()
+    
+    def message = "![Succes](https://www.jenkins.io/images/logos/cute/cute.png =100)\n#### [Commit Message]\n${commitMsg}\n&nbsp;\n#### [Author]\nName: ${authorId}\nEmail: ${authorName}" 
+                
+    mattermostSend(
+        color: 'good',
+        message: message,
+        endpoint: 'https://meeting.ssafy.com/hooks/4inuymmqiffrjyaskugfhg4fny', 
+        channel: 'd210-be-cicd'
+    )
+}
+
+def sendFailureMessage() {
+    def commitId = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+    def commitMsg = sh(script: "git show -s --format=%B ${commitId}", returnStdout: true).trim()
+    def authorId = sh(script: "git show -s --pretty=%an ${commitId}", returnStdout: true).trim()
+    def authorName = sh(script: "git show -s --pretty=%ae ${commitId}", returnStdout: true).trim()
+    
+    def message = "![Failure](https://www.jenkins.io/images/logos/fire/fire.png =100)\n#### [Commit Message]\n${commitMsg}\n&nbsp;\n#### [Author]\nName: ${authorId}\nEmail: ${authorName}" 
+                
+    mattermostSend(
+        color: 'danger',
+        message: message,
+        endpoint: 'https://meeting.ssafy.com/hooks/4inuymmqiffrjyaskugfhg4fny', 
+        channel: 'd210-be-cicd'
+    )
+}

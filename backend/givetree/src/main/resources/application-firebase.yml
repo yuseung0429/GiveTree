@@ -1,0 +1,4 @@
+firebase:
+  file-path: properties/firebase/fcm-secret.json
+  uri: https://fcm.googleapis.com/v1/projects/givetree-4521a/messages:send
+  google-uri: https://www.googleapis.com/auth/cloud-platform
