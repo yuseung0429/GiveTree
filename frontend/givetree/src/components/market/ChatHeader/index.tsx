@@ -54,7 +54,7 @@ const ChatHeader = async ({ id }: ChatHeaderProps) => {
         </div>
         <div style={{ flex: '0 0 auto' }}>
           {data.sellerId === member.id ? (
-            <ReservationButton saleId={id} purchaserId={1} />
+            <ReservationButton saleId={id} purchaserId={member.id} />
           ) : (
             <PurchaseButton saleId={id} />
           )}

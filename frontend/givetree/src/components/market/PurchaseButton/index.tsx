@@ -18,7 +18,8 @@ const PurchaseButton = ({ saleId }: PurchaseButtonProps) => {
 
   const handleClick = async () => {
     if (!(await isReserved(saleId))) {
-      alert('판매자가 나를 예약자로 등록해야 합니다.');
+      await alert('판매자가 나를 예약자로 등록해야 합니다.');
+      return;
     }
 
     router.push(`/market/pay/${saleId}`);
