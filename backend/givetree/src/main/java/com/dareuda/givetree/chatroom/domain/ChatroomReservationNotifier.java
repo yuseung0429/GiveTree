@@ -1,5 +1,6 @@
 package com.dareuda.givetree.chatroom.domain;
 
+import com.dareuda.givetree.chatroom.domain.dto.ChatroomMessage;
 import com.dareuda.givetree.chatroom.infrastructure.ChatroomConnectionRepository;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
@@ -8,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Aspect
@@ -37,7 +39,7 @@ public class ChatroomReservationNotifier {
 
         chatroomAdminMessageSender.send(
                 connection.getChatroom().getId(),
-                "예약 알림 메세지!"
+                new ChatroomMessage(0L, "구매 예약되었습니다.", LocalDateTime.now())
         );
     }
 }
