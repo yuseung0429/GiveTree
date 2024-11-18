@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 
 import { initializeApp } from 'firebase/app';
@@ -21,48 +23,50 @@ const useNotification = () => {
   const [permission, setPermission] = useState<NotificationPermission>();
 
   useEffect(() => {
-    Notification.requestPermission().then((permission) => {
-      const serviceWorkerScope = '/firebase-cloud-messaging-push-scope';
-      setPermission(permission);
+    try {
+      Notification.requestPermission().then((permission) => {
+        const serviceWorkerScope = '/firebase-cloud-messaging-push-scope';
+        setPermission(permission);
 
-      if (permission !== 'granted') {
-        return;
-      }
+        if (permission !== 'granted') {
+          return;
+        }
 
-      initializeApp(firebaseConfig);
+        initializeApp(firebaseConfig);
 
-      const messaging = getMessaging();
+        const messaging = getMessaging();
 
-      navigator.serviceWorker.register('/firebase-messaging-sw.js', {
-        scope: serviceWorkerScope,
-      });
-
-      getToken(messaging, {
-        vapidKey: firebaseConfig.vapidKey,
-      })
-        .then(async (result) => {
-          setToken(result);
-          await saveFCMToken(result);
-        })
-        .catch((error) => {
-          console.error(error);
+        navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+          scope: serviceWorkerScope,
         });
 
-      onMessage(messaging, async (payload) => {
-        const { title, body, image } = payload.data!;
+        getToken(messaging, {
+          vapidKey: firebaseConfig.vapidKey,
+        })
+          .then(async (result) => {
+            setToken(result);
+            await saveFCMToken(result);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
 
-        const registration = await navigator.serviceWorker.getRegistration(
-          serviceWorkerScope
-        );
+        onMessage(messaging, async (payload) => {
+          const { title, body, image } = payload.data!;
 
-        registration?.showNotification(title || '', {
-          body,
-          icon: '/favicon.svg',
-          badge: '/badge-128x128.png',
-          image,
-        } as NotificationOptions);
+          const registration = await navigator.serviceWorker.getRegistration(
+            serviceWorkerScope
+          );
+
+          registration?.showNotification(title || '', {
+            body,
+            icon: '/favicon.svg',
+            badge: '/badge-128x128.png',
+            image,
+          } as NotificationOptions);
+        });
       });
-    });
+    } catch {}
   }, []);
 
   return { permission, token };
