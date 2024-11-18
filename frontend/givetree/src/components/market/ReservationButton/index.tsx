@@ -29,7 +29,7 @@ const ReservationButton = ({ saleId, purchaserId }: ReservationButtonProps) => {
         return;
       }
 
-      alert('예약을 실패했습니다.');
+      alert('해당 상품은 이미 예약 중입니다.');
     }
   };
 
