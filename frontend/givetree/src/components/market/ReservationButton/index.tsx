@@ -37,6 +37,7 @@ const ReservationButton = ({ saleId, purchaserId }: ReservationButtonProps) => {
   const handleCancelClick = async () => {
     if (await confirm('상품 판매 예약을 취소하시겠습니까?')) {
       if (await cancelReserve(saleId)) {
+        mutate(`/sales/${saleId}/booker`);
         alert('취소되었습니다.');
       }
     }
