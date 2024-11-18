@@ -36,7 +36,7 @@ const Post = async ({ id }: PostProps) => {
         ))}
       </ImageCarousel>
       <Box padding="1rem">
-        <SimpleProfile id={memberId} size="md" />
+        <SimpleProfile id={data.id} size="md" />
         <Box padding="1rem 0">
           <SalePostHeader
             id={id}
