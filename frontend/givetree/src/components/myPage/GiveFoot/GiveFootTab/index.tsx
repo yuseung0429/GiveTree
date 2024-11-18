@@ -40,7 +40,7 @@ export default function GiveFootTab({
       ))}
       {selectedCategory === '재단 후원' && (
         <Box padding="1.25rem 0.25rem">
-          <Typography as="h3" weight="medium" style={{ margin: '0 0.5rem' }}>
+          <Typography as="h3" weight="medium" style={{ margin: '0 0.25rem' }}>
             <Typography
               weight="semiBold"
               color={colorPalette.primary[700]}
@@ -54,9 +54,13 @@ export default function GiveFootTab({
             <RegularGive key={index} donation={donation} />
           ))}
 
-          <div style={{ margin: '1.75rem 0.5rem 0.5rem' }}>
+          <div style={{ margin: '1.5rem 0rem 0.5rem' }}>
             <hr style={{ border: '1px dashed lightgrey' }} />
-            <Typography as="h3" weight="medium">
+            <Typography
+              as="h3"
+              weight="medium"
+              style={{ marginLeft: '0.25rem', marginTop: '0.5rem' }}
+            >
               재단 일시 후원을{' '}
               <Typography
                 weight="semiBold"

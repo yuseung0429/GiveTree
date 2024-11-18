@@ -13,15 +13,15 @@ const decorations = Array(7)
   .map((_, index) => `/images/treeObj${index + 1}.png`);
 
 const decorationPositions = [
-  { top: '22%', left: '50%' },
+  { top: '23%', left: '50%' },
   { top: '40%', left: '38%' },
   { top: '40%', left: '62%' },
   { top: '56%', left: '26%' },
-  { top: '54%', left: '50%' },
+  { top: '55%', left: '50%' },
   { top: '56%', left: '74%' },
   { top: '73%', left: '18%' },
-  { top: '70%', left: '38%' },
-  { top: '70%', left: '62%' },
+  { top: '71%', left: '38%' },
+  { top: '71%', left: '62%' },
   { top: '73%', left: '82%' },
 ];
 
