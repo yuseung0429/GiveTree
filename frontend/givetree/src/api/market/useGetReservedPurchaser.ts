@@ -3,10 +3,10 @@
 import useSWR from 'swr';
 
 const useGetReservedPurchaser = (saleId: number) => {
-  const { data } = useSWR<{ booker: number }>(`/sales/${saleId}/booker`, {
+  const { data } = useSWR<{ bookerId: number }>(`/sales/${saleId}/booker`, {
     errorRetryCount: 0,
   });
-  return data?.booker;
+  return data?.bookerId;
 };
 
 export default useGetReservedPurchaser;
