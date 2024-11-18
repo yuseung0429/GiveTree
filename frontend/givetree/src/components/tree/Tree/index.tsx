@@ -6,6 +6,7 @@ import TreeImg from '@/assets/images/tree/tree.png';
 import * as styles from './tree.css';
 import { Message } from '@/types/tree/types';
 import MessageItem from '@/components/tree/MessageItem';
+import Typography from '@/components/common/Typography';
 
 const decorations = Array(7)
   .fill(null)
@@ -50,21 +51,28 @@ const Tree = ({ messages, isFlipping, showDecorations }: TreeSliderProps) => {
       </div>
       {showDecorations &&
         messages.map((message, index) => (
-          <Image
+          <div
             key={index}
-            src={decorations[index % decorations.length]}
-            alt={`decoration ${index + 1}`}
-            className={styles.decoration}
             style={decorationPositions[index]}
-            onClick={() =>
-              handleDecorationClick(
-                message,
-                decorations[index % decorations.length]
-              )
-            }
-            width={58}
-            height={58}
-          />
+            className={styles.decorationContainer}
+          >
+            <Image
+              src={decorations[index % decorations.length]}
+              alt={`decoration ${index + 1}`}
+              className={styles.decoration}
+              onClick={() =>
+                handleDecorationClick(
+                  message,
+                  decorations[index % decorations.length]
+                )
+              }
+              width={58}
+              height={58}
+            />
+            <Typography className={styles.messageName}>
+              {message.name}
+            </Typography>
+          </div>
         ))}
 
       {selectedMessage && (

@@ -35,3 +35,19 @@ export const decoration = style({
   filter: 'drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.2))',
   animation: `${swayAnimation} 2s ease-in-out infinite`,
 });
+
+export const decorationContainer = style({
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  transform: 'translate(-50%, -50%)',
+});
+
+export const messageName = style({
+  color: 'white',
+  fontSize: '0.75rem',
+  marginTop: '4px',
+  textAlign: 'center',
+  pointerEvents: 'none',
+});
