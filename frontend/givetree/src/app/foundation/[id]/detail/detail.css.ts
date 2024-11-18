@@ -72,7 +72,7 @@ export const TabContainer = style({
   flexGrow: 1,
   overflowY: 'auto',
   padding: '0.25rem',
-  paddingBottom: '1.25rem'
+  paddingBottom: '1.25rem',
 });
 
 // imageBox
@@ -107,7 +107,7 @@ export const campaignCount = style({
 
 export const giveButton = style({
   position: 'fixed',
-  bottom: '50px',
+  bottom: '46px',
   left: '0',
   width: '100%',
   padding: '1rem',

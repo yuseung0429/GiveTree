@@ -54,24 +54,23 @@ export default function GiveFootTab({
             <RegularGive key={index} donation={donation} />
           ))}
 
-          <Typography
-            as="h3"
-            weight="medium"
-            style={{ margin: '1.75rem 0.5rem 0.5rem' }}
-          >
-            재단 일시 후원을{' '}
-            <Typography
-              weight="semiBold"
-              color={colorPalette.primary[700]}
-              style={{ display: 'inline-block' }}
-            >
-              {FoundationOneTimeDonation.length}회
-            </Typography>{' '}
-            했습니다.
-          </Typography>
-          {FoundationOneTimeDonation.map((donation, index) => (
-            <OneTimeGive key={index} donation={donation} />
-          ))}
+          <div style={{ margin: '1.75rem 0.5rem 0.5rem' }}>
+            <hr style={{ border: '1px dashed lightgrey' }} />
+            <Typography as="h3" weight="medium">
+              재단 일시 후원을{' '}
+              <Typography
+                weight="semiBold"
+                color={colorPalette.primary[700]}
+                style={{ display: 'inline-block', marginTop: '0.5rem' }}
+              >
+                {FoundationOneTimeDonation.length}회
+              </Typography>{' '}
+              했습니다.
+            </Typography>
+            {FoundationOneTimeDonation.map((donation, index) => (
+              <OneTimeGive key={index} donation={donation} />
+            ))}
+          </div>
         </Box>
       )}
       {selectedCategory === '캠페인 후원' && (

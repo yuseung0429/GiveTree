@@ -21,7 +21,7 @@ interface AccountProps {
 
 export default function Account({ registeredAccount }: AccountProps) {
   return (
-    <Box width="100%" padding="0 1rem" style={{ minWidth: '90vw' }}>
+    <Box width="100%" padding="0.5rem" style={{ minWidth: '90vw' }}>
       <Flex
         className={style.accountBox}
         justifyContent="center"

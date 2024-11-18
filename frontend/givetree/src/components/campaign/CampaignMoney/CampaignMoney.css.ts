@@ -33,7 +33,7 @@ export const goalAmount = style({
 
 export const giveButton = style({
   position: 'fixed',
-  bottom: '50px',
+  bottom: '46px',
   left: '0',
   width: '100%',
   padding: '1rem',
