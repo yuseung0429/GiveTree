@@ -1,0 +1,78 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('GitLab Clone') {
+            steps {           
+                echo '클론을 시작할게요!'
+                git branch: 'fe', credentialsId: 'GiveTree', url: 'https://lab.ssafy.com/s11-final/S11P31D210'
+                echo '클론을 완료했어요!'
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                echo '빌드를 시작할게요!'
+                dir('frontend/givetree') {
+                    sh '''
+                        docker stop givetree-next || true
+                        docker rm givetree-next || true
+                        docker rmi frontend || true
+                        docker build -t frontend .
+                    '''
+                }
+                echo '빌드를 완료했어요!'
+            }
+        }
+        stage('Docker Run') {
+            steps {
+                echo 'Docker 컨테이너를 실행할게요!'
+                sh '''
+                    docker run -d --name givetree-next -p 3000:3000 frontend
+                '''
+                echo '컨테이너 실행을 완료했어요!'
+            }
+        }
+    }
+    
+    post {
+        success {
+            sendSuccessMessage()
+        }
+        failure {
+            sendFailureMessage()
+        }
+    }
+}
+
+def sendSuccessMessage() {
+    def commitId = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+    def commitMsg = sh(script: "git show -s --format=%B ${commitId}", returnStdout: true).trim()
+    def authorId = sh(script: "git show -s --pretty=%an ${commitId}", returnStdout: true).trim()
+    def authorName = sh(script: "git show -s --pretty=%ae ${commitId}", returnStdout: true).trim()
+    
+    def message = "![Succes](https://www.jenkins.io/images/logos/cute/cute.png =100)\n#### [Commit Message]\n${commitMsg}\n&nbsp;\n#### [Author]\nName: ${authorId}\nEmail: ${authorName}" 
+                
+    mattermostSend(
+        color: 'good', 
+        message: message, 
+        endpoint: 'https://meeting.ssafy.com/hooks/wb9qze8rr3rg9mjdizeftpt7ne', 
+        channel: 'd210-fe-cicd'
+    )
+}
+
+def sendFailureMessage() {
+    def commitId = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+    def commitMsg = sh(script: "git show -s --format=%B ${commitId}", returnStdout: true).trim()
+    def authorId = sh(script: "git show -s --pretty=%an ${commitId}", returnStdout: true).trim()
+    def authorName = sh(script: "git show -s --pretty=%ae ${commitId}", returnStdout: true).trim()
+    
+    def message = "![Failure](https://www.jenkins.io/images/logos/fire/fire.png =100)\n#### [Commit Message]\n${commitMsg}\n&nbsp;\n#### [Author]\nName: ${authorId}\nEmail: ${authorName}" 
+                
+    mattermostSend(
+        color: 'danger', 
+        message: message, 
+        endpoint: 'https://meeting.ssafy.com/hooks/wb9qze8rr3rg9mjdizeftpt7ne', 
+        channel: 'd210-fe-cicd'
+    )
+}
+
