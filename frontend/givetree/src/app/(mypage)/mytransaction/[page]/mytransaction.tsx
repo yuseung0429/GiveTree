@@ -40,13 +40,13 @@ export default async function MyTransaction({ page }: { page: number }) {
             justifyContent="space-between"
             style={{ marginTop: '1rem' }}
           >
-            <Link href={`/mytransaction/${data.number - 1}`}>
+            <Link href={`/mytransaction/${data.number - 1}`} replace={true}>
               <Button size="sm" disabled={!data.number}>
                 이전
               </Button>
             </Link>
             <Typography>{data.number + 1}</Typography>
-            <Link href={`/mytransaction/${data.number + 1}`}>
+            <Link href={`/mytransaction/${data.number + 1}`} replace={true}>
               <Button size="sm" disabled={data.number >= data.totalPages - 1}>
                 다음
               </Button>

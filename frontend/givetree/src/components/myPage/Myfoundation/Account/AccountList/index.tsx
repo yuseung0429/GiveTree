@@ -38,7 +38,7 @@ export default function AccountList({ accounts }: AccountListProps) {
     try {
       const result = await registerAccount(selectedAccountId);
       if (result.success) {
-        router.push('/account');
+        router.replace('/account');
       }
     } catch (error) {
       if (error instanceof Error) {
