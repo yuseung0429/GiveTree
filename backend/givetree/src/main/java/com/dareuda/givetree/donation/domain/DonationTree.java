@@ -9,6 +9,8 @@ import java.util.List;
 @Builder
 public class DonationTree {
 
+    private String foundationName;
+
     private long campaignId;
 
     private String campaignName;

@@ -4,6 +4,7 @@ import com.dareuda.givetree.campaign.domain.Campaign;
 import com.dareuda.givetree.campaign.domain.CampaignReader;
 import com.dareuda.givetree.donation.infrastructure.CampaignDonationRepository;
 import com.dareuda.givetree.donation.infrastructure.DonationCustomRepository;
+import com.dareuda.givetree.member.domain.MemberReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +19,20 @@ public class DonationTreeReader {
     private static final int DEFAULT_PAGE_SIZE = 10;
 
     private final CampaignReader campaignReader;
+    private final MemberReader memberReader;
     private final CampaignDonationRepository campaignDonationRepository;
 
     public DonationTree read(long campaignId, Pageable pageable) {
         Campaign campaign = campaignReader.read(campaignId);
+
+        long foundationId = campaign.getFoundation().getId();
+        String foundationName = memberReader.read(foundationId).getName();
+
         long totalCount = campaignDonationRepository.countByCampaign(campaign);
         List<DonationMessage> messages = campaignDonationRepository.findDonationMessagesByCampaignId(campaignId, pageable);
 
         return DonationTree.builder()
+                .foundationName(foundationName)
                 .campaignId(campaignId)
                 .campaignName(campaign.getName())
                 .totalCount(totalCount)
