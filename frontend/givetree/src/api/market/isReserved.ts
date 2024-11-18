@@ -7,7 +7,7 @@ const isReserved = async (saleId: number) => {
     const response = await axiosInstance.get(
       `/sales/${saleId}/is-current-user-reserved`
     );
-    return response.data === 'success';
+    return response.data === 'true';
   } catch {
     return false;
   }
