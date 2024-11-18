@@ -13,24 +13,30 @@ interface GiveCampaignProps {
 export default function GiveCampaign({ donation }: GiveCampaignProps) {
   return (
     <Box className={s.box}>
-      <Typography as="h3" weight="semiBold">
+      <Typography color={colorPalette.grey[800]} size={15}>
+        {donation.createdAt.slice(0, 10)}
+      </Typography>
+      <Typography as="h3" weight="semiBold" style={{ marginTop: '0.25rem' }}>
         {donation.campaignName}
       </Typography>
-      <Typography>{donation.foundationName}</Typography>
+      <Typography size={15} style={{ marginTop: '2px' }}>
+        {donation.foundationName}
+      </Typography>
+      <Typography
+        size={14}
+        color={colorPalette.grey[800]}
+        style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
+      >
+        {donation.createdAt.slice(11, 16)}
+      </Typography>
       <Typography
         as="h3"
         weight="semiBold"
         size={typography.size.lg}
         color={colorPalette.secondary[600]}
-        style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
+        style={{ marginLeft: 'auto', marginRight: '0.5rem', marginTop: '2px' }}
       >
         {donation.amount.toLocaleString()}원
-      </Typography>
-      <Typography
-        color={colorPalette.grey[800]}
-        style={{ marginLeft: 'auto', marginRight: '0.25rem' }}
-      >
-        {donation.createdAt.slice(0, 10)}
       </Typography>
     </Box>
   );

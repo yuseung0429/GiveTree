@@ -71,7 +71,7 @@ export default function RegularGive({ donation }: RegularGiveProps) {
         weight="medium"
         size={typography.size.md}
         color={colorPalette.text[900]}
-        style={{ marginLeft: 'auto', marginRight: '0.25rem' }}
+        style={{ marginLeft: 'auto', marginRight: '0.25rem', marginTop: '4px', }}
       >
         매월 26일 (다음 결제일: {calculateMonth()}월 26일)
       </Typography>

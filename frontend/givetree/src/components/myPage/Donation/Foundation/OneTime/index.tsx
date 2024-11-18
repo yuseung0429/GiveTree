@@ -13,6 +13,9 @@ interface OneTimeGiveProps {
 export default function OneTimeGive({ donation }: OneTimeGiveProps) {
   return (
     <Box className={s.box}>
+      <Typography color={colorPalette.grey[800]} size={15}>
+        {donation.createdAt.slice(0, 10)}
+      </Typography>
       <div className={s.title}>
         <Image
           src={donation.foundationImage}
@@ -24,9 +27,18 @@ export default function OneTimeGive({ donation }: OneTimeGiveProps) {
             border: `1px solid ${colorPalette.grey[500]}`,
           }}
         />
-        <Typography as="h3" weight="semiBold">
-          {donation.foundationName}
-        </Typography>
+        <div>
+          <Typography as="h3" weight="semiBold">
+            {donation.foundationName}
+          </Typography>
+          <Typography
+            size={14}
+            color={colorPalette.grey[800]}
+            style={{ marginTop: '2px' }}
+          >
+            {donation.createdAt.slice(11, 16)}
+          </Typography>
+        </div>
       </div>
 
       <Typography
@@ -37,13 +49,6 @@ export default function OneTimeGive({ donation }: OneTimeGiveProps) {
         style={{ marginLeft: 'auto', marginRight: '0.5rem' }}
       >
         {donation.amount.toLocaleString()}원
-      </Typography>
-
-      <Typography
-        color={colorPalette.grey[800]}
-        style={{ marginLeft: 'auto', marginRight: '0.25rem' }}
-      >
-        {donation.createdAt.slice(0, 10)}
       </Typography>
     </Box>
   );
