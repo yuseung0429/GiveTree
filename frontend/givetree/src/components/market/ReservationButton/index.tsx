@@ -22,8 +22,6 @@ const ReservationButton = ({ saleId, purchaserId }: ReservationButtonProps) => {
   const bookerId = useGetReservedPurchaser(saleId);
   const isReserved = purchaserId === bookerId;
 
-  console.log(bookerId, purchaserId);
-
   const handleReserveClick = async () => {
     if (await confirm('상대방에게 상품 판매를 예약하시겠습니까?')) {
       if (await reserveSale(saleId, purchaserId)) {

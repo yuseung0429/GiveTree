@@ -57,9 +57,7 @@ const ChatRoom = ({
   useEffect(() => {
     (async () => {
       connect({
-        onOpen() {
-          console.log('Chat connected');
-        },
+        onOpen() {},
 
         onMessage(message) {
           if (message.senderId === 0) {
