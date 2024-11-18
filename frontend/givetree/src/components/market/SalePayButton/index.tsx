@@ -32,7 +32,7 @@ const SalePayButton = ({ saleId }: SalePayButtonProps) => {
 
     if (result.result) {
       await alert('결제가 완료되었습니다.');
-      router.push('/mypage');
+      router.push('/market');
       return;
     }
 
