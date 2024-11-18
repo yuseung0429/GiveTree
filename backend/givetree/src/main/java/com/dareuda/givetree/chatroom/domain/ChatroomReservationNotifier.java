@@ -17,7 +17,7 @@ public class ChatroomReservationNotifier {
     private final ChatroomAdminMessageSender chatroomAdminMessageSender;
     private final ChatroomConnectionRepository chatroomConnectionRepository;
 
-    @AfterReturning("execution(public void com.dareuda.givetree.sale.service.SaleService.reserveSale(*))")
+    @AfterReturning("execution(public void com.dareuda.givetree.sale.service.SaleService.reserveSale(..))")
     public void notifyReservationToChatroom(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String[] parameterNames = signature.getParameterNames();
