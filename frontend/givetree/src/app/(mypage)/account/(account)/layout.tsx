@@ -1,8 +1,7 @@
-'use client';
-
 import AppBar from '@/components/common/AppBar';
 import Flex from '@/components/common/Flex';
 import Layout from '@/components/common/Layout';
+import NavigationBar from '@/components/common/NavigationBar';
 import Typography from '@/components/common/Typography';
 import colorPalette from '@/styles/tokens/colorPalette';
 import { FaTree } from 'react-icons/fa';
@@ -47,6 +46,9 @@ export default function ExchangeLayout({
         </Flex>
         {children}
       </main>
+      <footer>
+        <NavigationBar />
+      </footer>
     </Layout>
   );
 }
