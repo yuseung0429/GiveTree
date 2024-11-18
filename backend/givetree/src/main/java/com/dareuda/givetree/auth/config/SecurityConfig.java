@@ -42,8 +42,7 @@ public class SecurityConfig {
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors
-                        .configurationSource(corsConfigurationSource))
+                .cors(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable);
 
@@ -70,8 +69,9 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/oauth2/**", "/api/login/**", "api/signup").permitAll()
-                        .anyRequest().permitAll());
+                        .requestMatchers("/api/oauth2/**", "/api/login/**", "/api/members",
+                                "/api/foundations", "/api/media").permitAll()
+                        .anyRequest().authenticated());
 
         http.
                 exceptionHandling(exception -> exception
