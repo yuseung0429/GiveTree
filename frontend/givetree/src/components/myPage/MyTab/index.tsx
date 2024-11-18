@@ -7,6 +7,7 @@ import {
   HiOutlineNewspaper,
   HiOutlinePencilSquare,
   HiOutlineWallet,
+  HiLink,
 } from 'react-icons/hi2';
 import { PiHandHeart, PiListHeart } from 'react-icons/pi';
 import * as styles from './MyTab.css';
@@ -84,6 +85,22 @@ export default async function MyTab({ role }: MyTabProps) {
           )}
           <Typography as="h3">
             {role === 'USER' ? '세액공제 알아보기' : '출금계좌 설정'}
+          </Typography>
+        </div>
+        <HiChevronRight size={20} />
+      </Link>
+      <Link
+        className={styles.tab}
+        href={
+          role === 'USER'
+            ? 'http://givetree-chain.kro.kr/txs'
+            : `http://givetree-chain.kro.kr/txs`
+        }
+      >
+        <div className={styles.IconBox}>
+          {role === 'USER' ? <HiLink size={22} /> : <HiLink size={22} />}
+          <Typography as="h3">
+            {role === 'USER' ? '블록 탐색' : '블록 탐색'}
           </Typography>
         </div>
         <HiChevronRight size={20} />
