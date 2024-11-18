@@ -18,6 +18,7 @@ export default async function Page({
     campaignName: '',
     totalCount: 0,
     messages: [],
+    foundationName: '',
   };
 
   if (currentCampaignId === 0) {

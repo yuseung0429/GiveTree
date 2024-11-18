@@ -14,7 +14,8 @@ export default function TreeHeader({
   currentTreeMessage: TreeCurrentMessage;
 }) {
   const router = useRouter();
-  const { campaignId, campaignName, totalCount } = currentTreeMessage;
+  const { campaignId, campaignName, totalCount, foundationName } =
+    currentTreeMessage;
 
   const handleMoreTrees = () => {
     router.push(`/tree/${campaignId}/0`);
@@ -22,9 +23,9 @@ export default function TreeHeader({
 
   return (
     <>
-      {/* <Typography as="h3" weight="medium" color={colorPalette.text[50]}>
-        {treeMessage?.foundationName}
-      </Typography> */}
+      <Typography as="h3" weight="medium" color={colorPalette.text[50]}>
+        {foundationName}
+      </Typography>
       <Box className={styles.messageText}>
         <div
           style={{ display: 'flex', flexDirection: 'row', alignItems: 'end' }}

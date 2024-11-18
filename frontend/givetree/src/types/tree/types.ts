@@ -21,4 +21,5 @@ export interface TreeCurrentMessage {
   campaignName: string;
   totalCount: number;
   messages: Message[];
+  foundationName: string;
 }
