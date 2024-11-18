@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "희망 나눔 캠페인",
+    "foundationId": 1,
+    "foundationName": "사랑의 열매",
+    "currentFundraisingAmount": 5400000,
+    "targetFundraisingAmount": 15000000,
+    "titleImageUrl": "/images/campaign/poster.png",
+    "startDate": "2024-01-01",
+    "endDate": "2024-12-31",
+    "introduction": "어려운 이웃에게 희망을 전달하는 사랑의 열매 캠페인입니다.",
+    "imageUrls": [
+      "/images/campaign/introducePoster.png",
+      "/images/campaign/poster.png"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "미래 꿈나무 지원 캠페인",
+    "foundationId": 2,
+    "foundationName": "초록우산",
+    "currentFundraisingAmount": 12000000,
+    "targetFundraisingAmount": 20000000,
+    "titleImageUrl": "/images/campaign/poster2.png",
+    "startDate": "2024-03-01",
+    "endDate": "2024-09-30",
+    "introduction": "미래를 이끌어 갈 아이들에게 더 나은 교육과 환경을 지원합니다.",
+    "imageUrls": [
+      "/images/campaign/introducePoster2.png",
+      "/images/campaign/poster2.png"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "소외계층 지원 캠페인",
+    "foundationId": 3,
+    "foundationName": "굿네이버스",
+    "currentFundraisingAmount": 7500000,
+    "targetFundraisingAmount": 10000000,
+    "titleImageUrl": "/images/campaign/poster3.png",
+    "startDate": "2024-05-01",
+    "endDate": "2024-11-10",
+    "introduction": "경제적 어려움을 겪는 저소득층 분들에게 따뜻한 손길을 내밀어 주세요.",
+    "imageUrls": [
+      "/images/campaign/introducePoster.png",
+      "/images/campaign/poster3.png"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "아나바다 캠페인",
+    "foundationId": 4,
+    "foundationName": "대한적십자사",
+    "currentFundraisingAmount": 3000000,
+    "targetFundraisingAmount": 5000000,
+    "titleImageUrl": "/images/campaign/poster4.png",
+    "startDate": "2024-06-15",
+    "endDate": "2024-11-14",
+    "introduction": "물품을 아껴쓰고 나눠쓰고 바꿔쓰는 캠페인입니다.",
+    "imageUrls": [
+      "/images/campaign/introducePoster2.png",
+      "/images/campaign/poster4.png"
+    ]
+  }
+]

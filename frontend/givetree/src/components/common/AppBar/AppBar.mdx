@@ -1,0 +1,27 @@
+import { Meta, Story, Primary, Controls } from '@storybook/addon-docs/blocks';
+import * as AppBar from './AppBar.stories.tsx';
+
+<Meta of={AppBar} />
+
+# AppBar
+
+AppBar
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## Usage
+
+```tsx
+<AppBar title="Title" showBackButton>
+  <AppBarMenu onClick={() => alert('검색')}>
+    <HiMagnifyingGlass />
+  </AppBarMenu>
+  <AppBarMenu onClick={() => alert('알림')}>
+    <HiOutlineBell />
+  </AppBarMenu>
+</AppBar>
+```
