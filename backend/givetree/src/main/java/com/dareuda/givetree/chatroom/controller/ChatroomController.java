@@ -5,6 +5,7 @@ import com.dareuda.givetree.chatroom.controller.dto.ConnectChatroomRequest;
 import com.dareuda.givetree.chatroom.domain.ChatroomHistoryDetail;
 import com.dareuda.givetree.chatroom.domain.dto.ChatroomDetail;
 import com.dareuda.givetree.chatroom.service.ChatroomService;
+import com.dareuda.givetree.member.domain.dto.MemberDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,6 +35,16 @@ public class ChatroomController {
         List<ChatroomDetail> chatroomDetails = chatroomService.getChatroomDetails(userPrinciple.getId());
 
         return ResponseEntity.ok(chatroomDetails);
+    }
+
+    @GetMapping("/{chatroomId}/counterpart")
+    public ResponseEntity<MemberDetail> getChatroomCounterpartMemberDetail(
+            @AuthenticationPrincipal UserPrinciple userPrinciple,
+            @PathVariable long chatroomId
+    ) {
+        MemberDetail counterpartDetail = chatroomService.getChatroomCounterpartMemberDetail(userPrinciple.getId(), chatroomId);
+
+        return ResponseEntity.ok(counterpartDetail);
     }
 
     @GetMapping("/{chatroomId}/histories")

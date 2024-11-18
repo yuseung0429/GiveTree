@@ -2,6 +2,7 @@ package com.dareuda.givetree.chatroom.service;
 
 import com.dareuda.givetree.chatroom.domain.*;
 import com.dareuda.givetree.chatroom.domain.dto.ChatroomDetail;
+import com.dareuda.givetree.member.domain.dto.MemberDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public class ChatroomService {
     private final ChatroomConnector chatroomConnector;
     private final ChatroomDetailReader chatroomDetailReader;
     private final ChatroomHistoryDetailReader chatroomHistoryDetailReader;
+    private final ChatroomConnectionReader chatroomConnectionReader;
 
     public long connect(long memberId, long saleId) {
         return chatroomConnector.connect(memberId, saleId);
@@ -26,5 +28,9 @@ public class ChatroomService {
         // TODO: validate Authority
 
         return chatroomHistoryDetailReader.readByChatroom(chatroomId);
+    }
+
+    public MemberDetail getChatroomCounterpartMemberDetail(long memberId, long chatroomId) {
+        return chatroomConnectionReader.readCounterpartMemberDetail(memberId, chatroomId);
     }
 }
