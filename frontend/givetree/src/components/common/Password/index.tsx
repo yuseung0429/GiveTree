@@ -40,7 +40,7 @@ export default function Password({
     if (password.length === 6 && onSubmit) {
       onSubmit(password).then((result) => {
         if (result?.error) {
-          setError(result.error);
+          setError('비밀번호가 일치하지 않습니다.');
           setPassword('');
         }
       });

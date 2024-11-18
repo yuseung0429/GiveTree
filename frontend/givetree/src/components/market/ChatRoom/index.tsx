@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useSWRConfig } from 'swr';
 
 import { ChatItem } from '@/types/chat/chat';
 
@@ -14,13 +15,13 @@ import Flex from '@/components/common/Flex';
 import ChatHeader from '@/components/market/ChatHeader';
 import ChatMessageInput from '@/components/market/ChatMessageInput';
 import ChatMessageList from '@/components/market/ChatMessageList';
-import { mutate } from 'swr';
 
 interface ChatRoomProps {
   senderId: number;
   saleId: number;
   chatroomId: number;
   chatHistory: ChatItem[];
+  purchaserId: number;
 }
 
 const ChatRoom = ({
@@ -28,7 +29,9 @@ const ChatRoom = ({
   saleId,
   chatroomId,
   chatHistory,
+  purchaserId,
 }: ChatRoomProps) => {
+  const { mutate } = useSWRConfig();
   const { alert } = useDialog();
   const { connect, send } = useChat(chatroomId);
   const chatRef = useRef<HTMLDivElement>(null);
@@ -54,9 +57,7 @@ const ChatRoom = ({
   useEffect(() => {
     (async () => {
       connect({
-        onOpen() {
-          console.log('Chat connected');
-        },
+        onOpen() {},
 
         onMessage(message) {
           if (message.senderId === 0) {
@@ -64,7 +65,6 @@ const ChatRoom = ({
           }
 
           setMessages((prev) => [...prev, message]);
-          console.log(message);
         },
 
         async onError() {
@@ -74,7 +74,7 @@ const ChatRoom = ({
         async onClose() {},
       });
     })();
-  }, [chatroomId, saleId, connect, send, alert]);
+  }, [chatroomId, saleId, connect, send, alert, mutate]);
 
   const handleMessageSubmit = (message: string) => {
     if (!message.trim()) {
@@ -95,7 +95,11 @@ const ChatRoom = ({
             padding: '0.75rem',
           }}
         >
-          <ChatHeader saleId={saleId} memberId={senderId} />
+          <ChatHeader
+            saleId={saleId}
+            memberId={senderId}
+            purchaserId={purchaserId}
+          />
         </Flex>
       </div>
       <div style={{ flex: '1 1 auto', overflowY: 'scroll' }}>

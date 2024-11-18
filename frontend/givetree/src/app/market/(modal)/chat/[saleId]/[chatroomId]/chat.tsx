@@ -1,4 +1,5 @@
 import getChatHistory from '@/api/market/getChatHistory';
+import getCounterpart from '@/api/market/getCounterpart';
 import getSessionMember from '@/api/member/getSessionMember';
 
 import Flex from '@/components/common/Flex';
@@ -10,8 +11,11 @@ interface ChatProps {
 }
 
 const Chat = async ({ saleId, chatroomId }: ChatProps) => {
-  const { id: senderId } = await getSessionMember();
-  const chatHistory = await getChatHistory(chatroomId);
+  const [{ id: senderId }, chatHistory, counterpart] = await Promise.all([
+    await getSessionMember(),
+    await getChatHistory(chatroomId),
+    await getCounterpart(chatroomId),
+  ]);
 
   return (
     <Flex flexDirection="column" height="100%">
@@ -20,6 +24,7 @@ const Chat = async ({ saleId, chatroomId }: ChatProps) => {
         saleId={saleId}
         chatroomId={chatroomId}
         chatHistory={chatHistory}
+        purchaserId={counterpart.id}
       />
     </Flex>
   );

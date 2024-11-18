@@ -1,11 +1,11 @@
 'use client';
 
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 
 import useGetReservedPurchaser from '@/api/market/useGetReservedPurchaser';
 
-import reserveSale from '@/actions/market/reserveSale';
 import cancelReserve from '@/actions/market/cancelReserve';
+import reserveSale from '@/actions/market/reserveSale';
 
 import useDialog from '@/hooks/useDialog';
 
@@ -17,6 +17,7 @@ interface ReservationButtonProps {
 }
 
 const ReservationButton = ({ saleId, purchaserId }: ReservationButtonProps) => {
+  const { mutate } = useSWRConfig();
   const { alert, confirm } = useDialog();
   const bookerId = useGetReservedPurchaser(saleId);
   const isReserved = purchaserId === bookerId;
