@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { ChatItem } from '@/types/chat/chat';
+
 import useChat, { type ChatMessage as ChatMessageType } from '@/hooks/useChat';
 import useDialog from '@/hooks/useDialog';
 
@@ -16,13 +18,27 @@ interface ChatRoomProps {
   senderId: number;
   saleId: number;
   chatroomId: number;
+  chatHistory: ChatItem[];
 }
 
-const ChatRoom = ({ senderId, saleId, chatroomId }: ChatRoomProps) => {
+const ChatRoom = ({
+  senderId,
+  saleId,
+  chatroomId,
+  chatHistory,
+}: ChatRoomProps) => {
   const { alert } = useDialog();
   const { connect, send } = useChat(chatroomId);
   const chatRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState<ChatMessageType[]>([]);
+  const [messages, setMessages] = useState<ChatMessageType[]>(
+    chatHistory.map((item) => {
+      return {
+        senderId: item.senderId,
+        content: item.message,
+        createdAt: item.createdAt,
+      };
+    })
+  );
 
   useEffect(() => {
     const chat = chatRef.current;

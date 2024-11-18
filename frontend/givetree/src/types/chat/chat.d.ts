@@ -8,3 +8,11 @@ export interface ChatroomItem {
   lastMessage: string;
   lastMessageCreatedAt: string;
 }
+
+export interface ChatItem {
+  id: number;
+  chatroomId: number;
+  senderId: number;
+  message: string;
+  createdAt: string;
+}
