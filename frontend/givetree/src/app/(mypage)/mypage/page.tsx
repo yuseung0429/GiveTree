@@ -7,20 +7,16 @@ import Profile from '@/components/myPage/Profile';
 import MyTab from '@/components/myPage/MyTab';
 import Link from 'next/link';
 import getSessionMember from '@/api/member/getSessionMember';
-import getSessionFoundation from '@/api/member/getSessionFoundation';
 import Logout from '@/components/myPage/Logout';
 import fetchWrapper from '@/lib/fetchWrapper';
+import { getTokenBalance } from '@/api/token/getTokenBalance';
 
 export default async function MyPage() {
+  const { balance: currentMoney } = await getTokenBalance();
   const { role, name, profileImageUrl } = await getSessionMember();
   const profileImage = profileImageUrl ? profileImageUrl : ProfileNull;
   const response = await fetchWrapper(`/donations/amount`, { method: 'GET' });
   const { amount: totalDonation } = await response.json();
-
-  const { totalFundraisingAmount, executedAmount } =
-    await getSessionFoundation();
-
-  const currentMoney = totalFundraisingAmount - executedAmount;
 
   return (
     <div className={styles.Wrapper}>
