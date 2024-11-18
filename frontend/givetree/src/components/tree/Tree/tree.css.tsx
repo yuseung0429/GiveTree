@@ -24,14 +24,30 @@ export const flip = style({
 });
 
 const swayAnimation = keyframes({
-  '0%': { transform: 'translateX(-50%) rotate(-5deg)' },
-  '50%': { transform: 'translateX(-50%) rotate(5deg)' },
-  '100%': { transform: 'translateX(-50%) rotate(-5deg)' },
+  '0%': { transform: 'rotate(-5deg)' },
+  '50%': { transform: 'rotate(5deg)' },
+  '100%': { transform: 'rotate(-5deg)' },
 });
 
 export const decoration = style({
-  position: 'absolute',
   cursor: 'pointer',
   filter: 'drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.2))',
   animation: `${swayAnimation} 2s ease-in-out infinite`,
+});
+
+export const decorationContainer = style({
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  transform: 'translate(-50%, -50%)',
+});
+
+export const messageName = style({
+  color: 'white',
+  fontSize: '0.75rem',
+  marginTop: '2px',
+  textAlign: 'center',
+  pointerEvents: 'none',
 });

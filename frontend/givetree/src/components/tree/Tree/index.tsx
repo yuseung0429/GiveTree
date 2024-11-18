@@ -6,22 +6,23 @@ import TreeImg from '@/assets/images/tree/tree.png';
 import * as styles from './tree.css';
 import { Message } from '@/types/tree/types';
 import MessageItem from '@/components/tree/MessageItem';
+import Typography from '@/components/common/Typography';
 
 const decorations = Array(7)
   .fill(null)
   .map((_, index) => `/images/treeObj${index + 1}.png`);
 
 const decorationPositions = [
-  { top: '18%', left: '50%' },
-  { top: '36%', left: '38%' },
-  { top: '36%', left: '62%' },
-  { top: '52%', left: '26%' },
-  { top: '50%', left: '50%' },
-  { top: '52%', left: '74%' },
-  { top: '69%', left: '18%' },
-  { top: '66%', left: '38%' },
-  { top: '66%', left: '62%' },
-  { top: '69%', left: '82%' },
+  { top: '22%', left: '50%' },
+  { top: '40%', left: '38%' },
+  { top: '40%', left: '62%' },
+  { top: '56%', left: '26%' },
+  { top: '54%', left: '50%' },
+  { top: '56%', left: '74%' },
+  { top: '73%', left: '18%' },
+  { top: '70%', left: '38%' },
+  { top: '70%', left: '62%' },
+  { top: '73%', left: '82%' },
 ];
 
 type TreeSliderProps = {
@@ -50,21 +51,28 @@ const Tree = ({ messages, isFlipping, showDecorations }: TreeSliderProps) => {
       </div>
       {showDecorations &&
         messages.map((message, index) => (
-          <Image
+          <div
             key={index}
-            src={decorations[index % decorations.length]}
-            alt={`decoration ${index + 1}`}
-            className={styles.decoration}
             style={decorationPositions[index]}
-            onClick={() =>
-              handleDecorationClick(
-                message,
-                decorations[index % decorations.length]
-              )
-            }
-            width={58}
-            height={58}
-          />
+            className={styles.decorationContainer}
+          >
+            <Image
+              src={decorations[index % decorations.length]}
+              alt={`decoration ${index + 1}`}
+              className={styles.decoration}
+              onClick={() =>
+                handleDecorationClick(
+                  message,
+                  decorations[index % decorations.length]
+                )
+              }
+              width={58}
+              height={58}
+            />
+            <Typography className={styles.messageName}>
+              {message.name}
+            </Typography>
+          </div>
         ))}
 
       {selectedMessage && (
