@@ -40,6 +40,11 @@ public class ChatroomDetailReader {
     public List<ChatroomDetail> readByMember(long memberId) {
         return chatroomReader.readByMember(memberId).stream()
                 .map(chatroom -> read(chatroom.getId(), memberId))
+                .sorted((o1, o2) -> {
+                    if (o1.getLastMessageCreatedAt().isAfter(o2.getLastMessageCreatedAt())) return -1;
+                    if (o1.getLastMessageCreatedAt().isBefore(o2.getLastMessageCreatedAt())) return 1;
+                    return 0;
+                })
                 .toList();
     }
 }
