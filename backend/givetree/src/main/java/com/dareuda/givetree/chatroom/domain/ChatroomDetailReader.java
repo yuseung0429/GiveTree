@@ -32,7 +32,7 @@ public class ChatroomDetailReader {
                 .counterpartName(connection.getMember().getName())
                 .counterpartProfileImageUrl(profileImageUrl)
                 .lastMessage(lastHistory != null ? lastHistory.getMessage() : null)
-                .lastMessageCreatedAt(lastHistory != null ? lastHistory.getCreatedAt() : null)
+                .lastMessageCreatedAt(lastHistory != null ? lastHistory.getCreatedAt() : chatroom.getCreatedAt())
                 .build();
     }
 
