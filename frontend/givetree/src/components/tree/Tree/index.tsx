@@ -13,16 +13,16 @@ const decorations = Array(7)
   .map((_, index) => `/images/treeObj${index + 1}.png`);
 
 const decorationPositions = [
-  { top: '18%', left: '50%' },
-  { top: '36%', left: '38%' },
-  { top: '36%', left: '62%' },
-  { top: '52%', left: '26%' },
-  { top: '50%', left: '50%' },
-  { top: '52%', left: '74%' },
-  { top: '69%', left: '18%' },
-  { top: '66%', left: '38%' },
-  { top: '66%', left: '62%' },
-  { top: '69%', left: '82%' },
+  { top: '22%', left: '50%' },
+  { top: '40%', left: '38%' },
+  { top: '40%', left: '62%' },
+  { top: '56%', left: '26%' },
+  { top: '54%', left: '50%' },
+  { top: '56%', left: '74%' },
+  { top: '73%', left: '18%' },
+  { top: '70%', left: '38%' },
+  { top: '70%', left: '62%' },
+  { top: '73%', left: '82%' },
 ];
 
 type TreeSliderProps = {
