@@ -11,6 +11,8 @@ import java.util.List;
 @Getter
 public class ReadFirstDonationTreeResponse {
 
+    private String foundationName;
+
     private long campaignId;
 
     private String campaignName;
@@ -21,6 +23,7 @@ public class ReadFirstDonationTreeResponse {
 
     public static ReadFirstDonationTreeResponse from(DonationTree donationTree) {
         return ReadFirstDonationTreeResponse.builder()
+                .foundationName(donationTree.getFoundationName())
                 .campaignId(donationTree.getCampaignId())
                 .campaignName(donationTree.getCampaignName())
                 .totalCount(donationTree.getTotalCount())
