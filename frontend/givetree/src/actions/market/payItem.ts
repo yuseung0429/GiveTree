@@ -19,9 +19,10 @@ export default async function payItem(
 
     return {
       result: response.status === 200,
-      message: (await response.json()).message,
+      message: '알 수 없는 오류가 발생하였습니다.',
     };
-  } catch {
+  } catch (error) {
+    console.log(error);
     return { result: false, message: '알 수 없는 오류가 발생하였습니다.' };
   }
 }

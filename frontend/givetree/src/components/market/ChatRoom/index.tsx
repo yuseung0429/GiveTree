@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { mutate } from 'swr';
+import { useSWRConfig } from 'swr';
 
 import { ChatItem } from '@/types/chat/chat';
 
@@ -31,6 +31,7 @@ const ChatRoom = ({
   chatHistory,
   purchaserId,
 }: ChatRoomProps) => {
+  const { mutate } = useSWRConfig();
   const { alert } = useDialog();
   const { connect, send } = useChat(chatroomId);
   const chatRef = useRef<HTMLDivElement>(null);
@@ -66,7 +67,6 @@ const ChatRoom = ({
           }
 
           setMessages((prev) => [...prev, message]);
-          console.log(message);
         },
 
         async onError() {
@@ -76,7 +76,7 @@ const ChatRoom = ({
         async onClose() {},
       });
     })();
-  }, [chatroomId, saleId, connect, send, alert]);
+  }, [chatroomId, saleId, connect, send, alert, mutate]);
 
   const handleMessageSubmit = (message: string) => {
     if (!message.trim()) {
