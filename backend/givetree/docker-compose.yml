@@ -1,0 +1,32 @@
+services:
+  givetree-spring:
+    container_name: givetree-spring
+    image: backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - givetree-mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://givetree-mysql:3306/givetree
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: givetreed210
+      TZ: "Asia/Seoul"
+    networks:
+      - internal_network
+
+  givetree-mysql:
+    container_name: givetree-mysql
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: givetree
+      MYSQL_ROOT_PASSWORD: givetreed210
+      TZ: "Asia/Seoul"
+    volumes:
+      - ~/givetree/database/mysql:/var/lib/mysql
+    networks:
+      - internal_network
+
+networks:
+  internal_network:
