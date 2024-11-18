@@ -52,13 +52,15 @@ const ChatHeader = ({ saleId, memberId, purchaserId }: ChatHeaderProps) => {
           </Flex>
         </Link>
       </div>
-      <div style={{ flex: '0 0 auto' }}>
-        {data.sellerId === memberId ? (
-          <ReservationButton saleId={saleId} purchaserId={purchaserId} />
-        ) : (
-          <PurchaseButton saleId={saleId} />
-        )}
-      </div>
+      {data.saleStatus !== '판매완료' && (
+        <div style={{ flex: '0 0 auto' }}>
+          {data.sellerId === memberId ? (
+            <ReservationButton saleId={saleId} purchaserId={purchaserId} />
+          ) : (
+            <PurchaseButton saleId={saleId} />
+          )}
+        </div>
+      )}
     </Flex>
   );
 };
