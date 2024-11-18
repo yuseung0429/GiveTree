@@ -65,9 +65,7 @@ const ChatRoom = ({
           await alert('채팅 서버에 오류가 발생하였습니다.');
         },
 
-        async onClose() {
-          await alert('채팅 서버와 연결이 끊어졌습니다.');
-        },
+        async onClose() {},
       });
     })();
   }, [chatroomId, saleId, connect, send, alert]);
