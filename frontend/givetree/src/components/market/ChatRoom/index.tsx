@@ -11,8 +11,10 @@ import colorPalette from '@/styles/tokens/colorPalette';
 
 import Box from '@/components/common/Box';
 import Flex from '@/components/common/Flex';
+import ChatHeader from '@/components/market/ChatHeader';
 import ChatMessageInput from '@/components/market/ChatMessageInput';
 import ChatMessageList from '@/components/market/ChatMessageList';
+import { mutate } from 'swr';
 
 interface ChatRoomProps {
   senderId: number;
@@ -57,6 +59,10 @@ const ChatRoom = ({
         },
 
         onMessage(message) {
+          if (message.senderId === 0) {
+            mutate(`/sales/${saleId}`);
+          }
+
           setMessages((prev) => [...prev, message]);
           console.log(message);
         },
@@ -79,19 +85,35 @@ const ChatRoom = ({
   };
 
   return (
-    <Flex flexDirection="column" height="100%">
-      <Box
-        ref={chatRef}
-        padding="0 0.75rem 0.5rem 0.75rem"
-        backgroundColor={colorPalette.grey[100]}
-        style={{ flex: '1 1 auto', overflow: 'scroll' }}
-      >
-        <ChatMessageList senderId={senderId} messages={messages} />
-      </Box>
-      <div style={{ flex: '0 0 auto' }}>
-        <ChatMessageInput onSubmit={handleMessageSubmit} />
+    <>
+      <div style={{ flex: '0 0 auto', width: '100%' }}>
+        <Flex
+          alignItems="center"
+          height="4.5rem"
+          style={{
+            borderBottom: `0.0625rem solid ${colorPalette.grey[300]}`,
+            padding: '0.75rem',
+          }}
+        >
+          <ChatHeader saleId={saleId} memberId={senderId} />
+        </Flex>
       </div>
-    </Flex>
+      <div style={{ flex: '1 1 auto', overflowY: 'scroll' }}>
+        <Flex flexDirection="column" height="100%">
+          <Box
+            ref={chatRef}
+            padding="0 0.75rem 0.5rem 0.75rem"
+            backgroundColor={colorPalette.grey[100]}
+            style={{ flex: '1 1 auto', overflow: 'scroll' }}
+          >
+            <ChatMessageList senderId={senderId} messages={messages} />
+          </Box>
+          <div style={{ flex: '0 0 auto' }}>
+            <ChatMessageInput onSubmit={handleMessageSubmit} />
+          </div>
+        </Flex>
+      </div>
+    </>
   );
 };
 
