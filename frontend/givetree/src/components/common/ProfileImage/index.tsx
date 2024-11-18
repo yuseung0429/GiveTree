@@ -32,7 +32,7 @@ const ProfileImage = ({
       <Image
         src={
           src ||
-          'https://givetree-bucket.s3.amazonaws.com/2eb8f39f86202162c51ba233c9218cb7.png'
+          'https://givetree-bucket.s3.amazonaws.com/271bd10c4b77c4668ccdfba4063d246f.webp'
         }
         alt="Profile"
         fill={true}
