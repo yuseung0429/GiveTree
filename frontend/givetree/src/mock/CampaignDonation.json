@@ -1,0 +1,32 @@
+[
+  {
+    "foundationId": 3,
+    "foundationImage": "https://cdn.pixabay.com/photo/2024/08/25/12/33/seagull-8996395_1280.jpg",
+    "foundationName": "사랑의 열매",
+    "campaignId": 1,
+    "campaignName": "희망 나눔 캠페인",
+    "amount": 200000,
+    "message": null,
+    "createdAt": "2024-11-15T10:17:31.618395"
+  },
+  {
+    "foundationId": 3,
+    "foundationImage": "https://cdn.pixabay.com/photo/2024/08/25/12/33/seagull-8996395_1280.jpg",
+    "foundationName": "사랑의 열매",
+    "campaignId": 1,
+    "campaignName": "희망 나눔 캠페인",
+    "amount": 200000,
+    "message": null,
+    "createdAt": "2024-11-15T10:17:31.618395"
+  },
+  {
+    "foundationId": 3,
+    "foundationImage": "https://cdn.pixabay.com/photo/2024/08/25/12/33/seagull-8996395_1280.jpg",
+    "foundationName": "사랑의 열매",
+    "campaignId": 1,
+    "campaignName": "희망 나눔 캠페인",
+    "amount": 200000,
+    "message": null,
+    "createdAt": "2024-11-15T10:17:31.618395"
+  }
+]

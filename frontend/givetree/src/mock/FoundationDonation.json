@@ -1,0 +1,30 @@
+{
+  "regularDonations": [
+    {
+      "foundationName": "사랑의 열매",
+      "foundationImage": "https://i.pinimg.com/originals/8b/ab/f2/8babf245addd1198b7b3cc4f297dc591.jpg",
+      "monthlyDonationAmount": 20000,
+      "paymentDate": 26
+    }
+  ],
+  "oneTimeDonations": [
+    {
+      "foundationName": "굿네이버스",
+      "foundationImage": "https://i.pinimg.com/originals/2e/47/06/2e470619f1652006f07b0c67f5212f92.jpg",
+      "oneTimeDonationAmount": 50000,
+      "donationDate": "2023-09-10"
+    },
+    {
+      "foundationName": "초록우산 어린이재단",
+      "foundationImage": "https://i.pinimg.com/originals/d3/e5/24/d3e52410ae505b62e7ce3639fb73fac2.jpg",
+      "oneTimeDonationAmount": 40000,
+      "donationDate": "2023-07-21"
+    },
+    {
+      "foundationName": "사랑의 열매",
+      "foundationImage": "https://i.pinimg.com/originals/2e/47/06/2e470619f1652006f07b0c67f5212f92.jpg",
+      "oneTimeDonationAmount": 30000,
+      "donationDate": "2023-05-15"
+    }
+  ]
+}
