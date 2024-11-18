@@ -1,11 +1,9 @@
-import type { RequestInit } from 'next/dist/server/web/spec-extension/request';
-
 import { SalePostDetail } from '@/types/market/market';
 
 import fetchWrapper from '@/lib/fetchWrapper';
 
-const getSalePost = async (id: number, options?: RequestInit) => {
-  const response = await fetchWrapper(`/sales/${id}`, options);
+const getSalePost = async (id: number) => {
+  const response = await fetchWrapper(`/sales/${id}`, { method: 'GET' });
 
   if (response.status !== 200) {
     throw new Error('삭제된 게시글입니다.');
