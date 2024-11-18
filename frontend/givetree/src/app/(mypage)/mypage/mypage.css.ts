@@ -21,15 +21,9 @@ export const modifyButton = style({
 });
 
 export const mainContainer = style({
-  marginTop: 'auto',
+  marginTop: '70px',
   position: 'relative',
   overflow: 'visible',
-
-  '@media': {
-    '(max-height: 778px)': {
-      marginTop: '70px',
-    },
-  },
 });
 
 export const profileConatainer = style({
