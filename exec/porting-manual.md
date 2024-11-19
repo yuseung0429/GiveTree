@@ -19,6 +19,9 @@
 - Nginx 1.18.0
 - Docker 27.3.1
 - Docker Compose 2.30.1
+- Web3j 4.12.2
+- hardhat 2.22.16
+- blockscout 6.9.1
 - Intellij IDEDA Ultimate
 - Visual Studio Code
 - GitLab
@@ -27,6 +30,7 @@
 - Figma
 - Notion
 - ERD Cloud
+
 
 ## 빌드 시 사용되는 환경 변수 등의 내용
 
@@ -66,13 +70,52 @@ spring:
 - application-blockchain.yml
 
 ```yaml
+blockchain:
+  network:
+    host: "http://givetree-chain.kro.kr"
+    port: 8545
+  agent:
+    pool-size: 20
+    threshold-balance-gwei: 1000000000
+    recharge-amount-gwei: 5000000000
+  contract:
+    token:
+      address: "0x5e51c79C8367e98deE2E35334864ecDb26C66513"
 
 ```
 
 - application-finance.yml
 
 ```yaml
-
+ssafy:
+  finance:
+    api:
+      base-url: "https://finopenapi.ssafy.io/ssafy/api/v1"
+      member:
+        base: "/member"
+        create: ""
+        search: "/search"
+      bank:
+        base: "/edu/bank"
+        codes-search: "/inquireBankCodes"
+      memo:
+        base: "/edu/transactionMemo"
+        create: ""
+      demand-deposit:
+        base: "/edu/demandDeposit"
+        product-create: "/createDemandDeposit"
+        products-search: "/inquireDemandDepositList"
+        account-create: "/createDemandDepositAccount"
+        accounts-search: "/inquireDemandDepositAccountList"
+        account-search: "/inquireDemandDepositAccount"
+        account-holder-search: "/inquireDemandDepositAccountHolderName"
+        account-balance-search: "/inquireDemandDepositAccountBalance"
+        account-withdrawal: "/updateDemandDepositAccountWithdrawal"
+        account-deposit: "/updateDemandDepositAccountDeposit"
+        account-transfer: "/updateDemandDepositAccountTransfer"
+        account-histories-search: "/inquireTransactionHistoryList"
+        account-history-search: "/inquireTransactionHistory"
+        account-delete: "/deleteDemandDepositAccount"
 ```
 
 - application-firebase.yml
