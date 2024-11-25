@@ -81,61 +81,7 @@ SSAFY 11기 2학기 자율 프로젝트
 ## 🧑‍🤝‍🧑팀원
 
 ### 다르다 팀 소개
-
-### 프론트엔드
-
----
-
-### 조소연
-
-![team1.png](image/team1.png)
-
-- 재단
-- 계좌
-- 결제
-
-### 윤지원
-
-![team2.png](image/team2.png)
-
-- 캠페인
-- 후원
-- 트리
-
-### 김다운
-
-![team3.png](image/team3.png)
-
-- 회원
-- 거래
-- 채팅
-- 알림
-
-### 백엔드
-
----
-
-### 권용진
-
-![team4.png](image/team4.png)
-
-- CI/CD
-- 인증, 인가
-- 거래
-- 알림
-
-### 이유승
-
-![team5.png](image/team5.png)
-
-- 블록체인
-- 금융
-- 후원
-
-### 신재민
-
-![team6.png](image/team6.png)
-
-- 채팅
-- 재단
-- 캠페
+|FE|FE|FE|BE|BE|BE|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|[조소연](https://github.com/soyeoning)|[윤지원](https://github.com/dbe0717)|[김다운](https://github.com/kimdw524)|[권용진](https://github.com/sarmsoo)|[이유승](https://github.com/yuseung0429)|[신재민](https://github.com/hamsteak1488)|
+|![team1.png](image/team1.png)|![team2.png](image/team2.png)|![team3.png](image/team3.png)|![team4.png](image/team4.png)|![team5.png](image/team5.png)|![team6.png](image/team6.png)|
